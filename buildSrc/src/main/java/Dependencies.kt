@@ -20,11 +20,11 @@ object Modules {
     const val utils = ":utils"
 }
 
-
 object Versions {
     //Retrofit2
     const val retrofitVersion = "2.9.0"
     const val loggingInterceptorVersion = "5.0.0-alpha.3"
+    const val retrofitKotlinCoroutinesAdapterVersion = "0.9.2"
 
     //Coroutines
     const val coroutinesVersion = "1.5.0"
@@ -45,12 +45,17 @@ object Versions {
 object Retrofit {
     const val retrofit = "com.squareup.retrofit2:retrofit2:${Versions.retrofitVersion}"
     const val converterGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofitVersion}"
-    const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptorVersion}"
+    const val loggingInterceptor =
+        "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptorVersion}"
+    const val retrofitKotlinCoroutinesAdapter =
+        "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.retrofitKotlinCoroutinesAdapterVersion}"
 }
 
 object Coroutines {
-    const val kotlinxCoroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutinesVersion}"
-    const val kotlinxCoroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutinesVersion}"
+    const val kotlinxCoroutinesCore =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutinesVersion}"
+    const val kotlinxCoroutinesAndroid =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutinesVersion}"
 }
 
 object Core {
