@@ -22,6 +22,13 @@ object Modules {
 
 
 object Versions {
+    //Retrofit2
+    const val retrofitVersion = "2.9.0"
+    const val loggingInterceptorVersion = "5.0.0-alpha.3"
+
+    //Coroutines
+    const val coroutinesVersion = "1.5.0"
+
     //Core
     const val coreKTXVersion = "1.7.0"
 
@@ -33,6 +40,17 @@ object Versions {
     const val junitVersion = "4.13.2"
     const val extJunitVersion = "1.1.3"
     const val espressoVersion = "3.4.0"
+}
+
+object Retrofit {
+    const val retrofit = "com.squareup.retrofit2:retrofit2:${Versions.retrofitVersion}"
+    const val converterGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofitVersion}"
+    const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptorVersion}"
+}
+
+object Coroutines {
+    const val kotlinxCoroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutinesVersion}"
+    const val kotlinxCoroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutinesVersion}"
 }
 
 object Core {
