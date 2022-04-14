@@ -21,6 +21,9 @@ object Modules {
 }
 
 object Versions {
+    //Lifecycle
+    const val lifecycleVersion = "2.4.1"
+
     //Retrofit2
     const val retrofitVersion = "2.9.0"
     const val loggingInterceptorVersion = "5.0.0-alpha.3"
@@ -42,8 +45,14 @@ object Versions {
     const val espressoVersion = "3.4.0"
 }
 
+object Lifecycle {
+    const val lifecycleViewModelKTX = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleVersion}"
+    const val lifecycleLiveDataKTX = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycleVersion}"
+    const val lifecycleViewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifecycleVersion}"
+}
+
 object Retrofit {
-    const val retrofit = "com.squareup.retrofit2:retrofit2:${Versions.retrofitVersion}"
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofitVersion}"
     const val converterGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofitVersion}"
     const val loggingInterceptor =
         "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptorVersion}"
