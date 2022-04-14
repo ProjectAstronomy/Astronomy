@@ -16,17 +16,6 @@ android {
 
     buildTypes {
         release {
-            buildConfigField("String", "NASA_API_KEY", SecretApiKey.NASA_API_KEY)
-
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-        debug {
-            buildConfigField("String", "DEMO_KEY", SecretApiKey.DEMO_KEY)
-
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -44,9 +33,6 @@ android {
 }
 
 dependencies {
-    //Modules
-    implementation(project(mapOf("path" to Modules.core)))
-
     //Lifecycle
     implementation(Lifecycle.lifecycleViewModelKTX)
     implementation(Lifecycle.lifecycleLiveDataKTX)
@@ -70,7 +56,7 @@ dependencies {
     implementation(Design.material)
 
     //Test
-    testImplementation(TestImpl.junit)
-    androidTestImplementation(TestImpl.extJunit)
-    androidTestImplementation(TestImpl.espresso)
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }

@@ -18,6 +18,7 @@ object Modules {
     const val epic = ":epic"
     const val mrp = ":mrp"
     const val utils = ":utils"
+    const val core = ":core"
 }
 
 object Versions {

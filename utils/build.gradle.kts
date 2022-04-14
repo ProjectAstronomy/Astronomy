@@ -35,8 +35,6 @@ android {
 dependencies {
     //Core
     implementation(Core.coreKTX)
-    implementation(Coroutines.kotlinxCoroutinesCore)
-    implementation(Lifecycle.lifecycleViewModelKTX)
 
     //Design
     implementation(Design.appcompat)
@@ -44,6 +42,6 @@ dependencies {
 
     //Test
     testImplementation(TestImpl.junit)
-    testImplementation(TestImpl.extJunit)
-    testImplementation(TestImpl.espresso)
+    androidTestImplementation(TestImpl.extJunit)
+    androidTestImplementation(TestImpl.espresso)
 }

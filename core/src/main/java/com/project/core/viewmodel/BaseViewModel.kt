@@ -1,4 +1,4 @@
-package com.project.apod.viewmodel
+package com.project.core.viewmodel
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.*

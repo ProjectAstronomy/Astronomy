@@ -16,3 +16,4 @@ rootProject.name = "Astronomy"
 include ':app'
 include ':apod'
 include ':utils'
+include ':core'

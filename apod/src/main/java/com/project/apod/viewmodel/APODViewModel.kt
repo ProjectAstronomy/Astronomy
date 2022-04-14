@@ -5,6 +5,7 @@ import androidx.lifecycle.SavedStateHandle
 import com.project.apod.domain.Repository
 import com.project.apod.entities.APODAppState
 import com.project.apod.entities.APODResponse
+import com.project.core.viewmodel.BaseViewModel
 import kotlinx.coroutines.launch
 
 class APODViewModel(

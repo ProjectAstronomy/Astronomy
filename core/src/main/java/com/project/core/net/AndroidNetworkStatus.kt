@@ -1,4 +1,4 @@
-package com.project.utils
+package com.project.core.net
 
 import android.content.Context
 import android.net.ConnectivityManager

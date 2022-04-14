@@ -1,4 +1,4 @@
-package com.project.apod.viewmodel
+package com.project.core.viewmodel
 
 import android.os.Bundle
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
