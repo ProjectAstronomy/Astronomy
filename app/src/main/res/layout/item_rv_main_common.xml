@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    android:layout_width="135dp"
+    android:layout_height="110dp"
+    android:layout_marginEnd="@dimen/step_between_rv_items_normal"
+    app:cardCornerRadius="@dimen/radius_normal"
+    app:strokeWidth="@dimen/stroke_width_normal"
+    app:cardElevation="@dimen/elevation_normal"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_pic"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/content_description_media"
+            android:scaleType="centerCrop"
+            android:src="@drawable/no_image"
+            />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/step_start_normal"
+            android:paddingBottom="@dimen/step_bottom_small"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:textAlignment="viewStart"
+            android:text="@string/title"
+            />
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>
