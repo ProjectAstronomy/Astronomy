@@ -16,6 +16,17 @@ android {
 
     buildTypes {
         release {
+            buildConfigField("String", "NASA_API_KEY", SecretApiKey.NASA_API_KEY)
+
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        debug {
+            buildConfigField("String", "DEMO_KEY", SecretApiKey.DEMO_KEY)
+
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -33,6 +44,24 @@ android {
 }
 
 dependencies {
+    //Modules
+    implementation(project(mapOf("path" to Modules.core)))
+
+    //Lifecycle
+    implementation(Lifecycle.lifecycleViewModelKTX)
+    implementation(Lifecycle.lifecycleLiveDataKTX)
+    implementation(Lifecycle.lifecycleViewModelSavedState)
+
+    //Retrofit2
+    implementation(Retrofit.retrofit)
+    implementation(Retrofit.converterGson)
+    implementation(Retrofit.loggingInterceptor)
+    implementation(Retrofit.retrofitKotlinCoroutinesAdapter)
+
+    //Coroutines
+    implementation(Coroutines.kotlinxCoroutinesCore)
+    implementation(Coroutines.kotlinxCoroutinesAndroid)
+
     //Core
     implementation(Core.coreKTX)
 
