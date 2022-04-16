@@ -33,6 +33,11 @@ android {
 }
 
 dependencies {
+    //Koin
+    implementation(Koin.koinCore)
+    implementation(Koin.koinAndroid)
+    implementation(Koin.koinAndroidCompat)
+
     //Lifecycle
     implementation(Lifecycle.lifecycleViewModelKTX)
     implementation(Lifecycle.lifecycleLiveDataKTX)

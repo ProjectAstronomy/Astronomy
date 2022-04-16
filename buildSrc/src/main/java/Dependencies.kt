@@ -22,6 +22,9 @@ object Modules {
 }
 
 object Versions {
+    //Koin
+    const val koinVersion = "3.1.6"
+
     //Lifecycle
     const val lifecycleVersion = "2.4.1"
 
@@ -40,10 +43,20 @@ object Versions {
     const val appcompatVersion = "1.4.1"
     const val materialVersion = "1.5.0"
 
+    //AndroidX
+    const val activityKTXVersion = "1.4.0"
+    const val fragmentKTXVersion = "1.4.1"
+
     //Test
     const val junitVersion = "4.13.2"
     const val extJunitVersion = "1.1.3"
     const val espressoVersion = "3.4.0"
+}
+
+object Koin {
+    const val koinCore = "io.insert-koin:koin-core:${Versions.koinVersion}"
+    const val koinAndroid = "io.insert-koin:koin-android:${Versions.koinVersion}"
+    const val koinAndroidCompat = "io.insert-koin:koin-android-compat:${Versions.koinVersion}"
 }
 
 object Lifecycle {
@@ -75,6 +88,11 @@ object Core {
 object Design {
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompatVersion}"
     const val material = "com.google.android.material:material:${Versions.materialVersion}"
+}
+
+object AndroidXImpl {
+    const val activityKTX = "androidx.activity:activity-ktx:${Versions.activityKTXVersion}"
+    const val fragmentKTX = "androidx.fragment:fragment-ktx:${Versions.fragmentKTXVersion}"
 }
 
 object TestImpl {

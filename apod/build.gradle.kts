@@ -47,6 +47,11 @@ dependencies {
     //Modules
     implementation(project(mapOf("path" to Modules.core)))
 
+    //Koin
+    implementation(Koin.koinCore)
+    implementation(Koin.koinAndroid)
+    implementation(Koin.koinAndroidCompat)
+
     //Lifecycle
     implementation(Lifecycle.lifecycleViewModelKTX)
     implementation(Lifecycle.lifecycleLiveDataKTX)
@@ -68,6 +73,10 @@ dependencies {
     //Design
     implementation(Design.appcompat)
     implementation(Design.material)
+
+    //AndroidX
+    implementation(AndroidXImpl.activityKTX)
+    implementation(AndroidXImpl.fragmentKTX)
 
     //Test
     testImplementation(TestImpl.junit)

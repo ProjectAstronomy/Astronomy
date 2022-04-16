@@ -2,7 +2,7 @@ package com.project.apod.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
-import com.project.apod.domain.Repository
+import com.project.apod.domain.APODRepository
 import com.project.apod.entities.APODAppState
 import com.project.apod.entities.APODResponse
 import com.project.core.viewmodel.BaseViewModel
@@ -10,22 +10,22 @@ import kotlinx.coroutines.launch
 
 class APODViewModel(
     private val savedStateHandle: SavedStateHandle,
-    private val repository: Repository,
+    private val apodRepository: APODRepository,
 ) : BaseViewModel() {
 
     companion object {
-        private const val LIVE_DATA_PODRESPONSE_BY_DATE_TAG = "LIVE_DATA_PODRESPONSE_TAG"
-        private const val LIVE_DATA_PODRESPONSE_FROM_DATE_TO_DATE_TAG = "LIVE_DATA_LIST_OF_PODRESPONSE_TAG"
-        private const val LIVE_DATA_PODRESPONSE_BY_COUNT_TAG = "LIVE_DATA_LIST_OF_PODRESPONSE_BY_COUNT_TAG"
+        private const val PODRESPONSE_BY_DATE = "PODRESPONSE_BY_DATE"
+        private const val PODRESPONSE_FROM_DATE_TO_DATE = "PODRESPONSE_FROM_DATE_TO_DATE"
+        private const val PODRESPONSE_BY_COUNT = "PODRESPONSE_BY_COUNT"
     }
 
     fun getAPODByDate(date: String) {
-        savedStateHandle[LIVE_DATA_PODRESPONSE_BY_DATE_TAG] = null
+        savedStateHandle[PODRESPONSE_BY_DATE] = null
         cancelJob()
         viewModelCoroutineScope.launch {
-            val response = repository.getAPODByDate(date)
+            val response = apodRepository.getAPODByDate(date)
             if (response.isSuccessful) {
-                savedStateHandle[LIVE_DATA_PODRESPONSE_BY_DATE_TAG] =
+                savedStateHandle[PODRESPONSE_BY_DATE] =
                     response.body()?.let { APODAppState.Success(it, null) }
             } else {
                 //TODO: handle error
@@ -33,14 +33,13 @@ class APODViewModel(
         }
     }
 
-
     fun getAPODFromDateToDate(startDate: String, endDate: String) {
-        savedStateHandle[LIVE_DATA_PODRESPONSE_FROM_DATE_TO_DATE_TAG] = null
+        savedStateHandle[PODRESPONSE_FROM_DATE_TO_DATE] = null
         cancelJob()
         viewModelCoroutineScope.launch {
-            val response = repository.getAPODFromDateToDate(startDate, endDate)
+            val response = apodRepository.getAPODFromDateToDate(startDate, endDate)
             if (response.isSuccessful) {
-                savedStateHandle[LIVE_DATA_PODRESPONSE_BY_DATE_TAG] =
+                savedStateHandle[PODRESPONSE_BY_DATE] =
                     response.body()?.let { APODAppState.Success(null, it) }
             } else {
                 //TODO: handle error
@@ -49,12 +48,12 @@ class APODViewModel(
     }
 
     fun getAPODByCount(count: Int) {
-        savedStateHandle[LIVE_DATA_PODRESPONSE_FROM_DATE_TO_DATE_TAG] = null
+        savedStateHandle[PODRESPONSE_FROM_DATE_TO_DATE] = null
         cancelJob()
         viewModelCoroutineScope.launch {
-            val response = repository.getAPODByCount(count)
+            val response = apodRepository.getAPODByCount(count)
             if (response.isSuccessful) {
-                savedStateHandle[LIVE_DATA_PODRESPONSE_BY_DATE_TAG] =
+                savedStateHandle[PODRESPONSE_BY_DATE] =
                     response.body()?.let { APODAppState.Success(null, it) }
             } else {
                 //TODO: handle error
@@ -62,9 +61,9 @@ class APODViewModel(
         }
     }
 
-    fun responseAPODByDate(): LiveData<APODResponse>? = savedStateHandle[LIVE_DATA_PODRESPONSE_BY_DATE_TAG]
+    fun responseAPODByDate(): LiveData<APODResponse>? = savedStateHandle[PODRESPONSE_BY_DATE]
 
-    fun responseAPODFromDateToDate(): LiveData<APODResponse>? = savedStateHandle[LIVE_DATA_PODRESPONSE_FROM_DATE_TO_DATE_TAG]
+    fun responseAPODFromDateToDate(): LiveData<APODResponse>? = savedStateHandle[PODRESPONSE_FROM_DATE_TO_DATE]
 
-    fun responseAPODByCount(): LiveData<APODResponse>? = savedStateHandle[LIVE_DATA_PODRESPONSE_BY_COUNT_TAG]
+    fun responseAPODByCount(): LiveData<APODResponse>? = savedStateHandle[PODRESPONSE_BY_COUNT]
 }

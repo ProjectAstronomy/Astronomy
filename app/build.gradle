@@ -32,6 +32,21 @@ android {
 }
 
 dependencies {
+    //Modules
+    implementation project(Modules.apod)
+    implementation project(Modules.core)
+
+    //Retrofit2
+    implementation Retrofit.retrofit
+    implementation Retrofit.converterGson
+    implementation Retrofit.loggingInterceptor
+    implementation Retrofit.retrofitKotlinCoroutinesAdapter
+
+    //Koin
+    implementation Koin.koinCore
+    implementation Koin.koinAndroid
+    implementation Koin.koinAndroidCompat
+
     //Core
     implementation Core.coreKTX
 
