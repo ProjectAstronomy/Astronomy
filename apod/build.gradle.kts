@@ -14,6 +14,10 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     buildTypes {
         release {
             buildConfigField("String", "NASA_API_KEY", SecretApiKey.NASA_API_KEY)
@@ -77,6 +81,10 @@ dependencies {
     //AndroidX
     implementation(AndroidXImpl.activityKTX)
     implementation(AndroidXImpl.fragmentKTX)
+
+    //Navigation
+    implementation(Navigation.navigationFragmentKTX)
+    implementation(Navigation.navigationUIKTX)
 
     //Test
     testImplementation(TestImpl.junit)

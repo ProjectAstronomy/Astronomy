@@ -22,6 +22,9 @@ object Modules {
 }
 
 object Versions {
+    //Navigation
+    const val navigationFragmentKTXVersion = "2.4.2"
+
     //Koin
     const val koinVersion = "3.1.6"
 
@@ -53,6 +56,13 @@ object Versions {
     const val espressoVersion = "3.4.0"
 }
 
+object Navigation {
+    const val navigationFragmentKTX =
+        "androidx.navigation:navigation-fragment-ktx:${Versions.navigationFragmentKTXVersion}"
+    const val navigationUIKTX =
+        "androidx.navigation:navigation-ui-ktx:${Versions.navigationFragmentKTXVersion}"
+}
+
 object Koin {
     const val koinCore = "io.insert-koin:koin-core:${Versions.koinVersion}"
     const val koinAndroid = "io.insert-koin:koin-android:${Versions.koinVersion}"
@@ -60,9 +70,12 @@ object Koin {
 }
 
 object Lifecycle {
-    const val lifecycleViewModelKTX = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleVersion}"
-    const val lifecycleLiveDataKTX = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycleVersion}"
-    const val lifecycleViewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifecycleVersion}"
+    const val lifecycleViewModelKTX =
+        "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleVersion}"
+    const val lifecycleLiveDataKTX =
+        "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycleVersion}"
+    const val lifecycleViewModelSavedState =
+        "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifecycleVersion}"
 }
 
 object Retrofit {

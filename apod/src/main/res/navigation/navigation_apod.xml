@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_apod"
+    app:startDestination="@id/fragment_apod">
+
+    <fragment
+        android:id="@+id/fragment_apod"
+        android:name="com.project.apod.ui.APODFragment"
+        android:label="@string/fragment_apod_navigation_label"
+        tools:layout="@layout/fragment_apod">
+
+        <action />
+    </fragment>
+</navigation>
