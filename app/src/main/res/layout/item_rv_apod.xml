@@ -57,7 +57,7 @@
             style="@style/margin_all_normal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/no_copyright_text_yet" />
+            android:text="@string/no_text_yet" />
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

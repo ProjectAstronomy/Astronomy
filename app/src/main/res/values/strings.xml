@@ -7,5 +7,5 @@
     <string name="heading_title_geo">Geomagnetic Storm</string>
     <string name="heading_title_epic">Earth Polychromatic Camera</string>
     <string name="heading_title_mars">Mars Rover Photos</string>
-    <string name="no_copyright_text_yet">no copyright text yet</string>
+    <string name="no_text_yet">no text yet</string>
 </resources>
