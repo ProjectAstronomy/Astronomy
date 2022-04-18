@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.astronomy.ui.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--    1. aPod-->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title_apod"
+            style="@style/heading_text_style"
+            android:text="@string/heading_title_pod" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_apod"
+            style="@style/padding_start_top_end_normal_rv"
+            android:clipToPadding="false"/>
+
+        <!--    2. Solar Flare-->
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/heading_text_style"
+            android:text="@string/heading_title_solar" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_solar"
+            style="@style/padding_start_top_end_normal_rv"
+            android:clipToPadding="false"/>
+
+        <!--    3. Geomagnetic Storm-->
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/heading_text_style"
+            android:text="@string/heading_title_geo" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_geo"
+            style="@style/padding_start_top_end_normal_rv"
+            android:clipToPadding="false"/>
+
+        <!--    4. Earth Polychromatic Imaging Camera-->
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/heading_text_style"
+            android:text="@string/heading_title_epic" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_epic"
+            style="@style/padding_start_top_end_normal_rv"
+            android:clipToPadding="false"/>
+
+        <!--    5. Mars Rover Photos -->
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/heading_text_style"
+            android:text="@string/heading_title_mars" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_mars"
+            style="@style/padding_start_top_end_normal_rv"
+            android:clipToPadding="false"/>
+
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
