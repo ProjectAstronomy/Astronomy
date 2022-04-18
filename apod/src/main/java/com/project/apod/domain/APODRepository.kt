@@ -9,7 +9,4 @@ class APODRepository(private val apodApiService: APODApiService) {
 
     suspend fun getAPODFromDateToDate(startDate: String, endDate: String): retrofit2.Response<List<APODResponse>> =
         apodApiService.getAPODFromDateToDate(startDate, endDate, BuildConfig.DEMO_KEY)
-
-    suspend fun getAPODByCount(count: Int): retrofit2.Response<List<APODResponse>> =
-        apodApiService.getAPODByCount(count, BuildConfig.DEMO_KEY)
 }

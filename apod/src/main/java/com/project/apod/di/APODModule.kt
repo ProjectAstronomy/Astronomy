@@ -7,10 +7,10 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
-internal const val SCOPE_APOD_MODULE = "SCOPE_APOD_MODULE"
+internal const val SCOPE_APOD_LIST_MODULE = "SCOPE_APOD_MODULE"
 
 val apodModule = module {
-    scope(named(SCOPE_APOD_MODULE)) {
+    scope(named(SCOPE_APOD_LIST_MODULE)) {
         scoped<APODApiService> { get<Retrofit>().create(APODApiService::class.java) }
 
         scoped { APODRepository(apodApiService = get()) }

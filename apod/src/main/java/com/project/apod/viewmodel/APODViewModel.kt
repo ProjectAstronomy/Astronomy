@@ -16,7 +16,6 @@ class APODViewModel(
     companion object {
         private const val PODRESPONSE_BY_DATE = "PODRESPONSE_BY_DATE"
         private const val PODRESPONSE_FROM_DATE_TO_DATE = "PODRESPONSE_FROM_DATE_TO_DATE"
-        private const val PODRESPONSE_BY_COUNT = "PODRESPONSE_BY_COUNT"
     }
 
     fun getAPODByDate(date: String) {
@@ -47,23 +46,7 @@ class APODViewModel(
         }
     }
 
-    fun getAPODByCount(count: Int) {
-        savedStateHandle[PODRESPONSE_FROM_DATE_TO_DATE] = null
-        cancelJob()
-        viewModelCoroutineScope.launch {
-            val response = apodRepository.getAPODByCount(count)
-            if (response.isSuccessful) {
-                savedStateHandle[PODRESPONSE_BY_DATE] =
-                    response.body()?.let { APODAppState.Success(null, it) }
-            } else {
-                //TODO: handle error
-            }
-        }
-    }
-
     fun responseAPODByDate(): LiveData<APODResponse>? = savedStateHandle[PODRESPONSE_BY_DATE]
 
     fun responseAPODFromDateToDate(): LiveData<APODResponse>? = savedStateHandle[PODRESPONSE_FROM_DATE_TO_DATE]
-
-    fun responseAPODByCount(): LiveData<APODResponse>? = savedStateHandle[PODRESPONSE_BY_COUNT]
 }

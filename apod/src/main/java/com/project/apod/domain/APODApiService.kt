@@ -18,10 +18,4 @@ interface APODApiService {
         @Query("end_date") endDate: String,
         @Query("api_key") apiKey: String
     ): Response<List<APODResponse>>
-
-    @GET("planetary/apod")
-    suspend fun getAPODByCount(
-        @Query("count") count: Int,
-        @Query("api_key") apiKey: String
-    ): Response<List<APODResponse>>
 }
