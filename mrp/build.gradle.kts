@@ -25,7 +25,7 @@ android {
             )
         }
         debug {
-            buildConfigField("String", "DEMO_KEY", SecretApiKey.DEMO_KEY)
+            buildConfigField("String", "NASA_API_KEY", SecretApiKey.NASA_API_KEY)
 
             isMinifyEnabled = false
             proguardFiles(

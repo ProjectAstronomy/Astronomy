@@ -1,4 +1,4 @@
-package com.example.astronomy.ui
+package com.project.astronomy.ui
 
 import android.view.View
 

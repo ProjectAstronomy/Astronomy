@@ -9,11 +9,11 @@
         android:id="@+id/fragment_main"
         android:name="com.project.astronomy.ui.MainFragment"
         android:label="@string/fragment_main_navigation_label"
-        tools:layout="@layout/fragment_main">
+        tools:layout="@layout/main_fragment">
 
         <action
-            android:id="@+id/action_fragment_main_to_fragment_apod"
-            app:destination="@+id/fragment_apod" />
+            android:id="@+id/action_main_fragment_to_navigation_apod"
+            app:destination="@id/navigation_apod" />
     </fragment>
 
     <include app:graph="@navigation/navigation_apod" />

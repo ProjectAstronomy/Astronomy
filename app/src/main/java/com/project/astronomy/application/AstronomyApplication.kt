@@ -1,6 +1,7 @@
 package com.project.astronomy.application
 
 import android.app.Application
+import com.project.apod.di.apodApiServiceModule
 import com.project.apod.di.apodModule
 import com.project.astronomy.di.mainModule
 import com.project.core.di.androidNetworkStatusModule
@@ -14,7 +15,13 @@ class AstronomyApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@AstronomyApplication)
-            modules(listOf(retrofitModule, androidNetworkStatusModule, apodModule, mainModule))
+            modules(listOf(
+                retrofitModule,
+                androidNetworkStatusModule,
+                apodApiServiceModule,
+                apodModule,
+                mainModule
+            ))
         }
     }
 }

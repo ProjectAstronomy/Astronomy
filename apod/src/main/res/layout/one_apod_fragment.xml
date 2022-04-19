@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.astronomy.ui.MainActivity">
+    android:layout_height="match_parent">
 
     <com.google.android.material.card.MaterialCardView
         style="@style/card_view_only_bottom_circle_corner"

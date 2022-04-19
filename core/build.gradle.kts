@@ -41,6 +41,9 @@ dependencies {
     implementation(Koin.koinAndroid)
     implementation(Koin.koinAndroidCompat)
 
+    //Coil
+    implementation(Coil.coil)
+
     //Lifecycle
     implementation(Lifecycle.lifecycleViewModelKTX)
     implementation(Lifecycle.lifecycleLiveDataKTX)

@@ -9,7 +9,7 @@
         android:id="@+id/fragment_apod"
         android:name="com.project.apod.ui.APODListFragment"
         android:label="@string/fragment_apod_navigation_label"
-        tools:layout="@layout/fragment_apod_list">
+        tools:layout="@layout/list_apod_fragment">
 
         <action
             android:id="@+id/action_fragment_apod_to_fragment_apod_description"
@@ -20,7 +20,7 @@
         android:id="@+id/fragment_apod_description"
         android:name="com.project.apod.ui.APODDescriptionFragment"
         android:label="@string/fragment_apod_navigation_label"
-        tools:layout="@layout/fragment_apod_description">
+        tools:layout="@layout/one_apod_fragment">
         <argument
             android:name="apodResponse"
             app:argType="com.project.apod.entities.APODResponse" />

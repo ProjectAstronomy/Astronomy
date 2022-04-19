@@ -24,8 +24,7 @@
             android:layout_alignParentTop="true"
             android:contentDescription="@string/content_description_media"
             android:scaleType="centerCrop"
-            android:src="@drawable/no_image"
-            />
+            android:src="@drawable/no_image" />
 
         <TextView
             android:id="@+id/tv_title"

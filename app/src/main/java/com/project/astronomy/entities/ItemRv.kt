@@ -1,4 +1,4 @@
-package com.example.astronomy.model.entity
+package com.project.astronomy.entities
 
 data class ItemRv (
     val title: String,

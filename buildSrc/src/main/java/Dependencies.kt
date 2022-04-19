@@ -28,6 +28,9 @@ object Versions {
     //Koin
     const val koinVersion = "3.1.6"
 
+    //Coil
+    const val coilVersion = "1.3.2"
+
     //Lifecycle
     const val lifecycleVersion = "2.4.1"
 
@@ -67,6 +70,10 @@ object Koin {
     const val koinCore = "io.insert-koin:koin-core:${Versions.koinVersion}"
     const val koinAndroid = "io.insert-koin:koin-android:${Versions.koinVersion}"
     const val koinAndroidCompat = "io.insert-koin:koin-android-compat:${Versions.koinVersion}"
+}
+
+object Coil {
+    const val coil = "io.coil-kt:coil:${Versions.coilVersion}"
 }
 
 object Lifecycle {

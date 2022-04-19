@@ -9,7 +9,7 @@ internal val SCOPE_MAIN_MODULE = "SCOPE_MAIN_MODULE"
 
 val mainModule = module {
     scope(named(SCOPE_MAIN_MODULE)) {
-        scoped { MainRepository() }
+        scoped { MainRepository(apodApiService = get()) }
 
         scoped { MainViewModelFactory(mainRepository = get()) }
     }
