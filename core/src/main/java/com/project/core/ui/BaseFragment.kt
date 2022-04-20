@@ -17,13 +17,21 @@ abstract class BaseFragment<V : ViewBinding>(
     private var _binding: V? = null
     protected val binding: V get() = _binding!!
 
-    override fun onCreateView(
+    protected var hasInitializedRootView: Boolean = false
+    private var rootView: View? = null
+
+    protected fun providePersistentView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = inflaterBinding.invoke(inflater, container, false)
-        return binding.root
+    ): View? {
+        if (rootView == null) {
+            _binding = inflaterBinding.invoke(inflater, container, false)
+            rootView = binding.root
+        } else {
+            (rootView?.parent as? ViewGroup)?.removeView(rootView)
+        }
+        return rootView
     }
 
     override fun onDestroy() {
