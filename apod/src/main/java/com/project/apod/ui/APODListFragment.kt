@@ -1,11 +1,13 @@
 package com.project.apod.ui
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.project.apod.databinding.ListApodFragmentBinding
 import com.project.apod.di.SCOPE_APOD_LIST_MODULE
 import com.project.apod.entities.APODResponse
@@ -13,6 +15,8 @@ import com.project.apod.viewmodel.APODViewModel
 import com.project.apod.viewmodel.APODViewModelFactory
 import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
@@ -30,10 +34,28 @@ class APODListFragment :
 
     private val adapter by lazy { APODRecyclerViewAdapter(::onItemClick, ::useCoilToLoadPhoto) }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return providePersistentView(inflater, container, savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        apodViewModel.getAPODFromDateToDate()
-        initRecyclerView()
+        if (!hasInitializedRootView) {
+            hasInitializedRootView = true
+            initRecyclerView()
+            apodViewModel.uploadAPODFromDateToDate()
+            lifecycleScope.launch {
+                adapter.isNeededToLoadInFlow.collect { isNeededToLoad ->
+                    if (isNeededToLoad) {
+                        apodViewModel.uploadAPODFromDateToDate()
+                    }
+                }
+            }
+        }
         apodViewModel.responseAPODFromDateToDate()
             .observe(viewLifecycleOwner) { adapter.submitData(it) }
     }
@@ -48,19 +70,6 @@ class APODListFragment :
             layoutManager = LinearLayoutManager(requireContext())
             scrollToPosition(scrollPosition)
             adapter = this@APODListFragment.adapter
-            addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                    val totalItemCount = layoutManager.itemCount
-                    val lastVisible = layoutManager.findLastVisibleItemPosition()
-
-                    val endHasBeenReached = lastVisible + 3 >= totalItemCount
-                    if (totalItemCount > 0 && endHasBeenReached) {
-                        apodViewModel.getAPODFromDateToDate()
-                    }
-                }
-            })
         }
     }
 
@@ -69,7 +78,7 @@ class APODListFragment :
         apodListFragmentScope.close()
     }
 
-    fun onItemClick(apodResponse: APODResponse) {
+    private fun onItemClick(apodResponse: APODResponse) {
         val action = APODListFragmentDirections
             .actionFragmentApodToFragmentApodDescription(apodResponse)
         findNavController().navigate(action)

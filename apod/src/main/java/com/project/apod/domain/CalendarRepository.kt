@@ -4,18 +4,34 @@ import java.util.*
 
 class CalendarRepository {
     private val calendar = Calendar.getInstance()
-    private var year: Int = calendar.get(Calendar.YEAR)
-    private var month: Int = calendar.get(Calendar.MONTH)
-    private val dayOfMonth: Int = calendar.get(Calendar.DAY_OF_MONTH)
 
-    val endDate: String = "$year-$month-$dayOfMonth"
+    private var endDateYear: Int = calendar.get(Calendar.YEAR)
+    private var endDateMonth: Int = calendar.get(Calendar.MONTH)
+    private var endDateDayOfMonth: Int = calendar.get(Calendar.DAY_OF_MONTH)
 
-    fun getStartDate(): String {
-        month -= 1
-        if (month <= 0) {
-            year -= 1
-            month = 12
+    private var startDateYear: Int = endDateYear
+    private var startDateMonth: Int = endDateMonth
+    private var startDateDayOfMonth: Int = endDateDayOfMonth
+
+    var endDate: String = ""
+        get() = "$endDateYear-$endDateMonth-$endDateDayOfMonth"
+        private set
+
+    var startDate: String = ""
+        get() = "$startDateYear-$startDateMonth-$startDateDayOfMonth"
+        private set
+
+    fun refreshEndDate() {
+        endDateYear = startDateYear
+        endDateMonth = startDateMonth
+        endDateDayOfMonth = startDateDayOfMonth
+    }
+
+    fun refreshStartDate() {
+        startDateMonth -= 1
+        if (startDateMonth <= 0) {
+            startDateYear -= 1
+            startDateMonth = 12
         }
-        return "$year-$month-$dayOfMonth"
     }
 }

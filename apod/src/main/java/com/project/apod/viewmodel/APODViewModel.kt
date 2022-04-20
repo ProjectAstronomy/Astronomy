@@ -25,21 +25,30 @@ class APODViewModel(
         savedStateHandle[APODRESPONSE_FROM_DATE_TO_DATE] = null
     }
 
-    fun getAPODFromDateToDate() {
+    fun uploadAPODFromDateToDate() {
         cancelJob()
         viewModelCoroutineScope.launch {
-            val startDate = calendarRepository.getStartDate()
-            val endDate = calendarRepository.endDate
-            loadAsync(startDate, endDate)
+            with(calendarRepository) {
+                refreshEndDate(); refreshStartDate()
+                loadAsync(startDate, endDate)
+            }
         }
     }
 
     private suspend fun loadAsync(startDate: String, endDate: String) {
         var result: List<APODResponse>?
         withContext(Dispatchers.IO) {
-            result = apodRepository.getAPODFromDateToDate(startDate, endDate)
+            result = apodRepository.getAPODFromDateToDate(startDate, endDate).reversed()
         }
-        savedStateHandle[APODRESPONSE_FROM_DATE_TO_DATE] = result?.reversed()
+        if (!savedStateHandle.contains(APODRESPONSE_FROM_DATE_TO_DATE)) {
+            savedStateHandle.set(APODRESPONSE_FROM_DATE_TO_DATE, result)
+        } else {
+            val list =
+                savedStateHandle.getLiveData<List<APODResponse>>(APODRESPONSE_FROM_DATE_TO_DATE).value?.toMutableList()
+            list?.removeLast()
+            result?.let { list?.addAll(it) }
+            savedStateHandle.set(APODRESPONSE_FROM_DATE_TO_DATE, list)
+        }
     }
 
     fun responseAPODFromDateToDate(): LiveData<List<APODResponse>> =
