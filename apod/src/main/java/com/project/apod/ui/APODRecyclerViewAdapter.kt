@@ -52,9 +52,15 @@ class APODRecyclerViewAdapter(
                 tvTitleApod.text = apodResponse.title
                 tvDateApod.text = apodResponse.date
                 tvCopyrightApod.text = apodResponse.copyright
-                //TODO: solve the problem the image appears in wrong position
-                ivUrlApod.setImageDrawable(null)
-                onItemImageLoader(ivUrlApod, apodResponse.url)
+                when (apodResponse.mediaType) {
+                    "image" -> {
+                        ivUrlApod.setImageDrawable(null)
+                        onItemImageLoader(ivUrlApod, apodResponse.url)
+                    }
+                    "video" -> {
+                        //TODO: add YouTubePlayerView to item_rv_apod.xml
+                    }
+                }
             }
         }
     }

@@ -36,7 +36,12 @@ class APODDescriptionFragment :
         with(binding) {
             tvTitleApod.text = apodResponse.title
             tvDateApod.text = apodResponse.date
-            useCoilToLoadPhoto(ivUrlApod, apodResponse.url)
+            when (apodResponse.mediaType) {
+                "image" -> useCoilToLoadPhoto(ivUrlApod, apodResponse.url)
+                "video" -> {
+                    //TODO: add YouTubePlayerView to one_apod_fragment.xml
+                }
+            }
             tvExplanationApod.text = apodResponse.explanation
             tvCopyrightApod.text = apodResponse.copyright
         }

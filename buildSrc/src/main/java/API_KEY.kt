@@ -9,6 +9,9 @@ object SecretApiKey {
     //debug
     val DEMO_KEY: String = apiKeyProperties().getProperty("DEMO_KEY")
 
+    //YouTube API Key
+    val YOUTUBE_API_KEY: String = apiKeyProperties().getProperty("YOUTUBE_API_KEY")
+
     private fun apiKeyProperties(): Properties {
         val fileName = "app.properties"
         if (!File(fileName).exists()) {
