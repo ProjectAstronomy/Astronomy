@@ -18,6 +18,7 @@ class APODViewModel(
 
     companion object {
         private const val APODRESPONSE_FROM_DATE_TO_DATE = "PODRESPONSE_FROM_DATE_TO_DATE"
+        private const val ERROR = "ERROR"
     }
 
     override fun onCleared() {
@@ -36,11 +37,15 @@ class APODViewModel(
     }
 
     private suspend fun loadAsync(startDate: String, endDate: String) {
-        var result: List<APODResponse>?
-        withContext(Dispatchers.IO) {
-            result = apodRepository.getAPODFromDateToDate(startDate, endDate).reversed()
+        try {
+            var result: List<APODResponse>?
+            withContext(Dispatchers.IO) {
+                result = apodRepository.getAPODFromDateToDate(startDate, endDate).reversed()
+            }
+            saveLoadedData(result)
+        } catch (exception: Exception) {
+            savedStateHandle.set(ERROR, exception)
         }
-        saveLoadedData(result)
     }
 
     private fun saveLoadedData(result: List<APODResponse>?) {
@@ -57,5 +62,8 @@ class APODViewModel(
 
     fun responseAPODFromDateToDate(): LiveData<List<APODResponse>> =
         savedStateHandle.getLiveData(APODRESPONSE_FROM_DATE_TO_DATE)
+
+    fun error(): LiveData<Exception> =
+        savedStateHandle.getLiveData(ERROR)
 }
 

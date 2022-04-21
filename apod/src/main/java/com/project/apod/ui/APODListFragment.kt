@@ -8,6 +8,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
+import com.google.android.material.snackbar.Snackbar
 import com.project.apod.databinding.ListApodFragmentBinding
 import com.project.apod.di.SCOPE_APOD_LIST_MODULE
 import com.project.apod.entities.APODResponse
@@ -20,6 +22,7 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
+import kotlin.Exception
 
 class APODListFragment :
     BaseFragment<ListApodFragmentBinding>(ListApodFragmentBinding::inflate) {
@@ -56,8 +59,14 @@ class APODListFragment :
                 }
             }
         }
-        apodViewModel.responseAPODFromDateToDate()
-            .observe(viewLifecycleOwner) { adapter.submitData(it) }
+        with(apodViewModel) {
+            responseAPODFromDateToDate().observe(viewLifecycleOwner) { adapter.submitData(it) }
+            error().observe(viewLifecycleOwner) { showErrorMessage(it) }
+        }
+    }
+
+    private fun showErrorMessage(error: Exception) {
+        Snackbar.make(binding.root, error.message.toString(), LENGTH_SHORT).show()
     }
 
     private fun initRecyclerView() {
