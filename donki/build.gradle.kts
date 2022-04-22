@@ -83,6 +83,10 @@ dependencies {
     implementation(Design.appcompat)
     implementation(Design.material)
 
+    //Navigation
+    implementation(Navigation.navigationFragmentKTX)
+    implementation(Navigation.navigationUIKTX)
+
     //Test
     testImplementation(TestImpl.junit)
     androidTestImplementation(TestImpl.extJunit)

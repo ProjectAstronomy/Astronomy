@@ -5,6 +5,10 @@
     android:id="@+id/navigation_main"
     app:startDestination="@id/fragment_main">
 
+    <include app:graph="@navigation/navigation_apod" />
+    <include app:graph="@navigation/navigation_flr" />
+    <include app:graph="@navigation/navigation_gst" />
+
     <fragment
         android:id="@+id/fragment_main"
         android:name="com.project.astronomy.ui.MainFragment"
@@ -14,7 +18,13 @@
         <action
             android:id="@+id/action_main_fragment_to_navigation_apod"
             app:destination="@id/navigation_apod" />
-    </fragment>
 
-    <include app:graph="@navigation/navigation_apod" />
+        <action
+            android:id="@+id/action_main_fragment_to_navigation_flr"
+            app:destination="@id/navigation_flr" />
+
+        <action
+            android:id="@+id/action_main_fragment_to_navigation_gst"
+            app:destination="@+id/navigation_gst" />
+    </fragment>
 </navigation>

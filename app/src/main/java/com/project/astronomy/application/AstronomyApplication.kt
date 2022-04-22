@@ -6,7 +6,8 @@ import com.project.astronomy.di.mainModule
 import com.project.core.di.androidNetworkStatusModule
 import com.project.core.di.coreRepositoriesModule
 import com.project.core.di.retrofitModule
-import com.project.donki.di.solarFlareModule
+import com.project.donki.di.gstModule
+import com.project.donki.di.flrModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -21,7 +22,8 @@ class AstronomyApplication : Application() {
                 coreRepositoriesModule,
                 androidNetworkStatusModule,
                 apodModule,
-                solarFlareModule,
+                flrModule,
+                gstModule,
                 mainModule
             ))
         }

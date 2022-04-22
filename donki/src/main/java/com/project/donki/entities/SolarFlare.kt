@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class SolarFlareResponse(
+data class SolarFlare(
     @field:SerializedName("flrID") val flrID: String?,
     @field:SerializedName("instruments") val instruments: List<Instrument>?,
     @field:SerializedName("beginTime") val beginTime: String?,

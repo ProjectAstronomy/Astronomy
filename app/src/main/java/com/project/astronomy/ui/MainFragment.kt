@@ -36,8 +36,24 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
             }
         }
     }
-    private val adapterSolar by lazy { RvAdapterCommon() }
-    private val adapterGeo by lazy { RvAdapterCommon() }
+    private val adapterSolar by lazy {
+        RvAdapterCommon().apply {
+            myListener = object : MyOnClickListener {
+                override fun onMyClicked(view: View) {
+                    findNavController().navigate(R.id.action_main_fragment_to_navigation_flr)
+                }
+            }
+        }
+    }
+    private val adapterGeo by lazy {
+        RvAdapterCommon().apply {
+            myListener = object : MyOnClickListener {
+                override fun onMyClicked(view: View) {
+                    findNavController().navigate(R.id.action_main_fragment_to_navigation_gst)
+                }
+            }
+        }
+    }
     private val adapterEPIC by lazy { RvAdapterCommon() }
     private val adapterMars by lazy { RvAdapterCommon() }
 
