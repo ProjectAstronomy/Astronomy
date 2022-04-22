@@ -10,17 +10,17 @@ class WebDataSource : BaseWebDataSource() {
     private val mrpApiService = retrofit.create(MRPApiService::class.java)
 
     suspend fun loadMissionManifest(roverName: String): Response<MissionManifest> =
-        mrpApiService.loadMissionManifest(roverName, BuildConfig.DEMO_KEY)
+        mrpApiService.loadMissionManifest(roverName, BuildConfig.NASA_API_KEY)
 
     suspend fun loadPhotosByMartianSol(roverName: String, sol: Long): Response<Photos> =
-        mrpApiService.loadPhotosByMartianSol(roverName, sol, BuildConfig.DEMO_KEY)
+        mrpApiService.loadPhotosByMartianSol(roverName, sol, BuildConfig.NASA_API_KEY)
 
     suspend fun loadPhotosByMartianSolAndCamera(roverName: String, sol: Long, camera: String): Response<Photos> =
-        mrpApiService.loadPhotosByMartianSolAndCamera(roverName, sol, camera, BuildConfig.DEMO_KEY)
+        mrpApiService.loadPhotosByMartianSolAndCamera(roverName, sol, camera, BuildConfig.NASA_API_KEY)
 
     suspend fun loadPhotosByEarthDate(roverName: String, earthDate: String): Response<Photos> =
-        mrpApiService.loadPhotosByEarthDate(roverName, earthDate, BuildConfig.DEMO_KEY)
+        mrpApiService.loadPhotosByEarthDate(roverName, earthDate, BuildConfig.NASA_API_KEY)
 
     suspend fun loadPhotosByEarthDateAndCamera(roverName: String, earthDate: String, camera: String): Response<Photos> =
-        mrpApiService.loadPhotosByEarthDateAndCamera(roverName, earthDate, camera, BuildConfig.DEMO_KEY)
+        mrpApiService.loadPhotosByEarthDateAndCamera(roverName, earthDate, camera, BuildConfig.NASA_API_KEY)
 }

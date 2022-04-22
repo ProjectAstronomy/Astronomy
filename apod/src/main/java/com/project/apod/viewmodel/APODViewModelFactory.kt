@@ -1,15 +1,13 @@
 package com.project.apod.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
-import com.project.apod.domain.APODRepository
-import com.project.apod.domain.CalendarRepository
+import com.project.apod.usecase.APODUseCase
 import com.project.core.viewmodel.ViewModelAssistedFactory
 
 class APODViewModelFactory(
-    private val apodRepository: APODRepository,
-    private val calendarRepository: CalendarRepository
+    private val apodUseCase: APODUseCase
 ) : ViewModelAssistedFactory<APODViewModel> {
 
     override fun create(savedStateHandle: SavedStateHandle): APODViewModel =
-        APODViewModel(savedStateHandle, apodRepository, calendarRepository)
+        APODViewModel(savedStateHandle, apodUseCase)
 }

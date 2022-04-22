@@ -39,6 +39,7 @@ android {
 dependencies {
     //Modules
     implementation project(Modules.apod)
+    implementation project(Modules.donki)
     implementation project(Modules.core)
 
     //Retrofit2

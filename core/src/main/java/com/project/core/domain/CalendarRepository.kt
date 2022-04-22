@@ -1,4 +1,4 @@
-package com.project.apod.domain
+package com.project.core.domain
 
 import java.util.*
 

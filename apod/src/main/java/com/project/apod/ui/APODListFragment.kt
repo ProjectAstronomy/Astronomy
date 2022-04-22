@@ -50,23 +50,19 @@ class APODListFragment :
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             initRecyclerView()
-            apodViewModel.uploadAPODFromDateToDate()
+            apodViewModel.loadAsync()
             lifecycleScope.launch {
                 adapter.isNeededToLoadInFlow.collect { isNeededToLoad ->
                     if (isNeededToLoad) {
-                        apodViewModel.uploadAPODFromDateToDate()
+                        apodViewModel.loadAsync()
                     }
                 }
             }
         }
         with(apodViewModel) {
             responseAPODFromDateToDate().observe(viewLifecycleOwner) { adapter.submitData(it) }
-            error().observe(viewLifecycleOwner) { showErrorMessage(it) }
+            error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
-    }
-
-    private fun showErrorMessage(error: Exception) {
-        Snackbar.make(binding.root, error.message.toString(), LENGTH_SHORT).show()
     }
 
     private fun initRecyclerView() {

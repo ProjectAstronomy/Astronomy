@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import coil.ImageLoader
 import coil.request.ImageRequest
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseFragment<V : ViewBinding>(
     private val inflaterBinding: (inflater: LayoutInflater, root: ViewGroup?, attachToRoot: Boolean) -> V
@@ -37,6 +39,14 @@ abstract class BaseFragment<V : ViewBinding>(
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    protected fun showThrowable(throwable: Throwable) {
+        Snackbar.make(
+            binding.root,
+            throwable.message.toString(),
+            BaseTransientBottomBar.LENGTH_SHORT
+        ).show()
     }
 
     protected fun useCoilToLoadPhoto(imageView: ImageView, imageLink: String?) {
