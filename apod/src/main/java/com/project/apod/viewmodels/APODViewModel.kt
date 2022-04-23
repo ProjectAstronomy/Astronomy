@@ -12,27 +12,18 @@ import kotlinx.coroutines.withContext
 class APODViewModel(
     private val savedStateHandle: SavedStateHandle,
     private val apodUseCase: APODUseCase
-) : BaseViewModel() {
+) : BaseViewModel(savedStateHandle) {
 
     companion object {
         private const val APODRESPONSE_FROM_DATE_TO_DATE = "PODRESPONSE_FROM_DATE_TO_DATE"
-        private const val ERROR = "ERROR"
     }
 
     fun responseAPODFromDateToDate(): LiveData<List<APODResponse>> =
         savedStateHandle.getLiveData(APODRESPONSE_FROM_DATE_TO_DATE)
 
-    fun error(): LiveData<Exception> =
-        savedStateHandle.getLiveData(ERROR)
-
     override fun onCleared() {
         super.onCleared()
         savedStateHandle.set(APODRESPONSE_FROM_DATE_TO_DATE, null)
-        savedStateHandle.set(ERROR, null)
-    }
-
-    override fun handleThrowable(throwable: Throwable) {
-        savedStateHandle.set(ERROR, throwable)
     }
 
     fun loadAsync() {
@@ -57,4 +48,3 @@ class APODViewModel(
         }
     }
 }
-

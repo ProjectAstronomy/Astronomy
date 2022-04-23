@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -12,6 +14,10 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 
     buildTypes {
@@ -47,6 +53,11 @@ dependencies {
     //Modules
     implementation(project(mapOf("path" to Modules.core)))
 
+    //Koin
+    implementation(Koin.koinCore)
+    implementation(Koin.koinAndroid)
+    implementation(Koin.koinAndroidCompat)
+
     //Lifecycle
     implementation(Lifecycle.lifecycleViewModelKTX)
     implementation(Lifecycle.lifecycleLiveDataKTX)
@@ -62,12 +73,19 @@ dependencies {
     implementation(Coroutines.kotlinxCoroutinesCore)
     implementation(Coroutines.kotlinxCoroutinesAndroid)
 
+    //AndroidX
+    implementation(AndroidXImpl.fragmentKTX)
+
     //Core
     implementation(Core.coreKTX)
 
     //Design
     implementation(Design.appcompat)
     implementation(Design.material)
+
+    //Navigation
+    implementation(Navigation.navigationFragmentKTX)
+    implementation(Navigation.navigationUIKTX)
 
     //Test
     testImplementation(TestImpl.junit)

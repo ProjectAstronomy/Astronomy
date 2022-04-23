@@ -12,25 +12,17 @@ import kotlinx.coroutines.withContext
 class FLRViewModel(
     private val savedStateHandle: SavedStateHandle,
     private val flrUseCase: FLRUseCase
-) : BaseViewModel() {
+) : BaseViewModel(savedStateHandle) {
 
     companion object {
         private const val FLR_RESPONSE = "FLR_RESPONSE"
-        private const val ERROR = "ERROR"
     }
 
     fun responseSolarFlare(): LiveData<List<SolarFlare>> = savedStateHandle.getLiveData(FLR_RESPONSE)
 
-    fun error(): LiveData<Exception> = savedStateHandle.getLiveData(ERROR)
-
     override fun onCleared() {
         super.onCleared()
         savedStateHandle.set(FLR_RESPONSE, null)
-        savedStateHandle.set(ERROR, null)
-    }
-
-    override fun handleThrowable(throwable: Throwable) {
-        savedStateHandle.set(ERROR, throwable)
     }
 
     fun loadAsync() {

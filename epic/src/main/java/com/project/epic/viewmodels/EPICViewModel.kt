@@ -12,25 +12,17 @@ import kotlinx.coroutines.withContext
 class EPICViewModel(
     private val savedStateHandle: SavedStateHandle,
     private val epicRepository: EPICRepository
-) : BaseViewModel() {
+) : BaseViewModel(savedStateHandle) {
 
     companion object {
         private const val EPIC_RESPONSE = "EPIC_RESPONSE"
-        private const val ERROR = "ERROR"
     }
 
     fun responseEPIC(): LiveData<List<EPICResponse>> = savedStateHandle.getLiveData(EPIC_RESPONSE)
 
-    fun error(): LiveData<Exception> = savedStateHandle.getLiveData(ERROR)
-
     override fun onCleared() {
         super.onCleared()
         savedStateHandle.set(EPIC_RESPONSE, null)
-        savedStateHandle.set(ERROR, null)
-    }
-
-    override fun handleThrowable(throwable: Throwable) {
-        savedStateHandle.set(ERROR, throwable)
     }
 
     fun loadAsync() {

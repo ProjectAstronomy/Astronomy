@@ -12,25 +12,17 @@ import kotlinx.coroutines.withContext
 class GSTViewModel(
     private val savedStateHandle: SavedStateHandle,
     private val gstUseCase: GSTUseCase
-) : BaseViewModel() {
+) : BaseViewModel(savedStateHandle) {
 
     companion object {
         private const val GST_RESPONSE = "GST_RESPONSE"
-        private const val ERROR = "ERROR"
     }
 
     fun responseGeomagneticStorms(): LiveData<List<GeomagneticStorm>> = savedStateHandle.getLiveData(GST_RESPONSE)
 
-    fun error(): LiveData<Exception> = savedStateHandle.getLiveData(ERROR)
-
     override fun onCleared() {
         super.onCleared()
         savedStateHandle.set(GST_RESPONSE, null)
-        savedStateHandle.set(ERROR, null)
-    }
-
-    override fun handleThrowable(throwable: Throwable) {
-        savedStateHandle.set(ERROR, throwable)
     }
 
     fun loadAsync() {

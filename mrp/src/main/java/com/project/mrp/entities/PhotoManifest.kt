@@ -1,7 +1,10 @@
 package com.project.mrp.entities
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class PhotoManifest(
     @field:SerializedName("landing_date") val landingDate: String?,
     @field:SerializedName("launch_date") val launchDate: String?,
@@ -9,5 +12,6 @@ data class PhotoManifest(
     @field:SerializedName("max_sol") val maxSol: Long?,
     @field:SerializedName("name") val name: String?,
     @field:SerializedName("status") val status: String?,
-    @field:SerializedName("total_photos") val totalPhotos: Long?
-)
+    @field:SerializedName("total_photos") val totalPhotos: Long?,
+    @field:SerializedName("photos") val photos: List<PhotosInformation>?
+) : Parcelable

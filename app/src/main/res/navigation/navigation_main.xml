@@ -9,6 +9,7 @@
     <include app:graph="@navigation/navigation_flr" />
     <include app:graph="@navigation/navigation_gst" />
     <include app:graph="@navigation/navigation_epic" />
+    <include app:graph="@navigation/navigation_mrp" />
 
     <fragment
         android:id="@+id/fragment_main"
@@ -30,6 +31,15 @@
 
         <action
             android:id="@+id/action_main_fragment_to_navigation_epic"
-            app:destination="@id/action_main_fragment_to_navigation_epic" />
+            app:destination="@id/navigation_epic" />
+
+        <action
+            android:id="@+id/action_main_fragment_to_navigation_mrp"
+            app:destination="@id/navigation_mrp">
+            <argument
+                android:name="roverName"
+                app:argType="string"
+                android:defaultValue="Spirit" />
+        </action>
     </fragment>
 </navigation>

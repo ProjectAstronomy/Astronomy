@@ -8,14 +8,14 @@ import com.project.astronomy.entities.ItemRv
 import com.project.astronomy.R
 import com.project.astronomy.databinding.ItemRvMainCommonBinding
 
-class RvAdapterCommon : RecyclerView.Adapter<RvAdapterCommon.ViewHolder>() {
+class RvAdapterCommon(
+    private val onItemClickListener: (ItemRv) -> Unit
+) : RecyclerView.Adapter<RvAdapterCommon.ViewHolder>() {
     var adapterList: List<ItemRv> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
-
-    var myListener: MyOnClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -54,11 +54,8 @@ class RvAdapterCommon : RecyclerView.Adapter<RvAdapterCommon.ViewHolder>() {
             }
 
             itemView.setOnClickListener {
-                myListener?.onMyClicked(view = it)
+                onItemClickListener(adapterItemView)
             }
-
         }
     }
-
-
 }
