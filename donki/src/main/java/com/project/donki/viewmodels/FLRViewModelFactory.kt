@@ -1,8 +1,8 @@
-package com.project.donki.viewmodel
+package com.project.donki.viewmodels
 
 import androidx.lifecycle.SavedStateHandle
 import com.project.core.viewmodel.ViewModelAssistedFactory
-import com.project.donki.usecase.FLRUseCase
+import com.project.donki.usecases.FLRUseCase
 
 class FLRViewModelFactory(private val flrUseCase: FLRUseCase) : ViewModelAssistedFactory<FLRViewModel> {
 

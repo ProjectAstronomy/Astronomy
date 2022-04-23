@@ -10,8 +10,8 @@ import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.donki.databinding.FragmentListFlrBinding
 import com.project.donki.di.SCOPE_FLR_MODULE
-import com.project.donki.viewmodel.FLRViewModel
-import com.project.donki.viewmodel.FLRViewModelFactory
+import com.project.donki.viewmodels.FLRViewModel
+import com.project.donki.viewmodels.FLRViewModelFactory
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin

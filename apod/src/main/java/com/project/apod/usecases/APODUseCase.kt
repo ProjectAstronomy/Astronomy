@@ -1,4 +1,4 @@
-package com.project.apod.usecase
+package com.project.apod.usecases
 
 import com.project.apod.domain.APODRepository
 import com.project.apod.entities.APODResponse

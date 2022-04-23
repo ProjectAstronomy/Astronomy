@@ -10,8 +10,8 @@ import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.donki.databinding.FragmentListGstBinding
 import com.project.donki.di.SCOPE_GST_MODULE
-import com.project.donki.viewmodel.GSTViewModel
-import com.project.donki.viewmodel.GSTViewModelFactory
+import com.project.donki.viewmodels.GSTViewModel
+import com.project.donki.viewmodels.GSTViewModelFactory
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin

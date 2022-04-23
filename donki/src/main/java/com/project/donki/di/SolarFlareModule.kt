@@ -4,10 +4,10 @@ import com.project.donki.domain.GSTApiService
 import com.project.donki.domain.GSTRepository
 import com.project.donki.domain.FLRApiService
 import com.project.donki.domain.FLRRepository
-import com.project.donki.usecase.GSTUseCase
-import com.project.donki.usecase.FLRUseCase
-import com.project.donki.viewmodel.GSTViewModelFactory
-import com.project.donki.viewmodel.FLRViewModelFactory
+import com.project.donki.usecases.GSTUseCase
+import com.project.donki.usecases.FLRUseCase
+import com.project.donki.viewmodels.GSTViewModelFactory
+import com.project.donki.viewmodels.FLRViewModelFactory
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit

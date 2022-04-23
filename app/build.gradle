@@ -40,6 +40,7 @@ dependencies {
     //Modules
     implementation project(Modules.apod)
     implementation project(Modules.donki)
+    implementation project(Modules.epic)
     implementation project(Modules.core)
 
     //Retrofit2

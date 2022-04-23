@@ -1,11 +1,13 @@
-package com.project.apod.viewmodel
+package com.project.apod.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import com.project.apod.entities.APODResponse
-import com.project.apod.usecase.APODUseCase
+import com.project.apod.usecases.APODUseCase
 import com.project.core.viewmodel.BaseViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class APODViewModel(
     private val savedStateHandle: SavedStateHandle,
@@ -33,17 +35,14 @@ class APODViewModel(
         savedStateHandle.set(ERROR, throwable)
     }
 
-    override fun loadAsync() {
+    fun loadAsync() {
         cancelJob()
         viewModelCoroutineScope.launch {
-            try {
-                apodUseCase.loadAsync().apply {
-                    reversed()
-                    saveLoadedData(this)
-                }
-            } catch (exception: Exception) {
-                savedStateHandle.set(ERROR, exception)
+            var result: List<APODResponse>
+            withContext(Dispatchers.IO) {
+                result = apodUseCase.loadAsync().reversed()
             }
+            saveLoadedData(result)
         }
     }
 

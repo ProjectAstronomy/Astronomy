@@ -8,6 +8,7 @@
     <include app:graph="@navigation/navigation_apod" />
     <include app:graph="@navigation/navigation_flr" />
     <include app:graph="@navigation/navigation_gst" />
+    <include app:graph="@navigation/navigation_epic" />
 
     <fragment
         android:id="@+id/fragment_main"
@@ -26,5 +27,9 @@
         <action
             android:id="@+id/action_main_fragment_to_navigation_gst"
             app:destination="@+id/navigation_gst" />
+
+        <action
+            android:id="@+id/action_main_fragment_to_navigation_epic"
+            app:destination="@id/action_main_fragment_to_navigation_epic" />
     </fragment>
 </navigation>

@@ -8,13 +8,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
-import com.google.android.material.snackbar.Snackbar
 import com.project.apod.databinding.ListApodFragmentBinding
 import com.project.apod.di.SCOPE_APOD_LIST_MODULE
 import com.project.apod.entities.APODResponse
-import com.project.apod.viewmodel.APODViewModel
-import com.project.apod.viewmodel.APODViewModelFactory
+import com.project.apod.viewmodels.APODViewModel
+import com.project.apod.viewmodels.APODViewModelFactory
 import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
 import kotlinx.coroutines.flow.collect
@@ -22,7 +20,6 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
-import kotlin.Exception
 
 class APODListFragment :
     BaseFragment<ListApodFragmentBinding>(ListApodFragmentBinding::inflate) {

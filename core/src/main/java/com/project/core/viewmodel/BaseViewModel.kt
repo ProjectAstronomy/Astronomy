@@ -19,6 +19,4 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     protected abstract fun handleThrowable(throwable: Throwable)
-
-    abstract fun loadAsync()
 }

@@ -1,11 +1,13 @@
-package com.project.donki.viewmodel
+package com.project.donki.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import com.project.core.viewmodel.BaseViewModel
 import com.project.donki.entities.GeomagneticStorm
-import com.project.donki.usecase.GSTUseCase
+import com.project.donki.usecases.GSTUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class GSTViewModel(
     private val savedStateHandle: SavedStateHandle,
@@ -31,17 +33,14 @@ class GSTViewModel(
         savedStateHandle.set(ERROR, throwable)
     }
 
-    override fun loadAsync() {
+    fun loadAsync() {
         cancelJob()
         viewModelCoroutineScope.launch {
-            try {
-                gstUseCase.loadAsync().apply {
-                    reversed()
-                    saveLoadedData(this)
-                }
-            } catch (exception: Exception) {
-                savedStateHandle.set(ERROR, exception)
+            var result: List<GeomagneticStorm>
+            withContext(Dispatchers.IO) {
+                result = gstUseCase.loadAsync().reversed()
             }
+            saveLoadedData(result)
         }
     }
 
@@ -50,9 +49,7 @@ class GSTViewModel(
             savedStateHandle.set(GST_RESPONSE, result)
         } else {
             val list =
-                savedStateHandle.getLiveData<List<GeomagneticStorm>>(
-                    GST_RESPONSE
-                ).value?.toMutableList()
+                savedStateHandle.getLiveData<List<GeomagneticStorm>>(GST_RESPONSE).value?.toMutableList()
             list?.removeLast()
             list?.addAll(result)
             savedStateHandle.set(GST_RESPONSE, list)

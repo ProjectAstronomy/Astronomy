@@ -54,7 +54,15 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
             }
         }
     }
-    private val adapterEPIC by lazy { RvAdapterCommon() }
+    private val adapterEPIC by lazy {
+        RvAdapterCommon().apply {
+            myListener = object : MyOnClickListener {
+                override fun onMyClicked(view: View) {
+                    findNavController().navigate(R.id.action_main_fragment_to_navigation_epic)
+                }
+            }
+        }
+    }
     private val adapterMars by lazy { RvAdapterCommon() }
 
     override fun onCreateView(

@@ -1,11 +1,13 @@
-package com.project.donki.viewmodel
+package com.project.donki.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import com.project.core.viewmodel.BaseViewModel
 import com.project.donki.entities.SolarFlare
-import com.project.donki.usecase.FLRUseCase
+import com.project.donki.usecases.FLRUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FLRViewModel(
     private val savedStateHandle: SavedStateHandle,
@@ -31,17 +33,14 @@ class FLRViewModel(
         savedStateHandle.set(ERROR, throwable)
     }
 
-    override fun loadAsync() {
+    fun loadAsync() {
         cancelJob()
         viewModelCoroutineScope.launch {
-            try {
-                flrUseCase.loadAsync().apply {
-                    reversed()
-                    saveLoadedData(this)
-                }
-            } catch (exception: Exception) {
-                savedStateHandle.set(ERROR, exception)
+            var result: List<SolarFlare>
+            withContext(Dispatchers.IO) {
+                result = flrUseCase.loadAsync().reversed()
             }
+            saveLoadedData(result)
         }
     }
 

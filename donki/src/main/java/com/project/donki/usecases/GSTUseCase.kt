@@ -1,4 +1,4 @@
-package com.project.donki.usecase
+package com.project.donki.usecases
 
 import com.project.core.domain.CalendarRepository
 import com.project.core.usecase.BaseUseCase
