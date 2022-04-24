@@ -2,6 +2,7 @@ package com.project.core.di
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.project.core.domain.BaseInterceptor
+import com.project.core.domain.CalendarRepository
 import com.project.core.net.AndroidNetworkStatus
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,6 +23,10 @@ val retrofitModule = module {
         .build()
 
     single { provideRetrofit() }
+}
+
+val coreRepositoriesModule = module {
+    factory { CalendarRepository() }
 }
 
 val androidNetworkStatusModule = module {

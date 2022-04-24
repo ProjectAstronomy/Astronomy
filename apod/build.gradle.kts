@@ -23,6 +23,7 @@ android {
     buildTypes {
         release {
             buildConfigField("String", "NASA_API_KEY", SecretApiKey.NASA_API_KEY)
+            buildConfigField("String", "YOUTUBE_API_KEY", SecretApiKey.YOUTUBE_API_KEY)
 
             isMinifyEnabled = false
             proguardFiles(
@@ -32,6 +33,7 @@ android {
         }
         debug {
             buildConfigField("String", "NASA_API_KEY", SecretApiKey.NASA_API_KEY)
+            buildConfigField("String", "YOUTUBE_API_KEY", SecretApiKey.YOUTUBE_API_KEY)
 
             isMinifyEnabled = false
             proguardFiles(
@@ -52,6 +54,9 @@ android {
 dependencies {
     //Modules
     implementation(project(mapOf("path" to Modules.core)))
+
+    //libs
+    implementation(files("libs/YouTubeAndroidPlayerApi.jar"))
 
     //Koin
     implementation(Koin.koinCore)
@@ -81,7 +86,6 @@ dependencies {
     implementation(Design.material)
 
     //AndroidX
-    implementation(AndroidXImpl.activityKTX)
     implementation(AndroidXImpl.fragmentKTX)
 
     //Navigation

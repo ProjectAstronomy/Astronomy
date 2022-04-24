@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_gst"
+    app:startDestination="@id/fragment_gst">
+
+    <fragment
+        android:id="@+id/fragment_gst"
+        android:name="com.project.donki.ui.GSTListFragment"
+        android:label="@string/fragment_gst_label"
+        tools:layout="@layout/fragment_list_gst" />
+</navigation>

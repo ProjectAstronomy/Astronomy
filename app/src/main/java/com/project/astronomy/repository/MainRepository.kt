@@ -6,10 +6,7 @@ import com.project.apod.domain.APODApiService
 import com.project.apod.entities.APODResponse
 import retrofit2.Response
 
-class MainRepository(private val apodApiService: APODApiService) {
-    suspend fun getApodToday(date: String): Response<APODResponse> =
-        apodApiService.getAPODByDate(date, BuildConfig.NASA_API_KEY)
-
+class MainRepository() {
     private val listItemRvAPOD: List<ItemRv> = listOf(
         ItemRv("Today", "rv_apod_today"),
     )

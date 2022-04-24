@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_mrp"
+    app:startDestination="@id/missionManifestFragment">
+
+    <fragment
+        android:id="@+id/missionManifestFragment"
+        android:name="com.project.mrp.ui.MissionManifestFragment"
+        android:label="MissionManifestFragment"
+        tools:layout="@layout/fragment_mission_manifest">
+        <action
+            android:id="@+id/action_missionManifestFragment_to_photosFragment"
+            app:destination="@id/photosFragment" />
+        <argument
+            android:name="roverName"
+            app:argType="string"
+            android:defaultValue="Spirit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/photosFragment"
+        android:name="com.project.mrp.ui.PhotosFragment"
+        android:label="PhotosFragment"
+        tools:layout="@layout/fragment_photos">
+        <argument
+            android:name="roverName"
+            app:argType="string"
+            android:defaultValue="Spirit" />
+        <argument
+            android:name="photosInformation"
+            app:argType="com.project.mrp.entities.PhotosInformation" />
+    </fragment>
+</navigation>

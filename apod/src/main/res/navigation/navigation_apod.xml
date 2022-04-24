@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/fragment_apod_description"
         android:name="com.project.apod.ui.APODDescriptionFragment"
-        android:label="@string/fragment_apod_navigation_label"
+        android:label="@string/fragment_apod_description_navigation_label"
         tools:layout="@layout/one_apod_fragment">
         <argument
             android:name="apodResponse"
