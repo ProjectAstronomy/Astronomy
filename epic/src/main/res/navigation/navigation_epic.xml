@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_epic"
+    app:startDestination="@id/fragment_epic">
+
+    <fragment
+        android:id="@+id/fragment_epic"
+        android:name="com.project.epic.ui.EPICListFragment"
+        android:label="@string/fragment_epic_navigation_label"
+        tools:layout="@layout/fragment_list_epic">
+
+        <action
+            android:id="@+id/action_fragment_epic_to_fragment_epic_description"
+            app:destination="@id/fragment_epic_description" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_epic_description"
+        android:name="com.project.epic.ui.EPICDescriptionFragment"
+        android:label="@string/fragment_epic_description_navigation_label"
+        tools:layout="@layout/fragment_epic_description">
+        <argument
+            android:name="epicResponse"
+            app:argType="com.project.epic.entities.EPICResponse" />
+    </fragment>
+</navigation>

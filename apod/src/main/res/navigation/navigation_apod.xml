@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_apod"
+    app:startDestination="@id/fragment_apod">
+
+    <fragment
+        android:id="@+id/fragment_apod"
+        android:name="com.project.apod.ui.APODListFragment"
+        android:label="@string/fragment_apod_navigation_label"
+        tools:layout="@layout/list_apod_fragment">
+
+        <action
+            android:id="@+id/action_fragment_apod_to_fragment_apod_description"
+            app:destination="@id/fragment_apod_description" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_apod_description"
+        android:name="com.project.apod.ui.APODDescriptionFragment"
+        android:label="@string/fragment_apod_description_navigation_label"
+        tools:layout="@layout/one_apod_fragment">
+        <argument
+            android:name="apodResponse"
+            app:argType="com.project.apod.entities.APODResponse" />
+    </fragment>
+</navigation>

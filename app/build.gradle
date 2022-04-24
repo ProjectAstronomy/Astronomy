@@ -1,7 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-android-extensions'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -15,6 +16,9 @@ android {
         versionName Releases.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures {
+        viewBinding true
     }
 
     buildTypes {
@@ -33,6 +37,24 @@ android {
 }
 
 dependencies {
+    //Modules
+    implementation project(Modules.apod)
+    implementation project(Modules.donki)
+    implementation project(Modules.epic)
+    implementation project(Modules.mrp)
+    implementation project(Modules.core)
+
+    //Retrofit2
+    implementation Retrofit.retrofit
+    implementation Retrofit.converterGson
+    implementation Retrofit.loggingInterceptor
+    implementation Retrofit.retrofitKotlinCoroutinesAdapter
+
+    //Koin
+    implementation Koin.koinCore
+    implementation Koin.koinAndroid
+    implementation Koin.koinAndroidCompat
+
     //Core
     implementation Core.coreKTX
 
@@ -46,6 +68,14 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    //AndroidX
+    implementation AndroidXImpl.activityKTX
+    implementation AndroidXImpl.fragmentKTX
+
+    //Navigation
+    implementation Navigation.navigationFragmentKTX
+    implementation Navigation.navigationUIKTX
 
     //Test
     testImplementation TestImpl.junit

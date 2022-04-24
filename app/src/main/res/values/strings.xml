@@ -1,11 +1,4 @@
 <resources>
     <string name="app_name">Astronomy</string>
-    <string name="content_description_media">no description</string>
-    <string name="title">no title</string>
-    <string name="heading_title_pod">Picture Of The Day</string>
-    <string name="heading_title_solar">Solar Flare</string>
-    <string name="heading_title_geo">Geomagnetic Storm</string>
-    <string name="heading_title_epic">Earth Polychromatic Camera</string>
-    <string name="heading_title_mars">Mars Rover Photos</string>
-    <string name="no_text_yet">no text yet</string>
+    <string name="fragment_main_navigation_label">fragment_main</string>
 </resources>

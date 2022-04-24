@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fragment_flr_label">fragment_flr</string>
+    <string name="fragment_gst_label">fragment_gst_label</string>
+</resources>

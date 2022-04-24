@@ -3,6 +3,7 @@
     package="com.project.astronomy">
 
     <application
+        android:name=".application.AstronomyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Astronomy" >
         <activity
-            android:name="com.example.astronomy.ui.MainActivity"
+            android:name="com.project.astronomy.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

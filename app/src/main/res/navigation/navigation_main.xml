@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/fragment_main">
+
+    <include app:graph="@navigation/navigation_apod" />
+    <include app:graph="@navigation/navigation_flr" />
+    <include app:graph="@navigation/navigation_gst" />
+    <include app:graph="@navigation/navigation_epic" />
+    <include app:graph="@navigation/navigation_mrp" />
+
+    <fragment
+        android:id="@+id/fragment_main"
+        android:name="com.project.astronomy.ui.MainFragment"
+        android:label="@string/fragment_main_navigation_label"
+        tools:layout="@layout/main_fragment">
+
+        <action
+            android:id="@+id/action_main_fragment_to_navigation_apod"
+            app:destination="@id/navigation_apod" />
+
+        <action
+            android:id="@+id/action_main_fragment_to_navigation_flr"
+            app:destination="@id/navigation_flr" />
+
+        <action
+            android:id="@+id/action_main_fragment_to_navigation_gst"
+            app:destination="@+id/navigation_gst" />
+
+        <action
+            android:id="@+id/action_main_fragment_to_navigation_epic"
+            app:destination="@id/navigation_epic" />
+
+        <action
+            android:id="@+id/action_main_fragment_to_navigation_mrp"
+            app:destination="@id/navigation_mrp">
+            <argument
+                android:name="roverName"
+                app:argType="string"
+                android:defaultValue="Spirit" />
+        </action>
+    </fragment>
+</navigation>
