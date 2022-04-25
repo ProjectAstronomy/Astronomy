@@ -22,7 +22,6 @@ android {
 
     buildTypes {
         release {
-            buildConfigField("String", "NASA_API_KEY", SecretApiKey.NASA_API_KEY)
             buildConfigField("String", "YOUTUBE_API_KEY", SecretApiKey.YOUTUBE_API_KEY)
 
             isMinifyEnabled = false
@@ -32,7 +31,6 @@ android {
             )
         }
         debug {
-            buildConfigField("String", "NASA_API_KEY", SecretApiKey.NASA_API_KEY)
             buildConfigField("String", "YOUTUBE_API_KEY", SecretApiKey.YOUTUBE_API_KEY)
 
             isMinifyEnabled = false
