@@ -23,8 +23,6 @@ class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FLRViewHolder =
         FLRViewHolder(ItemRvFlrBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
-    override fun getItemCount(): Int = data.currentList.size
-
     class FLRViewHolder(private val viewBinding: ItemRvFlrBinding) : BaseViewHolder<SolarFlare>(viewBinding.root) {
         override fun bind(solarFlare: SolarFlare) {
             //TODO: bind solarFlare to view

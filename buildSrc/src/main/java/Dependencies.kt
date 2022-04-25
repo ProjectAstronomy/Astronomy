@@ -17,7 +17,6 @@ object Modules {
     const val donki = ":donki"
     const val epic = ":epic"
     const val mrp = ":mrp"
-    const val utils = ":utils"
     const val core = ":core"
 }
 
