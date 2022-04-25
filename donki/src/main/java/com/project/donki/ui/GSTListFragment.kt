@@ -44,7 +44,7 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
             }
         }
         with(gstViewModel) {
-            responseGeomagneticStorms().observe(viewLifecycleOwner) { adapter.submitData(it) }
+            responseGeomagneticStorms().observe(viewLifecycleOwner) { adapter.submitList(it) }
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
     }
