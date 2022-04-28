@@ -15,8 +15,7 @@ abstract class BaseUseCase<T>(
         val endDate: String
 
         with(calendarRepository) {
-            refreshEndDate()
-            refreshStartDate()
+            refreshDates()
             startDate = this.startDate
             endDate = this.endDate
         }

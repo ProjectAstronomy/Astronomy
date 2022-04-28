@@ -1,7 +1,6 @@
 package com.project.core.ui
 
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.flow.MutableStateFlow
