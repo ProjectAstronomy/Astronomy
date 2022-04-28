@@ -1,9 +1,7 @@
 package com.project.donki.di
 
-import com.project.donki.domain.GSTApiService
-import com.project.donki.domain.GSTRepository
-import com.project.donki.domain.FLRApiService
-import com.project.donki.domain.FLRRepository
+import com.project.donki.BuildConfig
+import com.project.donki.domain.*
 import com.project.donki.usecases.GSTUseCase
 import com.project.donki.usecases.FLRUseCase
 import com.project.donki.viewmodels.GSTViewModelFactory
@@ -19,9 +17,15 @@ val flrModule = module {
     scope(named(SCOPE_FLR_MODULE)) {
         scoped<FLRApiService> { get<Retrofit>().create(FLRApiService::class.java) }
 
-        scoped { FLRRepository(flrApiService = get()) }
+        scoped {
+            if (BuildConfig.FLAVOR == "FAKE") {
+                FLRRepositoryFake()
+            } else {
+                FLRRepository(flrApiService = get())
+            }
+        }
 
-        scoped { FLRUseCase(calendarRepository = get(), flrRepository = get()) }
+        scoped { FLRUseCase(calendarRepository = get(), repository = get()) }
 
         scoped { FLRViewModelFactory(flrUseCase = get()) }
     }
@@ -31,9 +35,15 @@ val gstModule = module {
     scope(named(SCOPE_GST_MODULE)) {
         scoped<GSTApiService> { get<Retrofit>().create(GSTApiService::class.java) }
 
-        scoped { GSTRepository(gstApiService = get()) }
+        scoped {
+            if (BuildConfig.FLAVOR == "FAKE") {
+                GSTRepositoryFake()
+            } else {
+                GSTRepository(gstApiService = get())
+            }
+        }
 
-        scoped { GSTUseCase(calendarRepository = get(), gstRepository = get()) }
+        scoped { GSTUseCase(calendarRepository = get(), repository = get()) }
 
         scoped { GSTViewModelFactory(gstUseCase = get()) }
     }

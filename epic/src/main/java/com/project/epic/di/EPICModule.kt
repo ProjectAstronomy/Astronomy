@@ -1,7 +1,9 @@
 package com.project.epic.di
 
+import com.project.epic.BuildConfig
 import com.project.epic.domain.EPICApiKey
 import com.project.epic.domain.EPICRepository
+import com.project.epic.domain.EPICRepositoryFake
 import com.project.epic.viewmodels.EPICViewModelFactory
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -13,8 +15,14 @@ val epicModule = module {
     scope(named(SCOPE_EPIC_MODULE)) {
         scoped<EPICApiKey> { get<Retrofit>().create(EPICApiKey::class.java) }
 
-        scoped { EPICRepository(epicApiKey = get()) }
+        scoped {
+            if (BuildConfig.FLAVOR == "FAKE") {
+                EPICRepositoryFake()
+            } else {
+                EPICRepository(epicApiKey = get())
+            }
+        }
 
-        scoped { EPICViewModelFactory(epicRepository = get()) }
+        scoped { EPICViewModelFactory(repository = get()) }
     }
 }

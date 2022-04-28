@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class AllKpIndex(
-    @field:SerializedName("observedTime") val observedTime: String,
-    @field:SerializedName("kpIndex") val kpIndex: Int,
-    @field:SerializedName("source") val source: String
+    @field:SerializedName("observedTime") val observedTime: String?,
+    @field:SerializedName("kpIndex") val kpIndex: Long?,
+    @field:SerializedName("source") val source: String?
 ) : Parcelable
