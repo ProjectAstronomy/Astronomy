@@ -8,7 +8,6 @@ import retrofit2.http.Query
 interface EPICApiKey {
     @GET("EPIC/api/{quality}/images")
     suspend fun loadEPIC(
-        @Path("quality") quality: String,
-        @Query("api_key") apiKey: String
+        @Path("quality") quality: String
     ): List<EPICResponse>
 }

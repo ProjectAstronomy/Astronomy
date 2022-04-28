@@ -19,6 +19,17 @@ android {
 
     buildTypes {
         release {
+            buildConfigField("String", "NASA_API_KEY", SecretApiKey.NASA_API_KEY)
+
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        debug {
+            buildConfigField("String", "NASA_API_KEY", SecretApiKey.NASA_API_KEY)
+
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
