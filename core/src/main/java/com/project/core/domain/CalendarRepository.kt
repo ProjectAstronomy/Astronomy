@@ -21,13 +21,18 @@ class CalendarRepository {
         get() = "$startDateYear-$startDateMonth-$startDateDayOfMonth"
         private set
 
-    fun refreshEndDate() {
+    fun refreshDates() {
+        refreshEndDate()
+        refreshStartDate()
+    }
+
+    private fun refreshEndDate() {
         endDateYear = startDateYear
         endDateMonth = startDateMonth
         endDateDayOfMonth = startDateDayOfMonth
     }
 
-    fun refreshStartDate() {
+    private fun refreshStartDate() {
         startDateMonth -= 1
         if (startDateMonth <= 0) {
             startDateYear -= 1

@@ -9,7 +9,6 @@ interface PhotosApiService {
     @GET("/mars-photos/api/v1/rovers/{rover_name}")
     suspend fun loadPhotosByMartianSol(
         @Path("rover_name") roverName: String,
-        @Query("sol") sol: Long,
-        @Query("api_key") apiKey: String
+        @Query("sol") sol: Long
     ): Photos
 }

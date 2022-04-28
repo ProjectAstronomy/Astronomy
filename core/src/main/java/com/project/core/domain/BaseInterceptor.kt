@@ -1,5 +1,6 @@
 package com.project.core.domain
 
+import com.project.core.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -20,7 +21,10 @@ class BaseInterceptor private constructor() : Interceptor {
     private var responseCode: Int = 0
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        return chain.proceed(chain.request()).also { responseCode = it.code }
+        var request = chain.request()
+        val url = request.url.newBuilder().addQueryParameter("api_key", BuildConfig.NASA_API_KEY).build()
+        request = request.newBuilder().url(url).build()
+        return chain.proceed(request).also { responseCode = it.code }
     }
 
     fun getResponseCode(): ServerResponseStatusCode {

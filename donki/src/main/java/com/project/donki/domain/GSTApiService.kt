@@ -8,7 +8,6 @@ interface GSTApiService {
     @GET("DONKI/GST")
     suspend fun loadGeomagneticStorms(
         @Query("start_date") startDate: String,
-        @Query("end_date") end_date: String,
-        @Query("api_key") apiKey: String
+        @Query("end_date") end_date: String
     ): List<GeomagneticStorm>
 }
