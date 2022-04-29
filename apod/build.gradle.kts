@@ -20,6 +20,16 @@ android {
         viewBinding = true
     }
 
+    flavorDimensions += "TEST"
+    productFlavors {
+        create("FAKE") {
+            dimension = "TEST"
+        }
+        create("REAL") {
+            dimension = "TEST"
+        }
+    }
+
     buildTypes {
         release {
             buildConfigField("String", "YOUTUBE_API_KEY", SecretApiKey.YOUTUBE_API_KEY)

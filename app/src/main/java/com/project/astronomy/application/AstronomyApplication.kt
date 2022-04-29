@@ -10,6 +10,7 @@ import com.project.donki.di.gstModule
 import com.project.donki.di.flrModule
 import com.project.epic.di.epicModule
 import com.project.mrp.di.missionManifestModule
+import com.project.mrp.di.photosModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -28,6 +29,7 @@ class AstronomyApplication : Application() {
                 gstModule,
                 epicModule,
                 missionManifestModule,
+                photosModule,
                 mainModule
             ))
         }
