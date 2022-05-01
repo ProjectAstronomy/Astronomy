@@ -22,8 +22,7 @@ class EPICRecyclerViewAdapter(
             oldItem == newItem
     }
 
-    override val data: AsyncListDiffer<EPICResponse>
-        get() = AsyncListDiffer(this, epicDiffUtilCallBack)
+    override val differ = AsyncListDiffer(this, epicDiffUtilCallBack)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EPICViewHolder =
         EPICViewHolder(ItemRvEpicBinding.inflate(LayoutInflater.from(parent.context), parent, false))

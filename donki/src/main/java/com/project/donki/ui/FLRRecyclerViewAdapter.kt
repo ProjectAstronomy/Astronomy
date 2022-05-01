@@ -17,8 +17,7 @@ class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
             oldItem == newItem
     }
 
-    override val data: AsyncListDiffer<SolarFlare>
-        get() = AsyncListDiffer(this, flrDiffUtilCallBack)
+    override val differ = AsyncListDiffer(this, flrDiffUtilCallBack)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FLRViewHolder =
         FLRViewHolder(ItemRvFlrBinding.inflate(LayoutInflater.from(parent.context), parent, false))
