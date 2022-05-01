@@ -22,8 +22,7 @@ class APODRecyclerViewAdapter(
             oldItem == newItem
     }
 
-    override val data: AsyncListDiffer<APODResponse>
-        get() = AsyncListDiffer(this, apodDiffUtilCallBack)
+    override val differ = AsyncListDiffer(this, apodDiffUtilCallBack)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): APODViewHolder =
         APODViewHolder(ItemRvApodBinding.inflate(LayoutInflater.from(parent.context), parent, false))

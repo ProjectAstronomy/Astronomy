@@ -17,8 +17,7 @@ class GSTRecyclerViewAdapter : BaseRecyclerViewAdapter<GeomagneticStorm>() {
             oldItem == newItem
     }
 
-    override val data: AsyncListDiffer<GeomagneticStorm>
-        get() = AsyncListDiffer(this, gstDiffUtilCallBack)
+    override val differ = AsyncListDiffer(this, gstDiffUtilCallBack)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GSTViewHolder =
         GSTViewHolder(ItemRvGstBinding.inflate(LayoutInflater.from(parent.context), parent, false))

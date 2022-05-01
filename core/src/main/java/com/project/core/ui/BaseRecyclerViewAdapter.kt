@@ -10,18 +10,18 @@ abstract class BaseRecyclerViewAdapter<T> : RecyclerView.Adapter<BaseRecyclerVie
     private val _isNeededToLoadInFlow = MutableStateFlow(false)
     val isNeededToLoadInFlow: StateFlow<Boolean> get() = _isNeededToLoadInFlow
 
-    protected abstract val data: AsyncListDiffer<T>
+    protected abstract val differ: AsyncListDiffer<T>
 
-    fun submitList(list: List<T>) {
-        data.submitList(list)
-    }
+    var items: List<T>
+        get() = differ.currentList
+        set(value) = differ.submitList(value)
 
     override fun onBindViewHolder(holder: BaseViewHolder<T>, position: Int) {
         _isNeededToLoadInFlow.value = (position * 100 / itemCount) > 80
-        holder.bind(data.currentList[position])
+        holder.bind(items[position])
     }
 
-    override fun getItemCount(): Int = data.currentList.size
+    override fun getItemCount(): Int = items.size
 
     abstract class BaseViewHolder<T>(view: View) : RecyclerView.ViewHolder(view) {
         abstract fun bind(t: T)
