@@ -32,8 +32,6 @@ android {
 
     buildTypes {
         release {
-            buildConfigField("String", "YOUTUBE_API_KEY", SecretApiKey.YOUTUBE_API_KEY)
-
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -41,8 +39,6 @@ android {
             )
         }
         debug {
-            buildConfigField("String", "YOUTUBE_API_KEY", SecretApiKey.YOUTUBE_API_KEY)
-
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -62,9 +58,6 @@ android {
 dependencies {
     //Modules
     implementation(project(mapOf("path" to Modules.core)))
-
-    //libs
-    implementation(files("libs/YouTubeAndroidPlayerApi.jar"))
 
     //Koin
     implementation(Koin.koinCore)
