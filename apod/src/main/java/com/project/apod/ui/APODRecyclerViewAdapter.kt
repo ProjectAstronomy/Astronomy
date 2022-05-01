@@ -1,7 +1,11 @@
 package com.project.apod.ui
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
+import android.webkit.WebSettings
 import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -22,15 +26,21 @@ class APODRecyclerViewAdapter(
             oldItem == newItem
     }
 
-    override val data: AsyncListDiffer<APODResponse>
-        get() = AsyncListDiffer(this, apodDiffUtilCallBack)
+    override val differ = AsyncListDiffer(this, apodDiffUtilCallBack)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): APODViewHolder =
-        APODViewHolder(ItemRvApodBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        APODViewHolder(
+            ItemRvApodBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
 
     inner class APODViewHolder(private val viewBinding: ItemRvApodBinding) :
         BaseViewHolder<APODResponse>(viewBinding.root) {
 
+        @SuppressLint("SetJavaScriptEnabled")
         override fun bind(apodResponse: APODResponse) {
             itemView.setOnClickListener { onItemClickListener(apodResponse) }
             with(viewBinding) {
@@ -43,7 +53,14 @@ class APODRecyclerViewAdapter(
                         onItemImageLoader(ivUrlApod, apodResponse.url)
                     }
                     "video" -> {
-                        //TODO: add YouTubePlayerView to item_rv_apod.xml
+                        viewBinding.ivUrlApod.visibility = View.GONE
+                        with(viewBinding.wvRvUrlVideoApod) {
+                            visibility = View.VISIBLE
+                            settings.javaScriptEnabled = true
+                            settings.pluginState = WebSettings.PluginState.ON
+                            loadUrl(apodResponse.url + "&fs=0&loop=1&modestbranding=1&autoplay=1&mute=1")
+                            webChromeClient = WebChromeClient()
+                        }
                     }
                 }
             }

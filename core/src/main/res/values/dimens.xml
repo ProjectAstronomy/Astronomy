@@ -39,4 +39,6 @@
     <dimen name="blank_space">200dp</dimen>
 
 
+    <dimen name="height_video_frame">250dp</dimen>
+
 </resources>

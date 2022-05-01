@@ -44,7 +44,7 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
         }
 
         with(epicViewModel) {
-            responseEPIC().observe(viewLifecycleOwner) { adapter.submitList(it) }
+            responseEPIC().observe(viewLifecycleOwner) { adapter.items = it }
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
     }

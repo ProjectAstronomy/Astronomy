@@ -6,7 +6,7 @@ class CalendarRepository {
     private val calendar = Calendar.getInstance()
 
     private var endDateYear: Int = calendar.get(Calendar.YEAR)
-    private var endDateMonth: Int = calendar.get(Calendar.MONTH)
+    private var endDateMonth: Int = calendar.get(Calendar.MONTH) + 1
     private var endDateDayOfMonth: Int = calendar.get(Calendar.DAY_OF_MONTH)
 
     private var startDateYear: Int = endDateYear
@@ -27,16 +27,16 @@ class CalendarRepository {
     }
 
     private fun refreshEndDate() {
-        endDateYear = startDateYear
-        endDateMonth = startDateMonth
-        endDateDayOfMonth = startDateDayOfMonth
+        endDateYear = calendar.get(Calendar.YEAR)
+        endDateMonth = calendar.get(Calendar.MONTH) + 1
+        endDateDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
     }
 
     private fun refreshStartDate() {
-        startDateMonth -= 1
-        if (startDateMonth <= 0) {
-            startDateYear -= 1
-            startDateMonth = 12
-        }
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1)
+
+        startDateYear = calendar.get(Calendar.YEAR)
+        startDateMonth = calendar.get(Calendar.MONTH) + 1
+        startDateDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
     }
 }
