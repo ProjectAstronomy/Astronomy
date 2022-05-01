@@ -43,6 +43,13 @@
 
         </LinearLayout>
 
+        <WebView
+            android:id="@+id/wv_rv_url_video_apod"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_video_frame"
+            android:visibility="gone"
+            />
+
         <ImageView
             android:id="@+id/iv_url_apod"
             android:layout_width="match_parent"

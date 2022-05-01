@@ -45,7 +45,7 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
             }
         }
         with(flrViewModel) {
-            responseSolarFlare().observe(viewLifecycleOwner) { adapter.submitData(it) }
+            responseSolarFlare().observe(viewLifecycleOwner) { adapter.items = it }
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
     }

@@ -57,7 +57,7 @@ class APODListFragment :
             }
         }
         with(apodViewModel) {
-            responseAPODFromDateToDate().observe(viewLifecycleOwner) { adapter.submitData(it) }
+            responseAPODFromDateToDate().observe(viewLifecycleOwner) { adapter.items = it }
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
     }

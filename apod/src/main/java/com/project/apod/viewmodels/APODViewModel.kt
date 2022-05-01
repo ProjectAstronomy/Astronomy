@@ -41,7 +41,11 @@ class APODViewModel(
         if (!savedStateHandle.contains(APODRESPONSE_FROM_DATE_TO_DATE)) {
             savedStateHandle.set(APODRESPONSE_FROM_DATE_TO_DATE, result)
         } else {
-            val list = savedStateHandle.getLiveData<List<APODResponse>>(APODRESPONSE_FROM_DATE_TO_DATE).value?.toMutableList()
+            val list = savedStateHandle
+                .getLiveData<List<APODResponse>>(APODRESPONSE_FROM_DATE_TO_DATE)
+                .value
+                ?.toMutableList()
+
             list?.removeLast()
             list?.addAll(result)
             savedStateHandle.set(APODRESPONSE_FROM_DATE_TO_DATE, list)
