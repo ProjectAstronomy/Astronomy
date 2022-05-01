@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
 import androidx.navigation.fragment.navArgs
 import com.project.apod.databinding.OneApodFragmentBinding
 import com.project.core.ui.BaseFragment
@@ -31,7 +32,14 @@ class APODDescriptionFragment :
             when (apodResponse.mediaType) {
                 "image" -> useCoilToLoadPhoto(ivUrlApod, apodResponse.url)
                 "video" -> {
-                    //TODO: add YouTubePlayerView to one_apod_fragment.xml
+                    binding.ivUrlApod.visibility = View.GONE
+                    with(binding.wvOneUrlVideoApod) {
+                        visibility = android.view.View.VISIBLE
+                        settings.javaScriptEnabled = true
+                        settings.pluginState = android.webkit.WebSettings.PluginState.ON
+                        loadUrl(apodResponse.url + "&fs=0&loop=1&modestbranding=1&autoplay=1&mute=1")
+                        webChromeClient = WebChromeClient()
+                    }
                 }
             }
             tvExplanationApod.text = apodResponse.explanation
