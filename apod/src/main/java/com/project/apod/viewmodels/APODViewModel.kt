@@ -18,8 +18,9 @@ class APODViewModel(
         private const val APODRESPONSE_FROM_DATE_TO_DATE = "PODRESPONSE_FROM_DATE_TO_DATE"
     }
 
-    fun responseAPODFromDateToDate(): LiveData<List<APODResponse>> =
-        savedStateHandle.getLiveData(APODRESPONSE_FROM_DATE_TO_DATE)
+    fun responseAPODFromDateToDate(): LiveData<List<APODResponse>> {
+        return savedStateHandle.getLiveData(APODRESPONSE_FROM_DATE_TO_DATE)
+    }
 
     override fun onCleared() {
         super.onCleared()
