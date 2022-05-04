@@ -1,4 +1,4 @@
-package com.project.apod.ui
+package com.project.core.utils
 
 import android.graphics.PointF
 import android.view.View
