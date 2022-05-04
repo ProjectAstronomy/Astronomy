@@ -13,12 +13,12 @@ import com.project.apod.databinding.ScaleImageAponFragmentBinding
 class APODScaleImageFragment : Fragment(R.layout.scale_image_apon_fragment) {
 
     companion object {
+        fun newInstance() = APODScaleImageFragment()
+
         //константы для жестов (ч. 1 из 3)
         private const val MAX_SCALE_FACTOR = 5f
         private const val MIN_SCALE_FACTOR = 1f
         private const val CORRECT_LOCATION_ANIMATION_DURATION = 300L
-
-        fun newInstance() = APODScaleImageFragment()
     }
 
     private lateinit var binding: ScaleImageAponFragmentBinding
@@ -35,6 +35,10 @@ class APODScaleImageFragment : Fragment(R.layout.scale_image_apon_fragment) {
         super.onViewCreated(view, savedInstanceState)
         //viewModel = ViewModelProvider(this).get(APODScaleImageViewModel::class.java)
 
+
+        binding = ScaleImageAponFragmentBinding.bind(view)
+
+
         // Методы, относящиеся к жестам (ч. 2 из 3)
         binding.myImageView.doOnLayout { originContentRect }
         binding.viewTouchHandler.setOnTouchListener { view, event ->
@@ -44,7 +48,7 @@ class APODScaleImageFragment : Fragment(R.layout.scale_image_apon_fragment) {
         }
     }
 
-    // Ниже методы, относящиеся к жестам (ч. 3 из 3)
+//     Ниже методы, относящиеся к жестам (ч. 3 из 3)
     private val originContentRect by lazy {
         binding.myImageView.run {
             val array = IntArray(2)

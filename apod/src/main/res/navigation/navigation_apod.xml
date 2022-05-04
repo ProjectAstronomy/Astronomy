@@ -26,7 +26,9 @@
             app:argType="com.project.apod.entities.APODResponse" />
         <action
             android:id="@+id/action_fragment_apod_description_to_APODScaleImageFragment"
-            app:destination="@id/APODScaleImageFragment" />
+            app:destination="@id/APODScaleImageFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/APODScaleImageFragment"
