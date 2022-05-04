@@ -24,5 +24,13 @@
         <argument
             android:name="apodResponse"
             app:argType="com.project.apod.entities.APODResponse" />
+        <action
+            android:id="@+id/action_fragment_apod_description_to_APODScaleImageFragment"
+            app:destination="@id/APODScaleImageFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/APODScaleImageFragment"
+        android:name="com.project.apod.ui.APODScaleImageFragment"
+        android:label="scale_image_apon_fragment"
+        tools:layout="@layout/scale_image_apon_fragment" />
 </navigation>

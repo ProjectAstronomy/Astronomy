@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.project.apod.R
 import com.project.apod.databinding.OneApodFragmentBinding
 import com.project.core.ui.BaseFragment
 
@@ -44,6 +46,11 @@ class APODDescriptionFragment :
             }
             tvExplanationApod.text = apodResponse.explanation
             tvCopyrightApod.text = apodResponse.copyright
+        }
+        binding.ivUrlApod.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_fragment_apod_description_to_APODScaleImageFragment
+            )
         }
     }
 }
