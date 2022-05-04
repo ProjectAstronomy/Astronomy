@@ -7,7 +7,6 @@ plugins {
 
 android {
     compileSdk = Config.compileSdk
-
     defaultConfig {
         minSdk = Config.minSdk
         targetSdk = Config.targetSdk
@@ -99,5 +98,18 @@ dependencies {
     //Test
     testImplementation(TestImpl.junit)
     androidTestImplementation(TestImpl.extJunit)
+    //androidTestImplementation(TestImpl.composeJunit)
     androidTestImplementation(TestImpl.espresso)
+    debugImplementation(TestImpl.fragment)
+    testImplementation(TestImpl.mockito)
+    testImplementation(TestImpl.mockitoInline)
+    testImplementation(TestImpl.mockitoKotlin)
+    testImplementation(TestImpl.coreTesting)
+    androidTestImplementation(TestImpl.espressoContrib)
+//    testImplementation  (TestImpl.koinTests)
+//    androidTestImplementation  (TestImpl.koinTest)
+
+
+
+
 }

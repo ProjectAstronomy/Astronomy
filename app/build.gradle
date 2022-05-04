@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    compileSdk Config.compileSdk
+    compileSdk 31
 
     defaultConfig {
         applicationId Config.applicationId
@@ -96,4 +96,15 @@ dependencies {
     testImplementation TestImpl.junit
     androidTestImplementation TestImpl.extJunit
     androidTestImplementation TestImpl.espresso
+    androidTestImplementation TestImpl.fragment
+    testImplementation(TestImpl.mockito)
+    testImplementation(TestImpl.mockitoInline)
+    testImplementation(TestImpl.mockitoKotlin)
+    androidTestImplementation(TestImpl.espressoContrib)
+    implementation(TestImpl.navigation)
+//    androidTestImplementation  (TestImpl.koinTests)
+//    androidTestImplementation  (TestImpl.koinTest)
+
+
+
 }

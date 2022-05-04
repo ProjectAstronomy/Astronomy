@@ -4,41 +4,29 @@ import android.graphics.PointF
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.core.view.doOnLayout
-import com.project.apod.R
 import com.project.apod.databinding.ScaleImageAponFragmentBinding
+import com.project.core.ui.BaseFragment
+import com.project.core.utils.animateWithDetach
+import com.project.core.utils.scale
+import com.project.core.utils.setPivot
 
-
-class APODScaleImageFragment : Fragment(R.layout.scale_image_apon_fragment) {
+class APODScaleImageFragment :
+    BaseFragment<ScaleImageAponFragmentBinding>(ScaleImageAponFragmentBinding::inflate) {
 
     companion object {
-        fun newInstance() = APODScaleImageFragment()
-
         //константы для жестов (ч. 1 из 3)
         private const val MAX_SCALE_FACTOR = 5f
         private const val MIN_SCALE_FACTOR = 1f
         private const val CORRECT_LOCATION_ANIMATION_DURATION = 300L
     }
 
-    private lateinit var binding: ScaleImageAponFragmentBinding
-    //private lateinit var viewModel: APODScaleImageViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.scale_image_apon_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return providePersistentView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //viewModel = ViewModelProvider(this).get(APODScaleImageViewModel::class.java)
-
-
-        binding = ScaleImageAponFragmentBinding.bind(view)
-
 
         // Методы, относящиеся к жестам (ч. 2 из 3)
         binding.myImageView.doOnLayout { originContentRect }
@@ -49,7 +37,7 @@ class APODScaleImageFragment : Fragment(R.layout.scale_image_apon_fragment) {
         }
     }
 
-//     Ниже методы, относящиеся к жестам (ч. 3 из 3)
+    // Ниже методы, относящиеся к жестам (ч. 3 из 3)
     private val originContentRect by lazy {
         binding.myImageView.run {
             val array = IntArray(2)
@@ -181,7 +169,4 @@ class APODScaleImageFragment : Fragment(R.layout.scale_image_apon_fragment) {
             }
         }
     }
-
-
-
 }
