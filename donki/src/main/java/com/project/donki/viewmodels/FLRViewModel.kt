@@ -25,12 +25,12 @@ class FLRViewModel(
         savedStateHandle.set(FLR_RESPONSE, null)
     }
 
-    fun loadAsync() {
+    fun loadAsync(isDateNeededToBeRefreshed: Boolean) {
         cancelJob()
         viewModelCoroutineScope.launch {
             var result: List<SolarFlare>
             withContext(Dispatchers.IO) {
-                result = flrUseCase.loadAsync().reversed()
+                result = flrUseCase.loadAsync(isDateNeededToBeRefreshed).reversed()
             }
             saveLoadedData(result)
         }

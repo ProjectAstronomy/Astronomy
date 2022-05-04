@@ -10,6 +10,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 val retrofitModule = module {
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
@@ -26,7 +27,9 @@ val retrofitModule = module {
 }
 
 val coreRepositoriesModule = module {
-    factory { CalendarRepository() }
+    factory { Calendar.getInstance() }
+
+    factory { CalendarRepository(calendar = get()) }
 }
 
 val androidNetworkStatusModule = module {

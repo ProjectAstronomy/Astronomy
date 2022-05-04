@@ -25,12 +25,12 @@ class GSTViewModel(
         savedStateHandle.set(GST_RESPONSE, null)
     }
 
-    fun loadAsync() {
+    fun loadAsync(isDateNeededToBeRefreshed: Boolean) {
         cancelJob()
         viewModelCoroutineScope.launch {
             var result: List<GeomagneticStorm>
             withContext(Dispatchers.IO) {
-                result = gstUseCase.loadAsync().reversed()
+                result = gstUseCase.loadAsync(isDateNeededToBeRefreshed).reversed()
             }
             saveLoadedData(result)
         }

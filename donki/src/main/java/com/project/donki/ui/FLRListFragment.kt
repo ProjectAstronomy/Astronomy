@@ -37,16 +37,16 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             //TODO: init views
-            flrViewModel.loadAsync()
+            flrViewModel.loadAsync(true)
         }
         lifecycleScope.launch {
             adapter.isNeededToLoadInFlow.collect { isNeededToLoad ->
-                if (isNeededToLoad) flrViewModel.loadAsync()
+                if (isNeededToLoad) flrViewModel.loadAsync(true)
             }
         }
         with(flrViewModel) {
             responseSolarFlare().observe(viewLifecycleOwner) { adapter.items = it }
-            error().observe(viewLifecycleOwner) { showThrowable(it) }
+            error().observe(viewLifecycleOwner) { /* TODO: handle error here */ }
         }
     }
 

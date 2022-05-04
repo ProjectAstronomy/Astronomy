@@ -79,6 +79,7 @@ dependencies {
 
     //Test
     testImplementation(TestImpl.junit)
+    testImplementation(TestImpl.mockitoKotlin)
     androidTestImplementation(TestImpl.extJunit)
     androidTestImplementation(TestImpl.espresso)
 }

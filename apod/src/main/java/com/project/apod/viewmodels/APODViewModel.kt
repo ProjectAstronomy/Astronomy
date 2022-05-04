@@ -27,12 +27,12 @@ class APODViewModel(
         savedStateHandle.set(APODRESPONSE_FROM_DATE_TO_DATE, null)
     }
 
-    fun loadAsync() {
+    fun loadAsync(isDateNeededToBeRefreshed: Boolean) {
         cancelJob()
         viewModelCoroutineScope.launch {
             var result: List<APODResponse>
             withContext(Dispatchers.IO) {
-                result = apodUseCase.loadAsync().reversed()
+                result = apodUseCase.loadAsync(isDateNeededToBeRefreshed).reversed()
             }
             saveLoadedData(result)
         }

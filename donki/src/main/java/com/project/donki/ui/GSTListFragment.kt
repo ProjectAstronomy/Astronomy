@@ -36,16 +36,16 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             //TODO: init views
-            gstViewModel.loadAsync()
+            gstViewModel.loadAsync(true)
         }
         lifecycleScope.launch {
             adapter.isNeededToLoadInFlow.collect { isNeededToLoad ->
-                if (isNeededToLoad) gstViewModel.loadAsync()
+                if (isNeededToLoad) gstViewModel.loadAsync(true)
             }
         }
         with(gstViewModel) {
             responseGeomagneticStorms().observe(viewLifecycleOwner) { adapter.items = it }
-            error().observe(viewLifecycleOwner) { showThrowable(it) }
+            error().observe(viewLifecycleOwner) { /* TODO: handle error here */ }
         }
     }
 

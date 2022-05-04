@@ -47,18 +47,18 @@ class APODListFragment :
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             initRecyclerView()
-            apodViewModel.loadAsync()
+            apodViewModel.loadAsync(true)
             lifecycleScope.launch {
                 adapter.isNeededToLoadInFlow.collect { isNeededToLoad ->
                     if (isNeededToLoad) {
-                        apodViewModel.loadAsync()
+                        apodViewModel.loadAsync(true)
                     }
                 }
             }
         }
         with(apodViewModel) {
             responseAPODFromDateToDate().observe(viewLifecycleOwner) { adapter.items = it }
-            error().observe(viewLifecycleOwner) { showThrowable(it) }
+            error().observe(viewLifecycleOwner) { /* TODO: handle error here */ }
         }
     }
 

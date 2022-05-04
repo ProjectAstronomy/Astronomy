@@ -58,9 +58,11 @@ object Versions {
     const val espressoVersion = "3.4.0"
     const val fragmentVersion = "1.4.0"
     const val composetVersion = "1.0.4"
+
     const val mockitoVersion = "2.19.0"
     const val mockitoinlineVersion = "2.8.9"
-    const val mockitokotlinVersion = "1.5.0"
+    const val mockitoKotlinVersion = "3.2.0"
+
     const val espressoContriblinVersion = "3.3.0"
     const val nav_version = "2.4.2"
     const val koinTestsversion = "2.1.6"
@@ -131,14 +133,14 @@ object TestImpl {
     const val composeJunit = "androidx.compose.ui:ui-test-junit4:${Versions.composetVersion}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espressoVersion}"
     const val fragment = "androidx.fragment:fragment-testing:${Versions.fragmentVersion}"
+
     const val mockito = "org.mockito:mockito-core:${Versions.mockitoVersion}"
     const val mockitoInline = "org.mockito:mockito-core:${Versions.mockitoinlineVersion}"
-    const val mockitoKotlin = "org.mockito:mockito-core:${Versions.mockitokotlinVersion}"
+    const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:${Versions.mockitoKotlinVersion}"
+
     const val espressoContrib = "androidx.test.espresso:espresso-contrib:${Versions.espressoContriblinVersion}"
     const val navigation = "androidx.navigation:navigation-testing:${Versions.nav_version}"
     const val koinTests = "org.koin:koin-test:${Versions.koinTestsversion}"
     const val koinTest = "org.koin:koin-test:${Versions.koinTestversion}"
     const val coreTesting = "androidx.arch.core:core-testing:${Versions.coreTestingTestversion}"
-
-
 }

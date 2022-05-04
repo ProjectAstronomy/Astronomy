@@ -9,13 +9,13 @@ abstract class BaseUseCase<T>(
     private val calendarRepository: CalendarRepository,
     private val baseRepository: BaseRepository<T>
 ) {
-    suspend fun loadAsync(): T {
+    suspend fun loadAsync(isDateNeededToBeRefreshed: Boolean): T {
         var result: T
         val startDate: String
         val endDate: String
 
         with(calendarRepository) {
-            refreshDates()
+            if (isDateNeededToBeRefreshed) refreshDates()
             startDate = this.startDate
             endDate = this.endDate
         }
