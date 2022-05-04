@@ -48,9 +48,9 @@ class APODDescriptionFragment :
             tvCopyrightApod.text = apodResponse.copyright
         }
         binding.ivUrlApod.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_fragment_apod_description_to_APODScaleImageFragment
-            )
+            val action = APODDescriptionFragmentDirections
+                .actionFragmentApodDescriptionToAPODScaleImageFragment(apodResponse)
+            findNavController().navigate(action)
         }
     }
 }
