@@ -25,7 +25,8 @@ class APODScaleImageFragment : Fragment(R.layout.scale_image_apon_fragment) {
     //private lateinit var viewModel: APODScaleImageViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.scale_image_apon_fragment, container, false)
