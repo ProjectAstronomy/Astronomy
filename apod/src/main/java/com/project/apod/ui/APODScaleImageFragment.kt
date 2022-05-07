@@ -5,6 +5,7 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.view.*
 import androidx.core.view.doOnLayout
+import androidx.navigation.fragment.navArgs
 import com.project.apod.databinding.ScaleImageAponFragmentBinding
 import com.project.core.ui.BaseFragment
 import com.project.core.utils.animateWithDetach
@@ -13,6 +14,8 @@ import com.project.core.utils.setPivot
 
 class APODScaleImageFragment :
     BaseFragment<ScaleImageAponFragmentBinding>(ScaleImageAponFragmentBinding::inflate) {
+
+    private val navArgs: APODScaleImageFragmentArgs by navArgs()
 
     companion object {
         //константы для жестов (ч. 1 из 3)
@@ -28,7 +31,11 @@ class APODScaleImageFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        hasInitializedRootView = !hasInitializedRootView
+        val apodResponse = navArgs.apodResponse
+
         // Методы, относящиеся к жестам (ч. 2 из 3)
+        useCoilToLoadPhoto(binding.myImageView, apodResponse.hdurl)
         binding.myImageView.doOnLayout { originContentRect }
         binding.viewTouchHandler.setOnTouchListener { view, event ->
             scaleGestureDetector.onTouchEvent(event)
