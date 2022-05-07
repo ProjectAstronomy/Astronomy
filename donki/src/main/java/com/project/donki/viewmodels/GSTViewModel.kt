@@ -42,7 +42,7 @@ class GSTViewModel(
         } else {
             val list =
                 savedStateHandle.getLiveData<List<GeomagneticStorm>>(GST_RESPONSE).value?.toMutableList()
-            list?.removeLast()
+
             list?.addAll(result)
             savedStateHandle.set(GST_RESPONSE, list)
         }

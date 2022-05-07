@@ -15,7 +15,7 @@ class APODViewModel(
 ) : BaseViewModel(savedStateHandle) {
 
     companion object {
-        private const val APODRESPONSE_FROM_DATE_TO_DATE = "PODRESPONSE_FROM_DATE_TO_DATE"
+        internal const val APODRESPONSE_FROM_DATE_TO_DATE = "PODRESPONSE_FROM_DATE_TO_DATE"
     }
 
     fun responseAPODFromDateToDate(): LiveData<List<APODResponse>> {
@@ -38,7 +38,7 @@ class APODViewModel(
         }
     }
 
-    private fun saveLoadedData(result: List<APODResponse>) {
+    internal fun saveLoadedData(result: List<APODResponse>) {
         if (!savedStateHandle.contains(APODRESPONSE_FROM_DATE_TO_DATE)) {
             savedStateHandle.set(APODRESPONSE_FROM_DATE_TO_DATE, result)
         } else {
@@ -47,7 +47,6 @@ class APODViewModel(
                 .value
                 ?.toMutableList()
 
-            list?.removeLast()
             list?.addAll(result)
             savedStateHandle.set(APODRESPONSE_FROM_DATE_TO_DATE, list)
         }

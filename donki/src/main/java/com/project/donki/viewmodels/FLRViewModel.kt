@@ -44,7 +44,7 @@ class FLRViewModel(
                 savedStateHandle.getLiveData<List<SolarFlare>>(
                     FLR_RESPONSE
                 ).value?.toMutableList()
-            list?.removeLast()
+
             list?.addAll(result)
             savedStateHandle.set(FLR_RESPONSE, list)
         }

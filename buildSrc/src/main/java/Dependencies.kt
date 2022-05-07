@@ -59,6 +59,7 @@ object Versions {
     const val fragmentVersion = "1.4.0"
     const val composetVersion = "1.0.4"
 
+    const val mockkVersion = "1.12.3"
     const val mockitoVersion = "2.19.0"
     const val mockitoinlineVersion = "2.8.9"
     const val mockitoKotlinVersion = "3.2.0"
@@ -68,7 +69,8 @@ object Versions {
     const val koinTestsversion = "2.1.6"
     const val koinTestversion = "2.1.6"
     const val coreTestingTestversion = "2.1.0"
-    
+
+    const val coreTestingVersion = "2.1.0"
 }
 
 object Navigation {
@@ -134,6 +136,7 @@ object TestImpl {
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espressoVersion}"
     const val fragment = "androidx.fragment:fragment-testing:${Versions.fragmentVersion}"
 
+    const val mockk = "io.mockk:mockk:${Versions.mockkVersion}"
     const val mockito = "org.mockito:mockito-core:${Versions.mockitoVersion}"
     const val mockitoInline = "org.mockito:mockito-core:${Versions.mockitoinlineVersion}"
     const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:${Versions.mockitoKotlinVersion}"
@@ -143,4 +146,6 @@ object TestImpl {
     const val koinTests = "org.koin:koin-test:${Versions.koinTestsversion}"
     const val koinTest = "org.koin:koin-test:${Versions.koinTestversion}"
     const val coreTesting = "androidx.arch.core:core-testing:${Versions.coreTestingTestversion}"
+
+    const val kotlinxCoroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutinesVersion}"
 }

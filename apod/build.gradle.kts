@@ -51,6 +51,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs = freeCompilerArgs + "-opt-in=kotlin.RequiresOptIn"
     }
 }
 
@@ -95,6 +96,9 @@ dependencies {
 
     //Test
     testImplementation(TestImpl.junit)
+    testImplementation(TestImpl.kotlinxCoroutinesTest)
+    testImplementation(TestImpl.mockk)
+    testImplementation(TestImpl.coreTesting)
     testImplementation(TestImpl.mockitoKotlin)
     androidTestImplementation(TestImpl.extJunit)
     androidTestImplementation(TestImpl.espresso)
