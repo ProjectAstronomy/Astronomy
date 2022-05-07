@@ -18,7 +18,8 @@ class MissionManifestViewModel(
         private const val MISSION_MANIFEST_RESPONSE = "MISSION_MANIFEST_RESPONSE"
     }
 
-    fun responseEPIC(): LiveData<List<MissionManifest>> = savedStateHandle.getLiveData(MISSION_MANIFEST_RESPONSE)
+    fun responseMissionManifest(): LiveData<List<MissionManifest>> =
+        savedStateHandle.getLiveData(MISSION_MANIFEST_RESPONSE)
 
     override fun onCleared() {
         super.onCleared()

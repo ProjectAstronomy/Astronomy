@@ -18,7 +18,7 @@ class PhotosViewModel(
         private const val PHOTOS_RESPONSE = "PHOTOS_RESPONSE"
     }
 
-    fun responseEPIC(): LiveData<List<Photos>> = savedStateHandle.getLiveData(PHOTOS_RESPONSE)
+    fun responsePhotos(): LiveData<List<Photos>> = savedStateHandle.getLiveData(PHOTOS_RESPONSE)
 
     override fun onCleared() {
         super.onCleared()
