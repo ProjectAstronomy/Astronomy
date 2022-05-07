@@ -92,24 +92,10 @@ dependencies {
     implementation(Navigation.navigationFragmentKTX)
     implementation(Navigation.navigationUIKTX)
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
 
     //Test
     testImplementation(TestImpl.junit)
-    androidTestImplementation(TestImpl.extJunit)
-    //androidTestImplementation(TestImpl.composeJunit)
-    androidTestImplementation(TestImpl.espresso)
-    debugImplementation(TestImpl.fragment)
-    testImplementation(TestImpl.mockito)
-    testImplementation(TestImpl.mockitoInline)
     testImplementation(TestImpl.mockitoKotlin)
-    testImplementation(TestImpl.coreTesting)
-    androidTestImplementation(TestImpl.espressoContrib)
-//    testImplementation  (TestImpl.koinTests)
-//    androidTestImplementation  (TestImpl.koinTest)
-
-
-
-
+    androidTestImplementation(TestImpl.extJunit)
+    androidTestImplementation(TestImpl.espresso)
 }

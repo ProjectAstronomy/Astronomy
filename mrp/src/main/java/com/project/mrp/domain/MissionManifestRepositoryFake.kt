@@ -1,6 +1,5 @@
 package com.project.mrp.domain
 
-import com.project.mrp.entities.Camera
 import com.project.mrp.entities.MissionManifest
 import com.project.mrp.entities.PhotoManifest
 import com.project.mrp.entities.PhotosInformation
@@ -15,14 +14,7 @@ class MissionManifestRepositoryFake : BaseMissionManifestRepository {
                     sol = it.toLong(),
                     earthDate = "earthDate",
                     totalPhotos = Long.MAX_VALUE,
-                    cameras = listOf(
-                        Camera(
-                            fullName = "fullName",
-                            id = Long.MAX_VALUE,
-                            name = "name",
-                            roverId = Long.MAX_VALUE
-                        )
-                    )
+                    cameras = listOf("CHEMCAM", "FHAZ", "MARDI", "RHAZ")
                 )
             )
         }

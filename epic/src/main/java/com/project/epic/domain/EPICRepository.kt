@@ -2,7 +2,7 @@ package com.project.epic.domain
 
 import com.project.epic.entities.EPICResponse
 
-class EPICRepository(private val epicApiKey: EPICApiKey) : EPICBaseRepository {
+class EPICRepository(private val epicApiService: EPICApiService) : EPICBaseRepository {
     override suspend fun loadAsync(quality: String): List<EPICResponse> =
-        epicApiKey.loadEPIC(quality)
+        epicApiService.loadEPIC(quality)
 }

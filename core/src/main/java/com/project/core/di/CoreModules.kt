@@ -1,5 +1,6 @@
 package com.project.core.di
 
+import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.project.core.domain.BaseInterceptor
 import com.project.core.domain.CalendarRepository
@@ -15,7 +16,7 @@ import java.util.*
 val retrofitModule = module {
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl("https://api.nasa.gov/")
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .client(OkHttpClient.Builder().apply {
             addInterceptor(BaseInterceptor.interceptor)
