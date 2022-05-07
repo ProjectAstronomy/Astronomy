@@ -15,7 +15,7 @@ import com.project.core.utils.setPivot
 class APODScaleImageFragment :
     BaseFragment<ScaleImageAponFragmentBinding>(ScaleImageAponFragmentBinding::inflate) {
 
-    private val navArgs: APODDescriptionFragmentArgs by navArgs()
+    private val navArgs: APODScaleImageFragmentArgs by navArgs()
 
     companion object {
         //константы для жестов (ч. 1 из 3)
