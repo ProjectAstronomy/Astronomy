@@ -91,20 +91,17 @@ dependencies {
     //Navigation
     implementation Navigation.navigationFragmentKTX
     implementation Navigation.navigationUIKTX
+    implementation Navigation.navigationRuntime
 
     //Test
     testImplementation TestImpl.junit
+    testImplementation TestImpl.mockito
+    testImplementation TestImpl.mockitoInline
+    testImplementation TestImpl.mockitoKotlin
+
+    androidTestImplementation TestImpl.navigation
+    androidTestImplementation TestImpl.fragment
     androidTestImplementation TestImpl.extJunit
     androidTestImplementation TestImpl.espresso
-    androidTestImplementation TestImpl.fragment
-    testImplementation(TestImpl.mockito)
-    testImplementation(TestImpl.mockitoInline)
-    testImplementation(TestImpl.mockitoKotlin)
     androidTestImplementation(TestImpl.espressoContrib)
-    implementation(TestImpl.navigation)
-//    androidTestImplementation  (TestImpl.koinTests)
-//    androidTestImplementation  (TestImpl.koinTest)
-
-
-
 }

@@ -29,13 +29,7 @@ class APODRecyclerViewAdapter(
     override val differ = AsyncListDiffer(this, apodDiffUtilCallBack)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): APODViewHolder =
-        APODViewHolder(
-            ItemRvApodBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+        APODViewHolder(ItemRvApodBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     inner class APODViewHolder(private val viewBinding: ItemRvApodBinding) :
         BaseViewHolder<APODResponse>(viewBinding.root) {

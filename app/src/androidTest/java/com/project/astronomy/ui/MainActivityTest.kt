@@ -31,5 +31,4 @@ class MainActivityTest {
     fun close() {
         scenario.close()
     }
-
 }

@@ -71,6 +71,13 @@ object Versions {
     const val coreTestingTestversion = "2.1.0"
 
     const val coreTestingVersion = "2.1.0"
+    const val robolectricVersion = "4.8.1"
+
+    const val startupRuntimeVersion = "1.1.1"
+}
+
+object StartUp {
+    const val startUpRuntime = "androidx.startup:startup-runtime:${Versions.startupRuntimeVersion}"
 }
 
 object Navigation {
@@ -78,6 +85,8 @@ object Navigation {
         "androidx.navigation:navigation-fragment-ktx:${Versions.navigationFragmentKTXVersion}"
     const val navigationUIKTX =
         "androidx.navigation:navigation-ui-ktx:${Versions.navigationFragmentKTXVersion}"
+    const val navigationRuntime =
+        "androidx.navigation:navigation-runtime-ktx:${Versions.navigationFragmentKTXVersion}"
 }
 
 object Koin {
@@ -148,4 +157,5 @@ object TestImpl {
     const val coreTesting = "androidx.arch.core:core-testing:${Versions.coreTestingTestversion}"
 
     const val kotlinxCoroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutinesVersion}"
+    const val robolectric = "org.robolectric:robolectric:${Versions.robolectricVersion}"
 }

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.project.apod.R
 import com.project.apod.databinding.OneApodFragmentBinding
 import com.project.core.ui.BaseFragment
 
@@ -36,7 +35,7 @@ class APODDescriptionFragment :
                 "video" -> {
                     binding.ivUrlApod.visibility = View.GONE
                     with(binding.wvOneUrlVideoApod) {
-                        visibility = android.view.View.VISIBLE
+                        visibility = View.VISIBLE
                         settings.javaScriptEnabled = true
                         settings.pluginState = android.webkit.WebSettings.PluginState.ON
                         loadUrl(apodResponse.url + "&fs=0&loop=1&modestbranding=1&autoplay=1&mute=1")

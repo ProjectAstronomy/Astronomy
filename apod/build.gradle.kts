@@ -19,6 +19,12 @@ android {
         viewBinding = true
     }
 
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
+
     flavorDimensions += "TEST"
     productFlavors {
         create("FAKE") {
@@ -59,6 +65,9 @@ dependencies {
     //Modules
     implementation(project(mapOf("path" to Modules.core)))
 
+    //StartUp
+    implementation(StartUp.startUpRuntime)
+
     //Koin
     implementation(Koin.koinCore)
     implementation(Koin.koinAndroid)
@@ -92,14 +101,19 @@ dependencies {
     //Navigation
     implementation(Navigation.navigationFragmentKTX)
     implementation(Navigation.navigationUIKTX)
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation(Navigation.navigationRuntime)
 
     //Test
     testImplementation(TestImpl.junit)
     testImplementation(TestImpl.kotlinxCoroutinesTest)
     testImplementation(TestImpl.mockk)
     testImplementation(TestImpl.coreTesting)
+    testImplementation(TestImpl.robolectric)
     testImplementation(TestImpl.mockitoKotlin)
+
+    debugImplementation(TestImpl.fragment)
+
+    androidTestImplementation(TestImpl.navigation)
     androidTestImplementation(TestImpl.extJunit)
     androidTestImplementation(TestImpl.espresso)
 }

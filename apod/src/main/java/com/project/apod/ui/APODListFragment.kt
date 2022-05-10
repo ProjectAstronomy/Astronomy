@@ -21,9 +21,7 @@ import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 
-class APODListFragment :
-    BaseFragment<ListApodFragmentBinding>(ListApodFragmentBinding::inflate) {
-
+class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentBinding::inflate) {
     private val apodListFragmentScope: Scope =
         getKoin().getOrCreateScope(SCOPE_APOD_LIST_MODULE, named(SCOPE_APOD_LIST_MODULE))
 
