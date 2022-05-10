@@ -20,6 +20,12 @@ android {
         viewBinding = true
     }
 
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
+
     flavorDimensions += "TEST"
     productFlavors {
         create("FAKE") {
@@ -88,6 +94,15 @@ dependencies {
 
     //Test
     testImplementation(TestImpl.junit)
+    testImplementation(TestImpl.kotlinxCoroutinesTest)
+    testImplementation(TestImpl.mockk)
+    testImplementation(TestImpl.coreTesting)
+    testImplementation(TestImpl.robolectric)
+    testImplementation(TestImpl.mockitoKotlin)
+
+    debugImplementation(TestImpl.fragment)
+
+    androidTestImplementation(TestImpl.navigation)
     androidTestImplementation(TestImpl.extJunit)
     androidTestImplementation(TestImpl.espresso)
 }
