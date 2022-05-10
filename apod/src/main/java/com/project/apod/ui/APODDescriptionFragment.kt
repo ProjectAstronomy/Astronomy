@@ -15,11 +15,7 @@ class APODDescriptionFragment :
 
     private val navArgs: APODDescriptionFragmentArgs by navArgs()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return providePersistentView(inflater, container, savedInstanceState)
     }
 

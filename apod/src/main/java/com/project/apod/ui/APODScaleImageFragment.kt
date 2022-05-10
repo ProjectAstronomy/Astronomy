@@ -6,14 +6,14 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.view.doOnLayout
 import androidx.navigation.fragment.navArgs
-import com.project.apod.databinding.ScaleImageAponFragmentBinding
+import com.project.apod.databinding.ScaleImageApodFragmentBinding
 import com.project.core.ui.BaseFragment
 import com.project.core.utils.animateWithDetach
 import com.project.core.utils.scale
 import com.project.core.utils.setPivot
 
 class APODScaleImageFragment :
-    BaseFragment<ScaleImageAponFragmentBinding>(ScaleImageAponFragmentBinding::inflate) {
+    BaseFragment<ScaleImageApodFragmentBinding>(ScaleImageApodFragmentBinding::inflate) {
 
     private val navArgs: APODScaleImageFragmentArgs by navArgs()
 
