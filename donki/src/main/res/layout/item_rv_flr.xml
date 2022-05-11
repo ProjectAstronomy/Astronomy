@@ -1,6 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/step_xx_small"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_date_solar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/grey_100"
+            android:backgroundTint="@color/blue_grey_100"
+            android:paddingTop="@dimen/step_small"
+            android:paddingBottom="@dimen/step_small"
+            android:text="@string/no_text_yet"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guide_line"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--        android:windowBackground="@color/blue_grey_200"-->
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@id/view_scale_1of5"
+            app:layout_constraintGuide_percent="0.32"
+            app:layout_constraintStart_toEndOf="@id/tv_date_solar"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/view_scale_1of5"
+            style="@style/view_scale_item"
+            android:layout_marginStart="@dimen/step_xx_small"
+            app:cardBackgroundColor="@color/light_green_800"
+            app:cardCornerRadius="@dimen/step_xx_small"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/view_scale_2of5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/tv_date_solar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/view_scale_2of5"
+            style="@style/view_scale_item"
+            app:cardBackgroundColor="@color/light_green_800"
+            app:cardCornerRadius="@dimen/step_xx_small"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/view_scale_3of5"
+            app:layout_constraintStart_toEndOf="@id/view_scale_1of5"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/view_scale_3of5"
+            style="@style/view_scale_item"
+            app:cardBackgroundColor="@color/yellow_800"
+            app:cardCornerRadius="@dimen/step_xx_small"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/view_scale_4of5"
+            app:layout_constraintStart_toEndOf="@id/view_scale_2of5"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/view_scale_4of5"
+            style="@style/view_scale_item"
+            app:cardBackgroundColor="@color/red_900"
+            app:cardCornerRadius="@dimen/step_xx_small"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintCircleRadius="@dimen/step_normal"
+            app:layout_constraintEnd_toStartOf="@id/view_scale_5of5"
+            app:layout_constraintStart_toEndOf="@id/view_scale_3of5"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/view_scale_5of5"
+            style="@style/view_scale_item"
+            app:cardBackgroundColor="@color/red_900"
+            app:cardCornerRadius="@dimen/step_xx_small"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintCircleRadius="@dimen/step_normal"
+            app:layout_constraintEnd_toStartOf="@id/guide_line1"
+            app:layout_constraintStart_toEndOf="@id/view_scale_4of5"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_line1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@id/tv_solar_flare_class"
+            app:layout_constraintGuide_percent="0.8"
+            app:layout_constraintStart_toEndOf="@id/view_scale_4of5"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_solar_flare_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/step_normal"
+            android:text="M1.1"
+            android:textAlignment="textStart"
+            app:flow_horizontalAlign="start"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guide_line1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+<!--        <androidx.constraintlayout.widget.Guideline-->
+<!--            android:id="@+id/guide_line2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            app:layout_constraintEnd_toStartOf="parent"-->
+<!--            app:layout_constraintGuide_percent="0.79"-->
+<!--            app:layout_constraintStart_toEndOf="@id/tv_solar_flare_class"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/btn_details"-->
+<!--            style="@style/Widget.MaterialComponents.Button.TextButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="18dp"-->
+<!--            android:text=" see details"-->
+<!--            android:textAlignment="viewEnd"-->
+<!--            android:textSize="@dimen/text_size_small"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@id/guide_line2"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

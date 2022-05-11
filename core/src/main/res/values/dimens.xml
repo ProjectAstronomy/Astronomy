@@ -38,6 +38,8 @@
     <dimen name="step_negative">-1dp</dimen>
     <dimen name="blank_space">200dp</dimen>
 
+    <dimen name="step_x_small">4dp</dimen>
+    <dimen name="step_xx_small">2dp</dimen>
 
     <dimen name="height_video_frame">250dp</dimen>
 
