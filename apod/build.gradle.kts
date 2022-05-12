@@ -112,6 +112,7 @@ dependencies {
     testImplementation(TestImpl.mockitoKotlin)
 
     debugImplementation(TestImpl.fragment)
+    debugImplementation(TestImpl.espressoContrib)
 
     androidTestImplementation(TestImpl.navigation)
     androidTestImplementation(TestImpl.extJunit)
