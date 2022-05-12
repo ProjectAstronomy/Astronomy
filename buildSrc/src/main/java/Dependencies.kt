@@ -28,7 +28,7 @@ object Versions {
     const val koinVersion = "3.1.6"
 
     //Coil
-    const val coilVersion = "1.3.2"
+    const val coilVersion = "1.4.0"
 
     //Lifecycle
     const val lifecycleVersion = "2.4.1"

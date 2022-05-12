@@ -83,6 +83,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.airbnb.android:lottie:3.4.4'
 
     //AndroidX
     implementation AndroidXImpl.activityKTX
@@ -91,6 +92,8 @@ dependencies {
     //Navigation
     implementation Navigation.navigationFragmentKTX
     implementation Navigation.navigationUIKTX
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
 
     //Test
     testImplementation TestImpl.junit
