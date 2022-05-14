@@ -1,4 +1,4 @@
-package com.project.apod.entities
+package com.project.apod.entities.local
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo

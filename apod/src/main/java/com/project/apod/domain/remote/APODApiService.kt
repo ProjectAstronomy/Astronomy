@@ -1,6 +1,6 @@
-package com.project.apod.domain
+package com.project.apod.domain.remote
 
-import com.project.apod.entities.APODResponse
+import com.project.apod.entities.remote.APODResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

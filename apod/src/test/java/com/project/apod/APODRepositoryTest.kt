@@ -1,7 +1,7 @@
 package com.project.apod
 
-import com.project.apod.domain.APODApiService
-import com.project.apod.domain.APODRepository
+import com.project.apod.domain.remote.APODApiService
+import com.project.apod.domain.remote.APODRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.mockito.kotlin.atLeast

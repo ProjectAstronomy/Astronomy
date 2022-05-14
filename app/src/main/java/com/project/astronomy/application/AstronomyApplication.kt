@@ -6,6 +6,7 @@ import com.project.astronomy.di.mainModule
 import com.project.core.di.androidNetworkStatusModule
 import com.project.core.di.coreRepositoriesModule
 import com.project.core.di.retrofitModule
+import com.project.donki.di.donkiDatabaseModule
 import com.project.donki.di.gstModule
 import com.project.donki.di.flrModule
 import com.project.epic.di.epicModule
@@ -25,6 +26,7 @@ class AstronomyApplication : Application() {
                 coreRepositoriesModule,
                 androidNetworkStatusModule,
                 apodModule,
+                donkiDatabaseModule,
                 flrModule,
                 gstModule,
                 epicModule,

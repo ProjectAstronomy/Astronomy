@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.project.core.net.AndroidNetworkStatus
 import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.donki.databinding.FragmentListGstBinding
@@ -15,6 +16,7 @@ import com.project.donki.viewmodels.GSTViewModelFactory
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
+import org.koin.android.ext.android.inject
 import org.koin.core.qualifier.named
 
 class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBinding::inflate) {
@@ -26,6 +28,7 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
     }
 
     private val adapter by lazy { GSTRecyclerViewAdapter() }
+    private val androidNetworkStatus: AndroidNetworkStatus by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return providePersistentView(inflater, container, savedInstanceState)
@@ -36,11 +39,11 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             //TODO: init views
-            gstViewModel.loadAsync(true)
+            gstViewModel.load(androidNetworkStatus.isNetworkAvailable())
         }
         lifecycleScope.launch {
             adapter.isNeededToLoadInFlow.collect { isNeededToLoad ->
-                if (isNeededToLoad) gstViewModel.loadAsync(true)
+                if (isNeededToLoad) gstViewModel.reload()
             }
         }
         with(gstViewModel) {

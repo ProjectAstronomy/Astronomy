@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.project.core.ui.BaseRecyclerViewAdapter
 import com.project.donki.databinding.ItemRvFlrBinding
-import com.project.donki.entities.SolarFlare
+import com.project.donki.entities.remote.SolarFlare
 
 class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
     private val flrDiffUtilCallBack = object : DiffUtil.ItemCallback<SolarFlare>() {

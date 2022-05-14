@@ -3,7 +3,7 @@ package com.project.apod
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import androidx.lifecycle.SavedStateHandle
-import com.project.apod.entities.APODResponse
+import com.project.apod.entities.remote.APODResponse
 import com.project.apod.usecases.APODUseCase
 import com.project.apod.viewmodels.APODViewModel
 import com.project.apod.viewmodels.APODViewModel.Companion.APODRESPONSE_FROM_DATE_TO_DATE

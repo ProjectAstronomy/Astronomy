@@ -1,4 +1,4 @@
-package com.project.donki.entities
+package com.project.donki.entities.remote
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class SolarFlare(
-    @field:SerializedName("flrID") val flrID: String?,
+    @field:SerializedName("flrID") val flrID: String,
     @field:SerializedName("instruments") val instruments: List<Instrument>?,
     @field:SerializedName("beginTime") val beginTime: String?,
     @field:SerializedName("peakTime") val peakTime: String?,

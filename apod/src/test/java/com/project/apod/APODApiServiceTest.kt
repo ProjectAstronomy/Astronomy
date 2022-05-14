@@ -1,7 +1,7 @@
 package com.project.apod
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.project.apod.domain.APODApiService
+import com.project.apod.domain.remote.APODApiService
 import com.project.core.BuildConfig
 import com.project.core.domain.BaseInterceptor
 import kotlinx.coroutines.runBlocking

@@ -1,7 +1,7 @@
-package com.project.donki.domain
+package com.project.donki.domain.remote
 
 import com.project.core.domain.BaseRepository
-import com.project.donki.entities.GeomagneticStorm
+import com.project.donki.entities.remote.GeomagneticStorm
 
 class GSTRepository(private val gstApiService: GSTApiService) :
     BaseRepository<List<GeomagneticStorm>> {

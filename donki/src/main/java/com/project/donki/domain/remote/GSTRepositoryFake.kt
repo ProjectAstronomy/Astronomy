@@ -1,9 +1,9 @@
-package com.project.donki.domain
+package com.project.donki.domain.remote
 
 import com.project.core.domain.BaseRepository
-import com.project.donki.entities.AllKpIndex
-import com.project.donki.entities.GeomagneticStorm
-import com.project.donki.entities.LinkedEvent
+import com.project.donki.entities.remote.AllKpIndex
+import com.project.donki.entities.remote.GeomagneticStorm
+import com.project.donki.entities.remote.LinkedEvent
 
 class GSTRepositoryFake : BaseRepository<List<GeomagneticStorm>> {
     override suspend fun loadAsync(startDate: String, endDate: String): List<GeomagneticStorm> {

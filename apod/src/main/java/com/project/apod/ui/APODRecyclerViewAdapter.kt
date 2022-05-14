@@ -10,7 +10,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.project.apod.databinding.ItemRvApodBinding
-import com.project.apod.entities.APODResponse
+import com.project.apod.entities.remote.APODResponse
 import com.project.core.ui.BaseRecyclerViewAdapter
 
 class APODRecyclerViewAdapter(

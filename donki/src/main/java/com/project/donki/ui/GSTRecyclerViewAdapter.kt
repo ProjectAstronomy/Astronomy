@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.project.core.ui.BaseRecyclerViewAdapter
 import com.project.donki.databinding.ItemRvGstBinding
-import com.project.donki.entities.GeomagneticStorm
+import com.project.donki.entities.remote.GeomagneticStorm
 
 class GSTRecyclerViewAdapter : BaseRecyclerViewAdapter<GeomagneticStorm>() {
     private val gstDiffUtilCallBack = object : DiffUtil.ItemCallback<GeomagneticStorm>() {

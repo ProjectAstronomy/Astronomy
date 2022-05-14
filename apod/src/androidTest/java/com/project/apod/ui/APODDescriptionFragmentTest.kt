@@ -9,7 +9,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.project.apod.R
-import com.project.apod.entities.APODResponse
+import com.project.apod.entities.remote.APODResponse
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before

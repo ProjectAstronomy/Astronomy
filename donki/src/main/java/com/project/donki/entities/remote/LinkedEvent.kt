@@ -1,4 +1,4 @@
-package com.project.donki.entities
+package com.project.donki.entities.remote
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

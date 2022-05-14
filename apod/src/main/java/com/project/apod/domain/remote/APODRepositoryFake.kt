@@ -1,6 +1,6 @@
-package com.project.apod.domain
+package com.project.apod.domain.remote
 
-import com.project.apod.entities.APODResponse
+import com.project.apod.entities.remote.APODResponse
 import com.project.core.domain.BaseRepository
 import java.util.*
 

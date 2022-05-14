@@ -5,7 +5,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.testing.TestNavHostController
 import com.project.apod.R
 import com.project.apod.di.apodModule
-import com.project.apod.entities.APODResponse
+import com.project.apod.entities.remote.APODResponse
 import com.project.core.di.androidNetworkStatusModule
 import com.project.core.di.coreRepositoriesModule
 import com.project.core.di.retrofitModule

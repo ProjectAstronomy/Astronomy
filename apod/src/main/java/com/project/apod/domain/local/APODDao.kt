@@ -1,10 +1,10 @@
-package com.project.apod.domain
+package com.project.apod.domain.local
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.project.apod.entities.APODEntity
+import com.project.apod.entities.local.APODEntity
 
 @Dao
 interface APODDao {

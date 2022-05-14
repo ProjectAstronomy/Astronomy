@@ -1,9 +1,9 @@
-package com.project.donki.domain
+package com.project.donki.domain.remote
 
 import com.project.core.domain.BaseRepository
-import com.project.donki.entities.Instrument
-import com.project.donki.entities.LinkedEvent
-import com.project.donki.entities.SolarFlare
+import com.project.donki.entities.remote.Instrument
+import com.project.donki.entities.remote.LinkedEvent
+import com.project.donki.entities.remote.SolarFlare
 
 class FLRRepositoryFake : BaseRepository<List<SolarFlare>> {
     override suspend fun loadAsync(startDate: String, endDate: String): List<SolarFlare> {

@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.apod.databinding.ListApodFragmentBinding
 import com.project.apod.di.SCOPE_APOD_LIST_MODULE
-import com.project.apod.entities.APODResponse
+import com.project.apod.entities.remote.APODResponse
 import com.project.apod.viewmodels.APODViewModel
 import com.project.apod.viewmodels.APODViewModelFactory
 import com.project.core.net.AndroidNetworkStatus

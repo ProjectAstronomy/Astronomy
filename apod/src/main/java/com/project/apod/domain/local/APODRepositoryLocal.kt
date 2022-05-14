@@ -1,7 +1,7 @@
-package com.project.apod.domain
+package com.project.apod.domain.local
 
-import com.project.apod.entities.APODEntity
-import com.project.apod.entities.APODResponse
+import com.project.apod.entities.local.APODEntity
+import com.project.apod.entities.remote.APODResponse
 
 class APODRepositoryLocal(private val dao: APODDao) {
     suspend fun insert(apodResponse: APODResponse): Unit = dao.insert(convert(apodResponse))

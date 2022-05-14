@@ -1,7 +1,7 @@
-package com.project.donki.domain
+package com.project.donki.domain.remote
 
 import com.project.core.domain.BaseRepository
-import com.project.donki.entities.SolarFlare
+import com.project.donki.entities.remote.SolarFlare
 
 class FLRRepository(private val flrApiService: FLRApiService) :
     BaseRepository<List<SolarFlare>> {

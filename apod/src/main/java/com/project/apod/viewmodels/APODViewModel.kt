@@ -3,7 +3,7 @@ package com.project.apod.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.project.apod.entities.APODResponse
+import com.project.apod.entities.remote.APODResponse
 import com.project.apod.usecases.APODUseCase
 import com.project.core.viewmodel.BaseViewModel
 import kotlinx.coroutines.Dispatchers
@@ -59,10 +59,7 @@ class APODViewModel(
             savedStateHandle.set(APODRESPONSE_FROM_DATE_TO_DATE, result)
         } else {
             val list = savedStateHandle
-                .getLiveData<List<APODResponse>>(APODRESPONSE_FROM_DATE_TO_DATE)
-                .value
-                ?.toMutableList()
-
+                .getLiveData<List<APODResponse>>(APODRESPONSE_FROM_DATE_TO_DATE).value?.toMutableList()
             list?.addAll(result)
             savedStateHandle.set(APODRESPONSE_FROM_DATE_TO_DATE, list)
         }

@@ -1,4 +1,4 @@
-package com.project.apod.entities
+package com.project.apod.entities.remote
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
