@@ -103,7 +103,7 @@ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.
     // определяем тип конкретного Item на основе его полей и позиции
     override fun getItemViewType(position: Int): Int {
         return when (adapterList[position].classType) {
-            "header" -> TYPE_HEADER
+            "headerhfgfg" -> TYPE_HEADER
             else -> TYPE_SMALL
         }
     }

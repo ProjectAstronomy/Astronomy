@@ -21,18 +21,25 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
+import java.text.SimpleDateFormat
+import java.util.*
 
 class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBinding::inflate) {
-    private val flrListFragmentScope: Scope = getKoin().getOrCreateScope(SCOPE_FLR_MODULE, named(SCOPE_FLR_MODULE))
+    private val flrListFragmentScope: Scope =
+        getKoin().getOrCreateScope(SCOPE_FLR_MODULE, named(SCOPE_FLR_MODULE))
 
     private val flrViewModelFactory: FLRViewModelFactory = flrListFragmentScope.get()
     private val flrViewModel: FLRViewModel by viewModels {
         SavedStateViewModelFactory(flrViewModelFactory, this)
     }
 
-//    private val adapter by lazy { FLRRecyclerViewAdapter() }
+    //    private val adapter by lazy { FLRRecyclerViewAdapter() }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         //return providePersistentView(inflater, container, savedInstanceState)
         return inflater.inflate(R.layout.fragment_list_flr, container, false)
     }
@@ -71,18 +78,44 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
 //            }
 //        }
 
-            with(flrViewModel) {
+        // получаем массив (listSolarResponse) с данными из API
+        var listSolarResponse = listOf<SolarFlare>()
+        with(flrViewModel) {
             responseSolarFlare().observe(viewLifecycleOwner) {
-                adapterSolarVertical.adapterList = it
+                listSolarResponse = it
+                println ("------------44---------- $it")
             }
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
 
         // -------
+        // создаем массив (listFullEveryDay), заполняем датами за 30 дней, класс солнечной активности "B"
+//        val listFullEveryDay = mutableListOf<SolarFlare>()
+//        val calendar = Calendar.getInstance()
+//        val sdf = SimpleDateFormat("yyyy-MM-dd")
+//
+//        repeat(30) {
+//            calendar.add(Calendar.DAY_OF_YEAR, -1)
+//            listFullEveryDay.add(SolarFlare(null, null, beginTime = sdf.format(calendar.time),null, null, classType = "header",null, null, null, null ))
+//        }
+
+        // В массиве listFullEveryDay берем каждый элемент (из 30 шт.) и проверяем есть ли такой элемент в
+        // массиве 2 (сравниваем по дате). Если есть, то заменяем элемент массива 1 на
+        // элемент массива 2
+
+//        for (index in listFullEveryDay.indices) {
+//            var seekTime = listFullEveryDay[index].beginTime
+//            listSolarResponse.forEach {
+//                if (it.beginTime?.take(10).equals(seekTime)) {
+//                    listFullEveryDay.add(it)
+//                }
+//            }
+//        }
+
+        //listFullEveryDay.add(listSolarResponse[2])
 
 
-
-
+        adapterSolarVertical.adapterList = listSolarResponse
     }
 
     override fun onDestroy() {
