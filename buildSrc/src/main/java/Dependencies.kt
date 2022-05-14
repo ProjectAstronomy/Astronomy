@@ -52,6 +52,9 @@ object Versions {
     const val activityKTXVersion = "1.4.0"
     const val fragmentKTXVersion = "1.4.1"
 
+    //Room
+    const val roomVersion = "2.4.2"
+
     //Test
     const val junitVersion = "4.13.2"
     const val extJunitVersion = "1.1.3"
@@ -122,6 +125,11 @@ object Coroutines {
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutinesVersion}"
     const val kotlinxCoroutinesAndroid =
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutinesVersion}"
+}
+
+object Room {
+    const val roomRuntime = "androidx.room:room-runtime:${Versions.roomVersion}"
+    const val roomCompiler = "androidx.room:room-compiler:${Versions.roomVersion}"
 }
 
 object Core {

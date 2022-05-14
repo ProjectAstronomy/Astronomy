@@ -103,6 +103,10 @@ dependencies {
     implementation(Navigation.navigationUIKTX)
     implementation(Navigation.navigationRuntime)
 
+    //Room
+    implementation(Room.roomRuntime)
+    annotationProcessor(Room.roomCompiler)
+
     //Test
     testImplementation(TestImpl.junit)
     testImplementation(TestImpl.kotlinxCoroutinesTest)
