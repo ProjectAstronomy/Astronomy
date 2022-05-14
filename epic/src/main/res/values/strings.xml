@@ -2,4 +2,28 @@
 <resources>
     <string name="fragment_epic_navigation_label">fragment_epic_navigation_label</string>
     <string name="fragment_epic_description_navigation_label">fragment_epic_description_navigation_labeel</string>
+    <string name="date_epic">it\"s date</string>
+    <string name="verison_epic">version</string>
+    <string name="distancetosun_epic">distanceToSun</string>
+    <string name="distancesuntoearth_epic">distanceSunToEarth</string>
+    <string name="distanceToEarth">distanceToEarth</string>
+    <string name="title_epic">DSCOVR Earth Polychromatic Imaging Camera</string>
+    <string name="sun_j2000_position">sun_j2000_position</string>
+    <string name="lunar">Расположение луны:</string>
+    <string name="sun">Расположение солнца:</string>
+    <string name="dscovк">Расположение дискавер</string>
+    <string name="caption_epic">caption</string>
+    <string name="identifier_epic">identifier</string>
+    <string name="Version">Version:</string>
+    <string name="Date">Date:</string>
+    <string name="ID">Id:</string>
+    <string name="dscovr_z">dscovr_z</string>
+    <string name="dscovr_y">dscovr_y</string>
+    <string name="dscovr_x">dscovr_x</string>
+    <string name="luna_z">luna_z</string>
+    <string name="luna_y">luna_y</string>
+    <string name="luna_x">luna_x</string>
+    <string name="sun_z">sun_z</string>
+    <string name="sun_y">sun_y</string>
+    <string name="sun_x">sun_x</string>
 </resources>

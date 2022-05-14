@@ -11,6 +11,7 @@ import coil.ImageLoader
 import coil.request.ImageRequest
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import com.project.core.R
 
 abstract class BaseFragment<V : ViewBinding>(
     private val inflaterBinding: (inflater: LayoutInflater, root: ViewGroup?, attachToRoot: Boolean) -> V
@@ -56,7 +57,7 @@ abstract class BaseFragment<V : ViewBinding>(
                 .target(
                     onStart = {},
                     onSuccess = { drawable -> imageView.setImageDrawable(drawable) },
-                    onError = { imageView.setImageResource(com.project.core.R.drawable.no_image) }
+                    onError = { imageView.setImageResource(R.drawable.no_image) }
                 )
                 .build()
             ImageLoader(_context).enqueue(request)
