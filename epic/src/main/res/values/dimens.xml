@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="text_size_epic">20sp</dimen>
-    <dimen name="padding_left_epic">15sp</dimen>
-    <dimen name="pad_bot_pic_txt">20sp</dimen>
-</resources>

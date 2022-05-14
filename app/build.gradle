@@ -83,7 +83,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.airbnb.android:lottie:3.4.4'
 
     //AndroidX
     implementation AndroidXImpl.activityKTX
@@ -104,15 +103,5 @@ dependencies {
     androidTestImplementation TestImpl.fragment
     androidTestImplementation TestImpl.extJunit
     androidTestImplementation TestImpl.espresso
-    androidTestImplementation TestImpl.fragment
-    testImplementation(TestImpl.mockito)
-    testImplementation(TestImpl.mockitoInline)
-    testImplementation(TestImpl.mockitoKotlin)
     androidTestImplementation(TestImpl.espressoContrib)
-    implementation(TestImpl.navigation)
-//    androidTestImplementation  (TestImpl.koinTests)
-//    androidTestImplementation  (TestImpl.koinTest)
-
-
-
 }

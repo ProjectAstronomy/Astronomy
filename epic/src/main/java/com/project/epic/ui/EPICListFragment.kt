@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.epic.databinding.FragmentListEpicBinding
@@ -26,7 +25,7 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
         SavedStateViewModelFactory(epicViewModelFactory, this)
     }
 
-    private val adapterEpic by lazy { EPICRecyclerViewAdapter(::onItemClick, ::useCoilToLoadPhoto) }
+    private val adapter by lazy { EPICRecyclerViewAdapter(::onItemClick, ::useCoilToLoadPhoto) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,19 +44,13 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
         }
 
         with(epicViewModel) {
-            responseEPIC().observe(viewLifecycleOwner) {
-                binding.title.text = it[0].caption
-                adapterEpic.items = it
-            }
+            responseEPIC().observe(viewLifecycleOwner) { adapter.items = it }
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
     }
 
     private fun initRecyclerView() {
-        with(binding.rvListEpicVertical) {
-            layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = this@EPICListFragment.adapterEpic
-        }
+
     }
 
     override fun onDestroy() {

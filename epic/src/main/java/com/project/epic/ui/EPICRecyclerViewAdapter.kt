@@ -1,6 +1,5 @@
 package com.project.epic.ui
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -9,9 +8,6 @@ import androidx.recyclerview.widget.DiffUtil
 import com.project.core.ui.BaseRecyclerViewAdapter
 import com.project.epic.databinding.ItemRvEpicBinding
 import com.project.epic.entities.EPICResponse
-import com.project.epic.ui.ImageEpic.dateImageEpic
-import com.project.epic.ui.ImageEpic.urlEpicImage
-
 
 class EPICRecyclerViewAdapter(
     private val onItemClickListener: (EPICResponse) -> Unit,
@@ -33,18 +29,11 @@ class EPICRecyclerViewAdapter(
 
     inner class EPICViewHolder(private val viewBinding: ItemRvEpicBinding) :
         BaseViewHolder<EPICResponse>(viewBinding.root) {
-        private var version = "V: "
-        private var datez = "Date: "
-        private var id = "ID: "
 
-        @SuppressLint("SetTextI18n")
         override fun bind(epicResponse: EPICResponse) {
             itemView.setOnClickListener { onItemClickListener(epicResponse) }
             with(viewBinding) {
-                onItemImageLoader(imgEpic, urlEpicImage(epicResponse.date.toString(), epicResponse.image.toString()))
-                verEpic.text = version + epicResponse.version
-                dateEpic.text = datez + epicResponse.date?.let { dateImageEpic(it) }
-                identifierEpic.text = id + epicResponse.identifier
+                //TODO: bind epicResponse to item_rv_epic.xml
             }
         }
     }
