@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
     <style name="Theme.Astronomy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue_600</item>
@@ -24,10 +25,5 @@
 
         <!-- ���� ����������� ��������� ��������-->
         <item name="android:windowBackground">?attr/myColorPrimaryLight</item>
-
-    </style>
-
-    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/gradient_splash</item>
     </style>
 </resources>
