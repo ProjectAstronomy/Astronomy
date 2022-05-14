@@ -43,7 +43,6 @@ class APODRecyclerViewAdapter(
                 tvCopyrightApod.text = apodResponse.copyright
                 when (apodResponse.mediaType) {
                     "image" -> {
-                        ivUrlApod.setImageDrawable(null)
                         onItemImageLoader(ivUrlApod, apodResponse.url)
                     }
                     "video" -> {

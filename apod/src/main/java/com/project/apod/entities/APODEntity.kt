@@ -3,11 +3,13 @@ package com.project.apod.entities
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.project.apod.di.TABLE_NAME
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-@Entity(tableName = "a_picture_of_the_day_table")
+@Entity(tableName = TABLE_NAME, indices = [Index(value = ["date"], unique = true)])
 data class APODEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val copyright: String?,

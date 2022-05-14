@@ -20,10 +20,10 @@ import org.junit.Rule
 import org.junit.Test
 
 class APODViewModelTest {
-    private val isDateNeededToBeRefreshed = true
+    private val isNetworkAvailable = true
     private val savedStateHandle = mockk<SavedStateHandle>(relaxed = true)
     private val apodUseCase = mockk<APODUseCase> {
-        coEvery { loadAsync(isDateNeededToBeRefreshed) } returns provideList()
+        coEvery { load(isNetworkAvailable) } returns provideList()
     }
     private val apodViewModel = APODViewModel(savedStateHandle, apodUseCase)
 
@@ -41,8 +41,8 @@ class APODViewModelTest {
 
     @Test
     fun `test loadAsync()`() {
-        apodViewModel.loadAsync(isDateNeededToBeRefreshed)
-        coVerify(atLeast = 1) { apodUseCase.loadAsync(isDateNeededToBeRefreshed) }
+        apodViewModel.load(isNetworkAvailable)
+        coVerify(atLeast = 1) { apodUseCase.load(isNetworkAvailable) }
     }
 
     @Test

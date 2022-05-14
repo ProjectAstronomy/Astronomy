@@ -2,6 +2,7 @@ package com.project.apod.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import com.project.apod.entities.APODResponse
 import com.project.apod.usecases.APODUseCase
 import com.project.core.viewmodel.BaseViewModel
@@ -27,15 +28,30 @@ class APODViewModel(
         savedStateHandle.set(APODRESPONSE_FROM_DATE_TO_DATE, null)
     }
 
-    fun loadAsync(isDateNeededToBeRefreshed: Boolean) {
+    fun load(isNetworkAvailable: Boolean) {
         cancelJob()
         viewModelCoroutineScope.launch {
             var result: List<APODResponse>
             withContext(Dispatchers.IO) {
-                result = apodUseCase.loadAsync(isDateNeededToBeRefreshed).reversed()
+                result = apodUseCase.load(isNetworkAvailable).reversed()
             }
             saveLoadedData(result)
         }
+    }
+
+    fun reload() {
+        cancelJob()
+        viewModelCoroutineScope.launch {
+            var result: List<APODResponse>
+            withContext(Dispatchers.IO) {
+                result = apodUseCase.reload().reversed()
+            }
+            saveLoadedData(result)
+        }
+    }
+
+    fun insert(apodResponse: APODResponse) {
+        viewModelScope.launch { apodUseCase.insert(apodResponse) }
     }
 
     internal fun saveLoadedData(result: List<APODResponse>) {

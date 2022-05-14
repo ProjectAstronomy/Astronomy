@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-kapt")
 }
 
 android {
@@ -104,8 +105,9 @@ dependencies {
     implementation(Navigation.navigationRuntime)
 
     //Room
+    implementation(Room.room)
     implementation(Room.roomRuntime)
-    annotationProcessor(Room.roomCompiler)
+    kapt(Room.roomCompiler)
 
     //Test
     testImplementation(TestImpl.junit)

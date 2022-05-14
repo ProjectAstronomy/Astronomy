@@ -1,11 +1,14 @@
 package com.project.apod.domain
 
+import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.project.apod.entities.APODEntity
 
+@Dao
 interface APODDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(apodEntity: APODEntity)
 
     @Query("SELECT * FROM a_picture_of_the_day_table")
