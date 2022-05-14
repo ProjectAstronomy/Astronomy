@@ -12,15 +12,8 @@ class MainRepository() {
     )
 
     private val listItemRvSolarFlare: List<ItemRv> = listOf(
-        ItemRv("Today", "rv_solar_today"),
-        ItemRv("Before", "rv_solar_before"),
-        ItemRv("Forecast", "rv_solar_forecast"),
-    )
-
-    private val listItemRvGeoStorm: List<ItemRv> = listOf(
-        ItemRv("Today", "rv_geo_today"),
-        ItemRv("Before", "rv_geo_before"),
-        ItemRv("Forecast", "rv_geo_forecast"),
+        ItemRv("Solar Flare", "rv_solar_today"),
+        ItemRv("Magnetic Storm", "rv_geo_today"),
     )
 
     private val listItemRvEpic: List<ItemRv> = listOf(
@@ -36,7 +29,6 @@ class MainRepository() {
 
     fun getListRvAPOD() = listItemRvAPOD
     fun getListRvSolarFlare() = listItemRvSolarFlare
-    fun getListRvGeoStorm() = listItemRvGeoStorm
     fun getListRvEpic() = listItemRvEpic
     fun getListRvMars() = listItemRvMars
 }
