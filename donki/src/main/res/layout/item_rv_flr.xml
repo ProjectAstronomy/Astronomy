@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/step_xx_small"
+    android:layout_marginTop="@dimen/step_zero"
     app:cardCornerRadius="0dp"
     app:cardElevation="0dp">
 
@@ -20,8 +20,9 @@
             android:backgroundTint="@color/blue_grey_100"
             android:paddingTop="@dimen/step_small"
             android:paddingBottom="@dimen/step_small"
+            android:paddingEnd="@dimen/step_small"
             android:text="@string/no_text_yet"
-            android:textAlignment="center"
+            android:textAlignment="textEnd"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/guide_line"
             app:layout_constraintHorizontal_chainStyle="spread"
@@ -37,7 +38,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintEnd_toStartOf="@id/view_scale_1of5"
-            app:layout_constraintGuide_percent="0.32"
+            app:layout_constraintGuide_percent="0.3"
             app:layout_constraintStart_toEndOf="@id/tv_date_solar"
             app:layout_constraintTop_toTopOf="parent"
 
@@ -46,64 +47,63 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/view_scale_1of5"
             style="@style/view_scale_item"
-            android:layout_marginStart="@dimen/step_xx_small"
+            android:layout_marginStart="@dimen/step_small"
             app:cardBackgroundColor="@color/light_green_800"
             app:cardCornerRadius="@dimen/step_xx_small"
             app:cardElevation="0dp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/view_scale_2of5"
-            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toEndOf="@id/tv_date_solar"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/view_scale_2of5"
             style="@style/view_scale_item"
+            android:layout_marginStart="@dimen/step_xx_small"
             app:cardBackgroundColor="@color/light_green_800"
             app:cardCornerRadius="@dimen/step_xx_small"
             app:cardElevation="0dp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/view_scale_3of5"
+
             app:layout_constraintStart_toEndOf="@id/view_scale_1of5"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/view_scale_3of5"
             style="@style/view_scale_item"
+            android:layout_marginStart="@dimen/step_xx_small"
             app:cardBackgroundColor="@color/yellow_800"
             app:cardCornerRadius="@dimen/step_xx_small"
             app:cardElevation="0dp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/view_scale_4of5"
             app:layout_constraintStart_toEndOf="@id/view_scale_2of5"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/view_scale_4of5"
             style="@style/view_scale_item"
-            app:cardBackgroundColor="@color/red_900"
+            android:layout_marginStart="@dimen/step_xx_small"
+            app:cardBackgroundColor="@color/yellow_800"
             app:cardCornerRadius="@dimen/step_xx_small"
             app:cardElevation="0dp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintCircleRadius="@dimen/step_normal"
-            app:layout_constraintEnd_toStartOf="@id/view_scale_5of5"
             app:layout_constraintStart_toEndOf="@id/view_scale_3of5"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/view_scale_5of5"
             style="@style/view_scale_item"
+            android:layout_marginStart="@dimen/step_xx_small"
             app:cardBackgroundColor="@color/red_900"
             app:cardCornerRadius="@dimen/step_xx_small"
             app:cardElevation="0dp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintCircleRadius="@dimen/step_normal"
-            app:layout_constraintEnd_toStartOf="@id/guide_line1"
             app:layout_constraintStart_toEndOf="@id/view_scale_4of5"
             app:layout_constraintTop_toTopOf="parent" />
 

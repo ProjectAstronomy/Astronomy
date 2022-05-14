@@ -11,7 +11,7 @@
     <dimen name="step_large">24dp</dimen>
     <dimen name="radius_large">24dp</dimen>
     <dimen name="elevation_large">6dp</dimen>
-    <dimen name="text_size_large">24sp</dimen>
+    <dimen name="text_size_large">16sp</dimen>
 
     <!--normal-->
     <dimen name="step_normal">12dp</dimen>
@@ -40,6 +40,8 @@
 
     <dimen name="step_x_small">4dp</dimen>
     <dimen name="step_xx_small">2dp</dimen>
+    <dimen name="step_xxx_small">1dp</dimen>
+    <dimen name="step_zero">0dp</dimen>
 
     <dimen name="height_video_frame">250dp</dimen>
 
