@@ -79,13 +79,6 @@ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.
 
     override fun getItemCount(): Int = adapterList.size
 
-
-
-
-
-
-
-
     inner class HeadersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(adapterItemData: SolarFlare) {
             itemView.findViewById<TextView>(R.id.tv_date_solar).text = adapterItemData.beginTime

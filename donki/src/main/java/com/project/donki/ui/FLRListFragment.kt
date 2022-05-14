@@ -30,7 +30,7 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
         SavedStateViewModelFactory(flrViewModelFactory, this)
     }
 
-    private val adapter by lazy { FLRRecyclerViewAdapter() }
+//    private val adapter by lazy { FLRRecyclerViewAdapter() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //return providePersistentView(inflater, container, savedInstanceState)
@@ -41,7 +41,7 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
         super.onViewCreated(view, savedInstanceState)
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
-            //TODO: init views
+
             flrViewModel.loadAsync()
         }
 
@@ -51,19 +51,18 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
         view.findViewById<RecyclerView>(R.id.rv_list_solar).adapter = adapterSolarVertical
 
 
-        val listSolar = mutableListOf(
-            SolarFlare (null, null, beginTime= "2022-04-11T05:00Z", null, null, classType = "C2.2", null, null, null, null),
-            SolarFlare (null, null, beginTime = "2022-04-15T11:07Z", null, null, classType = "M2.2",null, null, null, null, ),
-            SolarFlare (null, null, beginTime = "2022-04-15T13:47Z", null, null, classType = "M1.9",null, null, null, null, ),
-            SolarFlare (null, null, beginTime = "2022-04-17", null, null, classType = "M1.0",null, null, null, null, ),
-            SolarFlare (null, null, beginTime = "2022-04-22T03:17Z", null, null, classType = "A1.1",null, null, null, null, ),
-            SolarFlare (null, null, beginTime = "2022-04-22T03:17Z", null, null, classType = "_B1.1",null, null, null, null, ),
-            SolarFlare (null, null, beginTime = "2022-04-22T03:17Z", null, null, classType = "X1.1",null, null, null, null, ),
-            SolarFlare (null, null, beginTime = "2022-04-22T03:17Z", null, null, classType = "B1.1",null, null, null, null, ),
-            SolarFlare (null, null, beginTime = "2022-04-22T03:17Z", null, null, classType = "X1.1",null, null, null, null, ),
-        )
-
-        adapterSolarVertical.adapterList = listSolar       // вызов set в адаптере
+//        val listSolar = mutableListOf(
+//            SolarFlare (null, null, beginTime= "2022-04-11T05:00Z", null, null, classType = "C2.2", null, null, null, null),
+//            SolarFlare (null, null, beginTime = "2022-04-15T11:07Z", null, null, classType = "M2.2",null, null, null, null, ),
+//            SolarFlare (null, null, beginTime = "2022-04-15T13:47Z", null, null, classType = "M1.9",null, null, null, null, ),
+//            SolarFlare (null, null, beginTime = "2022-04-17", null, null, classType = "M1.0",null, null, null, null, ),
+//            SolarFlare (null, null, beginTime = "2022-04-22T03:17Z", null, null, classType = "A1.1",null, null, null, null, ),
+//            SolarFlare (null, null, beginTime = "2022-04-22T03:17Z", null, null, classType = "_B1.1",null, null, null, null, ),
+//            SolarFlare (null, null, beginTime = "2022-04-22T03:17Z", null, null, classType = "X1.1",null, null, null, null, ),
+//            SolarFlare (null, null, beginTime = "2022-04-22T03:17Z", null, null, classType = "B1.1",null, null, null, null, ),
+//            SolarFlare (null, null, beginTime = "2022-04-22T03:17Z", null, null, classType = "X1.1",null, null, null, null, ),
+//        )
+//        adapterSolarVertical.adapterList = listSolar
 
 
 //        lifecycleScope.launch {
@@ -72,10 +71,12 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
 //            }
 //        }
 
-    //        with(flrViewModel) {
-//            responseSolarFlare().observe(viewLifecycleOwner) { adapter.items = it }
-//            error().observe(viewLifecycleOwner) { showThrowable(it) }
-//        }
+            with(flrViewModel) {
+            responseSolarFlare().observe(viewLifecycleOwner) {
+                adapterSolarVertical.adapterList = it
+            }
+            error().observe(viewLifecycleOwner) { showThrowable(it) }
+        }
 
         // -------
 
