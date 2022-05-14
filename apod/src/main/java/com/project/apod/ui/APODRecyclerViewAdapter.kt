@@ -49,11 +49,14 @@ class APODRecyclerViewAdapter(
                 tvCopyrightApod.text = apodResponse.copyright
                 when (apodResponse.mediaType) {
                     "image" -> {
+                        viewBinding.ivUrlApod.visibility = View.VISIBLE
+                        viewBinding.wvRvUrlVideoApod.visibility = View.GONE
                         ivUrlApod.setImageDrawable(null)
                         onItemImageLoader(ivUrlApod, apodResponse.url)
                     }
                     "video" -> {
                         viewBinding.ivUrlApod.visibility = View.GONE
+                        viewBinding.wvRvUrlVideoApod.visibility = View.VISIBLE
                         with(viewBinding.wvRvUrlVideoApod) {
                             visibility = View.VISIBLE
                             settings.javaScriptEnabled = true

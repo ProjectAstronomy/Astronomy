@@ -33,15 +33,18 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
         SavedStateViewModelFactory(flrViewModelFactory, this)
     }
 
-    //    private val adapter by lazy { FLRRecyclerViewAdapter() }
+    private val adapterSolarVertical by lazy { FLRRecyclerViewAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //return providePersistentView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.fragment_list_flr, container, false)
+        // эта строчка непонятно как работает - в ней же нет ссылки на разметку
+        return providePersistentView(inflater, container, savedInstanceState)
+
+        // была бы эта строчка - то было бы понятно
+        //return inflater.inflate(R.layout.fragment_list_flr, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,14 +55,17 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
             flrViewModel.loadAsync()
         }
 
-        view.findViewById<RecyclerView>(R.id.rv_list_solar).layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        val adapterSolarVertical = FLRRecyclerViewAdapter()
-        view.findViewById<RecyclerView>(R.id.rv_list_solar).adapter = adapterSolarVertical
+        // почему-то падаем в варианте с binding
+        binding.rvListSolar.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.rvListSolar.adapter = adapterSolarVertical
+
+//        view.findViewById<RecyclerView>(R.id.rv_list_solar).layoutManager =
+//            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+//        view.findViewById<RecyclerView>(R.id.rv_list_solar).adapter = adapterSolarVertical
 
 
 //        lifecycleScope.launch {
-//            adapter.isNeededToLoadInFlow.collect { isNeededToLoad ->
+//            adapterSolarVertical.isNeededToLoadInFlow.collect { isNeededToLoad ->
 //                if (isNeededToLoad) flrViewModel.loadAsync()
 //            }
 //        }

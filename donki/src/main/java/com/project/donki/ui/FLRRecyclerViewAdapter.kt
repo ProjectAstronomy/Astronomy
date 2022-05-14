@@ -6,12 +6,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.project.core.ui.BaseRecyclerViewAdapter
 import com.project.donki.R
 import com.project.donki.entities.SolarFlare
 
-// class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
-class FLRRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
+//class FLRRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val TYPE_HEADER = 0
@@ -26,14 +29,14 @@ class FLRRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
 
 
-//    private val flrDiffUtilCallBack = object : DiffUtil.ItemCallback<SolarFlare>() {
-//        override fun areItemsTheSame(oldItem: SolarFlare, newItem: SolarFlare): Boolean =
-//            oldItem.flrID == newItem.flrID
-//
-//        override fun areContentsTheSame(oldItem: SolarFlare, newItem: SolarFlare): Boolean =
-//            oldItem == newItem
-//    }
-//    override val differ = AsyncListDiffer(this, flrDiffUtilCallBack)
+    private val flrDiffUtilCallBack = object : DiffUtil.ItemCallback<SolarFlare>() {
+        override fun areItemsTheSame(oldItem: SolarFlare, newItem: SolarFlare): Boolean =
+            oldItem.flrID == newItem.flrID
+
+        override fun areContentsTheSame(oldItem: SolarFlare, newItem: SolarFlare): Boolean =
+            oldItem == newItem
+    }
+    override val differ = AsyncListDiffer(this, flrDiffUtilCallBack)
 //*********************
 
 
@@ -43,7 +46,7 @@ class FLRRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 //        FLRViewHolder(ItemRvFlrBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 // ****************
     // в этой строке заненен конкретный из этого класса viewHolder на общий из библиотеки
-override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
+override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<SolarFlare>
 {
     val myInflater = LayoutInflater.from(parent.context)
     return when (viewType) {
@@ -53,18 +56,10 @@ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.
     }
 }
 
-//    class FLRViewHolder(private val viewBinding: ItemRvFlrBinding) : BaseViewHolder<SolarFlare>(viewBinding.root) {
-//        override fun bind(solarFlare: SolarFlare) {
-//            //TODO: bind solarFlare to view
-//        }
-//    }
-//**************************************************
-
-
 
     // в этой строке заненен конкретный из этого класса viewHolder на общий из библиотеки
     // override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BaseViewHolder<SolarFlare>, position: Int) {
         when (getItemViewType(position)) {
             TYPE_HEADER -> {
                 holder as HeadersViewHolder
@@ -83,14 +78,25 @@ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.
 
     override fun getItemCount(): Int = adapterList.size
 
-    inner class HeadersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(adapterItemData: SolarFlare) {
+
+
+//    class FLRViewHolder(private val viewBinding: ItemRvFlrBinding) : BaseViewHolder<SolarFlare>(viewBinding.root) {
+//        override fun bind(solarFlare: SolarFlare) {
+//            //TODO: bind solarFlare to view
+//        }
+//    }
+//**************************************************
+
+
+
+    inner class HeadersViewHolder(itemView: View) : BaseViewHolder<SolarFlare>(itemView) {
+        override fun bind(adapterItemData: SolarFlare) {
             itemView.findViewById<TextView>(R.id.tv_date_solar).text = adapterItemData.beginTime
         }
     }
 
-    inner class SmallViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(adapterItemData: SolarFlare) {
+    inner class SmallViewHolder(itemView: View) : BaseViewHolder<SolarFlare>(itemView) {
+        override fun bind(adapterItemData: SolarFlare) {
             itemView.findViewById<TextView>(R.id.tv_date_solar).text = adapterItemData.beginTime?.substring(11, 16)
             itemView.findViewById<TextView>(R.id.tv_solar_flare_class).text = adapterItemData.classType
 
@@ -110,8 +116,8 @@ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.
         }
     }
 
-    inner class NoFlareViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(adapterItemData: SolarFlare) {
+    inner class NoFlareViewHolder(itemView: View) : BaseViewHolder<SolarFlare>(itemView) {
+        override fun bind(adapterItemData: SolarFlare) {
             //itemView.findViewById<TextView>(R.id.tv_date_solar).text = adapterItemData.beginTime
         }
     }
@@ -124,6 +130,5 @@ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.
             else -> TYPE_SMALL
         }
     }
-
 
 }
