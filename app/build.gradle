@@ -20,21 +20,6 @@ android {
     buildFeatures {
         viewBinding true
     }
-    flavorDimensions "TEST"
-    productFlavors {
-        FAKE {
-            dimension "TEST"
-            applicationIdSuffix '.fake'
-            versionNameSuffix '-fake'
-            buildConfigField "String", "TYPE", '"FAKE"'
-        }
-        REAL {
-            dimension "TEST"
-            applicationIdSuffix '.real'
-            versionNameSuffix '-real'
-            buildConfigField "String", "TYPE", '"REAL"'
-        }
-    }
 
     buildTypes {
         release {

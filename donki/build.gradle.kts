@@ -20,15 +20,6 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    flavorDimensions += "TEST"
-    productFlavors {
-        create("FAKE") {
-            dimension = "TEST"
-        }
-        create("REAL") {
-            dimension = "TEST"
-        }
-    }
 
     buildTypes {
         release {

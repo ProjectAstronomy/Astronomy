@@ -2,7 +2,6 @@ package com.project.donki.di
 
 import android.content.Context
 import androidx.room.Room
-import com.project.donki.BuildConfig
 import com.project.donki.database.DONKIDatabase
 import com.project.donki.domain.local.*
 import com.project.donki.domain.remote.*
@@ -55,13 +54,7 @@ val flrModule = module {
     scope(named(SCOPE_FLR_MODULE)) {
         scoped<FLRApiService> { get<Retrofit>().create(FLRApiService::class.java) }
 
-        scoped {
-            if (BuildConfig.FLAVOR == "FAKE") {
-                FLRRepositoryFake()
-            } else {
-                FLRRepository(flrApiService = get())
-            }
-        }
+        scoped { FLRRepository(flrApiService = get()) }
 
         scoped { FLRRepositoryLocal(solarFlareDao = get(), instrumentDao = get(), linkedEventDao = get()) }
 
@@ -75,13 +68,7 @@ val gstModule = module {
     scope(named(SCOPE_GST_MODULE)) {
         scoped<GSTApiService> { get<Retrofit>().create(GSTApiService::class.java) }
 
-        scoped {
-            if (BuildConfig.FLAVOR == "FAKE") {
-                GSTRepositoryFake()
-            } else {
-                GSTRepository(gstApiService = get())
-            }
-        }
+        scoped { GSTRepository(gstApiService = get()) }
 
         scoped { GSTRepositoryLocal(geomagneticStormDao = get(), allKpIndexDao = get(), linkedEventDao = get()) }
 

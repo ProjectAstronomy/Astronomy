@@ -1,13 +1,13 @@
 package com.project.apod.usecases
 
 import com.project.apod.domain.local.APODRepositoryLocal
+import com.project.apod.domain.remote.APODRepository
 import com.project.apod.entities.remote.APODResponse
-import com.project.core.domain.BaseRepository
 import com.project.core.domain.CalendarRepository
 
 class APODUseCase(
     private val calendarRepository: CalendarRepository,
-    private val remoteRepository: BaseRepository<List<APODResponse>>,
+    private val remoteRepository: APODRepository,
     private val localRepository: APODRepositoryLocal
 ) {
     suspend fun load(isNetworkAvailable: Boolean): List<APODResponse> {

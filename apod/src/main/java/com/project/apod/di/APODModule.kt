@@ -2,13 +2,11 @@ package com.project.apod.di
 
 import android.content.Context
 import androidx.room.Room
-import com.project.apod.BuildConfig
 import com.project.apod.database.APODDatabase
 import com.project.apod.domain.local.APODDao
 import com.project.apod.domain.local.APODRepositoryLocal
 import com.project.apod.domain.remote.APODApiService
 import com.project.apod.domain.remote.APODRepository
-import com.project.apod.domain.remote.APODRepositoryFake
 import com.project.apod.usecases.APODUseCase
 import com.project.apod.viewmodels.APODViewModelFactory
 import org.koin.android.ext.koin.androidContext
@@ -35,13 +33,7 @@ val apodModule = module {
 
         scoped { APODRepositoryLocal(dao = get()) }
 
-        scoped {
-            if (BuildConfig.FLAVOR == "FAKE") {
-                APODRepositoryFake()
-            } else {
-                APODRepository(apodApiService = get())
-            }
-        }
+        scoped { APODRepository(apodApiService = get()) }
 
         scoped { APODUseCase(calendarRepository = get(), remoteRepository = get(), localRepository = get()) }
 

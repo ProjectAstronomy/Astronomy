@@ -3,7 +3,7 @@ package com.project.mrp.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import com.project.core.viewmodel.BaseViewModel
-import com.project.mrp.domain.remote.BaseMissionManifestRepository
+import com.project.mrp.domain.remote.MissionManifestRepository
 import com.project.mrp.entities.remote.MissionManifest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 
 class MissionManifestViewModel(
     private val savedStateHandle: SavedStateHandle,
-    private val repository: BaseMissionManifestRepository
+    private val repository: MissionManifestRepository
 ) : BaseViewModel(savedStateHandle) {
 
     companion object {

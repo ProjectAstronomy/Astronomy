@@ -2,14 +2,12 @@ package com.project.epic.di
 
 import android.content.Context
 import androidx.room.Room
-import com.project.epic.BuildConfig
 import com.project.epic.database.EPICDatabase
 import com.project.epic.database.EPICDatabase.Companion.EPIC_DATABASE
 import com.project.epic.domain.local.EPICDao
 import com.project.epic.domain.local.EPICRepositoryLocal
 import com.project.epic.domain.remote.EPICApiService
 import com.project.epic.domain.remote.EPICRepository
-import com.project.epic.domain.remote.EPICRepositoryFake
 import com.project.epic.usecases.EPICUseCase
 import com.project.epic.viewmodels.EPICViewModelFactory
 import org.koin.android.ext.koin.androidContext
@@ -32,13 +30,7 @@ val epicModule = module {
     scope(named(SCOPE_EPIC_MODULE)) {
         scoped<EPICApiService> { get<Retrofit>().create(EPICApiService::class.java) }
 
-        scoped {
-            if (BuildConfig.FLAVOR == "FAKE") {
-                EPICRepositoryFake()
-            } else {
-                EPICRepository(epicApiService = get())
-            }
-        }
+        scoped { EPICRepository(epicApiService = get()) }
 
         scoped { EPICRepositoryLocal(dao = get()) }
 
