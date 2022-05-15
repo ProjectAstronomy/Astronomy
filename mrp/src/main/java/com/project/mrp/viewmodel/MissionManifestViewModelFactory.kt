@@ -2,7 +2,7 @@ package com.project.mrp.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import com.project.core.viewmodel.ViewModelAssistedFactory
-import com.project.mrp.domain.BaseMissionManifestRepository
+import com.project.mrp.domain.remote.BaseMissionManifestRepository
 
 class MissionManifestViewModelFactory(private val repository: BaseMissionManifestRepository) :
     ViewModelAssistedFactory<MissionManifestViewModel> {

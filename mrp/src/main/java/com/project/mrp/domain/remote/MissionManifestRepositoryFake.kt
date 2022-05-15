@@ -1,4 +1,4 @@
-package com.project.mrp.domain
+package com.project.mrp.domain.remote
 
 import com.project.mrp.entities.remote.MissionManifest
 import com.project.mrp.entities.remote.PhotoManifest

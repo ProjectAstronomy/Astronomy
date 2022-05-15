@@ -18,9 +18,9 @@ data class EPICEntity(
     val date: String?,
     @Embedded val attitudeQuaternions: AttitudeQuaternions?,
     @Embedded val centroidCoordinates: CentroidCoordinates?,
-    @Embedded(prefix = "first") val dscovrJ2000Position: J2000Position?,
-    @Embedded(prefix = "second") val lunarJ2000Position: J2000Position?,
-    @Embedded(prefix = "third") val sunJ2000Position: J2000Position?,
+    @Embedded(prefix = "dscovr_") val dscovrJ2000Position: J2000Position?,
+    @Embedded(prefix = "lunar_") val lunarJ2000Position: J2000Position?,
+    @Embedded(prefix = "sun_") val sunJ2000Position: J2000Position?,
 ) {
     companion object {
         const val EPIC_TABLE = "epic_table"

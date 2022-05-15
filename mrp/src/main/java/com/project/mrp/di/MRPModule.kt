@@ -1,7 +1,7 @@
 package com.project.mrp.di
 
 import com.project.mrp.BuildConfig
-import com.project.mrp.domain.*
+import com.project.mrp.domain.remote.*
 import com.project.mrp.viewmodel.MissionManifestViewModelFactory
 import com.project.mrp.viewmodel.PhotosViewModelFactory
 import org.koin.core.qualifier.named

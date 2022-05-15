@@ -9,10 +9,10 @@ import com.project.mrp.entities.remote.Rover
 data class PhotoEntity(
     @PrimaryKey val id: Long,
     val sol: Long?,
-    @Embedded val camera: Camera,
+    @Embedded(prefix ="camera_") val camera: Camera,
     @ColumnInfo(name = "img_src") val imgSrc: String?,
     @ColumnInfo(name = "earth_date") val earthDate: String?,
-    @Embedded val rover: Rover?
+    @Embedded(prefix = "rover_") val rover: Rover?
 ) {
     companion object {
         const val PHOTO_ENTITY_TABLE = "photo_entity_table"

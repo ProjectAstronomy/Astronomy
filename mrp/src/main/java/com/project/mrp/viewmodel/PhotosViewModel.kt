@@ -3,7 +3,7 @@ package com.project.mrp.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import com.project.core.viewmodel.BaseViewModel
-import com.project.mrp.domain.BasePhotosRepository
+import com.project.mrp.domain.remote.BasePhotosRepository
 import com.project.mrp.entities.remote.Photos
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -1,4 +1,4 @@
-package com.project.mrp.domain
+package com.project.mrp.domain.remote
 
 import com.project.mrp.entities.remote.Camera
 import com.project.mrp.entities.remote.Photo

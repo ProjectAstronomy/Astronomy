@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class PhotoManifest(
-    @field:SerializedName("name") val name: String?,
+    @field:SerializedName("name") val name: String,
     @field:SerializedName("landing_date") val landingDate: String?,
     @field:SerializedName("launch_date") val launchDate: String?,
     @field:SerializedName("status") val status: String?,
