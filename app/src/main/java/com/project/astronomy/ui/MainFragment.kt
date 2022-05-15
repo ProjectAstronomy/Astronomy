@@ -80,7 +80,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     }
 
     private fun onSolarFlareClickListener(itemRv: ItemRv) {
-        findNavController().navigate(R.id.action_main_fragment_to_navigation_flr)
+        findNavController().navigate(R.id.action_main_fragment_to_navigation_gst)
     }
 
     private fun onGeoClickListener(itemRv: ItemRv) {

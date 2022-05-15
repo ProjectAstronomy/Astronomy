@@ -46,15 +46,15 @@ class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
 //        FLRViewHolder(ItemRvFlrBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 // ****************
     // в этой строке заненен конкретный из этого класса viewHolder на общий из библиотеки
-override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<SolarFlare>
-{
-    val myInflater = LayoutInflater.from(parent.context)
-    return when (viewType) {
-        TYPE_HEADER -> HeadersViewHolder(myInflater.inflate(R.layout.item_rv_flr_header, parent, false))
-        TYPE_NO_FLR -> NoFlareViewHolder(myInflater.inflate(R.layout.item_rv_flr_no_data, parent, false))
-        else -> SmallViewHolder(myInflater.inflate(R.layout.item_rv_flr, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<SolarFlare>
+    {
+        val myInflater = LayoutInflater.from(parent.context)
+        return when (viewType) {
+            TYPE_HEADER -> HeadersViewHolder(myInflater.inflate(R.layout.item_rv_flr_header, parent, false))
+            TYPE_NO_FLR -> NoFlareViewHolder(myInflater.inflate(R.layout.item_rv_flr_no_data, parent, false))
+            else -> SmallViewHolder(myInflater.inflate(R.layout.item_rv_flr, parent, false))
+        }
     }
-}
 
 
     // в этой строке заненен конкретный из этого класса viewHolder на общий из библиотеки
