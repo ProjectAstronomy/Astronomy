@@ -35,10 +35,7 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
 
     private val adapterSolarVertical by lazy { FLRRecyclerViewAdapter() }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // эта строчка непонятно как работает - в ней же нет ссылки на разметку
         return providePersistentView(inflater, container, savedInstanceState)
