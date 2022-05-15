@@ -1,6 +1,6 @@
-package com.project.epic.domain
+package com.project.epic.domain.remote
 
-import com.project.epic.entities.EPICResponse
+import com.project.epic.entities.remote.EPICResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 

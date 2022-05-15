@@ -1,8 +1,8 @@
 package com.project.mrp.domain
 
-import com.project.mrp.entities.MissionManifest
-import com.project.mrp.entities.PhotoManifest
-import com.project.mrp.entities.PhotosInformation
+import com.project.mrp.entities.remote.MissionManifest
+import com.project.mrp.entities.remote.PhotoManifest
+import com.project.mrp.entities.remote.PhotosInformation
 
 class MissionManifestRepositoryFake : BaseMissionManifestRepository {
     override suspend fun loadMissionManifest(roverName: String): MissionManifest {

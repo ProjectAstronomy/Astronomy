@@ -3,7 +3,7 @@ package com.project.epic
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.project.core.BuildConfig
 import com.project.core.domain.BaseInterceptor
-import com.project.epic.domain.EPICApiService
+import com.project.epic.domain.remote.EPICApiService
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

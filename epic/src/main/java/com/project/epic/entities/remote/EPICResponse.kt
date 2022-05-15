@@ -1,4 +1,4 @@
-package com.project.epic.entities
+package com.project.epic.entities.remote
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class EPICResponse(
-    @field:SerializedName("identifier") val identifier: String?,
+    @field:SerializedName("identifier") val identifier: String,
     @field:SerializedName("caption") val caption: String?,
     @field:SerializedName("image") val image: String?,
     @field:SerializedName("version") val version: String?,

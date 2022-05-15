@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.project.core.ui.BaseRecyclerViewAdapter
 import com.project.epic.databinding.ItemRvEpicBinding
-import com.project.epic.entities.EPICResponse
+import com.project.epic.entities.remote.EPICResponse
 import com.project.epic.ui.ImageEpic.dateImageEpic
 import com.project.epic.ui.ImageEpic.urlEpicImage
 

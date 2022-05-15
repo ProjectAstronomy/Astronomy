@@ -1,6 +1,6 @@
 package com.project.mrp.domain
 
-import com.project.mrp.entities.MissionManifest
+import com.project.mrp.entities.remote.MissionManifest
 
 class MissionManifestRepository(private val missionManifestApiService: MissionManifestApiService) :
     BaseMissionManifestRepository {

@@ -1,10 +1,7 @@
 package com.project.donki.entities.local
 
-import android.os.Parcelable
 import androidx.room.*
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
 @Entity(
     tableName = LINKED_EVENT_TABLE,
     foreignKeys = [
@@ -25,4 +22,4 @@ data class LinkedEventEntity(
     @ColumnInfo(name = "activity_id") val activityID: String?,
     @ColumnInfo(name = SOLAR_FLARE_ID) val flrID: String? = null,
     @ColumnInfo(name = GEOMAGNETIC_STORM_ID) val gstID: String? = null
-) : Parcelable
+)

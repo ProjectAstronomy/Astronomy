@@ -1,6 +1,6 @@
 package com.project.mrp.domain
 
-import com.project.mrp.entities.Photos
+import com.project.mrp.entities.remote.Photos
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

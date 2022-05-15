@@ -1,10 +1,7 @@
 package com.project.donki.entities.local
 
-import android.os.Parcelable
 import androidx.room.*
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
 @Entity(
     tableName = INSTRUMENT_TABLE,
     foreignKeys = [ForeignKey(
@@ -18,4 +15,4 @@ class InstrumentEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     @ColumnInfo(name = "display_name") val displayName: String?,
     @ColumnInfo(name = SOLAR_FLARE_ID) val flrID: String
-) : Parcelable
+)

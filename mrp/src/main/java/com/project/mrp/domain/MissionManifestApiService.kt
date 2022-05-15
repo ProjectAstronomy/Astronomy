@@ -1,6 +1,6 @@
 package com.project.mrp.domain
 
-import com.project.mrp.entities.MissionManifest
+import com.project.mrp.entities.remote.MissionManifest
 import retrofit2.http.GET
 import retrofit2.http.Path
 

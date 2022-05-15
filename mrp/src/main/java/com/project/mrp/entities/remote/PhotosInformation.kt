@@ -1,4 +1,4 @@
-package com.project.mrp.entities
+package com.project.mrp.entities.remote
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

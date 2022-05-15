@@ -1,6 +1,6 @@
 package com.project.mrp.domain
 
-import com.project.mrp.entities.MissionManifest
+import com.project.mrp.entities.remote.MissionManifest
 
 interface BaseMissionManifestRepository {
     suspend fun loadMissionManifest(roverName: String): MissionManifest

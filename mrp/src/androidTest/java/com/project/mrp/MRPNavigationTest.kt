@@ -10,7 +10,7 @@ import com.project.core.di.coreRepositoriesModule
 import com.project.core.di.retrofitModule
 import com.project.mrp.di.missionManifestModule
 import com.project.mrp.di.photosModule
-import com.project.mrp.entities.PhotosInformation
+import com.project.mrp.entities.remote.PhotosInformation
 import com.project.mrp.ui.MissionManifestFragment
 import com.project.mrp.ui.MissionManifestFragmentDirections
 import junit.framework.TestCase

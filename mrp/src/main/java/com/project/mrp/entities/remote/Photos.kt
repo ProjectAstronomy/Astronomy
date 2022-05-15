@@ -1,4 +1,4 @@
-package com.project.mrp.entities
+package com.project.mrp.entities.remote
 
 import com.google.gson.annotations.SerializedName
 

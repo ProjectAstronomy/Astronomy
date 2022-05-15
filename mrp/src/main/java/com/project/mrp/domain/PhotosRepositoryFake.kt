@@ -1,9 +1,9 @@
 package com.project.mrp.domain
 
-import com.project.mrp.entities.Camera
-import com.project.mrp.entities.Photo
-import com.project.mrp.entities.Photos
-import com.project.mrp.entities.Rover
+import com.project.mrp.entities.remote.Camera
+import com.project.mrp.entities.remote.Photo
+import com.project.mrp.entities.remote.Photos
+import com.project.mrp.entities.remote.Rover
 
 class PhotosRepositoryFake : BasePhotosRepository {
     override suspend fun loadPhotosByMartianSol(roverName: String, sol: Long): Photos {

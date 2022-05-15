@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-kapt")
 }
 
 android {
@@ -80,6 +81,11 @@ dependencies {
 
     //AndroidX
     implementation(AndroidXImpl.fragmentKTX)
+
+    //Room
+    implementation(Room.room)
+    implementation(Room.roomRuntime)
+    kapt(Room.roomCompiler)
 
     //Core
     implementation(Core.coreKTX)

@@ -1,6 +1,6 @@
 package com.project.mrp.domain
 
-import com.project.mrp.entities.Photos
+import com.project.mrp.entities.remote.Photos
 
 class PhotosRepository(private val photosApiService: PhotosApiService) : BasePhotosRepository {
     override suspend fun loadPhotosByMartianSol(roverName: String, sol: Long): Photos =

@@ -7,14 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.project.core.net.AndroidNetworkStatus
 import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.epic.databinding.FragmentListEpicBinding
 import com.project.epic.di.SCOPE_EPIC_MODULE
-import com.project.epic.entities.EPICResponse
+import com.project.epic.entities.remote.EPICResponse
 import com.project.epic.viewmodels.EPICViewModel
 import com.project.epic.viewmodels.EPICViewModelFactory
 import org.koin.android.ext.android.getKoin
+import org.koin.android.ext.android.inject
 import org.koin.core.qualifier.named
 
 class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicBinding::inflate) {
@@ -27,6 +29,7 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
     }
 
     private val adapterEpic by lazy { EPICRecyclerViewAdapter(::onItemClick, ::useCoilToLoadPhoto) }
+    private val androidNetworkStatus: AndroidNetworkStatus by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +44,7 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             initRecyclerView()
-            epicViewModel.loadAsync()
+            epicViewModel.loadAsync(androidNetworkStatus.isNetworkAvailable())
         }
 
         with(epicViewModel) {
@@ -66,6 +69,7 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
     }
 
     private fun onItemClick(epicResponse: EPICResponse) {
+        epicViewModel.insert(epicResponse)
         val action = EPICListFragmentDirections
             .actionFragmentEpicToFragmentEpicDescription(epicResponse)
         findNavController().navigate(action)

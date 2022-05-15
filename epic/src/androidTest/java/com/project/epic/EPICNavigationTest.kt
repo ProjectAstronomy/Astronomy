@@ -8,10 +8,10 @@ import com.project.core.di.androidNetworkStatusModule
 import com.project.core.di.coreRepositoriesModule
 import com.project.core.di.retrofitModule
 import com.project.epic.di.epicModule
-import com.project.epic.entities.AttitudeQuaternions
-import com.project.epic.entities.CentroidCoordinates
-import com.project.epic.entities.EPICResponse
-import com.project.epic.entities.J2000Position
+import com.project.epic.entities.remote.AttitudeQuaternions
+import com.project.epic.entities.remote.CentroidCoordinates
+import com.project.epic.entities.remote.EPICResponse
+import com.project.epic.entities.remote.J2000Position
 import com.project.epic.ui.EPICListFragment
 import com.project.epic.ui.EPICListFragmentDirections
 import junit.framework.TestCase
