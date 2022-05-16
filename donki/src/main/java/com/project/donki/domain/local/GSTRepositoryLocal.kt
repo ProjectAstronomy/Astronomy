@@ -16,10 +16,7 @@ class GSTRepositoryLocal(
         geomagneticStormDao.insertGeomagneticStorm(convert(geomagneticStorm))
         geomagneticStorm.allKpIndex?.let { insertAllKpIndices(it, geomagneticStorm.gstID) }
         geomagneticStorm.linkedEvents?.let {
-            insertLinkedEvents(
-                it,
-                gstID = geomagneticStorm.gstID
-            )
+            insertLinkedEvents(it, gstID = geomagneticStorm.gstID)
         }
     }
 
@@ -74,6 +71,7 @@ class GSTRepositoryLocal(
                     kpIndex = it.kpIndex
                 )
             },
-            linkedEvents = geomagneticStormEntity.linkedEvents?.map { LinkedEvent(activityID = it.activityID) }
+            linkedEvents = geomagneticStormEntity.linkedEvents
+                ?.map { LinkedEvent(activityID = it.activityID) }
         )
 }

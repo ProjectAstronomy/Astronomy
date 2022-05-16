@@ -4,12 +4,12 @@ import androidx.room.*
 
 @Entity(
     tableName = INSTRUMENT_TABLE,
+    indices = [Index(value = [SOLAR_FLARE_ID])],
     foreignKeys = [ForeignKey(
         entity = SolarFlareEntity::class,
         parentColumns = [SOLAR_FLARE_ID],
         childColumns = [SOLAR_FLARE_ID]
-    )],
-    indices = [Index(value = ["id", SOLAR_FLARE_ID])]
+    )]
 )
 class InstrumentEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,

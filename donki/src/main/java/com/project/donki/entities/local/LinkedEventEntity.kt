@@ -15,11 +15,11 @@ import androidx.room.*
             parentColumns = [GEOMAGNETIC_STORM_ID],
             childColumns = [GEOMAGNETIC_STORM_ID]
         )
-    ],
-    indices = [Index(value = [SOLAR_FLARE_ID, GEOMAGNETIC_STORM_ID])]
+    ]
 )
 data class LinkedEventEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
     @ColumnInfo(name = "activity_id") val activityID: String?,
-    @ColumnInfo(name = SOLAR_FLARE_ID) val flrID: String? = null,
-    @ColumnInfo(name = GEOMAGNETIC_STORM_ID) val gstID: String? = null
+    @ColumnInfo(name = SOLAR_FLARE_ID, index = true) val flrID: String? = null,
+    @ColumnInfo(name = GEOMAGNETIC_STORM_ID, index = true) val gstID: String? = null
 )

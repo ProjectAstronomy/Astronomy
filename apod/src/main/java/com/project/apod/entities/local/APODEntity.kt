@@ -6,7 +6,7 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.project.apod.di.TABLE_NAME
 
-@Entity(tableName = TABLE_NAME, indices = [Index(value = ["date"], unique = true)])
+@Entity(tableName = TABLE_NAME, indices = [Index(value = ["id"])])
 data class APODEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val copyright: String?,

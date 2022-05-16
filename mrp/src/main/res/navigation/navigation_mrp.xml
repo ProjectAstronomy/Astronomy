@@ -29,6 +29,6 @@
             app:argType="string" />
         <argument
             android:name="photosInformation"
-            app:argType="com.project.mrp.entities.PhotosInformation" />
+            app:argType="com.project.mrp.entities.remote.PhotosInformation" />
     </fragment>
 </navigation>

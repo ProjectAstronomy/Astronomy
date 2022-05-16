@@ -9,7 +9,8 @@ import androidx.room.*
 data class GeomagneticStormEntity(
     @PrimaryKey @ColumnInfo(name = GEOMAGNETIC_STORM_ID) val gstID: String,
     @ColumnInfo(name = "start_time") val startTime: String?,
-    @Ignore var allKpIndex: List<AllKpIndexEntity>? = null,
-    @Ignore var linkedEvents: List<LinkedEventEntity>? = null,
     val link: String?
-)
+) {
+    @Ignore var allKpIndex: List<AllKpIndexEntity>? = null
+    @Ignore var linkedEvents: List<LinkedEventEntity>? = null
+}

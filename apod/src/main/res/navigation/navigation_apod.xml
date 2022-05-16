@@ -27,7 +27,7 @@
         tools:layout="@layout/one_apod_fragment">
         <argument
             android:name="apodResponse"
-            app:argType="com.project.apod.entities.APODResponse" />
+            app:argType="com.project.apod.entities.remote.APODResponse" />
         <action
             android:id="@+id/action_fragment_apod_description_to_APODScaleImageFragment"
             app:destination="@id/fragment_apod_scale_image"
@@ -43,6 +43,6 @@
         tools:layout="@layout/scale_image_apod_fragment">
         <argument
             android:name="apodResponse"
-            app:argType="com.project.apod.entities.APODResponse" />
+            app:argType="com.project.apod.entities.remote.APODResponse" />
     </fragment>
 </navigation>
