@@ -4,6 +4,8 @@ import com.project.epic.entities.AttitudeQuaternions
 import com.project.epic.entities.CentroidCoordinates
 import com.project.epic.entities.EPICResponse
 import com.project.epic.entities.J2000Position
+import okhttp3.ResponseBody
+import retrofit2.Call
 
 class EPICRepositoryFake : EPICBaseRepository {
     override suspend fun loadAsync(quality: String): List<EPICResponse> {
