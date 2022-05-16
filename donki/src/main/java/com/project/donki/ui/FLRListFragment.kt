@@ -61,7 +61,7 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
         with(flrViewModel) {
             responseSolarFlare().observe(viewLifecycleOwner) {
                 // сохраняем массив (listSolarResponse) с данными из API
-                var listSolarResponse = it
+                val listSolarResponse = it
 
                 // создаем вспомогательный массив (listCalendarDays), заполняем датами за 30 дней
                 val listCalendarDays = mutableListOf<SolarFlare>()
@@ -77,15 +77,15 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
 
                 // создаем объединенный массив (listFullEveryDay)
                 val listFullEveryDay = mutableListOf<SolarFlare>()
-                var isNoSolarFlareThisDay = true
+                var isNoSolarFlareThisDay: Boolean
 
                 for (index in listCalendarDays.indices) {
-                    var seekTime = listCalendarDays[index].beginTime
+                    val seekTime = listCalendarDays[index].beginTime
                     listFullEveryDay.add(listCalendarDays[index])
                     isNoSolarFlareThisDay = true
-                    listSolarResponse.forEach {
-                        if (it.beginTime?.take(10).equals(seekTime)) {
-                            listFullEveryDay.add(it)
+                    listSolarResponse.forEach { solarFlare ->
+                        if (solarFlare.beginTime?.take(10).equals(seekTime)) {
+                            listFullEveryDay.add(solarFlare)
                             isNoSolarFlareThisDay = false
                         }
                     }

@@ -12,6 +12,7 @@ import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.donki.databinding.FragmentListGstBinding
 import com.project.donki.di.SCOPE_GST_MODULE
+import com.project.donki.entities.remote.GeomagneticStorm
 import com.project.donki.viewmodels.GSTViewModel
 import com.project.donki.viewmodels.GSTViewModelFactory
 import kotlinx.coroutines.flow.collect
@@ -55,7 +56,7 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
 
         binding.rvListGst.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        binding.rvListGst.adapter = adapterGST
+        binding.rvListGst.adapter = adapter
 
 //        lifecycleScope.launch {
 //            adapter.isNeededToLoadInFlow.collect { isNeededToLoad ->
@@ -69,7 +70,7 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
                 // сохраняем массив (listSolarResponse) с данными из API
                 val listGSTResponse = it
                 // создаем вспомогательный массив
-                var listGSTDisplay = mutableListOf<GeomagneticStorm>()
+                val listGSTDisplay = mutableListOf<GeomagneticStorm>()
                 for (index in listGSTResponse.indices) {
                     listGSTDisplay.add(
                         GeomagneticStorm(
@@ -80,23 +81,21 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
                             "header"
                         )
                     )
-                    listGSTResponse[index].allKpIndex?.forEach {
+                    listGSTResponse[index].allKpIndex?.forEach { allKpIndex ->
                         listGSTDisplay.add(
                             GeomagneticStorm(
                                 null,
                                 listGSTResponse[index].startTime?.substring(11, 16),
                                 null,
                                 null,
-                                it.kpIndex.toString()
+                                allKpIndex.kpIndex.toString()
                             )
                         )
                     }
                 }
-                adapterGST.adapterListGST = listGSTDisplay
+                adapter.adapterListGST = listGSTDisplay
             }
-            error().observe(viewLifecycleOwner) {
-                showThrowable(it)
-            }
+            error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
 
     }

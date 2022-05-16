@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class GeomagneticStorm(
-    @field:SerializedName("gstID") val gstID: String,
+    @field:SerializedName("gstID") val gstID: String?,
     @field:SerializedName("startTime") val startTime: String?,
     @field:SerializedName("allKpIndex") val allKpIndex: List<AllKpIndex>?,
     @field:SerializedName("linkedEvents") val linkedEvents: List<LinkedEvent>?,
