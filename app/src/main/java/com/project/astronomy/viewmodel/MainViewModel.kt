@@ -15,7 +15,6 @@ class MainViewModel(
 
     val liveDataAPOD: LiveData<List<ItemRv>> = MutableLiveData(mainRepository.getListRvAPOD())
     val liveDataSolar: LiveData<List<ItemRv>> = MutableLiveData(mainRepository.getListRvSolarFlare())
-    val liveDataGeo: LiveData<List<ItemRv>> = MutableLiveData(mainRepository.getListRvGeoStorm())
     val liveDataEpic: LiveData<List<ItemRv>> = MutableLiveData(mainRepository.getListRvEpic())
     val liveDataMars: LiveData<List<ItemRv>> = MutableLiveData(mainRepository.getListRvMars())
 }

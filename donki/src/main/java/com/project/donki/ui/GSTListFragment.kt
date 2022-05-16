@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.project.core.net.AndroidNetworkStatus
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.donki.databinding.FragmentListGstBinding
@@ -20,7 +21,8 @@ import org.koin.android.ext.android.inject
 import org.koin.core.qualifier.named
 
 class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBinding::inflate) {
-    private val gstListFragmentScope = getKoin().getOrCreateScope(SCOPE_GST_MODULE, named(SCOPE_GST_MODULE))
+    private val gstListFragmentScope =
+        getKoin().getOrCreateScope(SCOPE_GST_MODULE, named(SCOPE_GST_MODULE))
 
     private val gstViewModelFactory: GSTViewModelFactory = gstListFragmentScope.get()
     private val gstViewModel: GSTViewModel by viewModels {
@@ -30,7 +32,11 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
     private val adapter by lazy { GSTRecyclerViewAdapter() }
     private val androidNetworkStatus: AndroidNetworkStatus by inject()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return providePersistentView(inflater, container, savedInstanceState)
     }
 
@@ -46,10 +52,53 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
                 if (isNeededToLoad) gstViewModel.reload()
             }
         }
+
+        binding.rvListGst.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.rvListGst.adapter = adapterGST
+
+//        lifecycleScope.launch {
+//            adapter.isNeededToLoadInFlow.collect { isNeededToLoad ->
+//                if (isNeededToLoad) gstViewModel.loadAsync()
+//            }
+//        }
+
+
         with(gstViewModel) {
-            responseGeomagneticStorms().observe(viewLifecycleOwner) { adapter.items = it }
-            error().observe(viewLifecycleOwner) { /* TODO: handle error here */ }
+            responseGeomagneticStorms().observe(viewLifecycleOwner) {
+                // сохраняем массив (listSolarResponse) с данными из API
+                val listGSTResponse = it
+                // создаем вспомогательный массив
+                var listGSTDisplay = mutableListOf<GeomagneticStorm>()
+                for (index in listGSTResponse.indices) {
+                    listGSTDisplay.add(
+                        GeomagneticStorm(
+                            null,
+                            listGSTResponse[index].startTime?.take(10),
+                            null,
+                            null,
+                            "header"
+                        )
+                    )
+                    listGSTResponse[index].allKpIndex?.forEach {
+                        listGSTDisplay.add(
+                            GeomagneticStorm(
+                                null,
+                                listGSTResponse[index].startTime?.substring(11, 16),
+                                null,
+                                null,
+                                it.kpIndex.toString()
+                            )
+                        )
+                    }
+                }
+                adapterGST.adapterListGST = listGSTDisplay
+            }
+            error().observe(viewLifecycleOwner) {
+                showThrowable(it)
+            }
         }
+
     }
 
     override fun onDestroy() {

@@ -7,7 +7,7 @@ import retrofit2.http.Query
 interface GSTApiService {
     @GET("DONKI/GST")
     suspend fun loadGeomagneticStorms(
-        @Query("start_date") startDate: String,
-        @Query("end_date") end_date: String
+        @Query("startDate") startDate: String,
+        @Query("endDate") endDate: String
     ): List<GeomagneticStorm>
 }

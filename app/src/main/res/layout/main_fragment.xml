@@ -36,17 +36,7 @@
             style="@style/padding_start_top_end_normal_rv"
             android:clipToPadding="false"/>
 
-        <!--    3. Geomagnetic Storm-->
-        <com.google.android.material.textview.MaterialTextView
-            style="@style/heading_text_style"
-            android:text="@string/heading_title_geo" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_geo"
-            style="@style/padding_start_top_end_normal_rv"
-            android:clipToPadding="false"/>
-
-        <!--    4. Earth Polychromatic Imaging Camera-->
+        <!--    3. Earth Polychromatic Imaging Camera-->
         <com.google.android.material.textview.MaterialTextView
             style="@style/heading_text_style"
             android:text="@string/heading_title_epic" />
@@ -56,7 +46,7 @@
             style="@style/padding_start_top_end_normal_rv"
             android:clipToPadding="false"/>
 
-        <!--    5. Mars Rover Photos -->
+        <!--    4. Mars Rover Photos -->
         <com.google.android.material.textview.MaterialTextView
             style="@style/heading_text_style"
             android:text="@string/heading_title_mars" />
