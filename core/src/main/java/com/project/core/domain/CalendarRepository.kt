@@ -3,6 +3,10 @@ package com.project.core.domain
 import java.util.*
 
 class CalendarRepository(private val calendar: Calendar) {
+    enum class RangeFlag {
+        ONE_MONTH, TWO_MONTHS
+    }
+
     private var endDateYear: Int = calendar.get(Calendar.YEAR)
     private var endDateMonth: Int = calendar.get(Calendar.MONTH) + 1
     private var endDateDayOfMonth: Int = calendar.get(Calendar.DAY_OF_MONTH)
@@ -19,9 +23,9 @@ class CalendarRepository(private val calendar: Calendar) {
         get() = "$startDateYear-$startDateMonth-$startDateDayOfMonth"
         private set
 
-    fun refreshDates() {
+    fun refreshDates(rangeFlag: RangeFlag) {
         refreshEndDate()
-        refreshStartDate()
+        refreshStartDate(rangeFlag)
     }
 
     private fun refreshEndDate() {
@@ -30,8 +34,11 @@ class CalendarRepository(private val calendar: Calendar) {
         endDateDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
     }
 
-    private fun refreshStartDate() {
-        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 2)
+    private fun refreshStartDate(rangeFlag: RangeFlag) {
+        when (rangeFlag) {
+            RangeFlag.ONE_MONTH -> calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1)
+            RangeFlag.TWO_MONTHS -> calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 2)
+        }
 
         startDateYear = calendar.get(Calendar.YEAR)
         startDateMonth = calendar.get(Calendar.MONTH) + 1

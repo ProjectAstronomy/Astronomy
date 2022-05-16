@@ -14,13 +14,13 @@ class APODUseCase(
         return if (!isNetworkAvailable) {
             localRepository.getAll()
         } else {
-            calendarRepository.refreshDates()
+            calendarRepository.refreshDates(CalendarRepository.RangeFlag.ONE_MONTH)
             remoteRepository.loadAsync(calendarRepository.startDate, calendarRepository.endDate)
         }
     }
 
     suspend fun reload(): List<APODResponse> {
-        calendarRepository.refreshDates()
+        calendarRepository.refreshDates(CalendarRepository.RangeFlag.ONE_MONTH)
         return remoteRepository.loadAsync(calendarRepository.startDate, calendarRepository.endDate)
     }
 
