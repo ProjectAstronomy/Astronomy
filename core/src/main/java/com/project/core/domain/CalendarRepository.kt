@@ -33,7 +33,7 @@ class CalendarRepository {
     }
 
     private fun refreshStartDate() {
-        calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - 1)
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 2)
 
         startDateYear = calendar.get(Calendar.YEAR)
         startDateMonth = calendar.get(Calendar.MONTH) + 1

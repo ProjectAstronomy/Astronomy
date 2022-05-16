@@ -18,7 +18,8 @@ import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
 
 class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBinding::inflate) {
-    private val gstListFragmentScope = getKoin().getOrCreateScope(SCOPE_GST_MODULE, named(SCOPE_GST_MODULE))
+    private val gstListFragmentScope =
+        getKoin().getOrCreateScope(SCOPE_GST_MODULE, named(SCOPE_GST_MODULE))
 
     private val gstViewModelFactory: GSTViewModelFactory = gstListFragmentScope.get()
     private val gstViewModel: GSTViewModel by viewModels {
@@ -27,7 +28,11 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
 
     private val adapterGST by lazy { GSTRecyclerViewAdapter() }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return providePersistentView(inflater, container, savedInstanceState)
     }
 
@@ -39,7 +44,8 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
             gstViewModel.loadAsync()
         }
 
-        binding.rvListGst.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.rvListGst.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rvListGst.adapter = adapterGST
 
 //        lifecycleScope.launch {
@@ -47,38 +53,40 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
 //                if (isNeededToLoad) gstViewModel.loadAsync()
 //            }
 //        }
-        println("------------------222_______________")
-
-//        var tempList = mutableListOf<GeomagneticStorm>()
-//        tempList.add(GeomagneticStorm("gstID","startTime",null,null,"link"))
-//        tempList.add(GeomagneticStorm("gstID","startTime",null,null,"link"))
-
-
-        //adapterGST.adapterListGST = tempList
 
 
         with(gstViewModel) {
             responseGeomagneticStorms().observe(viewLifecycleOwner) {
                 // сохраняем массив (listSolarResponse) с данными из API
                 val listGSTResponse = it
-
                 // создаем вспомогательный массив
                 var listGSTDisplay = mutableListOf<GeomagneticStorm>()
                 for (index in listGSTResponse.indices) {
-                    listGSTDisplay.add(GeomagneticStorm(null, listGSTResponse[index].startTime?.take(10), null, null, "header"))
+                    listGSTDisplay.add(
+                        GeomagneticStorm(
+                            null,
+                            listGSTResponse[index].startTime?.take(10),
+                            null,
+                            null,
+                            "header"
+                        )
+                    )
                     listGSTResponse[index].allKpIndex?.forEach {
-                        listGSTDisplay.add(GeomagneticStorm(null, listGSTResponse[index].startTime?.substring(11, 16), null, null, it.kpIndex.toString()))
+                        listGSTDisplay.add(
+                            GeomagneticStorm(
+                                null,
+                                listGSTResponse[index].startTime?.substring(11, 16),
+                                null,
+                                null,
+                                it.kpIndex.toString()
+                            )
+                        )
                     }
                 }
-
-
-
                 adapterGST.adapterListGST = listGSTDisplay
-
             }
             error().observe(viewLifecycleOwner) {
                 showThrowable(it)
-                println("------------------555_______________")
             }
         }
 

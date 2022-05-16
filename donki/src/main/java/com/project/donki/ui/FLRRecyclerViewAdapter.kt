@@ -14,7 +14,6 @@ import com.project.donki.R
 import com.project.donki.entities.SolarFlare
 
 class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
-//class FLRRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val TYPE_HEADER = 0

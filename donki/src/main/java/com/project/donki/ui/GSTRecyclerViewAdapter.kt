@@ -14,7 +14,6 @@ import com.project.donki.entities.GeomagneticStorm
 import com.project.donki.entities.SolarFlare
 
 class GSTRecyclerViewAdapter : BaseRecyclerViewAdapter<GeomagneticStorm>() {
-//    private val gstDiffUtilCallBack = object : DiffUtil.ItemCallback<GeomagneticStorm>() {
 
         companion object {
             private const val TYPE_HEADER1 = 0
