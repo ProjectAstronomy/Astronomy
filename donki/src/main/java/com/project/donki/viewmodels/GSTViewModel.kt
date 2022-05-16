@@ -2,8 +2,9 @@ package com.project.donki.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import com.project.core.viewmodel.BaseViewModel
-import com.project.donki.entities.GeomagneticStorm
+import com.project.donki.entities.remote.GeomagneticStorm
 import com.project.donki.usecases.GSTUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,15 +26,30 @@ class GSTViewModel(
         savedStateHandle.set(GST_RESPONSE, null)
     }
 
-    fun loadAsync() {
+    fun load(isNetworkAvailable: Boolean) {
         cancelJob()
         viewModelCoroutineScope.launch {
             var result: List<GeomagneticStorm>
             withContext(Dispatchers.IO) {
-                result = gstUseCase.loadAsync().reversed()
+                result = gstUseCase.load(isNetworkAvailable).reversed()
             }
             saveLoadedData(result)
         }
+    }
+
+    fun reload() {
+        cancelJob()
+        viewModelCoroutineScope.launch {
+            var result: List<GeomagneticStorm>
+            withContext(Dispatchers.IO) {
+                result = gstUseCase.reload().reversed()
+            }
+            saveLoadedData(result)
+        }
+    }
+
+    fun insert(geomagneticStorm: GeomagneticStorm) {
+        viewModelScope.launch { gstUseCase.insert(geomagneticStorm) }
     }
 
     private fun saveLoadedData(result: List<GeomagneticStorm>) {
@@ -42,7 +58,6 @@ class GSTViewModel(
         } else {
             val list =
                 savedStateHandle.getLiveData<List<GeomagneticStorm>>(GST_RESPONSE).value?.toMutableList()
-            list?.removeLast()
             list?.addAll(result)
             savedStateHandle.set(GST_RESPONSE, list)
         }

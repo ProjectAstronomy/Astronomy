@@ -1,0 +1,328 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "71d55759460476bf08fda9ea6f5a4b5d",
+    "entities": [
+      {
+        "tableName": "all_kp_index_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `observed_time` TEXT, `kp_index` INTEGER, `source` TEXT, `gst_id` TEXT, FOREIGN KEY(`gst_id`) REFERENCES `geomagnetic_storm_table`(`gst_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "observedTime",
+            "columnName": "observed_time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "kpIndex",
+            "columnName": "kp_index",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "source",
+            "columnName": "source",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gstID",
+            "columnName": "gst_id",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_all_kp_index_table_gst_id",
+            "unique": false,
+            "columnNames": [
+              "gst_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_all_kp_index_table_gst_id` ON `${TABLE_NAME}` (`gst_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "geomagnetic_storm_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "gst_id"
+            ],
+            "referencedColumns": [
+              "gst_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "geomagnetic_storm_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`gst_id` TEXT NOT NULL, `start_time` TEXT, `link` TEXT, PRIMARY KEY(`gst_id`))",
+        "fields": [
+          {
+            "fieldPath": "gstID",
+            "columnName": "gst_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startTime",
+            "columnName": "start_time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "link",
+            "columnName": "link",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "gst_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_geomagnetic_storm_table_gst_id",
+            "unique": true,
+            "columnNames": [
+              "gst_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_geomagnetic_storm_table_gst_id` ON `${TABLE_NAME}` (`gst_id`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "instrument_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `display_name` TEXT, `flr_id` TEXT NOT NULL, FOREIGN KEY(`flr_id`) REFERENCES `solar_flare_table`(`flr_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "displayName",
+            "columnName": "display_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "flrID",
+            "columnName": "flr_id",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_instrument_table_flr_id",
+            "unique": false,
+            "columnNames": [
+              "flr_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_instrument_table_flr_id` ON `${TABLE_NAME}` (`flr_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "solar_flare_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "flr_id"
+            ],
+            "referencedColumns": [
+              "flr_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "linked_event_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `activity_id` TEXT, `flr_id` TEXT, `gst_id` TEXT, FOREIGN KEY(`flr_id`) REFERENCES `solar_flare_table`(`flr_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`gst_id`) REFERENCES `geomagnetic_storm_table`(`gst_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "activityID",
+            "columnName": "activity_id",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "flrID",
+            "columnName": "flr_id",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gstID",
+            "columnName": "gst_id",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_linked_event_table_flr_id",
+            "unique": false,
+            "columnNames": [
+              "flr_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_linked_event_table_flr_id` ON `${TABLE_NAME}` (`flr_id`)"
+          },
+          {
+            "name": "index_linked_event_table_gst_id",
+            "unique": false,
+            "columnNames": [
+              "gst_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_linked_event_table_gst_id` ON `${TABLE_NAME}` (`gst_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "solar_flare_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "flr_id"
+            ],
+            "referencedColumns": [
+              "flr_id"
+            ]
+          },
+          {
+            "table": "geomagnetic_storm_table",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "gst_id"
+            ],
+            "referencedColumns": [
+              "gst_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "solar_flare_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`flr_id` TEXT NOT NULL, `begin_time` TEXT, `peak_time` TEXT, `end_time` TEXT, `class_type` TEXT, `source_location` TEXT, `active_region_num` INTEGER, `link` TEXT, PRIMARY KEY(`flr_id`))",
+        "fields": [
+          {
+            "fieldPath": "flrID",
+            "columnName": "flr_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "beginTime",
+            "columnName": "begin_time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "peakTime",
+            "columnName": "peak_time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "endTime",
+            "columnName": "end_time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "classType",
+            "columnName": "class_type",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sourceLocation",
+            "columnName": "source_location",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "activeRegionNum",
+            "columnName": "active_region_num",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "link",
+            "columnName": "link",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "flr_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_solar_flare_table_flr_id",
+            "unique": true,
+            "columnNames": [
+              "flr_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_solar_flare_table_flr_id` ON `${TABLE_NAME}` (`flr_id`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '71d55759460476bf08fda9ea6f5a4b5d')"
+    ]
+  }
+}

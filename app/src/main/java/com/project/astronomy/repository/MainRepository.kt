@@ -1,10 +1,6 @@
 package com.project.astronomy.repository
 
 import com.project.astronomy.entities.ItemRv
-import com.project.apod.BuildConfig
-import com.project.apod.domain.APODApiService
-import com.project.apod.entities.APODResponse
-import retrofit2.Response
 
 class MainRepository() {
     private val listItemRvAPOD: List<ItemRv> = listOf(

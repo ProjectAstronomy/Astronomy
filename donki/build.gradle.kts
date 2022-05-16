@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-kapt")
 }
 
 android {
@@ -14,19 +15,16 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                argument("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
     }
 
     buildFeatures {
         viewBinding = true
-    }
-    flavorDimensions += "TEST"
-    productFlavors {
-        create("FAKE") {
-            dimension = "TEST"
-        }
-        create("REAL") {
-            dimension = "TEST"
-        }
     }
 
     buildTypes {
@@ -76,6 +74,11 @@ dependencies {
 
     //Core
     implementation(Core.coreKTX)
+
+    //Room
+    implementation(Room.room)
+    implementation(Room.roomRuntime)
+    kapt(Room.roomCompiler)
 
     //Design
     implementation(Design.appcompat)

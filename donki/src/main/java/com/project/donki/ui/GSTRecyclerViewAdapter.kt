@@ -9,48 +9,33 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.project.core.ui.BaseRecyclerViewAdapter
+import com.project.donki.entities.remote.GeomagneticStorm
 import com.project.donki.R
-import com.project.donki.entities.GeomagneticStorm
-import com.project.donki.entities.SolarFlare
 
 class GSTRecyclerViewAdapter : BaseRecyclerViewAdapter<GeomagneticStorm>() {
+    companion object {
+        private const val TYPE_HEADER1 = 0
+        private const val TYPE_SMALL1 = 1
+        private const val TYPE_NO_FLR1 = 2
+    }
 
-        companion object {
-            private const val TYPE_HEADER1 = 0
-            private const val TYPE_SMALL1 = 1
-            private const val TYPE_NO_FLR1 = 2
+    var adapterListGST: List<GeomagneticStorm> = listOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
         }
 
-        var adapterListGST: List<GeomagneticStorm> = listOf()
-            set(value) {
-                field = value
-                notifyDataSetChanged()
-            }
-
     private val gstDiffUtilCallBack = object : DiffUtil.ItemCallback<GeomagneticStorm>() {
-        override fun areItemsTheSame(
-            oldItem: GeomagneticStorm,
-            newItem: GeomagneticStorm
-        ): Boolean =
+        override fun areItemsTheSame(oldItem: GeomagneticStorm, newItem: GeomagneticStorm): Boolean =
             oldItem.gstID == newItem.gstID
 
-        override fun areContentsTheSame(
-            oldItem: GeomagneticStorm,
-            newItem: GeomagneticStorm
-        ): Boolean =
+        override fun areContentsTheSame(oldItem: GeomagneticStorm, newItem: GeomagneticStorm): Boolean =
             oldItem == newItem
     }
 
     override val differ = AsyncListDiffer(this, gstDiffUtilCallBack)
-//************************
 
-
-
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GSTViewHolder =
-//        GSTViewHolder(ItemRvGstBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<GeomagneticStorm>
-    {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<GeomagneticStorm> {
         val myInflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             TYPE_HEADER1 -> HeadersViewHolder(myInflater.inflate(R.layout.item_rv_flr_header, parent, false))
@@ -60,7 +45,6 @@ class GSTRecyclerViewAdapter : BaseRecyclerViewAdapter<GeomagneticStorm>() {
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<GeomagneticStorm>, position: Int) {
-
         when (getItemViewType(position)) {
             TYPE_HEADER1 -> {
                 holder as HeadersViewHolder
@@ -78,16 +62,6 @@ class GSTRecyclerViewAdapter : BaseRecyclerViewAdapter<GeomagneticStorm>() {
     }
 
     override fun getItemCount(): Int = adapterListGST.size
-
-
-
-//    class GSTViewHolder(private val viewBinding: ItemRvGstBinding) : BaseViewHolder<GeomagneticStorm>(viewBinding.root) {
-//        override fun bind(geomagneticStorm: GeomagneticStorm) {
-//            //TODO: bind solarFlare to view
-//        }
-//    }
-
-
 
     inner class HeadersViewHolder(itemView: View) : BaseViewHolder<GeomagneticStorm>(itemView) {
         override fun bind(adapterItemData: GeomagneticStorm) {
@@ -124,7 +98,6 @@ class GSTRecyclerViewAdapter : BaseRecyclerViewAdapter<GeomagneticStorm>() {
         }
     }
 
-    // определяем тип конкретного Item на основе его полей и позиции
     override fun getItemViewType(position: Int): Int {
         return when (adapterListGST[position].link) {
             "header" -> TYPE_HEADER1
@@ -132,6 +105,4 @@ class GSTRecyclerViewAdapter : BaseRecyclerViewAdapter<GeomagneticStorm>() {
             else -> TYPE_SMALL1
         }
     }
-
-
 }

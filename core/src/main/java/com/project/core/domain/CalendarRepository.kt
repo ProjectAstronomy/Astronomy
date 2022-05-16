@@ -2,9 +2,7 @@ package com.project.core.domain
 
 import java.util.*
 
-class CalendarRepository {
-    private val calendar = Calendar.getInstance()
-
+class CalendarRepository(private val calendar: Calendar) {
     private var endDateYear: Int = calendar.get(Calendar.YEAR)
     private var endDateMonth: Int = calendar.get(Calendar.MONTH) + 1
     private var endDateDayOfMonth: Int = calendar.get(Calendar.DAY_OF_MONTH)

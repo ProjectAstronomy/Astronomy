@@ -10,7 +10,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.project.apod.databinding.ItemRvApodBinding
-import com.project.apod.entities.APODResponse
+import com.project.apod.entities.remote.APODResponse
 import com.project.core.ui.BaseRecyclerViewAdapter
 
 class APODRecyclerViewAdapter(
@@ -29,13 +29,7 @@ class APODRecyclerViewAdapter(
     override val differ = AsyncListDiffer(this, apodDiffUtilCallBack)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): APODViewHolder =
-        APODViewHolder(
-            ItemRvApodBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+        APODViewHolder(ItemRvApodBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     inner class APODViewHolder(private val viewBinding: ItemRvApodBinding) :
         BaseViewHolder<APODResponse>(viewBinding.root) {

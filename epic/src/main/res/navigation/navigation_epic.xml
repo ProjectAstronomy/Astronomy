@@ -23,6 +23,6 @@
         tools:layout="@layout/fragment_epic_description">
         <argument
             android:name="epicResponse"
-            app:argType="com.project.epic.entities.EPICResponse" />
+            app:argType="com.project.epic.entities.remote.EPICResponse" />
     </fragment>
 </navigation>

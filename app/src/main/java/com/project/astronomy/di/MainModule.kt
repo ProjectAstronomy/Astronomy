@@ -5,7 +5,7 @@ import com.project.astronomy.viewmodel.MainViewModelFactory
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-internal val SCOPE_MAIN_MODULE = "SCOPE_MAIN_MODULE"
+internal const val SCOPE_MAIN_MODULE = "SCOPE_MAIN_MODULE"
 
 val mainModule = module {
     scope(named(SCOPE_MAIN_MODULE)) {

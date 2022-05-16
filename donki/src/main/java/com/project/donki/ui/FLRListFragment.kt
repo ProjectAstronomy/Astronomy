@@ -6,19 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.project.core.net.AndroidNetworkStatus
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
-import com.project.donki.R
 import com.project.donki.databinding.FragmentListFlrBinding
 import com.project.donki.di.SCOPE_FLR_MODULE
-import com.project.donki.entities.SolarFlare
+import com.project.donki.entities.remote.SolarFlare
 import com.project.donki.viewmodels.FLRViewModel
 import com.project.donki.viewmodels.FLRViewModelFactory
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
+import org.koin.android.ext.android.inject
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 import java.text.SimpleDateFormat
@@ -34,44 +34,34 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
     }
 
     private val adapterSolarVertical by lazy { FLRRecyclerViewAdapter() }
+    private val adapter by lazy { FLRRecyclerViewAdapter() }
+    private val androidNetworkStatus: AndroidNetworkStatus by inject()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        // эта строчка непонятно как работает - в ней же нет ссылки на разметку
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return providePersistentView(inflater, container, savedInstanceState)
-
-        // была бы эта строчка - то было бы понятно
-        //return inflater.inflate(R.layout.fragment_list_flr, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
-
-            flrViewModel.loadAsync()
+            flrViewModel.load(androidNetworkStatus.isNetworkAvailable())
+        }
+        lifecycleScope.launch {
+            adapter.isNeededToLoadInFlow.collect { isNeededToLoad ->
+                if (isNeededToLoad && androidNetworkStatus.isNetworkAvailable()) {
+                    flrViewModel.reload()
+                }
+            }
         }
 
-        // почему-то падаем в варианте с binding
         binding.rvListSolar.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rvListSolar.adapter = adapterSolarVertical
-
-//        view.findViewById<RecyclerView>(R.id.rv_list_solar).layoutManager =
-//            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-//        view.findViewById<RecyclerView>(R.id.rv_list_solar).adapter = adapterSolarVertical
-
-
-//        lifecycleScope.launch {
-//            adapterSolarVertical.isNeededToLoadInFlow.collect { isNeededToLoad ->
-//                if (isNeededToLoad) flrViewModel.loadAsync()
-//            }
-//        }
-
 
         with(flrViewModel) {
             responseSolarFlare().observe(viewLifecycleOwner) {
                 // сохраняем массив (listSolarResponse) с данными из API
-                var listSolarResponse = it
+                val listSolarResponse = it
 
                 // создаем вспомогательный массив (listCalendarDays), заполняем датами за 30 дней
                 val listCalendarDays = mutableListOf<SolarFlare>()
@@ -87,15 +77,15 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
 
                 // создаем объединенный массив (listFullEveryDay)
                 val listFullEveryDay = mutableListOf<SolarFlare>()
-                var isNoSolarFlareThisDay = true
+                var isNoSolarFlareThisDay: Boolean
 
                 for (index in listCalendarDays.indices) {
-                    var seekTime = listCalendarDays[index].beginTime
+                    val seekTime = listCalendarDays[index].beginTime
                     listFullEveryDay.add(listCalendarDays[index])
                     isNoSolarFlareThisDay = true
-                    listSolarResponse.forEach {
-                        if (it.beginTime?.take(10).equals(seekTime)) {
-                            listFullEveryDay.add(it)
+                    listSolarResponse.forEach { solarFlare ->
+                        if (solarFlare.beginTime?.take(10).equals(seekTime)) {
+                            listFullEveryDay.add(solarFlare)
                             isNoSolarFlareThisDay = false
                         }
                     }
@@ -108,8 +98,6 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
             }
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
-
-
     }
 
     override fun onDestroy() {

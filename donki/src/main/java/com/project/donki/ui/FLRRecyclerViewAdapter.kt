@@ -8,13 +8,11 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.project.core.ui.BaseRecyclerViewAdapter
+import com.project.donki.entities.remote.SolarFlare
 import com.project.donki.R
-import com.project.donki.entities.SolarFlare
 
 class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
-
     companion object {
         private const val TYPE_HEADER = 0
         private const val TYPE_SMALL = 1
@@ -35,18 +33,10 @@ class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
         override fun areContentsTheSame(oldItem: SolarFlare, newItem: SolarFlare): Boolean =
             oldItem == newItem
     }
+
     override val differ = AsyncListDiffer(this, flrDiffUtilCallBack)
-//*********************
 
-
-
-
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FLRViewHolder =
-//        FLRViewHolder(ItemRvFlrBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-// ****************
-    // в этой строке заненен конкретный из этого класса viewHolder на общий из библиотеки
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<SolarFlare>
-    {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<SolarFlare> {
         val myInflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             TYPE_HEADER -> HeadersViewHolder(myInflater.inflate(R.layout.item_rv_flr_header, parent, false))
@@ -55,9 +45,6 @@ class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
         }
     }
 
-
-    // в этой строке заненен конкретный из этого класса viewHolder на общий из библиотеки
-    // override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     override fun onBindViewHolder(holder: BaseViewHolder<SolarFlare>, position: Int) {
         when (getItemViewType(position)) {
             TYPE_HEADER -> {
@@ -76,17 +63,6 @@ class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
     }
 
     override fun getItemCount(): Int = adapterList.size
-
-
-
-//    class FLRViewHolder(private val viewBinding: ItemRvFlrBinding) : BaseViewHolder<SolarFlare>(viewBinding.root) {
-//        override fun bind(solarFlare: SolarFlare) {
-//            //TODO: bind solarFlare to view
-//        }
-//    }
-//**************************************************
-
-
 
     inner class HeadersViewHolder(itemView: View) : BaseViewHolder<SolarFlare>(itemView) {
         override fun bind(adapterItemData: SolarFlare) {
@@ -121,7 +97,6 @@ class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
         }
     }
 
-    // определяем тип конкретного Item на основе его полей и позиции
     override fun getItemViewType(position: Int): Int {
         return when (adapterList[position].classType) {
             "header" -> TYPE_HEADER
@@ -129,5 +104,4 @@ class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
             else -> TYPE_SMALL
         }
     }
-
 }

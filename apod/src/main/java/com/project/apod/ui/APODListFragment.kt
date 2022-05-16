@@ -10,20 +10,20 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.apod.databinding.ListApodFragmentBinding
 import com.project.apod.di.SCOPE_APOD_LIST_MODULE
-import com.project.apod.entities.APODResponse
+import com.project.apod.entities.remote.APODResponse
 import com.project.apod.viewmodels.APODViewModel
 import com.project.apod.viewmodels.APODViewModelFactory
+import com.project.core.net.AndroidNetworkStatus
 import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
+import org.koin.android.ext.android.inject
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 
-class APODListFragment :
-    BaseFragment<ListApodFragmentBinding>(ListApodFragmentBinding::inflate) {
-
+class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentBinding::inflate) {
     private val apodListFragmentScope: Scope =
         getKoin().getOrCreateScope(SCOPE_APOD_LIST_MODULE, named(SCOPE_APOD_LIST_MODULE))
 
@@ -33,6 +33,8 @@ class APODListFragment :
     }
 
     private val adapter by lazy { APODRecyclerViewAdapter(::onItemClick, ::useCoilToLoadPhoto) }
+
+    private val androidNetworkStatus: AndroidNetworkStatus by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,18 +49,24 @@ class APODListFragment :
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             initRecyclerView()
-            apodViewModel.loadAsync()
+            apodViewModel.load(androidNetworkStatus.isNetworkAvailable())
             lifecycleScope.launch {
                 adapter.isNeededToLoadInFlow.collect { isNeededToLoad ->
-                    if (isNeededToLoad) {
-                        apodViewModel.loadAsync()
+                    if (isNeededToLoad && androidNetworkStatus.isNetworkAvailable()) {
+                        apodViewModel.reload()
                     }
                 }
             }
         }
         with(apodViewModel) {
-            responseAPODFromDateToDate().observe(viewLifecycleOwner) { adapter.items = it }
-            error().observe(viewLifecycleOwner) { showThrowable(it) }
+            responseAPODFromDateToDate().observe(viewLifecycleOwner) { list ->
+                if (list.isNotEmpty()) {
+                    adapter.items = list
+                } else {
+                    //TODO: inform user list is empty
+                }
+            }
+            error().observe(viewLifecycleOwner) { /* TODO: handle error here */ }
         }
     }
 
@@ -81,6 +89,7 @@ class APODListFragment :
     }
 
     private fun onItemClick(apodResponse: APODResponse) {
+        apodViewModel.insert(apodResponse)
         val action = APODListFragmentDirections
             .actionFragmentApodToFragmentApodDescription(apodResponse)
         findNavController().navigate(action)
