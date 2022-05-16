@@ -5,18 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.donki.databinding.FragmentListGstBinding
 import com.project.donki.di.SCOPE_GST_MODULE
-import com.project.donki.domain.GSTRepositoryFake
 import com.project.donki.entities.GeomagneticStorm
-import com.project.donki.entities.SolarFlare
 import com.project.donki.viewmodels.GSTViewModel
 import com.project.donki.viewmodels.GSTViewModelFactory
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
@@ -63,8 +59,21 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
 
         with(gstViewModel) {
             responseGeomagneticStorms().observe(viewLifecycleOwner) {
-                println("------------------333_______________")
-                adapterGST.adapterListGST = it
+                // сохраняем массив (listSolarResponse) с данными из API
+                val listGSTResponse = it
+
+                // создаем вспомогательный массив
+                var listGSTDisplay = mutableListOf<GeomagneticStorm>()
+                for (index in listGSTResponse.indices) {
+                    listGSTDisplay.add(GeomagneticStorm(null, listGSTResponse[index].startTime?.take(10), null, null, "header"))
+                    listGSTResponse[index].allKpIndex?.forEach {
+                        listGSTDisplay.add(GeomagneticStorm(null, listGSTResponse[index].startTime?.substring(11, 16), null, null, it.kpIndex.toString()))
+                    }
+                }
+
+
+
+                adapterGST.adapterListGST = listGSTDisplay
 
             }
             error().observe(viewLifecycleOwner) {
