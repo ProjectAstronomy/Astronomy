@@ -2,7 +2,7 @@ package com.project.astronomy.repository
 
 import com.project.astronomy.entities.ItemRv
 
-class MainRepository() {
+class MainRepository {
     private val listItemRvAPOD: List<ItemRv> = listOf(
         ItemRv("Today", "rv_apod_today"),
     )

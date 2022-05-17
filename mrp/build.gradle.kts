@@ -83,6 +83,7 @@ dependencies {
     //Design
     implementation(Design.appcompat)
     implementation(Design.material)
+    implementation(Design.circleImageView)
 
     //Navigation
     implementation(Navigation.navigationFragmentKTX)
