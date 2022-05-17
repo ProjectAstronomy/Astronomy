@@ -1,4 +1,4 @@
-package com.project.mrp.domain.remote
+package com.project.mrp.domain.remote.api
 
 import com.project.mrp.entities.remote.MissionManifest
 import retrofit2.http.GET

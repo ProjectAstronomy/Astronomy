@@ -1,6 +1,8 @@
 package com.project.donki.entities.local
 
 import androidx.room.*
+import com.project.donki.database.ALL_KP_INDEX_TABLE
+import com.project.donki.database.GEOMAGNETIC_STORM_ID
 
 @Entity(
     tableName = ALL_KP_INDEX_TABLE,

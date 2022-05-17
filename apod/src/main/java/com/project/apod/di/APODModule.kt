@@ -3,6 +3,7 @@ package com.project.apod.di
 import android.content.Context
 import androidx.room.Room
 import com.project.apod.database.APODDatabase
+import com.project.apod.database.DATABASE_NAME
 import com.project.apod.domain.local.APODDao
 import com.project.apod.domain.local.APODRepositoryLocal
 import com.project.apod.domain.remote.APODApiService
@@ -15,8 +16,6 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 
 internal const val SCOPE_APOD_LIST_MODULE = "SCOPE_APOD_MODULE"
-internal const val DATABASE_NAME = "a_picture_of_the_day_database"
-internal const val TABLE_NAME = "a_picture_of_the_day_table"
 
 val apodModule = module {
     fun provideDatabase(context: Context): APODDatabase =

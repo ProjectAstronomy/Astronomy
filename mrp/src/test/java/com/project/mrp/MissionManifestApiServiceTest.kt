@@ -4,7 +4,7 @@ import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.project.core.BuildConfig
 import com.project.core.domain.BaseInterceptor
-import com.project.mrp.domain.remote.MissionManifestApiService
+import com.project.mrp.domain.remote.api.MissionManifestApiService
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

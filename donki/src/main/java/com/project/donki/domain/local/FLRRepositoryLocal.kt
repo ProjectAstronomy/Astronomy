@@ -1,5 +1,8 @@
 package com.project.donki.domain.local
 
+import com.project.donki.domain.local.dao.InstrumentDao
+import com.project.donki.domain.local.dao.LinkedEventDao
+import com.project.donki.domain.local.dao.SolarFlareDao
 import com.project.donki.entities.local.InstrumentEntity
 import com.project.donki.entities.local.LinkedEventEntity
 import com.project.donki.entities.local.SolarFlareEntity

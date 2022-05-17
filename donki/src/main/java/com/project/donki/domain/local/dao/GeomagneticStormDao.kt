@@ -1,12 +1,11 @@
-package com.project.donki.domain.local
+package com.project.donki.domain.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.project.donki.entities.local.GEOMAGNETIC_STORM_TABLE
+import com.project.donki.database.GEOMAGNETIC_STORM_TABLE
 import com.project.donki.entities.local.GeomagneticStormEntity
-import com.project.donki.entities.remote.GeomagneticStorm
 
 @Dao
 interface GeomagneticStormDao {
