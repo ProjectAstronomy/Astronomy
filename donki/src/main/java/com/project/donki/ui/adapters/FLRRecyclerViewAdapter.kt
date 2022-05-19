@@ -1,4 +1,4 @@
-package com.project.donki.ui
+package com.project.donki.ui.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -12,9 +12,10 @@ import androidx.recyclerview.widget.DiffUtil
 import com.project.core.ui.BaseRecyclerViewAdapter
 import com.project.donki.entities.remote.SolarFlare
 import com.project.donki.R
-import com.project.donki.entities.remote.GeomagneticStorm
 
-class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
+class FLRRecyclerViewAdapter(
+    private val onSolarFlareClicked: (SolarFlare) -> Unit
+) : BaseRecyclerViewAdapter<SolarFlare>() {
     companion object {
         private const val TYPE_NO_FLR = 0
         private const val TYPE_HEADER = 1
@@ -27,7 +28,6 @@ class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
             field = value
             notifyDataSetChanged()
         }
-
 
     private val flrDiffUtilCallBack = object : DiffUtil.ItemCallback<SolarFlare>() {
         override fun areItemsTheSame(oldItem: SolarFlare, newItem: SolarFlare): Boolean =
@@ -72,6 +72,7 @@ class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
             fillSmallDataInRvItem(itemView, adapterItemData)
             fillColoredScale(itemView, adapterItemData)
             itemView.setOnClickListener {
+                onSolarFlareClicked(adapterItemData)
                 toggleType(layoutPosition)
             }
         }
@@ -142,5 +143,4 @@ class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
                     "sourceLocation : ${adapterItemData.sourceLocation}\n" +
                     "activeRegionNum : ${adapterItemData.activeRegionNum}"
     }
-
 }

@@ -17,8 +17,8 @@ class FLRRepositoryLocal(
 ) {
     suspend fun insertSolarFlare(solarFlare: SolarFlare) {
         convert(solarFlare)?.let { solarFlareDao.insertSolarFlare(it) }
-        solarFlare.instruments?.let { solarFlare.flrID?.let { flrID -> insertInstruments(it, flrID) } }
-        solarFlare.linkedEvents?.let { solarFlare.flrID?.let { flrID -> insertLinkedEvents(it, flrID) } }
+        solarFlare.instruments?.let { insertInstruments(it, solarFlare.flrID) }
+        solarFlare.linkedEvents?.let { insertLinkedEvents(it, solarFlare.flrID) }
     }
 
     suspend fun getAll(): List<SolarFlare> {
@@ -47,18 +47,16 @@ class FLRRepositoryLocal(
     }
 
     private fun convert(solarFlare: SolarFlare): SolarFlareEntity? =
-        solarFlare.flrID?.let {
-            SolarFlareEntity(
-                flrID = it,
-                beginTime = solarFlare.beginTime,
-                peakTime = solarFlare.peakTime,
-                endTime = solarFlare.endTime,
-                classType = solarFlare.classType,
-                sourceLocation = solarFlare.sourceLocation,
-                activeRegionNum = solarFlare.activeRegionNum,
-                link = solarFlare.link
-            )
-        }
+        SolarFlareEntity(
+            flrID = solarFlare.flrID,
+            beginTime = solarFlare.beginTime,
+            peakTime = solarFlare.peakTime,
+            endTime = solarFlare.endTime,
+            classType = solarFlare.classType,
+            sourceLocation = solarFlare.sourceLocation,
+            activeRegionNum = solarFlare.activeRegionNum,
+            link = solarFlare.link
+        )
 
     private fun convert(solarFlareEntity: SolarFlareEntity): SolarFlare {
         return SolarFlare(

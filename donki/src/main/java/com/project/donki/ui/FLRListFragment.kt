@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.project.core.net.AndroidNetworkStatus
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.core.ui.BaseFragment
@@ -13,10 +12,9 @@ import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.donki.databinding.FragmentListFlrBinding
 import com.project.donki.di.SCOPE_FLR_MODULE
 import com.project.donki.entities.remote.SolarFlare
+import com.project.donki.ui.adapters.FLRRecyclerViewAdapter
 import com.project.donki.viewmodels.FLRViewModel
 import com.project.donki.viewmodels.FLRViewModelFactory
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
 import org.koin.core.qualifier.named
@@ -33,8 +31,8 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
         SavedStateViewModelFactory(flrViewModelFactory, this)
     }
 
-    private val adapterSolarVertical by lazy { FLRRecyclerViewAdapter() }
-    private val adapter by lazy { FLRRecyclerViewAdapter() }
+    private val onSolarFlareClicked: (SolarFlare) -> Unit = { flrViewModel.insert(it) }
+    private val adapterSolarVertical by lazy { FLRRecyclerViewAdapter(onSolarFlareClicked) }
     private val androidNetworkStatus: AndroidNetworkStatus by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -46,14 +44,6 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             flrViewModel.load(androidNetworkStatus.isNetworkAvailable())
-        }
-
-        lifecycleScope.launch {
-            adapter.isNeededToLoadInFlow.collect { isNeededToLoad ->
-                if (isNeededToLoad && androidNetworkStatus.isNetworkAvailable()) {
-                    flrViewModel.reload()
-                }
-            }
         }
 
         binding.rvListSolar.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -99,7 +89,6 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

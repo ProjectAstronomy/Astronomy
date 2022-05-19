@@ -1,4 +1,4 @@
-package com.project.donki.ui
+package com.project.donki.ui.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -13,7 +13,8 @@ import com.project.core.ui.BaseRecyclerViewAdapter
 import com.project.donki.entities.remote.GeomagneticStorm
 import com.project.donki.R
 
-class GSTRecyclerViewAdapter : BaseRecyclerViewAdapter<GeomagneticStorm>() {
+class GSTRecyclerViewAdapter(private val onGeomagneticStormClicked: (GeomagneticStorm) -> Unit) :
+    BaseRecyclerViewAdapter<GeomagneticStorm>() {
     companion object {
         private const val TYPE_NO_FLR = 0
         private const val TYPE_HEADER = 1
@@ -71,6 +72,7 @@ class GSTRecyclerViewAdapter : BaseRecyclerViewAdapter<GeomagneticStorm>() {
             fillColoredScale (itemView, adapterItemData)
             itemView.setOnClickListener {
                 toggleType(layoutPosition)
+                onGeomagneticStormClicked(adapterItemData)
             }
         }
     }
