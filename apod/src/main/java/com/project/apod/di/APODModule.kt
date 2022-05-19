@@ -19,7 +19,9 @@ internal const val SCOPE_APOD_LIST_MODULE = "SCOPE_APOD_MODULE"
 
 val apodModule = module {
     fun provideDatabase(context: Context): APODDatabase =
-        Room.databaseBuilder(context, APODDatabase::class.java, DATABASE_NAME).build()
+        Room.databaseBuilder(context, APODDatabase::class.java, DATABASE_NAME)
+            .fallbackToDestructiveMigration()
+            .build()
 
     fun provideDao(database: APODDatabase): APODDao = database.apodDao()
 

@@ -51,6 +51,7 @@ object Versions {
     //AndroidX
     const val activityKTXVersion = "1.4.0"
     const val fragmentKTXVersion = "1.4.1"
+    const val preferencesVersion = "1.2.0"
 
     //Room
     const val roomVersion = "2.4.2"
@@ -145,6 +146,7 @@ object Design {
 object AndroidXImpl {
     const val activityKTX = "androidx.activity:activity-ktx:${Versions.activityKTXVersion}"
     const val fragmentKTX = "androidx.fragment:fragment-ktx:${Versions.fragmentKTXVersion}"
+    const val preferences = "androidx.preference:preference-ktx:${Versions.preferencesVersion}"
 }
 
 object TestImpl {

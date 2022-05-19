@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="themes">
+        <item>@string/theme_original</item>
+        <item>@string/theme_blackAndWhite</item>
+        <item>@string/theme_mars</item>
+    </string-array>
+    <string-array name="themes_values">
+        <item>@string/theme_original</item>
+        <item>@string/theme_blackAndWhite</item>
+        <item>@string/theme_mars</item>
+    </string-array>
+
+    <string-array name="image_resolutions">
+        <item>@string/regular</item>
+        <item>@string/hd</item>
+    </string-array>
+    <string-array name="image_resolutions_values">
+        <item>@string/regular</item>
+        <item>@string/hd</item>
+    </string-array>
+</resources>

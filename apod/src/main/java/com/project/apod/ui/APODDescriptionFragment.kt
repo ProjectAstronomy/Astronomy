@@ -5,15 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.project.apod.databinding.OneApodFragmentBinding
+import com.project.core.entities.ImageResolution
 import com.project.core.ui.BaseFragment
+import com.project.core.viewmodel.SettingsViewModel
 
 class APODDescriptionFragment :
     BaseFragment<OneApodFragmentBinding>(OneApodFragmentBinding::inflate) {
 
     internal val navArgs: APODDescriptionFragmentArgs by navArgs()
+    private val settingsViewModel: SettingsViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return providePersistentView(inflater, container, savedInstanceState)
@@ -27,7 +31,15 @@ class APODDescriptionFragment :
             tvTitleApod.text = apodResponse.title
             tvDateApod.text = apodResponse.date
             when (apodResponse.mediaType) {
-                "image" -> useCoilToLoadPhoto(ivUrlApod, apodResponse.url)
+                "image" -> {
+                    settingsViewModel.imageResolution.observe(viewLifecycleOwner) { imageResolution ->
+                        val resolution = when (imageResolution) {
+                            ImageResolution.REGULAR -> apodResponse.url
+                            ImageResolution.HD -> apodResponse.hdurl
+                        }
+                        useCoilToLoadPhoto(ivUrlApod, resolution)
+                    }
+                }
                 "video" -> {
                     binding.ivUrlApod.visibility = View.GONE
                     with(binding.wvOneUrlVideoApod) {

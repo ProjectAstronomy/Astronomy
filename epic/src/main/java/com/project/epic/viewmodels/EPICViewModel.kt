@@ -26,7 +26,7 @@ class EPICViewModel(
         savedStateHandle.set(EPIC_RESPONSE, null)
     }
 
-    fun loadAsync(isNetworkAvailable: Boolean, quality: String = "natural") {
+    fun loadAsync(isNetworkAvailable: Boolean, quality: String) {
         cancelJob()
         viewModelCoroutineScope.launch {
             var result: List<EPICResponse>

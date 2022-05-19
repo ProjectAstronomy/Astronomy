@@ -5,12 +5,15 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.view.*
 import androidx.core.view.doOnLayout
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.project.apod.databinding.ScaleImageApodFragmentBinding
+import com.project.core.entities.ImageResolution
 import com.project.core.ui.BaseFragment
 import com.project.core.utils.animateWithDetach
 import com.project.core.utils.scale
 import com.project.core.utils.setPivot
+import com.project.core.viewmodel.SettingsViewModel
 
 class APODScaleImageFragment :
     BaseFragment<ScaleImageApodFragmentBinding>(ScaleImageApodFragmentBinding::inflate) {
@@ -24,6 +27,8 @@ class APODScaleImageFragment :
         private const val CORRECT_LOCATION_ANIMATION_DURATION = 300L
     }
 
+    private val settingsViewModel by activityViewModels<SettingsViewModel>()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return providePersistentView(inflater, container, savedInstanceState)
     }
@@ -35,7 +40,14 @@ class APODScaleImageFragment :
         val apodResponse = navArgs.apodResponse
 
         // Методы, относящиеся к жестам (ч. 2 из 3)
-        useCoilToLoadPhoto(binding.myImageView, apodResponse.hdurl)
+        var resolution = apodResponse.url.toString()
+        settingsViewModel.imageResolution.observe(viewLifecycleOwner) {
+            resolution = when (it) {
+                ImageResolution.REGULAR -> apodResponse.url.toString()
+                ImageResolution.HD -> apodResponse.hdurl.toString()
+            }
+        }
+        useCoilToLoadPhoto(binding.myImageView, resolution)
         binding.myImageView.doOnLayout { originContentRect }
         binding.viewTouchHandler.setOnTouchListener { view, event ->
             scaleGestureDetector.onTouchEvent(event)

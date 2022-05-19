@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -16,6 +17,7 @@ import com.project.apod.viewmodels.APODViewModelFactory
 import com.project.core.net.AndroidNetworkStatus
 import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
+import com.project.core.viewmodel.SettingsViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
@@ -31,7 +33,7 @@ class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentB
     private val apodViewModel: APODViewModel by viewModels {
         SavedStateViewModelFactory(apodViewModelFactory, this)
     }
-
+    private val settingsViewModel: SettingsViewModel by activityViewModels()
     private val adapter by lazy { APODRecyclerViewAdapter(::onItemClick, ::useCoilToLoadPhoto) }
 
     private val androidNetworkStatus: AndroidNetworkStatus by inject()
@@ -67,6 +69,9 @@ class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentB
                 }
             }
             error().observe(viewLifecycleOwner) { /* TODO: handle error here */ }
+        }
+        settingsViewModel.imageResolution.observe(viewLifecycleOwner) {
+            adapter.onImageResolutionChanged(it)
         }
     }
 
