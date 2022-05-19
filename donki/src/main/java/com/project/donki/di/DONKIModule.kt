@@ -4,8 +4,11 @@ import android.content.Context
 import androidx.room.Room
 import com.project.donki.database.DONKIDatabase
 import com.project.donki.domain.local.*
+import com.project.donki.domain.local.dao.*
 import com.project.donki.domain.remote.*
-import com.project.donki.entities.local.DONKI_DATABASE_NAME
+import com.project.donki.domain.remote.api.FLRApiService
+import com.project.donki.domain.remote.api.GSTApiService
+import com.project.donki.database.DONKI_DATABASE_NAME
 import com.project.donki.usecases.GSTUseCase
 import com.project.donki.usecases.FLRUseCase
 import com.project.donki.viewmodels.GSTViewModelFactory

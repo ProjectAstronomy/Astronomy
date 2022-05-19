@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class APODResponse(
     @field:SerializedName("copyright") val copyright: String?,
-    @field:SerializedName("date") val date: String?,
+    @field:SerializedName("date") val date: String,
     @field:SerializedName("explanation") val explanation: String?,
     @field:SerializedName("hdurl") val hdurl: String?,
     @field:SerializedName("media_type") val mediaType: String?,

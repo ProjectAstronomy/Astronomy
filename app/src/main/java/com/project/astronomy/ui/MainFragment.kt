@@ -61,6 +61,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = adapterMars
             }
+            binding.chipSettings.setOnClickListener { onSettingsClicked() }
         }
         with(mainViewModel) {
             liveDataAPOD.observe(viewLifecycleOwner) { adapterAPOD.adapterList = it }
@@ -93,5 +94,9 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     private fun onMarsClickListener(itemRv: ItemRv) {
         val action = MainFragmentDirections.actionMainFragmentToNavigationMrp(itemRv.title)
         findNavController().navigate(action)
+    }
+
+    private fun onSettingsClicked() {
+        findNavController().navigate(R.id.action_main_fragment_to_fragment_preferences)
     }
 }

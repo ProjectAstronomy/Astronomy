@@ -4,11 +4,13 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.project.epic.database.EPIC_TABLE_NAME
+import com.project.epic.database.EPIC_TABLE_PRIMARY_KEY
 import com.project.epic.entities.remote.AttitudeQuaternions
 import com.project.epic.entities.remote.CentroidCoordinates
 import com.project.epic.entities.remote.J2000Position
 
-@Entity(tableName = "epic_table", indices = [Index(value = ["identifier"], unique = true)])
+@Entity(tableName = EPIC_TABLE_NAME, indices = [Index(value = [EPIC_TABLE_PRIMARY_KEY], unique = true)])
 data class EPICEntity(
     @PrimaryKey val identifier: String,
     val caption: String?,

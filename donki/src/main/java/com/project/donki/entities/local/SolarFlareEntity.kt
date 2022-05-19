@@ -1,6 +1,8 @@
 package com.project.donki.entities.local
 
 import androidx.room.*
+import com.project.donki.database.SOLAR_FLARE_ID
+import com.project.donki.database.SOLAR_FLARE_TABLE
 
 @Entity(tableName = SOLAR_FLARE_TABLE, indices = [Index(value = [SOLAR_FLARE_ID], unique = true)])
 data class SolarFlareEntity(

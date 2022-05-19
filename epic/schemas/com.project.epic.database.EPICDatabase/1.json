@@ -1,0 +1,158 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "724bd32ff7f27a2c198f916447c45984",
+    "entities": [
+      {
+        "tableName": "epic_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`identifier` TEXT NOT NULL, `caption` TEXT, `image` TEXT, `version` TEXT, `date` TEXT, `q0` REAL, `q1` REAL, `q2` REAL, `q3` REAL, `lat` REAL, `lon` REAL, `dscovr_x` REAL, `dscovr_y` REAL, `dscovr_z` REAL, `lunar_x` REAL, `lunar_y` REAL, `lunar_z` REAL, `sun_x` REAL, `sun_y` REAL, `sun_z` REAL, PRIMARY KEY(`identifier`))",
+        "fields": [
+          {
+            "fieldPath": "identifier",
+            "columnName": "identifier",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "caption",
+            "columnName": "caption",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "image",
+            "columnName": "image",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "version",
+            "columnName": "version",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "attitudeQuaternions.q0",
+            "columnName": "q0",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "attitudeQuaternions.q1",
+            "columnName": "q1",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "attitudeQuaternions.q2",
+            "columnName": "q2",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "attitudeQuaternions.q3",
+            "columnName": "q3",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "centroidCoordinates.lat",
+            "columnName": "lat",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "centroidCoordinates.lon",
+            "columnName": "lon",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dscovrJ2000Position.x",
+            "columnName": "dscovr_x",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dscovrJ2000Position.y",
+            "columnName": "dscovr_y",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dscovrJ2000Position.z",
+            "columnName": "dscovr_z",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lunarJ2000Position.x",
+            "columnName": "lunar_x",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lunarJ2000Position.y",
+            "columnName": "lunar_y",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lunarJ2000Position.z",
+            "columnName": "lunar_z",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sunJ2000Position.x",
+            "columnName": "sun_x",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sunJ2000Position.y",
+            "columnName": "sun_y",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "sunJ2000Position.z",
+            "columnName": "sun_z",
+            "affinity": "REAL",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "identifier"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_epic_table_identifier",
+            "unique": true,
+            "columnNames": [
+              "identifier"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_epic_table_identifier` ON `${TABLE_NAME}` (`identifier`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '724bd32ff7f27a2c198f916447c45984')"
+    ]
+  }
+}

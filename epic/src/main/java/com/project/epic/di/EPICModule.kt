@@ -3,7 +3,7 @@ package com.project.epic.di
 import android.content.Context
 import androidx.room.Room
 import com.project.epic.database.EPICDatabase
-import com.project.epic.database.EPICDatabase.Companion.EPIC_DATABASE
+import com.project.epic.database.EPIC_DATABASE
 import com.project.epic.domain.local.EPICDao
 import com.project.epic.domain.local.EPICRepositoryLocal
 import com.project.epic.domain.remote.EPICApiService

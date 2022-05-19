@@ -1,4 +1,4 @@
-package com.project.mrp.domain.local
+package com.project.mrp.domain.local.dao
 
 import androidx.room.*
 import com.project.mrp.entities.local.ManifestWithPhotos

@@ -1,11 +1,11 @@
-package com.project.donki.domain.local
+package com.project.donki.domain.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.project.donki.entities.local.*
-import com.project.donki.entities.local.SOLAR_FLARE_TABLE
+import com.project.donki.database.SOLAR_FLARE_TABLE
 
 @Dao
 interface SolarFlareDao {

@@ -3,8 +3,8 @@ package com.project.mrp.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.project.mrp.domain.local.PhotoDao
-import com.project.mrp.domain.local.PhotoManifestDao
+import com.project.mrp.domain.local.dao.PhotoDao
+import com.project.mrp.domain.local.dao.PhotoManifestDao
 import com.project.mrp.entities.local.PhotoEntity
 import com.project.mrp.entities.local.PhotoManifestEntity
 import com.project.mrp.entities.local.PhotosInformationEntity

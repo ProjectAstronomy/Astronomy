@@ -1,5 +1,8 @@
 package com.project.donki.domain.local
 
+import com.project.donki.domain.local.dao.AllKpIndexDao
+import com.project.donki.domain.local.dao.GeomagneticStormDao
+import com.project.donki.domain.local.dao.LinkedEventDao
 import com.project.donki.entities.local.AllKpIndexEntity
 import com.project.donki.entities.local.GeomagneticStormEntity
 import com.project.donki.entities.local.LinkedEventEntity

@@ -2,7 +2,7 @@ package com.project.donki.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.project.donki.domain.local.*
+import com.project.donki.domain.local.dao.*
 import com.project.donki.entities.local.*
 
 @Database(

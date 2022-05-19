@@ -1,6 +1,8 @@
 package com.project.donki.entities.local
 
 import androidx.room.*
+import com.project.donki.database.GEOMAGNETIC_STORM_ID
+import com.project.donki.database.GEOMAGNETIC_STORM_TABLE
 
 @Entity(
     tableName = GEOMAGNETIC_STORM_TABLE,

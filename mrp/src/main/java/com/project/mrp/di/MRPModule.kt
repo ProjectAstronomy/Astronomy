@@ -1,6 +1,8 @@
 package com.project.mrp.di
 
 import com.project.mrp.domain.remote.*
+import com.project.mrp.domain.remote.api.MissionManifestApiService
+import com.project.mrp.domain.remote.api.PhotosApiService
 import com.project.mrp.viewmodel.MissionManifestViewModelFactory
 import com.project.mrp.viewmodel.PhotosViewModelFactory
 import org.koin.core.qualifier.named

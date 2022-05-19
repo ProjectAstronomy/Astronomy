@@ -1,4 +1,4 @@
-package com.project.donki.entities.local
+package com.project.donki.database
 
 internal const val DONKI_DATABASE_NAME = "donki_database"
 

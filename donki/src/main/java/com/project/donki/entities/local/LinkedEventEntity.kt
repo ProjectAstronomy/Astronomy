@@ -1,6 +1,9 @@
 package com.project.donki.entities.local
 
 import androidx.room.*
+import com.project.donki.database.GEOMAGNETIC_STORM_ID
+import com.project.donki.database.LINKED_EVENT_TABLE
+import com.project.donki.database.SOLAR_FLARE_ID
 
 @Entity(
     tableName = LINKED_EVENT_TABLE,
