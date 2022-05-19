@@ -18,12 +18,4 @@
             app:summary="@string/image_resolution_summary"
             app:title="@string/image_resolution_title" />
     </PreferenceCategory>
-    <PreferenceCategory app:title="@string/saving_data_header">
-        <SwitchPreference
-            app:defaultValue="false"
-            app:key="@string/save_image_to_gallery_key"
-            app:summaryOff="@string/save_images_to_gallery_summaryOff"
-            app:summaryOn="@string/save_images_to_gallery_summaryOn"
-            app:title="@string/save_images_to_gallery_title" />
-    </PreferenceCategory>
 </PreferenceScreen>

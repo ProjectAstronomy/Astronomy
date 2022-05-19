@@ -43,14 +43,10 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         val themesKey = getString(R.string.themes_key)
         val imageResolutionKey = getString(R.string.image_resolution_key)
-        val saveImageToGalleryKey = getString(R.string.save_image_to_gallery_key)
 
         when (key) {
             themesKey -> recreate()
             imageResolutionKey -> onImageResolutionChanged(sharedPreferences, key)
-            saveImageToGalleryKey -> {
-
-            }
         }
     }
 

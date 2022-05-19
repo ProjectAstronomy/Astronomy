@@ -5,7 +5,6 @@
     <!-- Preference Titles -->
     <string name="design_header">Design</string>
     <string name="image_resolution_header">Image resolution</string>
-    <string name="saving_data_header">Saving data</string>
 
     <string name="themes_title">Themes</string>
     <string name="theme_original">Original</string>
@@ -21,9 +20,4 @@
     <string name="image_resolution_key">Resolution</string>
     <string name="image_resolution_summary">Choose resolution</string>
     <string name="image_resolution_default_value">@string/regular</string>
-
-    <string name="save_images_to_gallery_title">Save to gallery</string>
-    <string name="save_images_to_gallery_summaryOff">Saving images to gallery disabled</string>
-    <string name="save_images_to_gallery_summaryOn">Saving images to gallery enabled</string>
-    <string name="save_image_to_gallery_key">save_image_to_gallery_key</string>
 </resources>
