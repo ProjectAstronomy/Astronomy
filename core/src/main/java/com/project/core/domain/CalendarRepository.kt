@@ -4,7 +4,7 @@ import java.util.*
 
 class CalendarRepository(private val calendar: Calendar) {
     enum class RangeFlag {
-        ONE_MONTH, TWO_MONTHS
+        ONE_MONTH, TWO_MONTHS, ONE_YEAR
     }
 
     private var endDateYear: Int = calendar.get(Calendar.YEAR)
@@ -35,11 +35,11 @@ class CalendarRepository(private val calendar: Calendar) {
     }
 
     private fun refreshStartDate(rangeFlag: RangeFlag) {
-        val range = when (rangeFlag) {
-            RangeFlag.ONE_MONTH -> 1
-            RangeFlag.TWO_MONTHS -> 2
+        when (rangeFlag) {
+            RangeFlag.ONE_MONTH -> calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1)
+            RangeFlag.TWO_MONTHS -> calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 2)
+            RangeFlag.ONE_YEAR -> calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - 1)
         }
-        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - range)
 
         startDateYear = calendar.get(Calendar.YEAR)
         startDateMonth = calendar.get(Calendar.MONTH) + 1

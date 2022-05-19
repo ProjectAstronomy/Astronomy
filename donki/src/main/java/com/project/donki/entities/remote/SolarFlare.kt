@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class SolarFlare(
-    @field:SerializedName("flrID") val flrID: String?,
+    @field:SerializedName("flrID") val flrID: String,
     @field:SerializedName("instruments") val instruments: List<Instrument>?,
     @field:SerializedName("beginTime") val beginTime: String?,
     @field:SerializedName("peakTime") val peakTime: String?,
@@ -15,5 +15,5 @@ data class SolarFlare(
     @field:SerializedName("sourceLocation") val sourceLocation: String?,
     @field:SerializedName("activeRegionNum") val activeRegionNum: Long?,
     @field:SerializedName("linkedEvents") val linkedEvents: List<LinkedEvent>?,
-    @field:SerializedName("link") val link: String?
+    @field:SerializedName("link") var link: String?
 ) : Parcelable

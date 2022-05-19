@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/step_zero"
-    app:cardCornerRadius="0dp"
-    app:cardElevation="0dp">
+    android:layout_marginBottom="@dimen/step_xxx_small"
+    app:cardCornerRadius="@dimen/step_zero"
+    app:cardElevation="@dimen/step_zero">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -36,7 +37,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintEnd_toStartOf="@id/tv_instead_of_scale"
-            app:layout_constraintGuide_percent="0.3"
+            app:layout_constraintGuide_percent="0.26"
             app:layout_constraintStart_toEndOf="@id/tv_date_solar"
             app:layout_constraintTop_toTopOf="parent"
             />

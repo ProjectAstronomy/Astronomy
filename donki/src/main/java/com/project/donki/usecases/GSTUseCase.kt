@@ -14,13 +14,13 @@ class GSTUseCase(
         return if (!isNetworkAvailable) {
             localRepository.getAll()
         } else {
-            calendarRepository.refreshDates(CalendarRepository.RangeFlag.TWO_MONTHS)
+            calendarRepository.refreshDates(CalendarRepository.RangeFlag.ONE_YEAR)
             remoteRepository.loadAsync(calendarRepository.startDate, calendarRepository.endDate)
         }
     }
 
     suspend fun reload(): List<GeomagneticStorm> {
-        calendarRepository.refreshDates(CalendarRepository.RangeFlag.TWO_MONTHS)
+        calendarRepository.refreshDates(CalendarRepository.RangeFlag.ONE_YEAR)
         return remoteRepository.loadAsync(calendarRepository.startDate, calendarRepository.endDate)
     }
 

@@ -8,6 +8,11 @@
 
 
     <!--large-->
+
+    <dimen name="step_xxx_large">140dp</dimen>
+    <dimen name="step_xx_large">72dp</dimen>
+    <dimen name="step_x_large">48dp</dimen>
+
     <dimen name="step_large">24dp</dimen>
     <dimen name="radius_large">24dp</dimen>
     <dimen name="elevation_large">6dp</dimen>
@@ -34,14 +39,15 @@
     <dimen name="step_between_rv_items_small">6dp</dimen>
     <dimen name="text_size_small">6sp</dimen>
 
-    <!--negative-->
-    <dimen name="step_negative">-1dp</dimen>
-    <dimen name="blank_space">200dp</dimen>
-
     <dimen name="step_x_small">4dp</dimen>
     <dimen name="step_xx_small">2dp</dimen>
     <dimen name="step_xxx_small">1dp</dimen>
     <dimen name="step_zero">0dp</dimen>
+
+    <!--negative-->
+    <dimen name="step_negative">-1dp</dimen>
+    <dimen name="blank_space">200dp</dimen>
+
 
     <dimen name="height_video_frame">250dp</dimen>
 

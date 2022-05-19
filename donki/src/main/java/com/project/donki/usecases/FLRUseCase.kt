@@ -14,13 +14,13 @@ class FLRUseCase(
         return if (!isNetworkAvailable) {
             localRepository.getAll()
         } else {
-            calendarRepository.refreshDates(rangeFlag = CalendarRepository.RangeFlag.TWO_MONTHS)
+            calendarRepository.refreshDates(rangeFlag = CalendarRepository.RangeFlag.ONE_YEAR)
             remoteRepository.loadAsync(calendarRepository.startDate, calendarRepository.endDate)
         }
     }
 
     suspend fun reload(): List<SolarFlare> {
-        calendarRepository.refreshDates(rangeFlag = CalendarRepository.RangeFlag.TWO_MONTHS)
+        calendarRepository.refreshDates(rangeFlag = CalendarRepository.RangeFlag.ONE_YEAR)
         return remoteRepository.loadAsync(calendarRepository.startDate, calendarRepository.endDate)
     }
 

@@ -59,6 +59,7 @@ abstract class BaseFragment<V : ViewBinding>(
                     onSuccess = { drawable -> imageView.setImageDrawable(drawable) },
                     onError = { imageView.setImageResource(R.drawable.no_image) }
                 )
+                .crossfade(true)
                 .build()
             ImageLoader(_context).enqueue(request)
         }
