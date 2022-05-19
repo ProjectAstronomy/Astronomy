@@ -3,28 +3,29 @@
     <style name="Theme.Astronomy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue_600</item>
-        <item name="colorPrimaryDark">@color/blue_600</item>
+        <item name="colorPrimaryDark">@color/indigo_900</item>
         <item name="colorPrimaryVariant">@color/indigo_900</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSurface">@color/indigo_100</item>
         <item name="colorAccent">@color/indigo_100</item>
         <item name="android:colorAccent" tools:targetApi="lollipop">@color/indigo_100</item>
-
-
         <item name="myColorPrimaryLight">@color/indigo_200</item>
+    <!-- векторные image xml подкрашивает:
+    <item name="colorControlNormal">@color/orange_800</item>-->
 
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
 
-        <!-- Status bar color. -->
+        <!-- Status bar color. (по умолчанию также colorPrimaryDark) -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
 
 
         <!-- ���� ����������� ��������� ��������-->
         <item name="android:windowBackground">?attr/myColorPrimaryLight</item>
 
+<!--        <item name="android:windowTranslucentStatus">true</item>-->
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">

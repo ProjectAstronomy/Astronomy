@@ -10,5 +10,5 @@ data class GeomagneticStorm(
     @field:SerializedName("startTime") val startTime: String?,
     @field:SerializedName("allKpIndex") val allKpIndex: List<AllKpIndex>?,
     @field:SerializedName("linkedEvents") val linkedEvents: List<LinkedEvent>?,
-    @field:SerializedName("link") val link: String?
+    @field:SerializedName("link") var link: String?
 ) : Parcelable

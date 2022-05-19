@@ -47,6 +47,7 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
             hasInitializedRootView = true
             flrViewModel.load(androidNetworkStatus.isNetworkAvailable())
         }
+
         lifecycleScope.launch {
             adapter.isNeededToLoadInFlow.collect { isNeededToLoad ->
                 if (isNeededToLoad && androidNetworkStatus.isNetworkAvailable()) {
@@ -71,7 +72,7 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
                 repeat(30) {
                     calendar.add(Calendar.DAY_OF_YEAR, -1)
                     listCalendarDays.add(
-                        SolarFlare(null, null, beginTime = sdf.format(calendar.time),null,null, classType = "header",null,null, null,null)
+                        SolarFlare(flrID = sdf.format(calendar.time), null, null, null, null, null,null,null, null,"header")
                     )
                 }
 
@@ -80,7 +81,7 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
                 var isNoSolarFlareThisDay: Boolean
 
                 for (index in listCalendarDays.indices) {
-                    val seekTime = listCalendarDays[index].beginTime
+                    val seekTime = listCalendarDays[index].flrID
                     listFullEveryDay.add(listCalendarDays[index])
                     isNoSolarFlareThisDay = true
                     listSolarResponse.forEach { solarFlare ->
@@ -90,15 +91,15 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
                         }
                     }
                     if (isNoSolarFlareThisDay) {
-                        listFullEveryDay.add(SolarFlare(null, null, beginTime = "There is no solar flare",null,null, classType = "no_flare",null,null, null,null))
+                        listFullEveryDay.add(SolarFlare(flrID = index.toString(), null, null,null,null, null,null,null,null, "no_flare"))
                     }
                 }
-
                 adapterSolarVertical.adapterList = listFullEveryDay
             }
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

@@ -74,21 +74,21 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
                 for (index in listGSTResponse.indices) {
                     listGSTDisplay.add(
                         GeomagneticStorm(
-                            null,
-                            listGSTResponse[index].startTime?.take(10),
+                            gstID = listGSTResponse[index].startTime,
+                            startTime = listGSTResponse[index].startTime?.take(10),
                             null,
                             null,
                             "header"
                         )
                     )
-                    listGSTResponse[index].allKpIndex?.forEach { allKpIndex ->
+                    listGSTResponse[index].allKpIndex?.forEach { eachFromAllKpIndex ->
                         listGSTDisplay.add(
                             GeomagneticStorm(
+                                gstID = listGSTResponse[index].startTime,
+                                startTime = eachFromAllKpIndex.observedTime?.substring(11, 16),
+                                allKpIndex = listOf(eachFromAllKpIndex),
                                 null,
-                                listGSTResponse[index].startTime?.substring(11, 16),
-                                null,
-                                null,
-                                allKpIndex.kpIndex.toString()
+                                "small"
                             )
                         )
                     }
