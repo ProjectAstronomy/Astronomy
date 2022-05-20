@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -25,6 +26,7 @@ class APODDescriptionFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requestWritePermission()
         hasInitializedRootView = !hasInitializedRootView
         val apodResponse = navArgs.apodResponse
         with(binding) {
@@ -38,10 +40,17 @@ class APODDescriptionFragment :
                             ImageResolution.HD -> apodResponse.hdurl
                         }
                         useCoilToLoadPhoto(ivUrlApod, resolution)
+                        binding.saveImageToExternalStorage.setOnClickListener {
+                            if (isWritePermissionGranted)
+                                saveImageToExternalStorage(
+                                    binding.ivUrlApod.drawable.toBitmap(),
+                                    "${apodResponse.title.toString()}.jpg"
+                                )
+                        }
                     }
                 }
                 "video" -> {
-                    binding.ivUrlApod.visibility = View.GONE
+                    binding.imageViewContainer.visibility = View.GONE
                     with(binding.wvOneUrlVideoApod) {
                         visibility = View.VISIBLE
                         settings.javaScriptEnabled = true
