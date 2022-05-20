@@ -30,7 +30,6 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
 
     private val adapterAPOD by lazy { RvAdapterCommon(::onApodClickListener) }
     private val adapterSolar by lazy { RvAdapterCommon(::onSolarFlareClickListener) }
-    private val adapterGeo by lazy { RvAdapterCommon(::onGeoClickListener) }
     private val adapterEPIC by lazy { RvAdapterCommon(::onEpicClickListener) }
     private val adapterMars by lazy { RvAdapterCommon(::onMarsClickListener) }
 
@@ -54,10 +53,6 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = adapterSolar
             }
-            with(binding.rvGeo) {
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                adapter = adapterGeo
-            }
             with(binding.rvEpic) {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = adapterEPIC
@@ -66,11 +61,11 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = adapterMars
             }
+            binding.chipSettings.setOnClickListener { onSettingsClicked() }
         }
         with(mainViewModel) {
             liveDataAPOD.observe(viewLifecycleOwner) { adapterAPOD.adapterList = it }
             liveDataEpic.observe(viewLifecycleOwner) { adapterEPIC.adapterList = it }
-            liveDataGeo.observe(viewLifecycleOwner) { adapterGeo.adapterList = it }
             liveDataMars.observe(viewLifecycleOwner) { adapterMars.adapterList = it }
             liveDataSolar.observe(viewLifecycleOwner) { adapterSolar.adapterList = it }
         }
@@ -86,11 +81,10 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     }
 
     private fun onSolarFlareClickListener(itemRv: ItemRv) {
-        findNavController().navigate(R.id.action_main_fragment_to_navigation_flr)
-    }
-
-    private fun onGeoClickListener(itemRv: ItemRv) {
-        findNavController().navigate(R.id.action_main_fragment_to_navigation_gst)
+        if (itemRv.title == "Solar Flare")
+            findNavController().navigate(R.id.action_main_fragment_to_navigation_flr)
+        else
+            findNavController().navigate(R.id.action_main_fragment_to_navigation_gst)
     }
 
     private fun onEpicClickListener(itemRv: ItemRv) {
@@ -100,5 +94,9 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     private fun onMarsClickListener(itemRv: ItemRv) {
         val action = MainFragmentDirections.actionMainFragmentToNavigationMrp(itemRv.title)
         findNavController().navigate(action)
+    }
+
+    private fun onSettingsClicked() {
+        findNavController().navigate(R.id.action_main_fragment_to_fragment_preferences)
     }
 }

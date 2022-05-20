@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-kapt")
 }
 
 android {
@@ -19,13 +20,9 @@ android {
         viewBinding = true
     }
 
-    flavorDimensions += "TEST"
-    productFlavors {
-        create("FAKE") {
-            dimension = "TEST"
-        }
-        create("REAL") {
-            dimension = "TEST"
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
         }
     }
 
@@ -51,12 +48,16 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs = freeCompilerArgs + "-opt-in=kotlin.RequiresOptIn"
     }
 }
 
 dependencies {
     //Modules
     implementation(project(mapOf("path" to Modules.core)))
+
+    //StartUp
+    implementation(StartUp.startUpRuntime)
 
     //Koin
     implementation(Koin.koinCore)
@@ -91,22 +92,25 @@ dependencies {
     //Navigation
     implementation(Navigation.navigationFragmentKTX)
     implementation(Navigation.navigationUIKTX)
+    implementation(Navigation.navigationRuntime)
+
+    //Room
+    implementation(Room.room)
+    implementation(Room.roomRuntime)
+    kapt(Room.roomCompiler)
 
     //Test
     testImplementation(TestImpl.junit)
-    androidTestImplementation(TestImpl.extJunit)
-    //androidTestImplementation(TestImpl.composeJunit)
-    androidTestImplementation(TestImpl.espresso)
-    debugImplementation(TestImpl.fragment)
-    testImplementation(TestImpl.mockito)
-    testImplementation(TestImpl.mockitoInline)
-    testImplementation(TestImpl.mockitoKotlin)
+    testImplementation(TestImpl.kotlinxCoroutinesTest)
+    testImplementation(TestImpl.mockk)
     testImplementation(TestImpl.coreTesting)
-    androidTestImplementation(TestImpl.espressoContrib)
-//    testImplementation  (TestImpl.koinTests)
-//    androidTestImplementation  (TestImpl.koinTest)
+    testImplementation(TestImpl.robolectric)
+    testImplementation(TestImpl.mockitoKotlin)
 
+    debugImplementation(TestImpl.fragment)
+    debugImplementation(TestImpl.espressoContrib)
 
-
-
+    androidTestImplementation(TestImpl.navigation)
+    androidTestImplementation(TestImpl.extJunit)
+    androidTestImplementation(TestImpl.espresso)
 }

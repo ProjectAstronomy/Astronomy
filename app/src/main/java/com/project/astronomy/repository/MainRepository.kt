@@ -1,10 +1,6 @@
 package com.project.astronomy.repository
 
 import com.project.astronomy.entities.ItemRv
-import com.project.apod.BuildConfig
-import com.project.apod.domain.APODApiService
-import com.project.apod.entities.APODResponse
-import retrofit2.Response
 
 class MainRepository() {
     private val listItemRvAPOD: List<ItemRv> = listOf(
@@ -12,15 +8,8 @@ class MainRepository() {
     )
 
     private val listItemRvSolarFlare: List<ItemRv> = listOf(
-        ItemRv("Today", "rv_solar_today"),
-        ItemRv("Before", "rv_solar_before"),
-        ItemRv("Forecast", "rv_solar_forecast"),
-    )
-
-    private val listItemRvGeoStorm: List<ItemRv> = listOf(
-        ItemRv("Today", "rv_geo_today"),
-        ItemRv("Before", "rv_geo_before"),
-        ItemRv("Forecast", "rv_geo_forecast"),
+        ItemRv("Solar Flare", "rv_solar_today"),
+        ItemRv("Magnetic Storm", "rv_geo_today"),
     )
 
     private val listItemRvEpic: List<ItemRv> = listOf(
@@ -36,7 +25,6 @@ class MainRepository() {
 
     fun getListRvAPOD() = listItemRvAPOD
     fun getListRvSolarFlare() = listItemRvSolarFlare
-    fun getListRvGeoStorm() = listItemRvGeoStorm
     fun getListRvEpic() = listItemRvEpic
     fun getListRvMars() = listItemRvMars
 }

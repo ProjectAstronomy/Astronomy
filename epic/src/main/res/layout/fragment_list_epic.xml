@@ -20,6 +20,8 @@
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
             app:collapsedTitleTextColor="@color/white_text_secondary">
 
+
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"

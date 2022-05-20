@@ -2,7 +2,6 @@ package com.project.astronomy.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.project.astronomy.entities.ItemRv
 import com.project.astronomy.R
@@ -18,9 +17,7 @@ class RvAdapterCommon(
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(
-            ItemRvMainCommonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        )
+        ViewHolder(ItemRvMainCommonBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(adapterList[position])
@@ -32,18 +29,13 @@ class RvAdapterCommon(
         RecyclerView.ViewHolder(viewBinding.root) {
 
         fun bind(adapterItemView: ItemRv) {
-            itemView.findViewById<TextView>(R.id.tv_title).text = adapterItemView.title
+            viewBinding.tvTitle.text = adapterItemView.title
 
             when (adapterItemView.imageName) {
                 "rv_apod_today" -> viewBinding.ivPic.setImageResource(R.drawable.rv_apod_today)
 
-                "rv_solar_today" -> viewBinding.ivPic.setImageResource(R.drawable.rv_solar_today)
-                "rv_solar_before" -> viewBinding.ivPic.setImageResource(R.drawable.rv_solar_before)
-                "rv_solar_forecast" -> viewBinding.ivPic.setImageResource(R.drawable.rv_solar_forecast)
-
+                "rv_solar_today" -> viewBinding.ivPic.setImageResource(R.drawable.rv_solar)
                 "rv_geo_today" -> viewBinding.ivPic.setImageResource(R.drawable.rv_geo_today)
-                "rv_geo_before" -> viewBinding.ivPic.setImageResource(R.drawable.rv_geo_before)
-                "rv_geo_forecast" -> viewBinding.ivPic.setImageResource(R.drawable.rv_geo_forecast)
 
                 "rv_epic_today" -> viewBinding.ivPic.setImageResource(R.drawable.rv_epic_today)
                 "rv_epic_before" -> viewBinding.ivPic.setImageResource(R.drawable.rv_epic_before)

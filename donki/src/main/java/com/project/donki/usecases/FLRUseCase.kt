@@ -1,9 +1,28 @@
 package com.project.donki.usecases
 
-import com.project.core.domain.BaseRepository
 import com.project.core.domain.CalendarRepository
-import com.project.core.usecase.BaseUseCase
-import com.project.donki.entities.SolarFlare
+import com.project.donki.domain.remote.FLRRepository
+import com.project.donki.domain.local.FLRRepositoryLocal
+import com.project.donki.entities.remote.SolarFlare
 
-class FLRUseCase(calendarRepository: CalendarRepository, repository: BaseRepository<List<SolarFlare>>) :
-    BaseUseCase<List<SolarFlare>>(calendarRepository, repository)
+class FLRUseCase(
+    private val calendarRepository: CalendarRepository,
+    private val remoteRepository: FLRRepository,
+    private val localRepository: FLRRepositoryLocal
+) {
+    suspend fun load(isNetworkAvailable: Boolean): List<SolarFlare> {
+        return if (!isNetworkAvailable) {
+            localRepository.getAll()
+        } else {
+            calendarRepository.refreshDates(rangeFlag = CalendarRepository.RangeFlag.ONE_YEAR)
+            remoteRepository.loadAsync(calendarRepository.startDate, calendarRepository.endDate)
+        }
+    }
+
+    suspend fun reload(): List<SolarFlare> {
+        calendarRepository.refreshDates(rangeFlag = CalendarRepository.RangeFlag.ONE_YEAR)
+        return remoteRepository.loadAsync(calendarRepository.startDate, calendarRepository.endDate)
+    }
+
+    suspend fun insert(solarFlare: SolarFlare): Unit = localRepository.insertSolarFlare(solarFlare)
+}

@@ -10,7 +10,8 @@ import kotlinx.coroutines.flow.StateFlow
 
 class AndroidNetworkStatus(context: Context) {
     private val connectivityManager = context.getSystemService<ConnectivityManager>()
-    private val networkState = MutableStateFlow(false)
+    private val _networkState = MutableStateFlow(false)
+    val networkState: StateFlow<Boolean> = _networkState
 
     init {
         val request = NetworkRequest.Builder().build()
@@ -18,22 +19,20 @@ class AndroidNetworkStatus(context: Context) {
         connectivityManager?.registerNetworkCallback(request, object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
                 super.onAvailable(network)
-                networkState.value = true
+                _networkState.value = true
             }
 
             override fun onLost(network: Network) {
                 super.onLost(network)
-                networkState.value = false
+                _networkState.value = false
             }
 
             override fun onUnavailable() {
                 super.onUnavailable()
-                networkState.value = false
+                _networkState.value = false
             }
         })
     }
 
     fun isNetworkAvailable(): Boolean = networkState.value
-
-    fun isNetworkAvailableInFlow(): StateFlow<Boolean> = networkState
 }

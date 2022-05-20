@@ -16,6 +16,13 @@
         <item name="android:layout_marginBottom">@dimen/step_normal</item>
     </style>
 
+    <style name="view_scale_item">
+        <item name="android:layout_width">@dimen/step_large</item>
+        <item name="android:layout_height">@dimen/step_normal</item>
+        <item name="android:layout_marginStart">@dimen/step_x_small</item>
+        <item name="android:visibility">invisible</item>
+    </style>
+
     <!--    заголовки в main_fragment-->
     <style name="heading_text_style" parent="margin_start_top_heading">
         <item name="android:textColor">@color/black</item>

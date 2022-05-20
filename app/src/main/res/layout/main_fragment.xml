@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/viewToScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <!-- TODO: create a better way to navigate to the settings screen -->
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/elevation_normal"
+            android:layout_marginEnd="@dimen/elevation_normal"
+            android:text="Settings"
+            android:textAlignment="center" />
 
         <!--    1. aPod-->
         <com.google.android.material.textview.MaterialTextView
@@ -24,7 +30,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_apod"
             style="@style/padding_start_top_end_normal_rv"
-            android:clipToPadding="false"/>
+            android:clipToPadding="false" />
 
         <!--    2. Solar Flare-->
         <com.google.android.material.textview.MaterialTextView
@@ -34,19 +40,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_solar"
             style="@style/padding_start_top_end_normal_rv"
-            android:clipToPadding="false"/>
+            android:clipToPadding="false" />
 
-        <!--    3. Geomagnetic Storm-->
-        <com.google.android.material.textview.MaterialTextView
-            style="@style/heading_text_style"
-            android:text="@string/heading_title_geo" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_geo"
-            style="@style/padding_start_top_end_normal_rv"
-            android:clipToPadding="false"/>
-
-        <!--    4. Earth Polychromatic Imaging Camera-->
+        <!--    3. Earth Polychromatic Imaging Camera-->
         <com.google.android.material.textview.MaterialTextView
             style="@style/heading_text_style"
             android:text="@string/heading_title_epic" />
@@ -54,9 +50,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_epic"
             style="@style/padding_start_top_end_normal_rv"
-            android:clipToPadding="false"/>
+            android:clipToPadding="false" />
 
-        <!--    5. Mars Rover Photos -->
+        <!--    4. Mars Rover Photos -->
         <com.google.android.material.textview.MaterialTextView
             style="@style/heading_text_style"
             android:text="@string/heading_title_mars" />
@@ -64,8 +60,6 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_mars"
             style="@style/padding_start_top_end_normal_rv"
-            android:clipToPadding="false"/>
-
-
+            android:clipToPadding="false" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

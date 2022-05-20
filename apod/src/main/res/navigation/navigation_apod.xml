@@ -13,7 +13,11 @@
 
         <action
             android:id="@+id/action_fragment_apod_to_fragment_apod_description"
-            app:destination="@id/fragment_apod_description" />
+            app:destination="@id/fragment_apod_description"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -23,6 +27,22 @@
         tools:layout="@layout/one_apod_fragment">
         <argument
             android:name="apodResponse"
-            app:argType="com.project.apod.entities.APODResponse" />
+            app:argType="com.project.apod.entities.remote.APODResponse" />
+        <action
+            android:id="@+id/action_fragment_apod_description_to_APODScaleImageFragment"
+            app:destination="@id/fragment_apod_scale_image"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_apod_scale_image"
+        android:name="com.project.apod.ui.APODScaleImageFragment"
+        android:label="fragment_apod_scale_image_navigation_label"
+        tools:layout="@layout/scale_image_apod_fragment">
+        <argument
+            android:name="apodResponse"
+            app:argType="com.project.apod.entities.remote.APODResponse" />
     </fragment>
 </navigation>

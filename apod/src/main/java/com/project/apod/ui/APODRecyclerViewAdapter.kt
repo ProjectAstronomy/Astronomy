@@ -10,7 +10,8 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.project.apod.databinding.ItemRvApodBinding
-import com.project.apod.entities.APODResponse
+import com.project.apod.entities.remote.APODResponse
+import com.project.core.entities.ImageResolution
 import com.project.core.ui.BaseRecyclerViewAdapter
 
 class APODRecyclerViewAdapter(
@@ -26,16 +27,16 @@ class APODRecyclerViewAdapter(
             oldItem == newItem
     }
 
+    private var imageResolution = ImageResolution.REGULAR
+
     override val differ = AsyncListDiffer(this, apodDiffUtilCallBack)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): APODViewHolder =
-        APODViewHolder(
-            ItemRvApodBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+        APODViewHolder(ItemRvApodBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+
+    fun onImageResolutionChanged(imageResolution: ImageResolution) {
+        this.imageResolution = imageResolution
+    }
 
     inner class APODViewHolder(private val viewBinding: ItemRvApodBinding) :
         BaseViewHolder<APODResponse>(viewBinding.root) {
@@ -49,11 +50,20 @@ class APODRecyclerViewAdapter(
                 tvCopyrightApod.text = apodResponse.copyright
                 when (apodResponse.mediaType) {
                     "image" -> {
+                        viewBinding.ivUrlApod.visibility = View.VISIBLE
+                        viewBinding.wvRvUrlVideoApod.visibility = View.GONE
                         ivUrlApod.setImageDrawable(null)
-                        onItemImageLoader(ivUrlApod, apodResponse.url)
+                        onItemImageLoader(
+                            ivUrlApod,
+                            when (imageResolution) {
+                                ImageResolution.REGULAR -> apodResponse.url
+                                ImageResolution.HD -> apodResponse.hdurl
+                            }
+                        )
                     }
                     "video" -> {
                         viewBinding.ivUrlApod.visibility = View.GONE
+                        viewBinding.wvRvUrlVideoApod.visibility = View.VISIBLE
                         with(viewBinding.wvRvUrlVideoApod) {
                             visibility = View.VISIBLE
                             settings.javaScriptEnabled = true

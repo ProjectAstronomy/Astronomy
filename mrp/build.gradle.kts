@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-kapt")
 }
 
 android {
@@ -20,13 +21,9 @@ android {
         viewBinding = true
     }
 
-    flavorDimensions += "TEST"
-    productFlavors {
-        create("FAKE") {
-            dimension = "TEST"
-        }
-        create("REAL") {
-            dimension = "TEST"
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
         }
     }
 
@@ -75,6 +72,11 @@ dependencies {
     //AndroidX
     implementation(AndroidXImpl.fragmentKTX)
 
+    //Room
+    implementation(Room.room)
+    implementation(Room.roomRuntime)
+    kapt(Room.roomCompiler)
+
     //Core
     implementation(Core.coreKTX)
 
@@ -88,6 +90,15 @@ dependencies {
 
     //Test
     testImplementation(TestImpl.junit)
+    testImplementation(TestImpl.kotlinxCoroutinesTest)
+    testImplementation(TestImpl.mockk)
+    testImplementation(TestImpl.coreTesting)
+    testImplementation(TestImpl.robolectric)
+    testImplementation(TestImpl.mockitoKotlin)
+
+    debugImplementation(TestImpl.fragment)
+
+    androidTestImplementation(TestImpl.navigation)
     androidTestImplementation(TestImpl.extJunit)
     androidTestImplementation(TestImpl.espresso)
 }
