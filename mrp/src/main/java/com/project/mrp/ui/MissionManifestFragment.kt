@@ -1,18 +1,17 @@
 package com.project.mrp.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.mrp.databinding.FragmentMissionManifestBinding
 import com.project.mrp.di.SCOPE_MISSION_MANIFEST_MODULE
-import com.project.mrp.entities.MissionManifest
+import com.project.mrp.entities.remote.PhotosInformation
 import com.project.mrp.viewmodel.MissionManifestViewModel
 import com.project.mrp.viewmodel.MissionManifestViewModelFactory
 import org.koin.android.ext.android.getKoin
@@ -41,6 +40,7 @@ class MissionManifestFragment :
         return providePersistentView(inflater, container, savedInstanceState)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (!hasInitializedRootView) {
@@ -51,7 +51,13 @@ class MissionManifestFragment :
 
         with(missionManifestViewModel) {
             responseMission().observe(viewLifecycleOwner) {
-                //adapterMission.items = it
+
+                it.photoManifest?.photos.also {
+                    if (it != null) {
+                        adapterMission.items = it
+                    }
+                }
+                //adapterMission.items.subList(it[1].photoManifest.photos)
                 binding.apply {
                     name.text = "Меня зовут: \n" + it.photoManifest?.name
                     launchDate.text = "Дата Запуска: \n" + it.photoManifest?.launchDate

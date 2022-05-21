@@ -3,14 +3,11 @@ package com.project.mrp.ui
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.project.core.ui.BaseRecyclerViewAdapter
 import com.project.mrp.databinding.ItemRvMrpBinding
-import com.project.mrp.entities.MissionManifest
-import com.project.mrp.entities.PhotoManifest
-import com.project.mrp.entities.PhotosInformation
+import com.project.mrp.entities.remote.PhotosInformation
 
 class MussionRecyclerViewAdapter : BaseRecyclerViewAdapter<PhotosInformation>() {
 
