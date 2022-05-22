@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sol"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:paddingLeft="10sp"
+        android:paddingTop="@dimen/padding_10"
+        android:text="@string/sol" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/earthDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:paddingLeft="10sp"
+        android:text="@string/eath_date_shime" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/totalPhotos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:paddingLeft="10sp"
+        android:text="@string/total_photo_shime" />
+
+</LinearLayout>

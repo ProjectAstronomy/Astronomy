@@ -19,7 +19,6 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>(FragmentPhotosBinding
         super.onViewCreated(view, savedInstanceState)
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
-            //TODO: init views here
         }
         val roverName = navArgs.roverName
         val photosInformation = navArgs.photosInformation

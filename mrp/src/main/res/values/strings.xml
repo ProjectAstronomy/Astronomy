@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mars_rover_title">Марсоход по исследованию марса</string>
+    <string name="sol">Sol: Загрузка</string>
+    <string name="eath_date_shime">Дата Земли: Загрузка</string>
+    <string name="total_photo_shime">Всего фото в этот день: Загрузка</string>
+    <string name="status_mission">Статус миссии:</string>
+    <string name="earth_date">Дата запуска с Земли</string>
+    <string name="mars_land">Дата посадки на Марс</string>
+    <string name="end_sol">Последний сол</string>
+    <string name="end_date">Последняя дата Земли</string>
+    <string name="total_phtos">Количество фотографий</string>
+</resources>

@@ -48,6 +48,7 @@ object Versions {
     const val appcompatVersion = "1.4.1"
     const val materialVersion = "1.5.0"
     const val circleImageviewVersion = "3.1.0"
+    const val shineImageviewVersion = "0.1.0@aar"
 
     //AndroidX
     const val activityKTXVersion = "1.4.0"
@@ -143,6 +144,7 @@ object Design {
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompatVersion}"
     const val material = "com.google.android.material:material:${Versions.materialVersion}"
     const val circleImageView = "de.hdodenhof:circleimageview:${Versions.circleImageviewVersion}"
+    const val shine = "com.facebook.shimmer:shimmer:${Versions.shineImageviewVersion}"
 
 }
 

@@ -10,19 +10,19 @@
         android:name="com.project.mrp.ui.MissionManifestFragment"
         android:label="MissionManifestFragment"
         tools:layout="@layout/fragment_mission_manifest">
-        <action
-            android:id="@+id/action_missionManifestFragment_to_photosFragment"
-            app:destination="@id/photosFragment" />
         <argument
             android:name="roverName"
             app:argType="string"
             android:defaultValue="Spirit" />
+        <action
+            android:id="@+id/action_missionManifestFragment_to_photosFragment"
+            app:destination="@id/fragment_photos" />
     </fragment>
 
     <fragment
-        android:id="@+id/photosFragment"
+        android:id="@+id/fragment_photos"
         android:name="com.project.mrp.ui.PhotosFragment"
-        android:label="PhotosFragment"
+        android:label="fragment_photos_navigation_label"
         tools:layout="@layout/fragment_photos">
         <argument
             android:name="roverName"

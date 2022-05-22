@@ -83,6 +83,7 @@ dependencies {
     //Design
     implementation(Design.appcompat)
     implementation(Design.material)
+    implementation(Design.shine)
     implementation(Design.circleImageView)
 
     //Navigation
