@@ -1,17 +1,21 @@
 package com.project.donki.ui.adapters
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.viewbinding.ViewBinding
 import com.project.core.ui.BaseRecyclerViewAdapter
 import com.project.donki.entities.remote.SolarFlare
 import com.project.donki.R
+import com.project.donki.databinding.ItemRvFlrBinding
+import com.project.donki.databinding.ItemRvFlrDetailedBinding
+import com.project.donki.databinding.ItemRvFlrHeaderBinding
+import com.project.donki.databinding.ItemRvFlrNoDataBinding
 
 class FLRRecyclerViewAdapter(
     private val onSolarFlareClicked: (SolarFlare) -> Unit
@@ -40,12 +44,11 @@ class FLRRecyclerViewAdapter(
     override val differ = AsyncListDiffer(this, flrDiffUtilCallBack)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<SolarFlare> {
-        val myInflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            TYPE_HEADER -> HeadersViewHolder(myInflater.inflate(R.layout.item_rv_flr_header, parent, false))
-            TYPE_NO_FLR -> NoFlareViewHolder(myInflater.inflate(R.layout.item_rv_flr_no_data, parent, false))
-            TYPE_LARGE -> LargeViewHolder(myInflater.inflate(R.layout.item_rv_flr_detailed, parent, false))
-            else -> SmallViewHolder(myInflater.inflate(R.layout.item_rv_flr, parent, false))
+            TYPE_HEADER -> HeadersViewHolder(ItemRvFlrHeaderBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            TYPE_NO_FLR -> NoFlareViewHolder(ItemRvFlrNoDataBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            TYPE_LARGE -> LargeViewHolder(ItemRvFlrDetailedBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            else -> SmallViewHolder(ItemRvFlrBinding.inflate(LayoutInflater.from(parent.context), parent, false))
         }
     }
 
@@ -56,21 +59,21 @@ class FLRRecyclerViewAdapter(
             TYPE_LARGE -> holder as LargeViewHolder
             TYPE_NO_FLR -> holder as NoFlareViewHolder
         }
-        holder.bind(adapterList[position])
+        _isNeededToLoadInFlow.value = (position * 100 / itemCount) > 80
+        holder.bind(items[position])
     }
 
-    override fun getItemCount(): Int = adapterList.size
-
-    inner class HeadersViewHolder(itemView: View) : BaseViewHolder<SolarFlare>(itemView) {
+    inner class HeadersViewHolder(private val viewBinding: ItemRvFlrHeaderBinding) :
+        BaseViewHolder<SolarFlare>(viewBinding.root) {
         override fun bind(adapterItemData: SolarFlare) {
-            itemView.findViewById<TextView>(R.id.tv_date_solar).text = adapterItemData.flrID
+            viewBinding.tvDateSolar.text = adapterItemData.beginTime
         }
     }
 
-    inner class SmallViewHolder(itemView: View) : BaseViewHolder<SolarFlare>(itemView) {
+    inner class SmallViewHolder(private val viewBinding: ItemRvFlrBinding) :
+        BaseViewHolder<SolarFlare>(viewBinding.root) {
         override fun bind(adapterItemData: SolarFlare) {
-            fillSmallDataInRvItem(itemView, adapterItemData)
-            fillColoredScale(itemView, adapterItemData)
+            fillSmallDataInRvItem(viewBinding, adapterItemData)
             itemView.setOnClickListener {
                 onSolarFlareClicked(adapterItemData)
                 toggleType(layoutPosition)
@@ -78,25 +81,27 @@ class FLRRecyclerViewAdapter(
         }
     }
 
-    inner class LargeViewHolder(itemView: View) : BaseViewHolder<SolarFlare>(itemView) {
+    inner class LargeViewHolder(private val viewBinding: ItemRvFlrDetailedBinding) :
+        BaseViewHolder<SolarFlare>(viewBinding.root) {
         override fun bind(adapterItemData: SolarFlare) {
-            fillSmallDataInRvItem(itemView, adapterItemData)
-            fillColoredScale(itemView, adapterItemData)
-            fillDetailedDataInRvItem(itemView, adapterItemData)
+            Log.d("TAG", "************** LargeViewHolder ")
+            fillSmallDataInRvItem(viewBinding, adapterItemData)
+            fillDetailedDataInRvItem(viewBinding, adapterItemData)
             itemView.setOnClickListener {
                 toggleType(layoutPosition)
             }
         }
     }
 
-    inner class NoFlareViewHolder(itemView: View) : BaseViewHolder<SolarFlare>(itemView) {
+    inner class NoFlareViewHolder(private val viewBinding: ItemRvFlrNoDataBinding) :
+        BaseViewHolder<SolarFlare>(viewBinding.root) {
         override fun bind(adapterItemData: SolarFlare) {
-            //itemView.findViewById<TextView>(R.id.tv_date_solar).text = adapterItemData.beginTime
+            viewBinding.tvDateSolar.text = adapterItemData.beginTime
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (adapterList[position].link) {
+        return when (items[position].link) {
             "header" -> TYPE_HEADER
             "no_flare" -> TYPE_NO_FLR
             "large" -> TYPE_LARGE
@@ -105,37 +110,44 @@ class FLRRecyclerViewAdapter(
     }
 
     private fun toggleType(layoutPosition: Int) {
-        if (adapterList[layoutPosition].link == "large")
-            adapterList[layoutPosition].link = "small"
-        else adapterList[layoutPosition].link = "large"
+        if (items[layoutPosition].link == "large")
+            items[layoutPosition].link = "small"
+        else items[layoutPosition].link = "large"
         notifyItemChanged(layoutPosition)
     }
 
-    private fun fillColoredScale (itemView: View, adapterItemData: SolarFlare) {
+    private fun fillColoredScale (viewBinding: ViewBinding, adapterItemData: SolarFlare) {
         // обнуляем scale, т.к. было замечено сохранение старых значений при переопределении itemView
-        itemView.findViewById<CardView>(R.id.view_scale_1of5).isVisible = false
-        itemView.findViewById<CardView>(R.id.view_scale_2of5).isVisible = false
-        itemView.findViewById<CardView>(R.id.view_scale_3of5).isVisible = false
-        itemView.findViewById<CardView>(R.id.view_scale_4of5).isVisible = false
-        itemView.findViewById<CardView>(R.id.view_scale_5of5).isVisible = false
+        viewBinding.root.findViewById<TextView>(R.id.view_scale_1of5).isVisible = false
+        viewBinding.root.findViewById<TextView>(R.id.view_scale_2of5).isVisible = false
+        viewBinding.root.findViewById<TextView>(R.id.view_scale_3of5).isVisible = false
+        viewBinding.root.findViewById<TextView>(R.id.view_scale_4of5).isVisible = false
+        viewBinding.root.findViewById<TextView>(R.id.view_scale_5of5).isVisible = false
 
         val cType = adapterItemData.classType?.take(1)
-        if (cType == "A" || cType == "B" || cType == "C" || cType == "M" || cType == "X") itemView.findViewById<CardView>(R.id.view_scale_1of5).isVisible = true
-        if (cType == "B" || cType == "C" || cType == "M" || cType == "X") itemView.findViewById<CardView>(R.id.view_scale_2of5).isVisible = true
-        if (cType == "C" || cType == "M" || cType == "X") itemView.findViewById<CardView>(R.id.view_scale_3of5).isVisible = true
-        if (cType == "M" || cType == "X") itemView.findViewById<CardView>(R.id.view_scale_4of5).isVisible = true
-        if (cType == "X") itemView.findViewById<CardView>(R.id.view_scale_5of5).isVisible = true
+        Log.d("TAG", "***************++++++++++ $cType")
+        if (cType == "A" || cType == "B" || cType == "C" || cType == "M" || cType == "X")
+            viewBinding.root.findViewById<TextView>(R.id.view_scale_1of5).isVisible = true
+        if (cType == "B" || cType == "C" || cType == "M" || cType == "X")
+            viewBinding.root.findViewById<TextView>(R.id.view_scale_2of5).isVisible = true
+        if (cType == "C" || cType == "M" || cType == "X")
+            viewBinding.root.findViewById<TextView>(R.id.view_scale_3of5).isVisible = true
+        if (cType == "M" || cType == "X")
+            viewBinding.root.findViewById<TextView>(R.id.view_scale_4of5).isVisible = true
+        if (cType == "X")
+            viewBinding.root.findViewById<TextView>(R.id.view_scale_5of5).isVisible = true
     }
 
     @SuppressLint("SetTextI18n")
-    private fun fillSmallDataInRvItem (itemView: View, adapterItemData: SolarFlare) {
-        itemView.findViewById<TextView>(R.id.tv_date_solar).text = adapterItemData.peakTime?.substring(11, 16)
-        itemView.findViewById<TextView>(R.id.tv_solar_flare_class).text = adapterItemData.classType
+    private fun fillSmallDataInRvItem (viewBinding: ViewBinding, adapterItemData: SolarFlare) {
+        viewBinding.root.findViewById<TextView>(R.id.tv_date_solar).text = adapterItemData.peakTime?.substring(11, 16)
+        viewBinding.root.findViewById<TextView>(R.id.tv_solar_flare_class).text = adapterItemData.classType
+        fillColoredScale(viewBinding, adapterItemData)
     }
 
     @SuppressLint("SetTextI18n")
-    private fun fillDetailedDataInRvItem (itemView: View, adapterItemData: SolarFlare) {
-        itemView.findViewById<TextView>(R.id.tv_solar_details).text =
+    private fun fillDetailedDataInRvItem (viewBinding: ItemRvFlrDetailedBinding, adapterItemData: SolarFlare) {
+        viewBinding.tvSolarDetails.text =
             "beginTime : ${adapterItemData.beginTime}\n" +
                     "peakTime : ${adapterItemData.peakTime}\n" +
                     "endTime : ${adapterItemData.endTime}\n" +
@@ -143,4 +155,5 @@ class FLRRecyclerViewAdapter(
                     "sourceLocation : ${adapterItemData.sourceLocation}\n" +
                     "activeRegionNum : ${adapterItemData.activeRegionNum}"
     }
+
 }
