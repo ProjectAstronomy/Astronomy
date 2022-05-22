@@ -86,6 +86,9 @@ dependencies {
     implementation(Design.appcompat)
     implementation(Design.material)
 
+    //Facebook Shimmer
+    implementation(FacebookShimmer.facebookShimmer)
+
     //AndroidX
     implementation(AndroidXImpl.fragmentKTX)
 

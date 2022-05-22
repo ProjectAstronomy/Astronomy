@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.toBitmap
 import androidx.navigation.fragment.navArgs
 import com.project.core.ui.BaseFragment
 import com.project.epic.databinding.FragmentEpicDescriptionBinding
@@ -30,6 +31,7 @@ class EPICDescriptionFragment :
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requestWritePermission()
         hasInitializedRootView = !hasInitializedRootView
         val epicResponse = navArgs.epicResponse
 
@@ -47,6 +49,14 @@ class EPICDescriptionFragment :
             dscovrZ.text = z + epicResponse.dscovrJ2000Position?.z.toString()
 
             useCoilToLoadPhoto(imgEpic, urlEpicImage(epicResponse.date.toString(), epicResponse.image.toString()))
+
+            saveImageToExternalStorage.setOnClickListener {
+                if (isWritePermissionGranted)
+                    saveImageToExternalStorage(
+                        binding.imgEpic.drawable.toBitmap(),
+                        "${epicResponse.identifier}.jpg"
+                    )
+            }
         }
     }
 }

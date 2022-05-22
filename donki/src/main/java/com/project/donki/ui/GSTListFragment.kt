@@ -13,6 +13,7 @@ import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.donki.databinding.FragmentListGstBinding
 import com.project.donki.di.SCOPE_GST_MODULE
 import com.project.donki.entities.remote.GeomagneticStorm
+import com.project.donki.ui.adapters.GSTRecyclerViewAdapter
 import com.project.donki.viewmodels.GSTViewModel
 import com.project.donki.viewmodels.GSTViewModelFactory
 import kotlinx.coroutines.flow.collect
@@ -29,8 +30,8 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
     private val gstViewModel: GSTViewModel by viewModels {
         SavedStateViewModelFactory(gstViewModelFactory, this)
     }
-
-    private val adapter by lazy { GSTRecyclerViewAdapter() }
+    private val onGeomagneticStormClicked: (GeomagneticStorm) -> Unit = { gstViewModel.insert(it) }
+    private val adapter by lazy { GSTRecyclerViewAdapter(onGeomagneticStormClicked) }
     private val androidNetworkStatus: AndroidNetworkStatus by inject()
 
     override fun onCreateView(
@@ -45,7 +46,6 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
         super.onViewCreated(view, savedInstanceState)
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
-            //TODO: init views
             gstViewModel.load(androidNetworkStatus.isNetworkAvailable())
         }
         lifecycleScope.launch {
@@ -57,13 +57,6 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
         binding.rvListGst.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rvListGst.adapter = adapter
-
-//        lifecycleScope.launch {
-//            adapter.isNeededToLoadInFlow.collect { isNeededToLoad ->
-//                if (isNeededToLoad) gstViewModel.loadAsync()
-//            }
-//        }
-
 
         with(gstViewModel) {
             responseGeomagneticStorms().observe(viewLifecycleOwner) {

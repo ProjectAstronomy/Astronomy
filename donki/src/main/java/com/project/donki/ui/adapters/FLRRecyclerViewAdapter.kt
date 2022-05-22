@@ -1,4 +1,4 @@
-package com.project.donki.ui
+package com.project.donki.ui.adapters
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -17,13 +17,21 @@ import com.project.donki.databinding.ItemRvFlrDetailedBinding
 import com.project.donki.databinding.ItemRvFlrHeaderBinding
 import com.project.donki.databinding.ItemRvFlrNoDataBinding
 
-class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
+class FLRRecyclerViewAdapter(
+    private val onSolarFlareClicked: (SolarFlare) -> Unit
+) : BaseRecyclerViewAdapter<SolarFlare>() {
     companion object {
         private const val TYPE_NO_FLR = 0
         private const val TYPE_HEADER = 1
         private const val TYPE_SMALL = 2
         private const val TYPE_LARGE = 3
     }
+
+    var adapterList: List<SolarFlare> = listOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     private val flrDiffUtilCallBack = object : DiffUtil.ItemCallback<SolarFlare>() {
         override fun areItemsTheSame(oldItem: SolarFlare, newItem: SolarFlare): Boolean =
@@ -67,6 +75,7 @@ class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
         override fun bind(adapterItemData: SolarFlare) {
             fillSmallDataInRvItem(viewBinding, adapterItemData)
             itemView.setOnClickListener {
+                onSolarFlareClicked(adapterItemData)
                 toggleType(layoutPosition)
             }
         }
@@ -148,4 +157,3 @@ class FLRRecyclerViewAdapter : BaseRecyclerViewAdapter<SolarFlare>() {
     }
 
 }
-

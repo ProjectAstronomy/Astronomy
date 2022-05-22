@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import com.project.core.net.AndroidNetworkStatus
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.core.net.AndroidNetworkStatus
 import com.project.core.ui.BaseFragment
@@ -16,6 +16,7 @@ import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.donki.databinding.FragmentListFlrBinding
 import com.project.donki.di.SCOPE_FLR_MODULE
 import com.project.donki.entities.remote.SolarFlare
+import com.project.donki.ui.adapters.FLRRecyclerViewAdapter
 import com.project.donki.viewmodels.FLRViewModel
 import com.project.donki.viewmodels.FLRViewModelFactory
 import kotlinx.coroutines.flow.collect
@@ -40,7 +41,8 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
         SavedStateViewModelFactory(flrViewModelFactory, this)
     }
 
-    private val adapterSolarVertical by lazy { FLRRecyclerViewAdapter() }
+    private val onSolarFlareClicked: (SolarFlare) -> Unit = { flrViewModel.insert(it) }
+    private val adapterSolarVertical by lazy { FLRRecyclerViewAdapter(onSolarFlareClicked) }
     private val androidNetworkStatus: AndroidNetworkStatus by inject()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

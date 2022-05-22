@@ -18,8 +18,6 @@ import com.project.core.viewmodel.SettingsViewModel
 class APODScaleImageFragment :
     BaseFragment<ScaleImageApodFragmentBinding>(ScaleImageApodFragmentBinding::inflate) {
 
-    private val navArgs: APODScaleImageFragmentArgs by navArgs()
-
     companion object {
         //константы для жестов (ч. 1 из 3)
         private const val MAX_SCALE_FACTOR = 5f
@@ -27,6 +25,7 @@ class APODScaleImageFragment :
         private const val CORRECT_LOCATION_ANIMATION_DURATION = 300L
     }
 
+    private val navArgs: APODScaleImageFragmentArgs by navArgs()
     private val settingsViewModel by activityViewModels<SettingsViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

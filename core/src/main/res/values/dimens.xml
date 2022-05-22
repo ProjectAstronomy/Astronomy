@@ -9,6 +9,7 @@
 
     <!--large-->
 
+    <dimen name="step_xxxx_large">250dp</dimen>
     <dimen name="step_xxx_large">140dp</dimen>
     <dimen name="step_xx_large">72dp</dimen>
     <dimen name="step_x_large">48dp</dimen>
@@ -51,4 +52,15 @@
 
     <dimen name="height_video_frame">250dp</dimen>
 
+    <!-- shimmer -->
+    <dimen name="activity_padding">16dp</dimen>
+    <dimen name="placeholder_image">50dp</dimen>
+    <dimen name="placeholder_text_height">8dp</dimen>
+    <dimen name="activity_padding_horizontal">16dp</dimen>
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="name">15dp</dimen>
+    <dimen name="chef">12dp</dimen>
+    <dimen name="timestamp">11dp</dimen>
+    <dimen name="description">15dp</dimen>
+    <dimen name="price">13dp</dimen>
 </resources>

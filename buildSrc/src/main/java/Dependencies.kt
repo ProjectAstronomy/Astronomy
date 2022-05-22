@@ -53,6 +53,9 @@ object Versions {
     const val fragmentKTXVersion = "1.4.1"
     const val preferencesVersion = "1.2.0"
 
+    //Facebook Shimmer
+    const val shimmerVersion = "0.5.0"
+
     //Room
     const val roomVersion = "2.4.2"
 
@@ -132,6 +135,10 @@ object Room {
     const val room = "androidx.room:room-ktx:${Versions.roomVersion}"
     const val roomRuntime = "androidx.room:room-runtime:${Versions.roomVersion}"
     const val roomCompiler = "androidx.room:room-compiler:${Versions.roomVersion}"
+}
+
+object FacebookShimmer {
+    const val facebookShimmer = "com.facebook.shimmer:shimmer:${Versions.shimmerVersion}"
 }
 
 object Core {
