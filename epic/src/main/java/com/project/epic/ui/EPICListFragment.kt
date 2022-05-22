@@ -8,6 +8,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.project.core.entities.ImageResolution
 import com.project.core.net.AndroidNetworkStatus
 import com.project.core.ui.BaseFragment
@@ -25,6 +27,8 @@ import org.koin.core.qualifier.named
 class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicBinding::inflate) {
     private val epicFragmentScope =
         getKoin().getOrCreateScope(SCOPE_EPIC_MODULE, named(SCOPE_EPIC_MODULE))
+
+    private var mShimmerViewContainer: ShimmerFrameLayout? = null
 
     private val epicViewModelFactory: EPICViewModelFactory = epicFragmentScope.get()
     private val epicViewModel: EPICViewModel by viewModels {
@@ -48,6 +52,7 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
         super.onViewCreated(view, savedInstanceState)
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
+            mShimmerViewContainer = binding.shimmerEpic
             initRecyclerView()
             epicViewModel.loadAsync(
                 androidNetworkStatus.isNetworkAvailable(),
@@ -59,6 +64,8 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
             responseEPIC().observe(viewLifecycleOwner) {
                 binding.title.text = it[0].caption
                 adapterEpic.items = it
+                mShimmerViewContainer?.stopShimmerAnimation()
+                mShimmerViewContainer?.visibility = View.GONE
             }
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
@@ -67,9 +74,19 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
 
     private fun initRecyclerView() {
         with(binding.rvListEpicVertical) {
-            layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = LinearLayoutManager(activity)
             adapter = this@EPICListFragment.adapterEpic
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mShimmerViewContainer?.startShimmerAnimation()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mShimmerViewContainer?.startShimmerAnimation()
     }
 
     override fun onDestroy() {
