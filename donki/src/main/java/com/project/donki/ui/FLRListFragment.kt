@@ -15,10 +15,7 @@ import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.donki.databinding.FragmentListFlrBinding
 import com.project.donki.di.SCOPE_FLR_MODULE
-import com.project.donki.entities.local.adapteritems.flr.ISolarFlareAdapterItem
-import com.project.donki.entities.local.adapteritems.flr.SolarFlareAdapterItemHeader
-import com.project.donki.entities.local.adapteritems.flr.SolarFlareAdapterItemLarge
-import com.project.donki.entities.local.adapteritems.flr.SolarFlareAdapterItemSmall
+import com.project.donki.entities.local.adapteritems.flr.*
 import com.project.donki.entities.remote.SolarFlare
 import com.project.donki.ui.adapters.FLRRecyclerViewAdapter
 import com.project.donki.viewmodels.FLRViewModel
@@ -29,6 +26,8 @@ import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
+import java.text.SimpleDateFormat
+import java.util.*
 
 class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBinding::inflate) {
     private val flrListFragmentScope: Scope =
@@ -74,26 +73,69 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
         with(flrViewModel) {
             responseSolarFlare().observe(viewLifecycleOwner) { listApi ->
 
-                // сохраняем массив (listSolarResponse) с данными из API
-                //val listSolarResponse = it
-//                Log.d("TAG", "___________size_${listSolarResponse.size}")
-//                listSolarResponse.forEach {
-//                    Log.d("TAG", "___________size_${it.flrID}, ${it.beginTime}")
-//                }
-
-
                 val apiSize = listApi.size
-                var previousHeaderPosition = -1
+
+                // объявляем список, который будет сформирован для адаптера
                 val listForAdapter = mutableListOf<ISolarFlareAdapterItem>()
 
+                // инициализируем крайнюю (предыдущую) дату для header (хедер - заголовок с датой),
+                // устанавливаем предыдущую дату на "завтра" от сегодняшней даты
+
+                val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+                var previousHeaderDaу = Calendar.getInstance()
+                previousHeaderDaу.add(Calendar.DAY_OF_YEAR, 1)
+                var previousHeaderDayString = simpleDateFormat.format(previousHeaderDaу.time)
+
                 for (index in listApi.indices) {
-                    // 1. Добавляем header
-                    val currentDayString = listApi[index].flrID.take(10)
-                    with(listApi[index]) {
+                    // 1. Добавляем строку header (заголовок с датой)
+                    val currentHeaderDayString = listApi[index].flrID.take(10)
+                    // проверяем на наличие уже ранее добавленного такого хедера
+                    if (previousHeaderDayString != currentHeaderDayString) {
+
+                        // Прежде чем добавить новый хедер, нужно проверить период от предыдущего
+                        // хедера. Возможно в этом периоде были даты без солнечной активности, а
+                        // в api не указываются дни без активности, но в список адаптера
+                        // эти дни надо добавить.
+
+                        previousHeaderDaу.add(Calendar.DAY_OF_YEAR, -1)
+                        previousHeaderDayString = simpleDateFormat.format(previousHeaderDaу.time)
+
+                        while (previousHeaderDayString != currentHeaderDayString) {
+                            // Добавляем хедер для дня без активности
+                            listForAdapter.add(
+                                SolarFlareAdapterItemHeader(
+                                    flrID = "${previousHeaderDayString}_header",
+                                    beginTime = previousHeaderDayString,
+                                    peakTime = null,
+                                    endTime = null,
+                                    classType = null,
+                                    sourceLocation = null,
+                                    activeRegionNum = null,
+                                    link = null
+                                )
+                            )
+                            // Добавляем строчку "no flare" для дня без активности
+                            listForAdapter.add(
+                                SolarFlareAdapterItemNoFlare(
+                                    flrID = "${previousHeaderDayString}_no_flare",
+                                    beginTime = previousHeaderDayString,
+                                    peakTime = null,
+                                    endTime = null,
+                                    classType = null,
+                                    sourceLocation = null,
+                                    activeRegionNum = null,
+                                    link = null
+                                )
+                            )
+                            previousHeaderDaу.add(Calendar.DAY_OF_YEAR, -1)
+                            previousHeaderDayString = simpleDateFormat.format(previousHeaderDaу.time)
+                        }
+
+                        // Теперь добавляем текущий хедер
                         listForAdapter.add(
                             SolarFlareAdapterItemHeader(
-                                flrID = "${currentDayString}_header",
-                                beginTime = currentDayString,
+                                flrID = "${currentHeaderDayString}_header",
+                                beginTime = currentHeaderDayString,
                                 peakTime = null,
                                 endTime = null,
                                 classType = null,
@@ -102,24 +144,13 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
                                 link = null
                             )
                         )
+                        // запоминаем дату хедера для последующего сравнения (чтобы не накидать одинаковых хедеров)
+                        //previousHeaderDaу.add(Calendar.DAY_OF_YEAR, -1)
+                        previousHeaderDayString = currentHeaderDayString
                     }
-                    // запоминаем позицию хедера для последующего сравнения (чтобы не накидать одинаковых хедеров)
-                    previousHeaderPosition = listForAdapter.size-1
 
-                    with(listApi[index]) {
-                        listForAdapter.add(
-                            SolarFlareAdapterItemSmall(
-                                flrID = this.flrID,
-                                beginTime = this.beginTime,
-                                peakTime = this.peakTime,
-                                endTime = this.endTime,
-                                classType = this.classType,
-                                sourceLocation = this.sourceLocation,
-                                activeRegionNum = this.activeRegionNum,
-                                link = this.link
-                            )
-                        )
-                    }
+                    println("22222222222222222222222$listForAdapter[0].")
+                    // 2. Добавляем строку со сведения о конкретной SolarFlare
                     with(listApi[index]) {
                         listForAdapter.add(
                             SolarFlareAdapterItemLarge(
