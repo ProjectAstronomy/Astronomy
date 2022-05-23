@@ -12,7 +12,7 @@ abstract class BaseRecyclerViewAdapter<T> : RecyclerView.Adapter<BaseRecyclerVie
 
     protected abstract val differ: AsyncListDiffer<T>
 
-    var items: List<T>
+    var items: MutableList<T>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 

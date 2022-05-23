@@ -1,5 +1,6 @@
 package com.project.apod.ui
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,7 @@ import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
+
 
 class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentBinding::inflate) {
     private val apodListFragmentScope: Scope =
@@ -66,6 +68,10 @@ class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        val stateListAnimator = StateListAnimator()
+//        stateListAnimator.addState(IntArray(0), ObjectAnimator.ofFloat(view, "elevation", 0))
+//        binding.appBarLayout.setStateListAnimator(stateListAnimator)
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             initRecyclerView()
@@ -91,6 +97,7 @@ class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentB
         settingsViewModel.imageResolution.observe(viewLifecycleOwner) {
             adapter.onImageResolutionChanged(it)
         }
+
     }
 
     private fun initRecyclerView() {
