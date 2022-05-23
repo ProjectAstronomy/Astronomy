@@ -1,8 +1,6 @@
 package com.project.donki.entities.local.adapteritems.flr
 
-import com.project.donki.entities.local.adapteritems.flr.ISolarFlareAdapterItem
-
-data class SolarFlareAdapterItemLarge (
+data class SolarFlareAdapterItemDetailed (
         val flrID: String,
         val beginTime: String?,
         val peakTime: String?,
