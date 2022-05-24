@@ -12,7 +12,6 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.project.apod.BuildConfig
 import com.project.apod.R
 import com.project.apod.di.apodModule
 import com.project.apod.ui.APODRecyclerViewAdapter.APODViewHolder
@@ -49,45 +48,39 @@ class APODListFragmentTest {
 
     @Test
     fun testScrolling() {
-        if (BuildConfig.FLAVOR == FAKE) {
-            onView(withId(R.id.rv_list_apod_vertical))
-                .perform(RecyclerViewActions.scrollTo<APODViewHolder>(
-                    hasDescendant(withText("2022-04-05")))
-                )
-        }
+        onView(withId(R.id.rv_list_apod_vertical))
+            .perform(RecyclerViewActions.scrollTo<APODViewHolder>(
+                hasDescendant(withText("2022-04-05")))
+            )
     }
 
     @Test
     fun performClickAtPosition() {
-        if (BuildConfig.FLAVOR == FAKE) {
-            val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
-            scenario?.onFragment { fragment ->
-                navController.setGraph(R.navigation.navigation_apod)
-                Navigation.setViewNavController(fragment.requireView(), navController)
-            }
-            onView(withId(R.id.rv_list_apod_vertical))
-                .perform(RecyclerViewActions.actionOnItemAtPosition<APODViewHolder>(3, click()))
-            assertEquals(navController.currentDestination?.id, R.id.fragment_apod_description)
+        val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
+        scenario?.onFragment { fragment ->
+            navController.setGraph(R.navigation.navigation_apod)
+            Navigation.setViewNavController(fragment.requireView(), navController)
         }
+        onView(withId(R.id.rv_list_apod_vertical))
+            .perform(RecyclerViewActions.actionOnItemAtPosition<APODViewHolder>(3, click()))
+        assertEquals(navController.currentDestination?.id, R.id.fragment_apod_description)
     }
 
     @Test
     fun performClickOnItem() {
-        if (BuildConfig.FLAVOR == FAKE) {
-            val date = "2022-04-05"
-            onView(withId(R.id.rv_list_apod_vertical))
-                .perform(RecyclerViewActions.scrollTo<APODViewHolder>(
-                    hasDescendant(withText(date)))
-                )
-            val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
-            scenario?.onFragment { fragment ->
-                navController.setGraph(R.navigation.navigation_apod)
-                Navigation.setViewNavController(fragment.requireView(), navController)
-            }
-            onView(withId(R.id.rv_list_apod_vertical))
-                .perform(RecyclerViewActions.actionOnItem<APODViewHolder>(hasDescendant(withText(date)), click()))
-            assertEquals(navController.currentDestination?.id, R.id.fragment_apod_description)
+        val date = "2022-04-05"
+        onView(withId(R.id.rv_list_apod_vertical))
+            .perform(RecyclerViewActions.scrollTo<APODViewHolder>(
+                hasDescendant(withText(date)))
+            )
+        val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
+        scenario?.onFragment { fragment ->
+            navController.setGraph(R.navigation.navigation_apod)
+            Navigation.setViewNavController(fragment.requireView(), navController)
         }
+        onView(withId(R.id.rv_list_apod_vertical))
+            .perform(RecyclerViewActions.actionOnItem<APODViewHolder>(hasDescendant(withText(date)), click()))
+        assertEquals(navController.currentDestination?.id, R.id.fragment_apod_description)
     }
 
     @After

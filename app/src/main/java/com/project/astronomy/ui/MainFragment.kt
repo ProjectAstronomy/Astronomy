@@ -5,17 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.project.astronomy.R
 import com.project.astronomy.databinding.MainFragmentBinding
 import com.project.astronomy.di.SCOPE_MAIN_MODULE
 import com.project.astronomy.entities.ItemRv
 import com.project.astronomy.viewmodel.MainViewModel
 import com.project.astronomy.viewmodel.MainViewModelFactory
+import com.project.core.net.AndroidNetworkStatus
 import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
+import org.koin.android.ext.android.inject
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 
@@ -27,6 +33,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     private val mainViewModel: MainViewModel by viewModels {
         SavedStateViewModelFactory(mainViewModelFactory, this)
     }
+    private val androidNetworkStatus: AndroidNetworkStatus by inject()
 
     private val adapterAPOD by lazy { RvAdapterCommon(::onApodClickListener) }
     private val adapterSolar by lazy { RvAdapterCommon(::onSolarFlareClickListener) }
@@ -43,6 +50,13 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        lifecycleScope.launch {
+            androidNetworkStatus.networkState.collect { isNetworkAvailable ->
+                if (!isNetworkAvailable) {
+                    Snackbar.make(binding.root, "No internet connection", Snackbar.LENGTH_SHORT).show()
+                }
+            }
+        }
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             with(binding.rvApod) {

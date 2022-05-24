@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.project.core.net.AndroidNetworkStatus
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.project.core.net.AndroidNetworkStatus
 import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.donki.databinding.FragmentListFlrBinding
@@ -65,7 +65,8 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
             }
         }
 
-        binding.rvListSolar.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.rvListSolar.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rvListSolar.adapter = adapterSolarVertical
 
         with(flrViewModel) {
@@ -74,7 +75,7 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
                 val listSolarResponse = it
 
                 // определяем начальную дату из крайнего элемента
-                val fromDateString = listSolarResponse[listSolarResponse.size-1].flrID.take(10)
+                val fromDateString = listSolarResponse[listSolarResponse.size - 1].flrID.take(10)
 
                 // определяем сегодняшнюю дату (toDateString)
                 val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
@@ -95,10 +96,21 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
                 repeat(periodOfDays) {
                     calendarToDate.add(Calendar.DAY_OF_YEAR, -1)
                     listCalendarDays.add(
-                        SolarFlare(flrID = simpleDateFormat.format(calendarToDate.time)+"_header", null, beginTime = simpleDateFormat.format(calendarToDate.time), null, null, null,null,null, null,"header")
+                        SolarFlare(
+                            flrID = simpleDateFormat.format(calendarToDate.time) + "_header",
+                            null,
+                            beginTime = simpleDateFormat.format(calendarToDate.time),
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            "header"
+                        )
                     )
                 }
-                Log.d("TAG","___________size_${listCalendarDays.size}___${listCalendarDays[0].flrID}_${listCalendarDays[listCalendarDays.size-1].flrID}")
+                Log.d("TAG", "___________size_${listCalendarDays.size}___${listCalendarDays[0].flrID}_${listCalendarDays[listCalendarDays.size - 1].flrID}")
 
                 // создаем объединенный массив (listFullEveryDay)
                 val listFullEveryDay = mutableListOf<SolarFlare>()
@@ -115,7 +127,20 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
                         }
                     }
                     if (isNoSolarFlareThisDay) {
-                        listFullEveryDay.add(SolarFlare(flrID = seekTime+"_no_flare", null, null,null,null, null,null,null,null, "no_flare"))
+                        listFullEveryDay.add(
+                            SolarFlare(
+                                flrID = seekTime + "_no_flare",
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                "no_flare"
+                            )
+                        )
                     }
                 }
                 adapterSolarVertical.items = listFullEveryDay
@@ -123,7 +148,6 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

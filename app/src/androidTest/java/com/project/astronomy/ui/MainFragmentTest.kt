@@ -1,23 +1,15 @@
 package com.project.astronomy.ui
 
-import android.os.SystemClock
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.project.astronomy.R
-import org.hamcrest.Matchers.allOf
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -54,16 +46,6 @@ class MainFragmentTest {
     }
 
     @Test
-    fun mainFragment_GeoSwipeLeft() {
-        onView(withId(R.id.rv_geo)).perform(swipeLeft())
-    }
-
-    @Test
-    fun mainFragment_GeoSwipeRight() {
-        onView(withId(R.id.rv_geo)).perform(swipeRight())
-    }
-
-    @Test
     fun mainFragment_SwipeUpDown_Many() {
         for (i in 1..50) {
             onView(withId(R.id.viewToScroll)).perform(swipeUp())
@@ -71,18 +53,8 @@ class MainFragmentTest {
         }
     }
 
-//    @Test
-//    fun onApodClickListener() {
-//        val navController = mock(NavController::class.java)
-//
-//
-//        onView(allOf(withId(R.id.rv_geo))).perform(
-//            RecyclerViewActions.scrollToPosition<RvAdapterCommon.ViewHolder>(1))
-//    }
-
     @After
     fun close() {
         scenario.close()
     }
-
 }
