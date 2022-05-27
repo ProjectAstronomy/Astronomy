@@ -16,7 +16,7 @@ class FLRRepositoryLocal(
     private val linkedEventDao: LinkedEventDao
 ) {
     suspend fun insertSolarFlare(solarFlare: SolarFlare) {
-        convert(solarFlare)?.let { solarFlareDao.insertSolarFlare(it) }
+        solarFlareDao.insertSolarFlare(convert(solarFlare))
         solarFlare.instruments?.let { insertInstruments(it, solarFlare.flrID) }
         solarFlare.linkedEvents?.let { insertLinkedEvents(it, solarFlare.flrID) }
     }
@@ -46,7 +46,7 @@ class FLRRepositoryLocal(
         }
     }
 
-    private fun convert(solarFlare: SolarFlare): SolarFlareEntity? =
+    private fun convert(solarFlare: SolarFlare): SolarFlareEntity =
         SolarFlareEntity(
             flrID = solarFlare.flrID,
             beginTime = solarFlare.beginTime,

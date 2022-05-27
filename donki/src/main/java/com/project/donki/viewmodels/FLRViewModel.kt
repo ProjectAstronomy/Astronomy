@@ -1,7 +1,6 @@
 package com.project.donki.viewmodels
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
@@ -52,11 +51,8 @@ class FLRViewModel(
             var result: List<SolarFlare>
             withContext(Dispatchers.IO) {
                 result = flrUseCase.reload().reversed()
-                Log.d("TAG", "55555555555_reloadList from VM__$result")
             }
-            //Log.d("TAG", "55555555555_reloadList from VM__$result")
             saveLoadedData(prepareListForAdapter(result))
-            //Log.d("TAG", "55555555555_reloadList from VM__$result")
         }
     }
 
@@ -68,7 +64,7 @@ class FLRViewModel(
 
         // инициализируем крайнюю (предыдущую) дату для header (хедер - заголовок с датой),
         // устанавливаем предыдущую дату на "завтра" от сегодняшней даты/от начала списка
-        var previousHeaderDay = Calendar.getInstance()
+        val previousHeaderDay = Calendar.getInstance()
         val pDay = listApi[0].flrID.substring(8, 10).toInt()
         val pMonth = listApi[0].flrID.substring(5, 7).toInt() -1
         val pYear = listApi[0].flrID.substring(0, 4).toInt()
@@ -120,20 +116,7 @@ class FLRViewModel(
             }
 
             // Добавляем строку со сведения о конкретной SolarFlare
-            with(listApi[index]) {
-                listForAdapter.add(
-                    SolarFlareAdapterItemDetailed(
-                        flrID = this.flrID,
-                        beginTime = this.beginTime,
-                        peakTime = this.peakTime,
-                        endTime = this.endTime,
-                        classType = this.classType,
-                        sourceLocation = this.sourceLocation,
-                        activeRegionNum = this.activeRegionNum,
-                        link = this.link
-                    )
-                )
-            }
+            listForAdapter.add(SolarFlareAdapterItemDetailed(listApi[index]))
         }
         return listForAdapter
     }

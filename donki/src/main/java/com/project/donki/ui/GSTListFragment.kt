@@ -15,7 +15,7 @@ import com.project.donki.di.SCOPE_GST_MODULE
 import com.project.donki.entities.remote.GeomagneticStorm
 import com.project.donki.ui.adapters.GSTRecyclerViewAdapter
 import com.project.donki.viewmodels.GSTViewModel
-import com.project.donki.viewmodels.GSTViewModelFactory
+import com.project.donki.viewmodels.factories.GSTViewModelFactory
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin

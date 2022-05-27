@@ -9,11 +9,11 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.project.core.ui.BaseRecyclerViewAdapter
-import com.project.donki.entities.remote.SolarFlare
 import com.project.donki.databinding.ItemRvFlrDetailedBinding
 import com.project.donki.databinding.ItemRvFlrHeaderBinding
 import com.project.donki.databinding.ItemRvFlrNoDataBinding
 import com.project.donki.entities.local.adapteritems.flr.*
+import com.project.donki.entities.remote.SolarFlare
 
 class FLRRecyclerViewAdapter(
     private val onSolarFlareClicked: (SolarFlare) -> Unit
@@ -96,6 +96,7 @@ class FLRRecyclerViewAdapter(
             viewBinding.tvDateSolarDetailed.isVisible = false
             viewBinding.tvSolarDetails.isVisible = false
             itemView.setOnClickListener {
+                onSolarFlareClicked(adapterItemData.solarFlare)
                 if (viewBinding.tvSolarDetails.visibility == View.VISIBLE) {
                     viewBinding.tvDateSolarDetailed.isVisible = false
                     viewBinding.tvSolarDetails.isVisible = false
@@ -112,7 +113,7 @@ class FLRRecyclerViewAdapter(
         }
     }
 
-    inner class NoFlareViewHolder(private val viewBinding: ItemRvFlrNoDataBinding) :
+    inner class NoFlareViewHolder(viewBinding: ItemRvFlrNoDataBinding) :
         BaseViewHolder<ISolarFlareAdapterItem>(viewBinding.root) {
         override fun bind(adapterItemData: ISolarFlareAdapterItem) {
             adapterItemData as SolarFlareAdapterItemNoFlare
@@ -135,7 +136,7 @@ class FLRRecyclerViewAdapter(
         viewBinding.viewScale4of5.isVisible = false
         viewBinding.viewScale5of5.isVisible = false
 
-        val cType = adapterItemData.classType?.take(1)
+        val cType = adapterItemData.solarFlare.classType?.take(1)
         Log.d("TAG", "***************++++++++++ $cType")
         if (cType == "A" || cType == "B" || cType == "C" || cType == "M" || cType == "X") viewBinding.viewScale1of5.isVisible = true
         if (cType == "B" || cType == "C" || cType == "M" || cType == "X") viewBinding.viewScale2of5.isVisible = true
@@ -148,8 +149,8 @@ class FLRRecyclerViewAdapter(
     private fun fillSmallDataInRvItem(viewBinding: ItemRvFlrDetailedBinding,
                                       adapterItemData: SolarFlareAdapterItemDetailed
     ) {
-        viewBinding.tvDateSolar.text = adapterItemData.peakTime?.substring(11, 16)
-        viewBinding.tvSolarFlareClass.text = adapterItemData.classType
+        viewBinding.tvDateSolar.text = adapterItemData.solarFlare.peakTime?.substring(11, 16)
+        viewBinding.tvSolarFlareClass.text = adapterItemData.solarFlare.classType
         fillColoredScale(viewBinding, adapterItemData)
     }
 
@@ -158,12 +159,11 @@ class FLRRecyclerViewAdapter(
                                          adapterItemData: SolarFlareAdapterItemDetailed
     ) {
         viewBinding.tvSolarDetails.text =
-                    "beginTime : ${adapterItemData.beginTime}\n" +
-                    "peakTime : ${adapterItemData.peakTime}\n" +
-                    "endTime : ${adapterItemData.endTime}\n" +
-                    "classType : ${adapterItemData.classType}\n" +
-                    "sourceLocation : ${adapterItemData.sourceLocation}\n" +
-                    "activeRegionNum : ${adapterItemData.activeRegionNum}"
+                    "beginTime : ${adapterItemData.solarFlare.beginTime}\n" +
+                    "peakTime : ${adapterItemData.solarFlare.peakTime}\n" +
+                    "endTime : ${adapterItemData.solarFlare.endTime}\n" +
+                    "classType : ${adapterItemData.solarFlare.classType}\n" +
+                    "sourceLocation : ${adapterItemData.solarFlare.sourceLocation}\n" +
+                    "activeRegionNum : ${adapterItemData.solarFlare.activeRegionNum}"
     }
-
 }
