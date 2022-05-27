@@ -69,9 +69,6 @@ class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentB
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val stateListAnimator = StateListAnimator()
-//        stateListAnimator.addState(IntArray(0), ObjectAnimator.ofFloat(view, "elevation", 0))
-//        binding.appBarLayout.setStateListAnimator(stateListAnimator)
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             initRecyclerView()

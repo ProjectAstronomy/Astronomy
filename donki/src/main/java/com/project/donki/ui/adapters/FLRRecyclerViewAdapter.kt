@@ -76,7 +76,7 @@ class FLRRecyclerViewAdapter(
             TYPE_DETAILED -> holder as DetailedViewHolder
             TYPE_NO_FLR -> holder as NoFlareViewHolder
         }
-        //_isNeededToLoadInFlow.value = (position * 100 / itemCount) > 80
+        _isNeededToLoadInFlow.value = (position * 100 / itemCount) > 80
         holder.bind(items[position])
     }
 

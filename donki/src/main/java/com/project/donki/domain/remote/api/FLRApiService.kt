@@ -7,7 +7,7 @@ import retrofit2.http.Query
 interface FLRApiService {
     @GET("DONKI/FLR")
     suspend fun loadSolarFlare(
-        @Query("start_date") startDate: String,
-        @Query("end_date") endDate: String
+        @Query("startDate") startDate: String,
+        @Query("endDate") endDate: String
     ): List<SolarFlare>
 }
