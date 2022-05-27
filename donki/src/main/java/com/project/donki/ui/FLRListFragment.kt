@@ -59,13 +59,11 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
             lifecycleScope.launch {
                 adapterSolarVertical.isNeededToLoadInFlow.collect { isNeededToLoad ->
                     if (isNeededToLoad && androidNetworkStatus.isNetworkAvailable()) {
-                        Log.d("TAG", "55555555555_reload__")
                         flrViewModel.reload()
                     }
                 }
             }
         }
-
 
         binding.rvListSolar.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -78,7 +76,6 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

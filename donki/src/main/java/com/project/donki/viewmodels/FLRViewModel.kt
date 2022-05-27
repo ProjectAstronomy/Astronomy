@@ -68,26 +68,14 @@ class FLRViewModel(
 
         // инициализируем крайнюю (предыдущую) дату для header (хедер - заголовок с датой),
         // устанавливаем предыдущую дату на "завтра" от сегодняшней даты/от начала списка
-        val previousHeaderDay = Calendar.getInstance()
-//        previousHeaderDay.set(Calendar.DAY_OF_YEAR, listApi[0].flrID.substring(8, 10).toInt() + 1)
-//        previousHeaderDay.set(Calendar.MONTH, listApi[0].flrID.substring(5, 7).toInt())
-//        previousHeaderDay.set(Calendar.YEAR, listApi[0].flrID.substring(0, 4).toInt())
-        val pDay = listApi[0].flrID.substring(8, 10).toInt() + 1
+        var previousHeaderDay = Calendar.getInstance()
+        val pDay = listApi[0].flrID.substring(8, 10).toInt()
         val pMonth = listApi[0].flrID.substring(5, 7).toInt() -1
         val pYear = listApi[0].flrID.substring(0, 4).toInt()
-        println("kkkkkkkkkk $pYear,- $pMonth,- $pDay")
         previousHeaderDay.set(pYear, pMonth, pDay)
-//        println("kkkkkkkkkk ${ listApi[0].flrID.substring(8, 10).toInt() + 1}")
-//        println("kkkkkkkkkk ${ listApi[0].flrID.substring(5, 7).toInt() - 1}")
-//        println("kkkkkkkkkk ${ listApi[0].flrID.substring(0, 4).toInt()}")
 
-        println("2kkkkkk $previousHeaderDay")
-        //println("3kkkkkk time ${previousHeaderDay.time}")
-
-//        previousHeaderDay.add(Calendar.DAY_OF_MONTH, 1)
-//        println("4kkkkkk $previousHeaderDay")
+        previousHeaderDay.add(Calendar.DAY_OF_YEAR, 1)
         var previousHeaderDayString = simpleDateFormat.format(previousHeaderDay.time)
-        println("5kkkkkk $previousHeaderDayString")
 
         for (index in listApi.indices) {
             // По элементу в листе api определяем новую дату для нового "текущего" header
@@ -131,7 +119,6 @@ class FLRViewModel(
                 )
             }
 
-
             // Добавляем строку со сведения о конкретной SolarFlare
             with(listApi[index]) {
                 listForAdapter.add(
@@ -150,7 +137,6 @@ class FLRViewModel(
         }
         return listForAdapter
     }
-
 
     fun insert(solarFlare: SolarFlare) {
         viewModelScope.launch { flrUseCase.insert(solarFlare) }
