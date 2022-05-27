@@ -1,6 +1,5 @@
 package com.project.donki.usecases
 
-import android.util.Log
 import com.project.core.domain.CalendarRepository
 import com.project.donki.domain.remote.FLRRepository
 import com.project.donki.domain.local.FLRRepositoryLocal
@@ -22,9 +21,7 @@ class FLRUseCase(
 
     suspend fun reload(): List<SolarFlare> {
         calendarRepository.refreshDates(rangeFlag = CalendarRepository.RangeFlag.ONE_MONTH)
-        val testList =
-            remoteRepository.loadAsync(calendarRepository.startDate, calendarRepository.endDate)
-        return testList
+        return remoteRepository.loadAsync(calendarRepository.startDate, calendarRepository.endDate)
     }
 
     suspend fun insert(solarFlare: SolarFlare): Unit = localRepository.insertSolarFlare(solarFlare)

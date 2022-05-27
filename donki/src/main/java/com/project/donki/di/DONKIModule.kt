@@ -11,8 +11,8 @@ import com.project.donki.domain.remote.api.GSTApiService
 import com.project.donki.database.DONKI_DATABASE_NAME
 import com.project.donki.usecases.GSTUseCase
 import com.project.donki.usecases.FLRUseCase
-import com.project.donki.viewmodels.GSTViewModelFactory
-import com.project.donki.viewmodels.FLRViewModelFactory
+import com.project.donki.viewmodels.factories.GSTViewModelFactory
+import com.project.donki.viewmodels.factories.FLRViewModelFactory
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module

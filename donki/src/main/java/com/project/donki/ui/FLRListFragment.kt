@@ -1,11 +1,9 @@
 package com.project.donki.ui
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +15,7 @@ import com.project.donki.di.SCOPE_FLR_MODULE
 import com.project.donki.entities.remote.SolarFlare
 import com.project.donki.ui.adapters.FLRRecyclerViewAdapter
 import com.project.donki.viewmodels.FLRViewModel
-import com.project.donki.viewmodels.FLRViewModelFactory
+import com.project.donki.viewmodels.factories.FLRViewModelFactory
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
@@ -42,7 +40,6 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
         return providePersistentView(inflater, container, savedInstanceState)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (!hasInitializedRootView) {
