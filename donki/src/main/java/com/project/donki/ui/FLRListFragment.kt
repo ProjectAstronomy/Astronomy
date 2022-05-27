@@ -2,7 +2,6 @@ package com.project.donki.ui
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,12 +24,6 @@ import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.Period
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBinding::inflate) {
     private val flrListFragmentScope: Scope =
@@ -65,85 +58,12 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
             }
         }
 
-        binding.rvListSolar.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.rvListSolar.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rvListSolar.adapter = adapterSolarVertical
 
         with(flrViewModel) {
             responseSolarFlare().observe(viewLifecycleOwner) {
-                // сохраняем массив (listSolarResponse) с данными из API
-                val listSolarResponse = it
-
-                // определяем начальную дату из крайнего элемента
-                val fromDateString = listSolarResponse[listSolarResponse.size - 1].flrID.take(10)
-
-                // определяем сегодняшнюю дату (toDateString)
-                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-                val current = LocalDateTime.now()
-                val toDateString = current.format(formatter)
-
-                // высчитываем количество дней в периоде между начальной и сегодняшней датами
-                val fromDate = LocalDate.parse(fromDateString, formatter)
-                val toDate = LocalDate.parse(toDateString, formatter)
-                val period = Period.between(fromDate, toDate)
-                val periodOfDays = period.years * 365 + period.months * 30 + period.days
-                println("___________period_d_$periodOfDays")
-
-                // создаем вспомогательный массив (listCalendarDays), заполняем датами по размеру списка из api
-                val listCalendarDays = mutableListOf<SolarFlare>()
-                val calendarToDate = Calendar.getInstance()
-                val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
-                repeat(periodOfDays) {
-                    calendarToDate.add(Calendar.DAY_OF_YEAR, -1)
-                    listCalendarDays.add(
-                        SolarFlare(
-                            flrID = simpleDateFormat.format(calendarToDate.time) + "_header",
-                            null,
-                            beginTime = simpleDateFormat.format(calendarToDate.time),
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            "header"
-                        )
-                    )
-                }
-                Log.d("TAG", "___________size_${listCalendarDays.size}___${listCalendarDays[0].flrID}_${listCalendarDays[listCalendarDays.size - 1].flrID}")
-
-                // создаем объединенный массив (listFullEveryDay)
-                val listFullEveryDay = mutableListOf<SolarFlare>()
-                var isNoSolarFlareThisDay: Boolean
-
-                for (index in listCalendarDays.indices) {
-                    val seekTime = listCalendarDays[index].beginTime
-                    listFullEveryDay.add(listCalendarDays[index])
-                    isNoSolarFlareThisDay = true
-                    listSolarResponse.forEach { solarFlare ->
-                        if (solarFlare.beginTime?.take(10).equals(seekTime)) {
-                            listFullEveryDay.add(solarFlare)
-                            isNoSolarFlareThisDay = false
-                        }
-                    }
-                    if (isNoSolarFlareThisDay) {
-                        listFullEveryDay.add(
-                            SolarFlare(
-                                flrID = seekTime + "_no_flare",
-                                null,
-                                null,
-                                null,
-                                null,
-                                null,
-                                null,
-                                null,
-                                null,
-                                "no_flare"
-                            )
-                        )
-                    }
-                }
-                adapterSolarVertical.items = listFullEveryDay
+                adapterSolarVertical.items = it
             }
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }

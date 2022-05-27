@@ -16,15 +16,15 @@ class FLRUseCase(
             localRepository.getAll()
         } else {
             calendarRepository.refreshDates(rangeFlag = CalendarRepository.RangeFlag.ONE_MONTH)
-            Log.d("TAG", "55555555555_load__${calendarRepository.startDate}, ${calendarRepository.endDate}")
             remoteRepository.loadAsync(calendarRepository.startDate, calendarRepository.endDate)
         }
     }
 
     suspend fun reload(): List<SolarFlare> {
         calendarRepository.refreshDates(rangeFlag = CalendarRepository.RangeFlag.ONE_MONTH)
-        Log.d("TAG", "55555555555_reload__${calendarRepository.startDate}, ${calendarRepository.endDate}")
-        return remoteRepository.loadAsync(calendarRepository.startDate, calendarRepository.endDate)
+        val testList =
+            remoteRepository.loadAsync(calendarRepository.startDate, calendarRepository.endDate)
+        return testList
     }
 
     suspend fun insert(solarFlare: SolarFlare): Unit = localRepository.insertSolarFlare(solarFlare)
