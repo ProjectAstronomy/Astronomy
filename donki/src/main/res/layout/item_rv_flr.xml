@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/step_zero"
@@ -16,8 +15,6 @@
             android:id="@+id/tv_date_solar"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@color/grey_100"
-            android:backgroundTint="@color/blue_grey_100"
             android:paddingTop="@dimen/step_small"
             android:paddingBottom="@dimen/step_small"
             android:paddingEnd="@dimen/step_small"
@@ -31,7 +28,6 @@
             app:layout_constraintTop_toTopOf="parent" />
         <!--        android:windowBackground="@color/blue_grey_200"-->
 
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guide_line"
             android:layout_width="wrap_content"
@@ -40,9 +36,7 @@
             app:layout_constraintEnd_toStartOf="@id/view_scale_1of5"
             app:layout_constraintGuide_percent="0.26"
             app:layout_constraintStart_toEndOf="@id/tv_date_solar"
-            app:layout_constraintTop_toTopOf="parent"
-
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/view_scale_1of5"
@@ -107,7 +101,6 @@
             app:layout_constraintStart_toEndOf="@id/view_scale_4of5"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guide_line1"
             android:layout_width="wrap_content"
@@ -117,7 +110,6 @@
             app:layout_constraintGuide_percent="0.7"
             app:layout_constraintStart_toEndOf="@id/view_scale_4of5"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_solar_flare_class"

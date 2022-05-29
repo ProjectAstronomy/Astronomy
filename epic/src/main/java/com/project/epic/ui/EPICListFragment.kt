@@ -62,7 +62,6 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
 
         with(epicViewModel) {
             responseEPIC().observe(viewLifecycleOwner) {
-                binding.title.text = it[0].caption
                 adapterEpic.items = it
                 mShimmerViewContainer?.stopShimmerAnimation()
                 mShimmerViewContainer?.visibility = View.GONE

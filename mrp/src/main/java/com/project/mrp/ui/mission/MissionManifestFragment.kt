@@ -1,4 +1,4 @@
-package com.project.mrp.ui
+package com.project.mrp.ui.mission
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,26 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
-import com.project.mrp.R
 import com.project.mrp.databinding.FragmentMissionManifestBinding
 import com.project.mrp.di.SCOPE_MISSION_MANIFEST_MODULE
 import com.project.mrp.entities.remote.PhotoManifest
-import com.project.mrp.entities.remote.Photos
 import com.project.mrp.entities.remote.PhotosInformation
 import com.project.mrp.ui.AllRoverFun.transformDate
-import com.project.mrp.viewmodel.MissionManifestViewModel
 import com.project.mrp.viewmodel.MissionManifestViewModelFactory
-import com.project.mrp.viewmodel.PhotosViewModel
 import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
+import com.project.mrp.viewmodel.MissionManifestViewModel as MissionManifestViewModel1
 
 
 class MissionManifestFragment :
@@ -43,7 +38,7 @@ class MissionManifestFragment :
 
     private val missionViewModelFactory: MissionManifestViewModelFactory =
         missionFragmentScope.get()
-    private val missionManifestViewModel: MissionManifestViewModel by viewModels {
+    private val missionManifestViewModel: MissionManifestViewModel1 by viewModels {
         SavedStateViewModelFactory(missionViewModelFactory, this)
     }
 
@@ -126,6 +121,7 @@ class MissionManifestFragment :
                     collapsToolbar.title = it.photoManifest?.name
                     launchDate.text = "Дата Запуска: " + transformDate(it.photoManifest?.launchDate)
                     landingDate.text = "Приземлился: " + transformDate(it.photoManifest?.landingDate)
+                    roverName.text = "Исследователь: " + it.photoManifest?.name
                     totalPhotos.text =
                         "Количество фотографий: " + it.photoManifest?.totalPhotos.toString()
                     if (it.photoManifest?.status.isNullOrEmpty()) {
@@ -146,7 +142,7 @@ class MissionManifestFragment :
     }
 
     private fun onItemClick(photoInfo: PhotosInformation) {
-        val action = MissionManifestFragmentDirections.actionMissionManifestFragmentToPhotosFragment(navArgs.roverName, photoInfo)
+        val action = MissionManifestFragmentDirections.actionFragmentMissionToFragmentPhotos(navArgs.roverName, photoInfo)
         findNavController().navigate(action)
     }
 }

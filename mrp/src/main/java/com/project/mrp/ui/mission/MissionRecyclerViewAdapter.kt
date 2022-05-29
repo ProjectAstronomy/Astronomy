@@ -1,4 +1,4 @@
-package com.project.mrp.ui
+package com.project.mrp.ui.mission
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
