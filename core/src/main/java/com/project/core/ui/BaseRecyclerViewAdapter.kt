@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 abstract class BaseRecyclerViewAdapter<T> : RecyclerView.Adapter<BaseRecyclerViewAdapter.BaseViewHolder<T>>() {
-    private val _isNeededToLoadInFlow = MutableStateFlow(false)
+    protected val _isNeededToLoadInFlow = MutableStateFlow(false)
     val isNeededToLoadInFlow: StateFlow<Boolean> get() = _isNeededToLoadInFlow
 
     protected abstract val differ: AsyncListDiffer<T>

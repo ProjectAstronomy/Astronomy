@@ -16,7 +16,8 @@ import com.project.core.ui.BaseRecyclerViewAdapter
 
 class APODRecyclerViewAdapter(
     private val onItemClickListener: (APODResponse) -> Unit,
-    private val onItemImageLoader: (ImageView, String?) -> Unit
+    private val onItemImageLoader: (ImageView, String?) -> Unit,
+    private val onListUpdated: (List<APODResponse>, List<APODResponse>) -> Unit
 ) : BaseRecyclerViewAdapter<APODResponse>() {
 
     private val apodDiffUtilCallBack = object : DiffUtil.ItemCallback<APODResponse>() {
@@ -29,7 +30,9 @@ class APODRecyclerViewAdapter(
 
     private var imageResolution = ImageResolution.REGULAR
 
-    override val differ = AsyncListDiffer(this, apodDiffUtilCallBack)
+    override val differ = AsyncListDiffer(this, apodDiffUtilCallBack).apply {
+        this.addListListener(onListUpdated)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): APODViewHolder =
         APODViewHolder(ItemRvApodBinding.inflate(LayoutInflater.from(parent.context), parent, false))

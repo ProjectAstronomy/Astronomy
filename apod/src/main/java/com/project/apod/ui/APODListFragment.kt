@@ -34,20 +34,35 @@ class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentB
         SavedStateViewModelFactory(apodViewModelFactory, this)
     }
     private val settingsViewModel: SettingsViewModel by activityViewModels()
-    private val adapter by lazy { APODRecyclerViewAdapter(::onItemClick, ::useCoilToLoadPhoto) }
+    private val onListUpdated: (List<APODResponse>, List<APODResponse>) -> Unit = { _, _ ->
+        with(binding.shimmerViewContainer) {
+            stopShimmer()
+            visibility = View.GONE
+        }
+    }
+    private val adapter by lazy {
+        APODRecyclerViewAdapter(::onItemClick, ::useCoilToLoadPhoto, onListUpdated)
+    }
 
     private val androidNetworkStatus: AndroidNetworkStatus by inject()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return providePersistentView(inflater, container, savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.shimmerViewContainer.startShimmer()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.shimmerViewContainer.stopShimmer()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             initRecyclerView()
@@ -73,6 +88,7 @@ class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentB
         settingsViewModel.imageResolution.observe(viewLifecycleOwner) {
             adapter.onImageResolutionChanged(it)
         }
+
     }
 
     private fun initRecyclerView() {

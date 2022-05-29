@@ -9,4 +9,5 @@
     <string name="heading_title_epic">Earth Polychromatic Camera</string>
     <string name="heading_title_mars">Mars Rover Photos</string>
     <string name="no_text_yet">no text yet</string>
+    <string name="save_image_to_external_storage">Save image to gallery</string>
 </resources>

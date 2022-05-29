@@ -15,7 +15,7 @@ import com.project.donki.di.SCOPE_GST_MODULE
 import com.project.donki.entities.remote.GeomagneticStorm
 import com.project.donki.ui.adapters.GSTRecyclerViewAdapter
 import com.project.donki.viewmodels.GSTViewModel
-import com.project.donki.viewmodels.GSTViewModelFactory
+import com.project.donki.viewmodels.factories.GSTViewModelFactory
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
@@ -67,7 +67,7 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
                 for (index in listGSTResponse.indices) {
                     listGSTDisplay.add(
                         GeomagneticStorm(
-                            gstID = listGSTResponse[index].startTime,
+                            gstID = listGSTResponse[index].startTime.toString(),
                             startTime = listGSTResponse[index].startTime?.take(10),
                             null,
                             null,
@@ -77,7 +77,7 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
                     listGSTResponse[index].allKpIndex?.forEach { eachFromAllKpIndex ->
                         listGSTDisplay.add(
                             GeomagneticStorm(
-                                gstID = listGSTResponse[index].startTime,
+                                gstID = listGSTResponse[index].startTime.toString(),
                                 startTime = eachFromAllKpIndex.observedTime?.substring(11, 16),
                                 allKpIndex = listOf(eachFromAllKpIndex),
                                 null,
