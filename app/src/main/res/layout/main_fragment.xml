@@ -1,65 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/viewToScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <RelativeLayout
 
-        <!-- TODO: create a better way to navigate to the settings screen -->
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_settings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/back_layout_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/elevation_normal"
-            android:layout_marginEnd="@dimen/elevation_normal"
-            android:text="Settings"
-            android:textAlignment="center" />
+            android:background="@color/teal_700"
+            android:orientation="vertical">
 
-        <!--    1. aPod-->
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/title_apod"
-            style="@style/heading_text_style"
-            android:text="@string/heading_title_pod" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="some text"
+                android:textSize="44sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_apod"
-            style="@style/padding_start_top_end_normal_rv"
-            android:clipToPadding="false" />
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp">
 
-        <!--    2. Solar Flare-->
-        <com.google.android.material.textview.MaterialTextView
-            style="@style/heading_text_style"
-            android:text="@string/heading_title_solar" />
+                <RadioButton
+                    android:id="@+id/rb_ya"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@android:color/white"
+                    android:text="one"
+                    android:textColor="@android:color/white" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_solar"
-            style="@style/padding_start_top_end_normal_rv"
-            android:clipToPadding="false" />
+                <RadioButton
+                    android:id="@+id/rb_tidak"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@android:color/white"
+                    android:text="two"
+                    android:textColor="@android:color/white" />
+            </RadioGroup>
 
-        <!--    3. Earth Polychromatic Imaging Camera-->
-        <com.google.android.material.textview.MaterialTextView
-            style="@style/heading_text_style"
-            android:text="@string/heading_title_epic" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="some text"
+                android:textSize="44sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_epic"
-            style="@style/padding_start_top_end_normal_rv"
-            android:clipToPadding="false" />
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp">
 
-        <!--    4. Mars Rover Photos -->
-        <com.google.android.material.textview.MaterialTextView
-            style="@style/heading_text_style"
-            android:text="@string/heading_title_mars" />
+                <RadioButton
+                    android:id="@+id/rb_ya1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@android:color/white"
+                    android:text="one"
+                    android:textColor="@android:color/white" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_mars"
-            style="@style/padding_start_top_end_normal_rv"
-            android:clipToPadding="false" />
-    </LinearLayout>
+                <RadioButton
+                    android:id="@+id/rb_tidak2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@android:color/white"
+                    android:text="two"
+                    android:textColor="@android:color/white" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/front_layout_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_me"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="buttonme"/>
+
+            <!-- TODO: create a better way to navigate to the settings screen -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/elevation_normal"
+                android:layout_marginEnd="@dimen/elevation_normal"
+                android:text="Settings"
+                android:textAlignment="center" />
+
+            <!--    1. aPod-->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title_apod"
+                style="@style/heading_text_style"
+                android:text="@string/heading_title_pod" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_apod"
+                style="@style/padding_start_top_end_normal_rv"
+                android:clipToPadding="false" />
+
+            <!--    2. Solar Flare-->
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/heading_text_style"
+                android:text="@string/heading_title_solar" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_solar"
+                style="@style/padding_start_top_end_normal_rv"
+                android:clipToPadding="false" />
+
+            <!--    3. Earth Polychromatic Imaging Camera-->
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/heading_text_style"
+                android:text="@string/heading_title_epic" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_epic"
+                style="@style/padding_start_top_end_normal_rv"
+                android:clipToPadding="false" />
+
+            <!--    4. Mars Rover Photos -->
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/heading_text_style"
+                android:text="@string/heading_title_mars" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_mars"
+                style="@style/padding_start_top_end_normal_rv"
+                android:clipToPadding="false" />
+
+        </LinearLayout>
+    </RelativeLayout>
 </androidx.core.widget.NestedScrollView>

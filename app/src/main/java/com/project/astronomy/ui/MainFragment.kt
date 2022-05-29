@@ -1,9 +1,15 @@
 package com.project.astronomy.ui
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.TranslateAnimation
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -39,6 +45,15 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     private val adapterSolar by lazy { RvAdapterCommon(::onSolarFlareClickListener) }
     private val adapterEPIC by lazy { RvAdapterCommon(::onEpicClickListener) }
     private val adapterMars by lazy { RvAdapterCommon(::onMarsClickListener) }
+
+
+    // backdrop
+    var showBackLayout = false
+    var lp: RelativeLayout.LayoutParams? = null
+    //    var frontLayout: RelativeLayout? = null
+    //    var backLayout: LinearLayout? = null
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -83,7 +98,44 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
             liveDataMars.observe(viewLifecycleOwner) { adapterMars.adapterList = it }
             liveDataSolar.observe(viewLifecycleOwner) { adapterSolar.adapterList = it }
         }
+        binding.buttonMe.setOnClickListener { dropLayout() }
     }
+
+
+//    var frontLayout: RelativeLayout? = null
+//    var backLayout: LinearLayout? = null
+//    var lp: RelativeLayout.LayoutParams? = null
+//    var showBackLayout = false
+
+
+    private fun dropLayout() {
+        showBackLayout = !showBackLayout
+        lp = binding.frontLayoutMain!!.layoutParams as RelativeLayout.LayoutParams
+        if (showBackLayout) {
+            val varl = ValueAnimator.ofInt(binding.backLayoutMain!!.height)
+            varl.duration = 100
+            varl.addUpdateListener { animation ->
+                lp!!.setMargins(0, (animation.animatedValue as Int), 0, 0)
+                binding.frontLayoutMain!!.layoutParams = lp
+            }
+            varl.start()
+        } else {
+            lp!!.setMargins(0, 0, 0, 0)
+            binding.frontLayoutMain!!.layoutParams = lp
+            val anim = TranslateAnimation(
+                0F, 0F,
+                binding.backLayoutMain!!.height.toFloat(), 0F
+            )
+            anim.startOffset = 0
+            anim.duration = 200
+            binding.frontLayoutMain!!.startAnimation(anim)
+        }
+    }
+
+
+
+
+
 
     override fun onDestroy() {
         super.onDestroy()
@@ -113,4 +165,8 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     private fun onSettingsClicked() {
         findNavController().navigate(R.id.action_main_fragment_to_fragment_preferences)
     }
+
+
+
+
 }
