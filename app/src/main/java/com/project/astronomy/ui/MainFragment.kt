@@ -6,10 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.TranslateAnimation
-import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -49,10 +46,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
 
     // backdrop
     var showBackLayout = false
-    var lp: RelativeLayout.LayoutParams? = null
-    //    var frontLayout: RelativeLayout? = null
-    //    var backLayout: LinearLayout? = null
-
+    var frontLayoutParams: RelativeLayout.LayoutParams? = null
 
 
     override fun onCreateView(
@@ -90,7 +84,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = adapterMars
             }
-            binding.chipSettings.setOnClickListener { onSettingsClicked() }
+            //binding.chipSettings.setOnClickListener { onSettingsClicked() }
         }
         with(mainViewModel) {
             liveDataAPOD.observe(viewLifecycleOwner) { adapterAPOD.adapterList = it }
@@ -98,30 +92,29 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
             liveDataMars.observe(viewLifecycleOwner) { adapterMars.adapterList = it }
             liveDataSolar.observe(viewLifecycleOwner) { adapterSolar.adapterList = it }
         }
-        binding.buttonMe.setOnClickListener { dropLayout() }
+
+        binding.appBarLayout.findViewById<View>(R.id.main_appbar).findViewById<View>(R.id.settings).setOnClickListener { dropLayout() }
+        binding.appBarLayout.findViewById<View>(R.id.main_appbar).setOnClickListener { dropLayout() }
     }
 
 
-//    var frontLayout: RelativeLayout? = null
-//    var backLayout: LinearLayout? = null
-//    var lp: RelativeLayout.LayoutParams? = null
-//    var showBackLayout = false
+
 
 
     private fun dropLayout() {
         showBackLayout = !showBackLayout
-        lp = binding.frontLayoutMain!!.layoutParams as RelativeLayout.LayoutParams
+        frontLayoutParams = binding.frontLayoutMain!!.layoutParams as RelativeLayout.LayoutParams
         if (showBackLayout) {
             val varl = ValueAnimator.ofInt(binding.backLayoutMain!!.height)
-            varl.duration = 100
+            varl.duration = 200
             varl.addUpdateListener { animation ->
-                lp!!.setMargins(0, (animation.animatedValue as Int), 0, 0)
-                binding.frontLayoutMain!!.layoutParams = lp
+                frontLayoutParams!!.setMargins(0, (animation.animatedValue as Int) - 72, 0, 0)
+                binding.frontLayoutMain!!.layoutParams = frontLayoutParams
             }
             varl.start()
         } else {
-            lp!!.setMargins(0, 0, 0, 0)
-            binding.frontLayoutMain!!.layoutParams = lp
+            frontLayoutParams!!.setMargins(0, 0, 0, 0)
+            binding.frontLayoutMain!!.layoutParams = frontLayoutParams
             val anim = TranslateAnimation(
                 0F, 0F,
                 binding.backLayoutMain!!.height.toFloat(), 0F
