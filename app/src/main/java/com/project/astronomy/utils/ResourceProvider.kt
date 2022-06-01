@@ -1,4 +1,4 @@
-package com.project.astronomy.ui
+package com.project.astronomy.utils
 
 import android.content.Context
 

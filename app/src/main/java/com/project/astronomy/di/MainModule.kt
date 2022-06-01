@@ -2,7 +2,7 @@ package com.project.astronomy.di
 
 import androidx.lifecycle.SavedStateHandle
 import com.project.astronomy.repository.MainRepository
-import com.project.astronomy.ui.ResourceProvider
+import com.project.astronomy.utils.ResourceProvider
 import com.project.astronomy.viewmodel.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
