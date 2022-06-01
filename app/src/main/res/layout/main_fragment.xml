@@ -106,8 +106,8 @@
                 android:layout_height="wrap_content"
                 app:singleSelection="true"
                 app:selectionRequired="true"
-                app:checkedButton="@+id/button_resolution_hd"
                 >
+<!--                app:checkedButton="@+id/button_resolution_hd"-->
 
                 <Button
                     android:id="@+id/button_resolution_hd"
@@ -147,7 +147,6 @@
                 android:layout_height="wrap_content"
                 app:singleSelection="true"
                 app:selectionRequired="true"
-                app:checkedButton="@+id/button_icon_1"
                 >
 
                 <Button
@@ -155,7 +154,6 @@
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="@dimen/step_xx_large"
                     android:layout_height="@dimen/step_xx_large"
-                    android:text="@string/settings_resolutions_hd"
                     android:src="@drawable/icon1"
                     android:scaleType="fitCenter"
 
@@ -166,54 +164,13 @@
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="@dimen/step_xx_large"
                     android:layout_height="@dimen/step_xx_large"
-                    android:text="@string/settings_resolutions_hd"
+
                     android:src="@drawable/icon2"
                     android:scaleType="fitCenter"
                      />
 
 
             </com.google.android.material.button.MaterialButtonToggleGroup>
-
-
-
-<!--            <com.google.android.material.chip.ChipGroup-->
-<!--                android:id="@+id/chipGroup"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:paddingLeft="16dp"-->
-<!--                app:chipSpacing="0dp"-->
-<!--                app:chipSpacingVertical="-8dp"-->
-<!--                app:singleSelection="true">-->
-
-<!--                <com.google.android.material.chip.Chip-->
-<!--                    style="@style/Widget.MaterialComponents.Chip.Choice"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@string/settings_resolutions_hd"-->
-<!--                    android:selectAllOnFocus="true"-->
-<!--                    />-->
-
-<!--                <com.google.android.material.chip.Chip-->
-<!--                    style="@style/Widget.MaterialComponents.Chip.Choice"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@string/settings_resolutions_regular" />-->
-
-<!--            </com.google.android.material.chip.ChipGroup>-->
-
-            <!--                <com.google.android.material.chip.Chip-->
-<!--                    style="@style/Widget.Material3.Chip.Suggestion"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@string/settings_resolutions_hd" />-->
-
-<!--                <com.google.android.material.chip.Chip-->
-<!--                    style="@style/Widget.Material3.Chip.Suggestion"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@string/settings_resolutions_regular" />-->
-
-<!--            </com.google.android.material.chip.ChipGroup>-->
 
             <View
                 android:layout_width="match_parent"
@@ -233,7 +190,7 @@
             <com.google.android.material.textview.MaterialTextView
                 style="@style/heading_text_style"
                 android:layout_marginTop="@dimen/step_large"
-                android:text="An official data from NASA website"
+                android:text="@string/title_front_in_main_fragment"
                 android:textAllCaps="true"
                 android:textSize="@dimen/text_size_normal" />
 
