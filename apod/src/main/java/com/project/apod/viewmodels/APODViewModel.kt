@@ -60,6 +60,7 @@ class APODViewModel(
         } else {
             val list = savedStateHandle
                 .getLiveData<List<APODResponse>>(APODRESPONSE_FROM_DATE_TO_DATE).value?.toMutableList()
+            list?.removeLast()
             list?.addAll(result)
             savedStateHandle.set(APODRESPONSE_FROM_DATE_TO_DATE, list)
         }

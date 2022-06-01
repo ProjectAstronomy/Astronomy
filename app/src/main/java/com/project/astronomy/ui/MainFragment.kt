@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.view.animation.TranslateAnimation
 import android.widget.RelativeLayout
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.whenResumed
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -17,14 +19,13 @@ import com.project.astronomy.databinding.MainFragmentBinding
 import com.project.astronomy.di.SCOPE_MAIN_MODULE
 import com.project.astronomy.entities.ItemRv
 import com.project.astronomy.viewmodel.MainViewModel
-import com.project.astronomy.viewmodel.MainViewModelFactory
 import com.project.core.net.AndroidNetworkStatus
 import com.project.core.ui.BaseFragment
-import com.project.core.viewmodel.SavedStateViewModelFactory
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 
@@ -32,10 +33,10 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     private val scopeMainModule: Scope =
         getKoin().getOrCreateScope(SCOPE_MAIN_MODULE, named(SCOPE_MAIN_MODULE))
 
-    private val mainViewModelFactory: MainViewModelFactory = scopeMainModule.get()
-    private val mainViewModel: MainViewModel by viewModels {
-        SavedStateViewModelFactory(mainViewModelFactory, this)
+    private val mainViewModel: MainViewModel by scopeMainModule.inject {
+        parametersOf(SavedStateHandle())
     }
+
     private val androidNetworkStatus: AndroidNetworkStatus by inject()
 
     private val adapterAPOD by lazy { RvAdapterCommon(::onApodClickListener) }
@@ -43,29 +44,29 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     private val adapterEPIC by lazy { RvAdapterCommon(::onEpicClickListener) }
     private val adapterMars by lazy { RvAdapterCommon(::onMarsClickListener) }
 
-
     // backdrop
     var showBackLayout = false
     var frontLayoutParams: RelativeLayout.LayoutParams? = null
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    init {
+        lifecycleScope.launch {
+            whenResumed {
+                androidNetworkStatus.networkState.collect { isNetworkAvailable ->
+                    if (!isNetworkAvailable) {
+                        Snackbar.make(binding.root, "No internet connection", Snackbar.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return providePersistentView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lifecycleScope.launch {
-            androidNetworkStatus.networkState.collect { isNetworkAvailable ->
-                if (!isNetworkAvailable) {
-                    Snackbar.make(binding.root, "No internet connection", Snackbar.LENGTH_SHORT).show()
-                }
-            }
-        }
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             with(binding.rvApod) {
@@ -158,8 +159,4 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     private fun onSettingsClicked() {
         findNavController().navigate(R.id.action_main_fragment_to_fragment_preferences)
     }
-
-
-
-
 }

@@ -5,42 +5,50 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.whenCreated
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.project.core.entities.ImageResolution
 import com.project.core.net.AndroidNetworkStatus
 import com.project.core.ui.BaseFragment
-import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.core.viewmodel.SettingsViewModel
 import com.project.epic.databinding.FragmentListEpicBinding
 import com.project.epic.di.SCOPE_EPIC_MODULE
 import com.project.epic.entities.remote.EPICResponse
 import com.project.epic.viewmodels.EPICViewModel
-import com.project.epic.viewmodels.EPICViewModelFactory
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 
 class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicBinding::inflate) {
     private val epicFragmentScope =
         getKoin().getOrCreateScope(SCOPE_EPIC_MODULE, named(SCOPE_EPIC_MODULE))
 
-    private val epicViewModelFactory: EPICViewModelFactory = epicFragmentScope.get()
-    private val epicViewModel: EPICViewModel by viewModels {
-        SavedStateViewModelFactory(epicViewModelFactory, this)
+    private val epicViewModel: EPICViewModel by epicFragmentScope.inject {
+        parametersOf(SavedStateHandle())
     }
+
     private val settingsViewModel by activityViewModels<SettingsViewModel>()
     private var imageResolution = ImageResolution.REGULAR
-
     private val adapterEpic by lazy { EPICRecyclerViewAdapter(::onItemClick, ::useCoilToLoadPhoto) }
     private val androidNetworkStatus: AndroidNetworkStatus by inject()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    init {
+        lifecycleScope.launch {
+            whenCreated {
+                epicViewModel.loadAsync(
+                    androidNetworkStatus.isNetworkAvailable(),
+                    imageResolution.resolution
+                )
+            }
+        }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return providePersistentView(inflater, container, savedInstanceState)
     }
 
@@ -49,10 +57,6 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             initRecyclerView()
-            epicViewModel.loadAsync(
-                androidNetworkStatus.isNetworkAvailable(),
-                imageResolution.resolution
-            )
         }
 
         with(epicViewModel) {
