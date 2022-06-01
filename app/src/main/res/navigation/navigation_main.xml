@@ -42,11 +42,4 @@
                 android:defaultValue="Spirit" />
         </action>
     </fragment>
-
-    <fragment
-        android:id="@+id/fragment_preferences"
-        android:name="com.project.astronomy.ui.SettingsFragment" />
-
-    <action android:id="@+id/action_main_fragment_to_fragment_preferences"
-        app:destination="@id/fragment_preferences" />
 </navigation>

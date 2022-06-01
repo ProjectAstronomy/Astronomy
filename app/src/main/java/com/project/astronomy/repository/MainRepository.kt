@@ -1,8 +1,10 @@
 package com.project.astronomy.repository
 
+import com.project.astronomy.R
 import com.project.astronomy.entities.ItemRv
+import com.project.astronomy.ui.ResourceProvider
 
-class MainRepository {
+class MainRepository(private val resourceProvider: ResourceProvider) {
 
     companion object {
         const val RV_APOD_TODAY = "rv_apod_today"
