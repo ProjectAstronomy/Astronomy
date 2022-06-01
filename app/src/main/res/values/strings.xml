@@ -20,4 +20,15 @@
     <string name="image_resolution_key">Resolution</string>
     <string name="image_resolution_summary">Choose resolution</string>
     <string name="image_resolution_default_value">@string/regular</string>
+
+    <string name="title_main_today">Today</string>
+    <string name="title_main_solar">Solar Flare</string>
+    <string name="title_main_magnetic">Magnetic Storm</string>
+    <string name="title_main_before">Before</string>
+    <string name="title_main_curiosity">Curiosity</string>
+    <string name="title_main_spirit">Spirit</string>
+    <string name="title_main_opportunity">Opportunity</string>
+
+
+
 </resources>
