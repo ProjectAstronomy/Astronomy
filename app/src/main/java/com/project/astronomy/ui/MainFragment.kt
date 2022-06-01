@@ -100,8 +100,6 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
 
 
 
-
-
     private fun dropLayout() {
         showBackLayout = !showBackLayout
         frontLayoutParams = binding.frontLayoutMain!!.layoutParams as RelativeLayout.LayoutParams
@@ -125,10 +123,6 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
             binding.frontLayoutMain!!.startAnimation(anim)
         }
     }
-
-
-
-
 
 
     override fun onDestroy() {
