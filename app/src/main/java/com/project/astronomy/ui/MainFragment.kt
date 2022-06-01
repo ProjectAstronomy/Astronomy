@@ -1,9 +1,13 @@
 package com.project.astronomy.ui
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.TranslateAnimation
+import android.widget.RelativeLayout
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenResumed
@@ -39,6 +43,11 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     private val adapterSolar by lazy { RvAdapterCommon(::onSolarFlareClickListener) }
     private val adapterEPIC by lazy { RvAdapterCommon(::onEpicClickListener) }
     private val adapterMars by lazy { RvAdapterCommon(::onMarsClickListener) }
+
+    // backdrop
+    var showBackLayout = false
+    var frontLayoutParams: RelativeLayout.LayoutParams? = null
+
 
     init {
         lifecycleScope.launch {
@@ -76,7 +85,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = adapterMars
             }
-            binding.chipSettings.setOnClickListener { onSettingsClicked() }
+            //binding.chipSettings.setOnClickListener { onSettingsClicked() }
         }
         with(mainViewModel) {
             liveDataAPOD.observe(viewLifecycleOwner) { adapterAPOD.adapterList = it }
@@ -84,7 +93,37 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
             liveDataMars.observe(viewLifecycleOwner) { adapterMars.adapterList = it }
             liveDataSolar.observe(viewLifecycleOwner) { adapterSolar.adapterList = it }
         }
+
+        binding.appBarLayout.findViewById<View>(R.id.main_appbar).findViewById<View>(R.id.settings).setOnClickListener { dropLayout() }
+        binding.appBarLayout.findViewById<View>(R.id.main_appbar).setOnClickListener { dropLayout() }
     }
+
+
+
+    private fun dropLayout() {
+        showBackLayout = !showBackLayout
+        frontLayoutParams = binding.frontLayoutMain!!.layoutParams as RelativeLayout.LayoutParams
+        if (showBackLayout) {
+            val varl = ValueAnimator.ofInt(binding.backLayoutMain!!.height)
+            varl.duration = 200
+            varl.addUpdateListener { animation ->
+                frontLayoutParams!!.setMargins(0, (animation.animatedValue as Int) - 72, 0, 0)
+                binding.frontLayoutMain!!.layoutParams = frontLayoutParams
+            }
+            varl.start()
+        } else {
+            frontLayoutParams!!.setMargins(0, 0, 0, 0)
+            binding.frontLayoutMain!!.layoutParams = frontLayoutParams
+            val anim = TranslateAnimation(
+                0F, 0F,
+                binding.backLayoutMain!!.height.toFloat(), 0F
+            )
+            anim.startOffset = 0
+            anim.duration = 200
+            binding.frontLayoutMain!!.startAnimation(anim)
+        }
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

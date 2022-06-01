@@ -15,6 +15,11 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:liftOnScroll="true"
 
+        android:animateLayoutChanges="true"
+
+        android:elevation="10dp"
+        android:layout_marginBottom="-20dp"
+
         >
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -34,16 +39,9 @@
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/appbar_apod"
+                android:contentDescription="@string/heading_title_solar"
+                android:layout_marginBottom="-20dp"
                 app:layout_collapseMode="parallax" />
-
-            <!--            <com.google.android.material.textview.MaterialTextView-->
-            <!--                android:id="@+id/main.backdrop"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="?attr/actionBarSize"-->
-            <!--                android:fitsSystemWindows="true"-->
-            <!--                android:scaleType="centerCrop"-->
-            <!--                app:layout_collapseMode="parallax"-->
-            <!--                />-->
 
             <!--    1. aPod-->
             <androidx.appcompat.widget.Toolbar
