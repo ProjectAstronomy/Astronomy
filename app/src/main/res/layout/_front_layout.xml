@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/elevation_normal"
             android:layout_marginEnd="@dimen/elevation_normal"
-            android:text="Settings"
+            android:text="@string/settings"
             android:textAlignment="center" />
 
         <!--    1. aPod-->
