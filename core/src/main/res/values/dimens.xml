@@ -14,6 +14,7 @@
     <dimen name="step_xx_large">72dp</dimen>
     <dimen name="step_x_large">48dp</dimen>
 
+    <dimen name="step_large_plus">28dp</dimen>
     <dimen name="step_large">24dp</dimen>
     <dimen name="radius_large">24dp</dimen>
     <dimen name="elevation_large">6dp</dimen>

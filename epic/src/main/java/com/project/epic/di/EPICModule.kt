@@ -1,6 +1,7 @@
 package com.project.epic.di
 
 import android.content.Context
+import androidx.lifecycle.SavedStateHandle
 import androidx.room.Room
 import com.project.epic.database.EPICDatabase
 import com.project.epic.database.EPIC_DATABASE
@@ -9,8 +10,9 @@ import com.project.epic.domain.local.EPICRepositoryLocal
 import com.project.epic.domain.remote.EPICApiService
 import com.project.epic.domain.remote.EPICRepository
 import com.project.epic.usecases.EPICUseCase
-import com.project.epic.viewmodels.EPICViewModelFactory
+import com.project.epic.viewmodels.EPICViewModel
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -36,6 +38,8 @@ val epicModule = module {
 
         scoped { EPICUseCase(remoteRepository = get(), localRepository = get()) }
 
-        scoped { EPICViewModelFactory(epicUseCase = get()) }
+        viewModel { (savedStateHandle: SavedStateHandle) ->
+            EPICViewModel(savedStateHandle = savedStateHandle, epicUseCase = get())
+        }
     }
 }
