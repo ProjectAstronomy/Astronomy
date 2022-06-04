@@ -1,5 +1,6 @@
 package com.project.astronomy.repository
 
+import com.project.astronomy.R
 import com.project.astronomy.entities.ItemRv
 import com.project.astronomy.utils.ResourceProvider
 import com.project.astronomy.utils.*
@@ -7,23 +8,23 @@ import com.project.astronomy.utils.*
 class MainRepository(private val resourceProvider: ResourceProvider) {
 
     private val listItemRvAPOD: List<ItemRv> = listOf(
-        ItemRv("Today", RV_APOD_TODAY),
+        ItemRv(resourceProvider.getString(R.string.title_main_today), RV_APOD_TODAY),
     )
 
     private val listItemRvSolarFlare: List<ItemRv> = listOf(
-        ItemRv("Solar Flare", RV_SOLAR_TODAY),
-        ItemRv("Magnetic Storm", RV_GEO_TODAY),
+        ItemRv(resourceProvider.getString(R.string.title_main_solar), RV_SOLAR_TODAY),
+        ItemRv(resourceProvider.getString(R.string.title_main_magnetic), RV_GEO_TODAY),
     )
 
     private val listItemRvEpic: List<ItemRv> = listOf(
-        ItemRv("Today", RV_EPIC_TODAY),
-        ItemRv("Before", RV_EPIC_BEFORE),
+        ItemRv(resourceProvider.getString(R.string.title_main_today), RV_EPIC_TODAY),
+        ItemRv(resourceProvider.getString(R.string.title_main_before), RV_EPIC_BEFORE),
     )
 
     private val listItemRvMars: List<ItemRv> = listOf(
-        ItemRv("Curiosity", RV_MARS_CURIOSITY),
-        ItemRv("Spirit", RV_MARS_SPIRIT),
-        ItemRv("Opportunity", RV_MARS_OPPORTUNITY),
+        ItemRv(resourceProvider.getString(R.string.title_main_curiosity), RV_MARS_CURIOSITY),
+        ItemRv(resourceProvider.getString(R.string.title_main_spirit), RV_MARS_SPIRIT),
+        ItemRv(resourceProvider.getString(R.string.title_main_opportunity), RV_MARS_OPPORTUNITY),
     )
 
     fun getListRvAPOD() = listItemRvAPOD
