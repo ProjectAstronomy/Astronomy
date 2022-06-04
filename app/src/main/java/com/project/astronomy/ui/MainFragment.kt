@@ -47,7 +47,6 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     var showBackLayout = false
     var frontLayoutParams: RelativeLayout.LayoutParams? = null
 
-
     init {
         lifecycleScope.launch {
             whenResumed {
@@ -84,7 +83,6 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = adapterMars
             }
-            //binding.chipSettings.setOnClickListener { onSettingsClicked() }
         }
         with(mainViewModel) {
             liveDataAPOD.observe(viewLifecycleOwner) { adapterAPOD.adapterList = it }
@@ -97,32 +95,29 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         binding.appBarLayout.findViewById<View>(R.id.main_appbar).setOnClickListener { dropLayout() }
     }
 
-
-
     private fun dropLayout() {
         showBackLayout = !showBackLayout
-        frontLayoutParams = binding.frontLayoutMain!!.layoutParams as RelativeLayout.LayoutParams
+        frontLayoutParams = binding.frontLayoutMain.layoutParams as RelativeLayout.LayoutParams
         if (showBackLayout) {
-            val varl = ValueAnimator.ofInt(binding.backLayoutMain!!.height)
+            val varl = ValueAnimator.ofInt(binding.backLayoutMain.height)
             varl.duration = 200
             varl.addUpdateListener { animation ->
                 frontLayoutParams!!.setMargins(0, (animation.animatedValue as Int) - 72, 0, 0)
-                binding.frontLayoutMain!!.layoutParams = frontLayoutParams
+                binding.frontLayoutMain.layoutParams = frontLayoutParams
             }
             varl.start()
         } else {
             frontLayoutParams!!.setMargins(0, 0, 0, 0)
-            binding.frontLayoutMain!!.layoutParams = frontLayoutParams
+            binding.frontLayoutMain.layoutParams = frontLayoutParams
             val anim = TranslateAnimation(
                 0F, 0F,
-                binding.backLayoutMain!!.height.toFloat(), 0F
+                binding.backLayoutMain.height.toFloat(), 0F
             )
             anim.startOffset = 0
             anim.duration = 200
-            binding.frontLayoutMain!!.startAnimation(anim)
+            binding.frontLayoutMain.startAnimation(anim)
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
@@ -147,9 +142,5 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     private fun onMarsClickListener(itemRv: ItemRv) {
         val action = MainFragmentDirections.actionMainFragmentToNavigationMrp(itemRv.title)
         findNavController().navigate(action)
-    }
-
-    private fun onSettingsClicked() {
-        findNavController().navigate(R.id.action_main_fragment_to_fragment_preferences)
     }
 }

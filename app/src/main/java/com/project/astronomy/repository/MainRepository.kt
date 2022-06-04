@@ -1,19 +1,10 @@
 package com.project.astronomy.repository
 
 import com.project.astronomy.entities.ItemRv
+import com.project.astronomy.utils.ResourceProvider
+import com.project.astronomy.utils.*
 
-class MainRepository {
-
-    companion object {
-        const val RV_APOD_TODAY = "rv_apod_today"
-        const val RV_SOLAR_TODAY = "rv_solar_today"
-        const val RV_GEO_TODAY = "rv_geo_today"
-        const val RV_EPIC_TODAY = "rv_epic_today"
-        const val RV_EPIC_BEFORE = "rv_epic_before"
-        const val RV_MARS_CURIOSITY = "rv_mars_curiosity"
-        const val RV_MARS_SPIRIT = "rv_mars_spirit"
-        const val RV_MARS_OPPORTUNITY = "rv_mars_opportunity"
-    }
+class MainRepository(private val resourceProvider: ResourceProvider) {
 
     private val listItemRvAPOD: List<ItemRv> = listOf(
         ItemRv("Today", RV_APOD_TODAY),
