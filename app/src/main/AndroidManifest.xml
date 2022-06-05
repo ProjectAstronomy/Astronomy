@@ -22,9 +22,21 @@
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.MAIN" />
+<!--                <action android:name="android.intent.action.MAIN" />-->
             </intent-filter>
         </activity>
+        <activity-alias
+            android:label="Red app"
+            android:icon="@mipmap/ic_launcher_1"
+            android:name=".RED"
+            android:enabled="true"
+            android:targetActivity=".ui.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
 
     </application>
 </manifest>

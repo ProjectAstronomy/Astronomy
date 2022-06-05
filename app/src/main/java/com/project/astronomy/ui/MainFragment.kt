@@ -2,6 +2,8 @@ package com.project.astronomy.ui
 
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.content.ComponentName
+import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
@@ -19,6 +21,7 @@ import androidx.lifecycle.whenResumed
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.project.astronomy.BuildConfig
 import com.project.astronomy.R
 import com.project.astronomy.databinding.MainFragmentBinding
 import com.project.astronomy.di.SCOPE_MAIN_MODULE
@@ -48,6 +51,9 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     private val adapterSolar by lazy { RvAdapterCommon(::onSolarFlareClickListener) }
     private val adapterEPIC by lazy { RvAdapterCommon(::onEpicClickListener) }
     private val adapterMars by lazy { RvAdapterCommon(::onMarsClickListener) }
+
+    //    Change icon
+    // enum class ICON_COLOUR { RED, GREEN, BLUE }
 
     // backdrop
     var showBackLayout = false
@@ -113,10 +119,10 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         binding.cardviewIconOne.setOnClickListener {
             setIconsStrokeClear()
             binding.cardviewIconOne.setStrokeWidth(12)
-//            ShadowActivityThread.getPackageManager().setComponentEnabledSetting(
-//                ComponentName("com.project.astronomy.ui", "com.project.astronomy.ui.MainFragment"),
-//                PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP
-//            )
+
+            // Change icon
+            // setIcon(ICON_COLOUR.RED)
+
         }
 
         binding.cardviewIconTwo.setOnClickListener {
@@ -135,6 +141,23 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         }
 
     }
+
+
+//    Change icon
+//    private fun setIcon(targetColour: ICON_COLOUR) {
+//        for (value in ICON_COLOUR.values()) {
+//            val action = if (value == targetColour) {
+//                PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+//            } else {
+//                PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+//            }
+//            val packageManager: PackageManager? = getActivity()?.getPackageManager()
+//            packageManager?.setComponentEnabledSetting(
+//                ComponentName(BuildConfig.APPLICATION_ID, "${BuildConfig.APPLICATION_ID}.${value.name}"),
+//                action, PackageManager.DONT_KILL_APP
+//            )
+//        }
+//    }
 
     private fun setIconsStrokeClear () {
         binding.cardviewIconOne.setStrokeWidth(0)
