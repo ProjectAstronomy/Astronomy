@@ -2,6 +2,8 @@ package com.project.astronomy.ui
 
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.content.ComponentName
+import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
@@ -13,7 +15,6 @@ import android.view.Window
 import android.view.animation.TranslateAnimation
 import android.widget.RelativeLayout
 import androidx.annotation.ColorInt
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenResumed
@@ -34,7 +35,6 @@ import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
-
 
 class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::inflate) {
     private val scopeMainModule: Scope =
@@ -115,6 +115,10 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         binding.cardviewIconOne.setOnClickListener {
             setIconsStrokeClear()
             binding.cardviewIconOne.setStrokeWidth(12)
+//            ShadowActivityThread.getPackageManager().setComponentEnabledSetting(
+//                ComponentName("com.project.astronomy.ui", "com.project.astronomy.ui.MainFragment"),
+//                PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP
+//            )
         }
 
         binding.cardviewIconTwo.setOnClickListener {
