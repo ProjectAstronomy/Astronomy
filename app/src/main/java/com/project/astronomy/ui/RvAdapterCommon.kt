@@ -33,8 +33,6 @@ class RvAdapterCommon(
             viewBinding.tvTitle.text = adapterItemView.title
 
             when (adapterItemView.imageName) {
-                RV_APOD_TODAY -> viewBinding.ivPic.setImageResource(R.drawable.rv_apod_today)
-
                 RV_SOLAR_TODAY -> viewBinding.ivPic.setImageResource(R.drawable.rv_solar)
                 RV_GEO_TODAY -> viewBinding.ivPic.setImageResource(R.drawable.rv_geo_today)
 

@@ -26,6 +26,7 @@ import com.project.astronomy.R
 import com.project.astronomy.databinding.MainFragmentBinding
 import com.project.astronomy.di.SCOPE_MAIN_MODULE
 import com.project.astronomy.entities.ItemRv
+import com.project.astronomy.utils.RV_APOD_TODAY
 import com.project.astronomy.viewmodel.MainViewModel
 import com.project.core.net.AndroidNetworkStatus
 import com.project.core.ui.BaseFragment
@@ -47,7 +48,6 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
 
     private val androidNetworkStatus: AndroidNetworkStatus by inject()
 
-    private val adapterAPOD by lazy { RvAdapterCommon(::onApodClickListener) }
     private val adapterSolar by lazy { RvAdapterCommon(::onSolarFlareClickListener) }
     private val adapterEPIC by lazy { RvAdapterCommon(::onEpicClickListener) }
     private val adapterMars by lazy { RvAdapterCommon(::onMarsClickListener) }
@@ -89,10 +89,6 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
 
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
-            with(binding.rvApod) {
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                adapter = adapterAPOD
-            }
             with(binding.rvSolar) {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = adapterSolar
@@ -107,11 +103,12 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
             }
         }
         with(mainViewModel) {
-            liveDataAPOD.observe(viewLifecycleOwner) { adapterAPOD.adapterList = it }
             liveDataEpic.observe(viewLifecycleOwner) { adapterEPIC.adapterList = it }
             liveDataMars.observe(viewLifecycleOwner) { adapterMars.adapterList = it }
             liveDataSolar.observe(viewLifecycleOwner) { adapterSolar.adapterList = it }
         }
+
+        binding.ivPic.setOnClickListener { onApodClickListener() }
 
         binding.appBarLayout.findViewById<View>(R.id.main_appbar).findViewById<View>(R.id.settings).setOnClickListener { dropLayout() }
         binding.appBarLayout.findViewById<View>(R.id.main_appbar).setOnClickListener { dropLayout() }
@@ -122,7 +119,6 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
 
             // Change icon
             // setIcon(ICON_COLOUR.RED)
-
         }
 
         binding.cardviewIconTwo.setOnClickListener {
@@ -202,12 +198,12 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         scopeMainModule.close()
     }
 
-    private fun onApodClickListener(itemRv: ItemRv) {
+    private fun onApodClickListener() {
         findNavController().navigate(R.id.action_main_fragment_to_navigation_apod)
     }
 
     private fun onSolarFlareClickListener(itemRv: ItemRv) {
-        if (itemRv.title == "Solar Flare")
+        if (itemRv.title == getString(R.string.title_main_solar))
             findNavController().navigate(R.id.action_main_fragment_to_navigation_flr)
         else
             findNavController().navigate(R.id.action_main_fragment_to_navigation_gst)

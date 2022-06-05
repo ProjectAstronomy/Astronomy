@@ -7,10 +7,6 @@ import com.project.astronomy.utils.*
 
 class MainRepository(private val resourceProvider: ResourceProvider) {
 
-    private val listItemRvAPOD: List<ItemRv> = listOf(
-        ItemRv(resourceProvider.getString(R.string.title_main_today), RV_APOD_TODAY),
-    )
-
     private val listItemRvSolarFlare: List<ItemRv> = listOf(
         ItemRv(resourceProvider.getString(R.string.title_main_solar), RV_SOLAR_TODAY),
         ItemRv(resourceProvider.getString(R.string.title_main_magnetic), RV_GEO_TODAY),
@@ -27,7 +23,6 @@ class MainRepository(private val resourceProvider: ResourceProvider) {
         ItemRv(resourceProvider.getString(R.string.title_main_opportunity), RV_MARS_OPPORTUNITY),
     )
 
-    fun getListRvAPOD() = listItemRvAPOD
     fun getListRvSolarFlare() = listItemRvSolarFlare
     fun getListRvEpic() = listItemRvEpic
     fun getListRvMars() = listItemRvMars
