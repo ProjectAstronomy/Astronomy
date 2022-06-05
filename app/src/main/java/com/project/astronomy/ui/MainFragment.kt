@@ -1,6 +1,7 @@
 package com.project.astronomy.ui
 
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.view.Window
 import android.view.animation.TranslateAnimation
 import android.widget.RelativeLayout
 import androidx.annotation.ColorInt
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenResumed
@@ -69,6 +71,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         return providePersistentView(inflater, container, savedInstanceState)
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -108,7 +111,37 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
 
         binding.appBarLayout.findViewById<View>(R.id.main_appbar).findViewById<View>(R.id.settings).setOnClickListener { dropLayout() }
         binding.appBarLayout.findViewById<View>(R.id.main_appbar).setOnClickListener { dropLayout() }
+
+        binding.cardviewIconOne.setOnClickListener {
+            setIconsStrokeClear()
+            binding.cardviewIconOne.setStrokeWidth(12)
+        }
+
+        binding.cardviewIconTwo.setOnClickListener {
+            setIconsStrokeClear()
+            binding.cardviewIconTwo.setStrokeWidth(12)
+        }
+
+        binding.cardviewIconThree.setOnClickListener {
+            setIconsStrokeClear()
+            binding.cardviewIconThree.setStrokeWidth(12)
+        }
+
+        binding.cardviewIconFour.setOnClickListener {
+            setIconsStrokeClear()
+            binding.cardviewIconFour.setStrokeWidth(12)
+        }
+
     }
+
+    private fun setIconsStrokeClear () {
+        binding.cardviewIconOne.setStrokeWidth(0)
+        binding.cardviewIconTwo.setStrokeWidth(0)
+        binding.cardviewIconThree.setStrokeWidth(0)
+        binding.cardviewIconFour.setStrokeWidth(0)
+
+    }
+
 
     private fun dropLayout() {
         showBackLayout = !showBackLayout

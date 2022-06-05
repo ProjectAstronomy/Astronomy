@@ -147,14 +147,15 @@
                 android:layout_marginTop="@dimen/step_start_normal"
                 android:orientation="horizontal">
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardview_icon_one"
                     android:layout_width="@dimen/step_xx_large"
                     android:layout_height="@dimen/step_xx_large"
                     android:layout_marginStart="@dimen/step_start_normal"
                     android:layout_marginTop="@dimen/step_start_normal"
                     app:cardCornerRadius="@dimen/radius_normal"
-                    app:strokeWidth="@dimen/stroke_width_large">
+                    app:strokeWidth="@dimen/step_zero"
+                    app:strokeColor="?attr/colorAccent">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -163,16 +164,17 @@
                         android:contentDescription="@string/content_description_media"
                         android:scaleType="centerCrop"
                         android:src="@drawable/icon1" />
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardview_icon_two"
                     android:layout_width="@dimen/step_xx_large"
                     android:layout_height="@dimen/step_xx_large"
                     android:layout_marginStart="@dimen/step_start_normal"
                     android:layout_marginTop="@dimen/step_start_normal"
                     app:cardCornerRadius="@dimen/radius_normal"
-                    app:strokeWidth="@dimen/stroke_width_large">
+                    app:strokeWidth="@dimen/step_zero"
+                    app:strokeColor="?attr/colorAccent">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -181,16 +183,17 @@
                         android:contentDescription="@string/content_description_media"
                         android:scaleType="centerCrop"
                         android:src="@drawable/icon2" />
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardview_icon_three"
                     android:layout_width="@dimen/step_xx_large"
                     android:layout_height="@dimen/step_xx_large"
                     android:layout_marginStart="@dimen/step_start_normal"
                     android:layout_marginTop="@dimen/step_start_normal"
                     app:cardCornerRadius="@dimen/radius_normal"
-                    app:strokeWidth="@dimen/stroke_width_large">
+                    app:strokeWidth="@dimen/step_zero"
+                    app:strokeColor="?attr/colorAccent">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -199,16 +202,17 @@
                         android:contentDescription="@string/content_description_media"
                         android:scaleType="centerCrop"
                         android:src="@drawable/icon3" />
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardview_icon_four"
                     android:layout_width="@dimen/step_xx_large"
                     android:layout_height="@dimen/step_xx_large"
                     android:layout_marginStart="@dimen/step_start_normal"
                     android:layout_marginTop="@dimen/step_start_normal"
                     app:cardCornerRadius="@dimen/radius_normal"
-                    app:strokeWidth="@dimen/stroke_width_large">
+                    app:strokeWidth="@dimen/step_zero"
+                    app:strokeColor="?attr/colorAccent">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -217,7 +221,7 @@
                         android:contentDescription="@string/content_description_media"
                         android:scaleType="centerCrop"
                         android:src="@drawable/icon4" />
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
 

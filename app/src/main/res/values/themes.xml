@@ -7,7 +7,7 @@
         <item name="colorPrimaryVariant">@color/blue_500</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSurface">@color/indigo_100</item>
-        <item name="colorAccent">@color/yellow_300</item>
+        <item name="colorAccent">@color/yellow_900</item>
         <item name="android:colorAccent" tools:targetApi="lollipop">@color/yellow_800</item>
 
 
