@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import com.project.core.viewmodel.BaseViewModel
 import com.project.mrp.domain.remote.PhotosRepository
+import com.project.mrp.entities.remote.Photo
 import com.project.mrp.entities.remote.Photos
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,7 +19,7 @@ class PhotosViewModel(
         private const val PHOTOS_RESPONSE = "PHOTOS_RESPONSE"
     }
 
-    fun responsePhotos(): LiveData<Photos> {
+    fun responsePhotos(): LiveData<List<Photo>> {
         return savedStateHandle.getLiveData(PHOTOS_RESPONSE)
     }
 
@@ -34,7 +35,9 @@ class PhotosViewModel(
             withContext(Dispatchers.IO) {
                 result = repository.loadPhotosByMartianSol(roverName, sol)
             }
-            savedStateHandle.set(PHOTOS_RESPONSE, result)
+            savedStateHandle.set(PHOTOS_RESPONSE,
+                result.photos ?: emptyList()
+            )
         }
     }
 }

@@ -9,7 +9,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenCreated
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.project.core.entities.ImageResolution
@@ -74,7 +73,7 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
         with(epicViewModel) {
             responseEPIC().observe(viewLifecycleOwner) {
                 adapterEpic.items = it
-                mShimmerViewContainer?.stopShimmerAnimation()
+                mShimmerViewContainer?.stopShimmer()
                 mShimmerViewContainer?.visibility = View.GONE
             }
             error().observe(viewLifecycleOwner) { showThrowable(it) }
@@ -91,12 +90,12 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
 
     override fun onResume() {
         super.onResume()
-        mShimmerViewContainer?.startShimmerAnimation()
+        mShimmerViewContainer?.startShimmer()
     }
 
     override fun onPause() {
         super.onPause()
-        mShimmerViewContainer?.startShimmerAnimation()
+        mShimmerViewContainer?.startShimmer()
     }
 
     override fun onDestroy() {

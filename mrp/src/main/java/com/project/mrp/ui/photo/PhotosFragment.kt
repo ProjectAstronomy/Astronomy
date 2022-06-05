@@ -1,4 +1,4 @@
-package com.project.mrp.ui
+package com.project.mrp.ui.photo
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +11,6 @@ import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.mrp.databinding.FragmentPhotosBinding
 import com.project.mrp.di.SCOPE_PHOTOS_MODULE
-import com.project.mrp.entities.remote.Photo
-import com.project.mrp.entities.remote.Photos
-import com.project.mrp.ui.mission.PhotosRecyclerViewAdapter
 import com.project.mrp.viewmodel.PhotosViewModel
 import com.project.mrp.viewmodel.PhotosViewModelFactory
 import org.koin.android.ext.android.getKoin
@@ -21,8 +18,6 @@ import org.koin.core.qualifier.named
 
 class PhotosFragment : BaseFragment<FragmentPhotosBinding>(FragmentPhotosBinding::inflate) {
     private val navArgs: PhotosFragmentArgs by navArgs()
-
-    private val listPhotoDisplay = mutableListOf<Photo>()
 
     private val photosScope = getKoin().getOrCreateScope(SCOPE_PHOTOS_MODULE, named(
         SCOPE_PHOTOS_MODULE))
@@ -48,22 +43,13 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>(FragmentPhotosBinding
 
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
-            photosViewModel.loadAsync(roverName, photosInformation.sol!!)
+            photosViewModel.loadAsync(roverName, checkNotNull(photosInformation.sol))
             initRecyclerView()
-
         }
 
         with(photosViewModel) {
-            photosViewModel.loadAsync(roverName, photosInformation.sol!!)
             responsePhotos().observe(viewLifecycleOwner) {
-                binding.apply {
-                    test.text = it.photos?.size.toString()
-                }
-                it.apply {
-                    photos
-                }
-                photoList(it)
-                adapter.adapterList = listPhotoDisplay
+                adapter.items = it
             }
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
@@ -73,20 +59,6 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>(FragmentPhotosBinding
         with(binding.rvPhoto) {
             layoutManager = LinearLayoutManager(activity)
             adapter = this@PhotosFragment.adapter
-        }
-    }
-
-    private fun photoList(photos: Photos?) {
-        photos?.photos?.apply {
-            for (n in 0..1000) {
-                listPhotoDisplay += Photo(
-                    get(n).id,
-                    get(n).sol,
-                    get(n).camera,
-                    get(n).imgSrc,
-                    get(n).earthDate,
-                    get(n).rover)
-            }
         }
     }
 

@@ -14,13 +14,14 @@ import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.mrp.databinding.FragmentMissionManifestBinding
 import com.project.mrp.di.SCOPE_MISSION_MANIFEST_MODULE
-import com.project.mrp.entities.remote.PhotoManifest
 import com.project.mrp.entities.remote.PhotosInformation
-import com.project.mrp.ui.AllRoverFun.transformDate
+import com.project.mrp.viewmodel.MissionManifestViewModel
 import com.project.mrp.viewmodel.MissionManifestViewModelFactory
 import org.koin.android.ext.android.getKoin
 import org.koin.core.qualifier.named
-import com.project.mrp.viewmodel.MissionManifestViewModel as MissionManifestViewModel1
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MissionManifestFragment :
@@ -32,17 +33,22 @@ class MissionManifestFragment :
             SCOPE_MISSION_MANIFEST_MODULE))
 
     private var mShimmerViewContainer: ShimmerFrameLayout? = null
-    private val listPhotoDisplay = mutableListOf<PhotosInformation>()
-
-
 
     private val missionViewModelFactory: MissionManifestViewModelFactory =
         missionFragmentScope.get()
-    private val missionManifestViewModel: MissionManifestViewModel1 by viewModels {
+    private val missionManifestViewModel: MissionManifestViewModel by viewModels {
         SavedStateViewModelFactory(missionViewModelFactory, this)
     }
 
-    private val adapter by lazy { MissionRecyclerViewAdapter(::onItemClick) }
+    private val onListUpdated: (List<PhotosInformation>, List<PhotosInformation>) -> Unit =
+        { _, _ ->
+            mShimmerViewContainer?.stopShimmer()
+            mShimmerViewContainer?.visibility = View.GONE
+        }
+
+    private val adapter by lazy {
+        MissionRecyclerViewAdapter(::onItemClick, onListUpdated)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,58 +58,24 @@ class MissionManifestFragment :
         return providePersistentView(inflater, container, savedInstanceState)
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             mShimmerViewContainer = binding.shimmerViewContainerRoverImg
             initRecyclerView()
-            missionManifestViewModel.loadAsync("curiosity")
+            roverInfo()
         }
-        photoManifest()
-        roverInfo()
-        val roverName = navArgs.roverName
     }
 
     override fun onResume() {
         super.onResume()
-        mShimmerViewContainer?.startShimmerAnimation()
+        mShimmerViewContainer?.startShimmer()
     }
 
     override fun onPause() {
         super.onPause()
-        mShimmerViewContainer?.startShimmerAnimation()
-    }
-
-    private fun photoManifest() {
-        with(missionManifestViewModel) {
-            responseMission().observe(viewLifecycleOwner) {
-
-                it.photoManifest?.apply {
-                    PhotoManifest(
-                        name, landingDate, launchDate,
-                        status, maxSol, maxDate, totalPhotos, photos
-                    )
-                    photoList(it.photoManifest)
-                }
-
-                adapter.adapterList = listPhotoDisplay
-                mShimmerViewContainer?.stopShimmerAnimation()
-                mShimmerViewContainer?.visibility = View.GONE
-            }
-            error().observe(viewLifecycleOwner) { showThrowable(it) }
-        }
-    }
-
-    private fun photoList(photos: PhotoManifest?) {
-        photos?.photos?.apply {
-            for (n in 0..1000) {
-                listPhotoDisplay += PhotosInformation(
-                    get(n).sol, get(n).earthDate,
-                    get(n).totalPhotos, get(n).cameras)
-            }
-        }
+        mShimmerViewContainer?.stopShimmer()
     }
 
     private fun initRecyclerView() {
@@ -113,26 +85,42 @@ class MissionManifestFragment :
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
+    private fun transformDate(date: String?): String {
+        val serverDate = date
+        val originalFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val targetFormat: DateFormat = SimpleDateFormat("dd-MMM-yyyy")
+        val date: Date = originalFormat.parse(serverDate.toString()) as Date
+        return targetFormat.format(date)
+    }
+
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     private fun roverInfo() {
+        missionManifestViewModel.loadAsync(navArgs.roverName)
         with(missionManifestViewModel) {
-            responseMission().observe(viewLifecycleOwner) {
+            responseMissionManifest().observe(viewLifecycleOwner) {
+
                 binding.apply {
-                    collapsToolbar.title = it.photoManifest?.name
-                    launchDate.text = "Дата Запуска: " + transformDate(it.photoManifest?.launchDate)
-                    landingDate.text = "Приземлился: " + transformDate(it.photoManifest?.landingDate)
-                    roverName.text = "Исследователь: " + it.photoManifest?.name
+                    collapsToolbar.title = it?.name
+                    launchDate.text = "Дата Запуска: " + transformDate(it?.launchDate)
+                    landingDate.text = "Приземлился: " + transformDate(it?.landingDate)
+                    roverName.text = "Исследователь: " + it?.name
                     totalPhotos.text =
-                        "Количество фотографий: " + it.photoManifest?.totalPhotos.toString()
-                    if (it.photoManifest?.status.isNullOrEmpty()) {
+                        "Количество фотографий: " + it?.totalPhotos.toString()
+                    if (it?.status.isNullOrEmpty()) {
                         status.text = "Статус мисии: Неизвестен"
                     } else {
-                        status.text = "Статус мисии: " + it.photoManifest?.status
+                        status.text = "Статус мисии: " + it?.status
                     }
-                    maxSol.text = "Последний сол: " + it.photoManifest?.maxSol
-                    maxDate.text = "Последняя дата Земли: " + it.photoManifest?.maxDate
+                    maxSol.text = "Последний сол: " + it?.maxSol
+                    maxDate.text = "Последняя дата Земли: " + it?.maxDate
                 }
             }
+            responseMissionManifestList().observe(viewLifecycleOwner) {
+                adapter.items = it
+            }
+
+            error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
     }
 

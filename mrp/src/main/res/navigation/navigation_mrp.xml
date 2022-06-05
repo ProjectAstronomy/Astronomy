@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/fragment_photos"
-        android:name="com.project.mrp.ui.PhotosFragment"
+        android:name="com.project.mrp.ui.photo.PhotosFragment"
         android:label="fragment_photos_navigation_label"
         tools:layout="@layout/fragment_photos">
         <argument

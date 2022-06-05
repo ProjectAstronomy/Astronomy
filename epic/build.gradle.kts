@@ -83,7 +83,7 @@ dependencies {
     //Design
     implementation(Design.appcompat)
     implementation(Design.material)
-    implementation(Design.shine)
+    implementation(FacebookShimmer.facebookShimmer)
 
     //Navigation
     implementation(Navigation.navigationFragmentKTX)
