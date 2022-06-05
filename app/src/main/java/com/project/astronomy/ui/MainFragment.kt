@@ -2,8 +2,6 @@ package com.project.astronomy.ui
 
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
-import android.content.ComponentName
-import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
@@ -143,9 +141,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         binding.cardviewIconTwo.setStrokeWidth(0)
         binding.cardviewIconThree.setStrokeWidth(0)
         binding.cardviewIconFour.setStrokeWidth(0)
-
     }
-
 
     private fun dropLayout() {
         showBackLayout = !showBackLayout
