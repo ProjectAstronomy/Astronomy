@@ -155,7 +155,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
             }
             varl.start()
         } else {
-            frontLayoutParams!!.setMargins(0, 0, 0, 0)
+            frontLayoutParams!!.setMargins(0, 18, 0, 0)
             binding.frontLayoutMain.layoutParams = frontLayoutParams
             val anim = TranslateAnimation(
                 0F, 0F,

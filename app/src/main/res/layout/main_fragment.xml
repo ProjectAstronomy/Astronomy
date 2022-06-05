@@ -235,7 +235,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/layout_top_corners_round"
-            android:layout_marginTop="@dimen/step_small"
+            android:layout_marginTop="@dimen/step_normal_too"
             android:elevation="@dimen/step_small"
             android:orientation="vertical">
 

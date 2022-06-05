@@ -23,6 +23,7 @@
 
     <!--normal-->
     <dimen name="step_normal">12dp</dimen>
+    <dimen name="step_normal_too">8dp</dimen>
     <dimen name="step_start_normal">12dp</dimen>
     <dimen name="step_bottom_normal">12dp</dimen>
     <dimen name="step_top_normal">12dp</dimen>
