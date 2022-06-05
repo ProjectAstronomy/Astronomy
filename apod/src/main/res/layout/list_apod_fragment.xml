@@ -13,13 +13,6 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:liftOnScroll="true"
-
-        android:animateLayoutChanges="true"
-
-        android:elevation="10dp"
-        android:layout_marginBottom="-20dp"
-
         >
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -27,10 +20,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimaryDark"
+            app:contentScrim="?attr/colorPrimaryVariant"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
             app:title="@string/heading_title_pod"
-            app:toolbarId="@+id/toolbar">
+            app:toolbarId="@+id/toolbar"
+            app:scrimAnimationDuration="250">
 
             <ImageView
                 android:id="@+id/iv_backdrop"

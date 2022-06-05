@@ -1,12 +1,17 @@
 package com.project.astronomy.ui
 
 import android.animation.ValueAnimator
+import android.content.res.Resources
+import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.view.animation.TranslateAnimation
 import android.widget.RelativeLayout
+import androidx.annotation.ColorInt
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenResumed
@@ -27,6 +32,7 @@ import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
+
 
 class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::inflate) {
     private val scopeMainModule: Scope =
@@ -65,6 +71,15 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //sets specific status bar color because of no appbar animation in this fragment
+        val typedValue = TypedValue()
+        val theme: Resources.Theme = requireContext().theme
+        theme.resolveAttribute(com.google.android.material.R.attr.colorPrimaryVariant, typedValue, true)
+        @ColorInt val mColor = typedValue.data
+        val window: Window = requireActivity().window
+        context?.let { window.setStatusBarColor(mColor) }
+
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             with(binding.rvApod) {
@@ -117,6 +132,13 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
             anim.duration = 200
             binding.frontLayoutMain.startAnimation(anim)
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        //returning transparent status bar background color
+        val window: Window = requireActivity().window
+        window.setStatusBarColor(Color.parseColor("#00000000"))
     }
 
     override fun onDestroy() {

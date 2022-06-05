@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:liftOnScroll="true"
         >
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -20,10 +21,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimaryDark"
+            app:contentScrim="?attr/colorPrimaryVariant"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar"
             app:title="@string/heading_title_flr"
+            app:scrimAnimationDuration="250"
             >
             <!--  Если не указать  app:contentScrim="@color/indigo_900"
             то остается картинка при collapsed-->
@@ -36,7 +38,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/appbar_solar"
                 app:layout_collapseMode="parallax"
-
+                android:contentDescription="@string/content_description_media"
                 />
 
             <!--    1. aPod-->
