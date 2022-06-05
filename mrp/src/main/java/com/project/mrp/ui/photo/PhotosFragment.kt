@@ -49,6 +49,7 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>(FragmentPhotosBinding
 
         with(photosViewModel) {
             responsePhotos().observe(viewLifecycleOwner) {
+                binding.collapsToolbar.title = roverName
                 adapter.items = it
             }
             error().observe(viewLifecycleOwner) { showThrowable(it) }

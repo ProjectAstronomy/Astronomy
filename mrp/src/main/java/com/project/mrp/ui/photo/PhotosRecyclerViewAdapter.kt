@@ -33,8 +33,10 @@ class PhotosRecyclerViewAdapter(
         @SuppressLint("SetTextI18n")
         override fun bind(t: Photo) {
             with(viewBinding) {
-                sol.text = t.sol.toString()
+                sol.text = "Солнечные сутки на Марсе: " + t.sol.toString()
                 onItemImageLoader(imgSrc, t.imgSrc)
+                camera.text = "Камера: " + t.camera?.name
+                earthDate.text = "Передача фотографий: " + t.earthDate
             }
         }
     }
