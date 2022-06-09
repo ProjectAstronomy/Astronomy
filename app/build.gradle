@@ -91,5 +91,4 @@ dependencies {
     androidTestImplementation TestImpl.extJunit
     androidTestImplementation TestImpl.espresso
     androidTestImplementation(TestImpl.espressoContrib)
-
 }

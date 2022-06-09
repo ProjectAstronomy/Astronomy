@@ -79,14 +79,6 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //sets specific status bar color because of no appbar animation in this fragment
-        val typedValue = TypedValue()
-        val theme: Resources.Theme = requireContext().theme
-        theme.resolveAttribute(com.google.android.material.R.attr.colorPrimaryVariant, typedValue, true)
-        @ColorInt val mColor = typedValue.data
-        val window: Window = requireActivity().window
-        context?.let { window.setStatusBarColor(mColor) }
-
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             with(binding.rvSolar) {
@@ -185,6 +177,19 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
             binding.frontLayoutMain.startAnimation(anim)
         }
     }
+
+
+    override fun onResume() {
+        super.onResume()
+        //sets specific status bar color because of no appbar animation in this fragment
+        val typedValue = TypedValue()
+        val theme: Resources.Theme = requireContext().theme
+        theme.resolveAttribute(com.google.android.material.R.attr.colorPrimaryVariant, typedValue, true)
+        @ColorInt val mColor = typedValue.data
+        val window: Window = requireActivity().window
+        context?.let { window.setStatusBarColor(mColor) }
+    }
+
 
     override fun onStop() {
         super.onStop()

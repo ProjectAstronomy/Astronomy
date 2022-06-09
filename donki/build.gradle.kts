@@ -92,4 +92,7 @@ dependencies {
     testImplementation(TestImpl.junit)
     androidTestImplementation(TestImpl.extJunit)
     androidTestImplementation(TestImpl.espresso)
+
+    //Facebook Shimmer
+    implementation(FacebookShimmer.facebookShimmer)
 }

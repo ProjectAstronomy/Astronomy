@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,8 +13,7 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:liftOnScroll="true"
-        >
+        app:liftOnScroll="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
@@ -23,10 +22,9 @@
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimaryVariant"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbar"
-            app:title="@string/heading_title_flr"
             app:scrimAnimationDuration="250"
-            >
+            app:title="@string/heading_title_flr"
+            app:toolbarId="@+id/toolbar">
             <!--  Если не указать  app:contentScrim="@color/indigo_900"
             то остается картинка при collapsed-->
 
@@ -34,33 +32,79 @@
                 android:id="@+id/main.backdrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="-20dp"
+                android:contentDescription="@string/content_description_media"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/appbar_solar"
-                app:layout_collapseMode="parallax"
-                android:contentDescription="@string/content_description_media"
-                />
+                app:layout_collapseMode="parallax" />
 
             <!--    1. aPod-->
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-                />
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-<!--    <include layout="@layout/content_scrolling" />-->
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_list_solar"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/fragment_list_flr"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-    />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/view_shadow_flr"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/step_xxx_small"
+            android:backgroundTint="#0D000000"
+            app:cardElevation="@dimen/elevation_normal"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container_flr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/view_shadow_flr"
+            shimmer:duration="800">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/item_rv_flr_header" />
+                <include layout="@layout/item_rv_flr_no_data" />
+                <include layout="@layout/item_rv_flr_header" />
+                <include layout="@layout/item_rv_flr_no_data" />
+                <include layout="@layout/item_rv_flr_header" />
+                <include layout="@layout/item_rv_flr_no_data" />
+                <include layout="@layout/item_rv_flr_header" />
+                <include layout="@layout/item_rv_flr_no_data" />
+                <include layout="@layout/item_rv_flr_header" />
+                <include layout="@layout/item_rv_flr_no_data" />
+                <include layout="@layout/item_rv_flr_header" />
+                <include layout="@layout/item_rv_flr_no_data" />
+                <include layout="@layout/item_rv_flr_header" />
+                <include layout="@layout/item_rv_flr_no_data" />
+                <include layout="@layout/item_rv_flr_header" />
+                <include layout="@layout/item_rv_flr_no_data" />
+                <include layout="@layout/item_rv_flr_header" />
+                <include layout="@layout/item_rv_flr_no_data" />
+
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list_solar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:showIn="@layout/fragment_list_flr" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

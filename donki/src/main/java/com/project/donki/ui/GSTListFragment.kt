@@ -89,11 +89,24 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
                         )
                     }
                 }
+                binding.shimmerViewContainerGst.stopShimmer()
                 adapter.adapterListGST = listGSTDisplay
             }
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        binding.shimmerViewContainerGst.startShimmer()
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        binding.shimmerViewContainerGst.stopShimmer()
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

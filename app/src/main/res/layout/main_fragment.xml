@@ -242,6 +242,7 @@
             <com.google.android.material.textview.MaterialTextView
                 style="@style/heading_text_style"
                 android:layout_marginTop="@dimen/step_large"
+                android:layout_marginStart="@dimen/step_large"
                 android:text="@string/title_front_in_main_fragment"
                 android:textAllCaps="true"
                 android:textSize="@dimen/text_size_normal" />

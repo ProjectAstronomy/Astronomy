@@ -1,14 +1,20 @@
 package com.project.apod.ui
 
+import android.annotation.SuppressLint
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.webkit.WebChromeClient
+import androidx.annotation.ColorInt
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.project.apod.R
 import com.project.apod.databinding.OneApodFragmentBinding
 import com.project.core.entities.ImageResolution
 import com.project.core.ui.BaseFragment
@@ -24,6 +30,7 @@ class APODDescriptionFragment :
         return providePersistentView(inflater, container, savedInstanceState)
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requestWritePermission()
@@ -50,7 +57,7 @@ class APODDescriptionFragment :
                     }
                 }
                 "video" -> {
-                    binding.imageViewContainer.visibility = View.GONE
+                    binding.ivUrlApod.visibility = View.GONE
                     with(binding.wvOneUrlVideoApod) {
                         visibility = View.VISIBLE
                         settings.javaScriptEnabled = true
@@ -68,5 +75,16 @@ class APODDescriptionFragment :
                 .actionFragmentApodDescriptionToAPODScaleImageFragment(apodResponse)
             findNavController().navigate(action)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //sets specific status bar color because of no appbar animation in this fragment
+        val typedValue = TypedValue()
+        val theme: Resources.Theme = requireContext().theme
+        theme.resolveAttribute(com.google.android.material.R.attr.colorPrimaryVariant, typedValue, true)
+        @ColorInt val mColor = typedValue.data
+        val window: Window = requireActivity().window
+        context?.let { window.setStatusBarColor(mColor) }
     }
 }
