@@ -1,5 +1,7 @@
 package com.project.apod.ui
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.graphics.PointF
 import android.graphics.Rect
 import android.os.Bundle
@@ -15,6 +17,7 @@ import com.project.core.utils.scale
 import com.project.core.utils.setPivot
 import com.project.core.viewmodel.SettingsViewModel
 
+@Suppress("SAFE_CALL_WILL_CHANGE_NULLABILITY")
 class APODScaleImageFragment :
     BaseFragment<ScaleImageApodFragmentBinding>(ScaleImageApodFragmentBinding::inflate) {
 
@@ -32,6 +35,7 @@ class APODScaleImageFragment :
         return providePersistentView(inflater, container, savedInstanceState)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -55,6 +59,13 @@ class APODScaleImageFragment :
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        //set status bar background color
+        val window: Window = requireActivity().window
+        window.setStatusBarColor(Color.parseColor("#000000"))
+    }
+
     // Ниже методы, относящиеся к жестам (ч. 3 из 3)
     private val originContentRect by lazy {
         binding.myImageView.run {
@@ -69,8 +80,9 @@ class APODScaleImageFragment :
             private var prevX = 0f
             private var prevY = 0f
             private var moveStarted = false
+            @SuppressLint("ClickableViewAccessibility")
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                if (event == null || (binding.myImageView?.scaleX ?: 1f) == 1f) return false
+                if (event == null || (binding.myImageView.scaleX) == 1f) return false
 
                 when (event.actionMasked) {
                     MotionEvent.ACTION_DOWN -> {
@@ -95,7 +107,7 @@ class APODScaleImageFragment :
                             return false
                         }
                         moveStarted = true
-                        binding.myImageView?.run {
+                        binding.myImageView.run {
                             translationX += (event.x - prevX)
                             translationY += (event.y - prevY)
                         }
@@ -157,7 +169,7 @@ class APODScaleImageFragment :
 
     private fun translateToOriginalRect() {
         getContentViewTranslation().takeIf { it != PointF(0f, 0f) }?.let { translation ->
-            binding.myImageView?.let { view ->
+            binding.myImageView.let { view ->
                 view.animateWithDetach()
                     .translationXBy(translation.x)
                     .translationYBy(translation.y)

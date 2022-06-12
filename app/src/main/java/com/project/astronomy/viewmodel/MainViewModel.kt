@@ -13,7 +13,6 @@ class MainViewModel(
     private val mainRepository: MainRepository
 ) : BaseViewModel(savedStateHandle) {
 
-    val liveDataAPOD: LiveData<List<ItemRv>> = MutableLiveData(mainRepository.getListRvAPOD())
     val liveDataSolar: LiveData<List<ItemRv>> = MutableLiveData(mainRepository.getListRvSolarFlare())
     val liveDataEpic: LiveData<List<ItemRv>> = MutableLiveData(mainRepository.getListRvEpic())
     val liveDataMars: LiveData<List<ItemRv>> = MutableLiveData(mainRepository.getListRvMars())
