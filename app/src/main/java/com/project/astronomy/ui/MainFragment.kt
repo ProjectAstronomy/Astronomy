@@ -2,8 +2,6 @@ package com.project.astronomy.ui
 
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
-import android.content.ComponentName
-import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
@@ -15,21 +13,23 @@ import android.view.Window
 import android.view.animation.TranslateAnimation
 import android.widget.RelativeLayout
 import androidx.annotation.ColorInt
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenResumed
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import com.project.astronomy.BuildConfig
 import com.project.astronomy.R
 import com.project.astronomy.databinding.MainFragmentBinding
 import com.project.astronomy.di.SCOPE_MAIN_MODULE
 import com.project.astronomy.entities.ItemRv
-import com.project.astronomy.utils.RV_APOD_TODAY
 import com.project.astronomy.viewmodel.MainViewModel
+import com.project.core.entities.ApplicationIcon
+import com.project.core.entities.ImageResolution
 import com.project.core.net.AndroidNetworkStatus
 import com.project.core.ui.BaseFragment
+import com.project.core.viewmodel.SettingsViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
@@ -42,6 +42,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     private val scopeMainModule: Scope =
         getKoin().getOrCreateScope(SCOPE_MAIN_MODULE, named(SCOPE_MAIN_MODULE))
 
+    private val settingsViewModel: SettingsViewModel by activityViewModels()
     private val mainViewModel: MainViewModel by scopeMainModule.inject {
         parametersOf(SavedStateHandle())
     }
@@ -52,12 +53,9 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
     private val adapterEPIC by lazy { RvAdapterCommon(::onEpicClickListener) }
     private val adapterMars by lazy { RvAdapterCommon(::onMarsClickListener) }
 
-    //    Change icon
-    // enum class ICON_COLOUR { RED, GREEN, BLUE }
-
     // backdrop
-    var showBackLayout = false
-    var frontLayoutParams: RelativeLayout.LayoutParams? = null
+    private var showBackLayout = false
+    private var frontLayoutParams: RelativeLayout.LayoutParams? = null
 
     init {
         lifecycleScope.launch {
@@ -107,51 +105,42 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
 
         binding.cardviewIconOne.setOnClickListener {
             setIconsStrokeClear()
-            binding.cardviewIconOne.setStrokeWidth(12)
-
-            // Change icon
-            // setIcon(ICON_COLOUR.RED)
+            binding.cardviewIconOne.strokeWidth = 12
+            settingsViewModel.setApplicationIcon(ApplicationIcon.MARS)
         }
 
         binding.cardviewIconTwo.setOnClickListener {
             setIconsStrokeClear()
-            binding.cardviewIconTwo.setStrokeWidth(12)
+            binding.cardviewIconTwo.strokeWidth = 12
+            settingsViewModel.setApplicationIcon(ApplicationIcon.JUPITER)
         }
 
         binding.cardviewIconThree.setOnClickListener {
             setIconsStrokeClear()
-            binding.cardviewIconThree.setStrokeWidth(12)
+            binding.cardviewIconThree.strokeWidth = 12
+            settingsViewModel.setApplicationIcon(ApplicationIcon.ROVER)
         }
 
         binding.cardviewIconFour.setOnClickListener {
             setIconsStrokeClear()
-            binding.cardviewIconFour.setStrokeWidth(12)
+            binding.cardviewIconFour.strokeWidth = 12
+            settingsViewModel.setApplicationIcon(ApplicationIcon.VENUS)
         }
 
+        binding.buttonResolutionHd.setOnClickListener {
+            settingsViewModel.setImageResolution(ImageResolution.HD)
+        }
+
+        binding.buttonResolutionRegular.setOnClickListener {
+            settingsViewModel.setImageResolution(ImageResolution.REGULAR)
+        }
     }
 
-
-//    Change icon
-//    private fun setIcon(targetColour: ICON_COLOUR) {
-//        for (value in ICON_COLOUR.values()) {
-//            val action = if (value == targetColour) {
-//                PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-//            } else {
-//                PackageManager.COMPONENT_ENABLED_STATE_DISABLED
-//            }
-//            val packageManager: PackageManager? = getActivity()?.getPackageManager()
-//            packageManager?.setComponentEnabledSetting(
-//                ComponentName(BuildConfig.APPLICATION_ID, "${BuildConfig.APPLICATION_ID}.${value.name}"),
-//                action, PackageManager.DONT_KILL_APP
-//            )
-//        }
-//    }
-
     private fun setIconsStrokeClear () {
-        binding.cardviewIconOne.setStrokeWidth(0)
-        binding.cardviewIconTwo.setStrokeWidth(0)
-        binding.cardviewIconThree.setStrokeWidth(0)
-        binding.cardviewIconFour.setStrokeWidth(0)
+        binding.cardviewIconOne.strokeWidth = 0
+        binding.cardviewIconTwo.strokeWidth = 0
+        binding.cardviewIconThree.strokeWidth = 0
+        binding.cardviewIconFour.strokeWidth = 0
     }
 
     private fun dropLayout() {
@@ -187,7 +176,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         theme.resolveAttribute(com.google.android.material.R.attr.colorPrimaryVariant, typedValue, true)
         @ColorInt val mColor = typedValue.data
         val window: Window = requireActivity().window
-        context?.let { window.setStatusBarColor(mColor) }
+        context?.let { window.statusBarColor = mColor }
     }
 
 
@@ -195,7 +184,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         super.onStop()
         //returning transparent status bar background color
         val window: Window = requireActivity().window
-        window.setStatusBarColor(Color.parseColor("#00000000"))
+        window.statusBarColor = Color.parseColor("#00000000")
     }
 
     override fun onDestroy() {

@@ -61,6 +61,7 @@
                 style="@style/padding_start_top_end_normal_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:checkedButton="@id/button_one"
                 app:selectionRequired="true"
                 app:singleSelection="true">
 
@@ -105,11 +106,11 @@
             <com.google.android.material.button.MaterialButtonToggleGroup
                 android:id="@+id/toggle_resolution"
                 style="@style/padding_start_top_end_normal_rv"
+                app:checkedButton="@id/button_resolution_regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:selectionRequired="true"
                 app:singleSelection="true">
-                <!--                app:checkedButton="@+id/button_resolution_hd"-->
 
                 <Button
                     android:id="@+id/button_resolution_hd"

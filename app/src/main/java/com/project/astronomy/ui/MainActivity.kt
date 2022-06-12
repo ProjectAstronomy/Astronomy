@@ -1,13 +1,17 @@
 package com.project.astronomy.ui
 
+import android.content.ComponentName
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
+import com.project.astronomy.BuildConfig
 import com.project.astronomy.R
+import com.project.core.entities.ApplicationIcon
 import com.project.core.entities.ImageResolution
 import com.project.core.viewmodel.SettingsViewModel
 
@@ -22,22 +26,11 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.activity_main_container) as NavHostFragment
         navController = navHostFragment.navController
+        settingsViewModel.applicationIcon.observe(this) { setIcon(it) }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController?.navigateUp() == true || super.onSupportNavigateUp()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        PreferenceManager.getDefaultSharedPreferences(this)
-            .registerOnSharedPreferenceChangeListener(this)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        PreferenceManager.getDefaultSharedPreferences(this)
-            .unregisterOnSharedPreferenceChangeListener(this)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
@@ -77,6 +70,21 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             marsTheme -> {
                 //TODO: create theme and set it
             }
+        }
+    }
+
+    private fun setIcon(applicationIcon: ApplicationIcon) {
+        for (value in ApplicationIcon.values()) {
+            val action = if (value == applicationIcon) {
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+            } else {
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+            }
+            packageManager.setComponentEnabledSetting(
+                ComponentName(BuildConfig.APPLICATION_ID, "${BuildConfig.APPLICATION_ID}.${value.name}"),
+                action,
+                PackageManager.DONT_KILL_APP
+            )
         }
     }
 }
