@@ -28,7 +28,6 @@
             app:layout_constraintTop_toTopOf="parent" />
         <!--        android:windowBackground="@color/blue_grey_200"-->
 
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guide_line"
             android:layout_width="wrap_content"
@@ -37,9 +36,7 @@
             app:layout_constraintEnd_toStartOf="@id/view_scale_1of5"
             app:layout_constraintGuide_percent="0.26"
             app:layout_constraintStart_toEndOf="@id/tv_date_solar"
-            app:layout_constraintTop_toTopOf="parent"
-
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/view_scale_1of5"
@@ -104,7 +101,6 @@
             app:layout_constraintStart_toEndOf="@id/view_scale_4of5"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guide_line1"
             android:layout_width="wrap_content"
@@ -114,7 +110,6 @@
             app:layout_constraintGuide_percent="0.7"
             app:layout_constraintStart_toEndOf="@id/view_scale_4of5"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_solar_flare_class"

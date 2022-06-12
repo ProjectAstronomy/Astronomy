@@ -1,0 +1,48 @@
+<!--?xml version="1.0" encoding="utf-8"?-->
+<resources>
+
+    <color name="colorPrimaryDark">#d91248</color>
+    <color name="colorAccent">#3ad23e</color>
+    <color name="myColorPrimaryLight">#6BC3C6</color>
+    <color name="placeholder_bg">#dddddd</color>
+    <color name="item_name">#0c0c0c</color>
+    <color name="description">#1a1a1a</color>
+    <color name="chef">#777</color>
+    <color name="timestamp">#777</color>
+
+    <color name="colorPrimaryVariantStandart">#6B6B6B</color>
+    <color name="colorPrimaryVariantEarth">#B9DFF8</color>
+    <color name="colorPrimaryVariantMars">#CF3F31</color>
+
+    <!--самый верх-->
+    <color name="colorPrimaryStandart">#6B6B6B</color>
+    <color name="colorPrimaryEarth">#B9DFF8</color>
+    <color name="colorPrimaryMars">#CF3F31</color>
+
+    <color name="colorPrimaryDarkStandart">#6B6B6B</color>
+    <color name="colorPrimaryDarkEarth">#B9DFF8</color>
+    <color name="colorPrimaryDarkMars">#CF3F31</color>
+
+    <color name="textColorStandart">#000000</color>
+    <color name="textColorEarth"> #ffffff</color>
+    <color name="textColorMars"> #ffffff</color>
+
+    <color name="ChipStandart">#000000</color>
+    <color name="ChipEarth"> #4DBD90</color>
+    <color name="ChipMars"> #263238</color>
+
+    <color name="myColorPrimaryLightStandart">#6B6B6B</color>
+    <color name="myColorPrimaryLightEarth">#B9DFF8</color>
+    <color name="myColorPrimaryLightMArs">#CF3F31</color>
+
+    <color name="RelativeLayoutStyleStandart">#332126</color>
+    <color name="RelativeLayoutStyleEarth">#4DBD90</color>
+    <color name="RelativeLayoutStyleMars">#CF3F31</color>
+
+    <color name="colorSurfaceStandart">#FFFFFF</color>
+    <color name="colorSurfaceEarth">#4DBD90</color>
+    <color name="colorSurfaceMars">#263238</color>
+    colorSurface
+
+
+</resources>

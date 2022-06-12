@@ -11,6 +11,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
 import com.project.astronomy.BuildConfig
 import com.project.astronomy.R
+import com.project.astronomy.R.style.Theme_Astronomy
 import com.project.core.entities.ApplicationIcon
 import com.project.core.entities.ImageResolution
 import com.project.core.viewmodel.SettingsViewModel
@@ -62,13 +63,13 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
         when (PreferenceManager.getDefaultSharedPreferences(this).getString(key, defValue)) {
             originalTheme -> {
-                //TODO: create theme and set it
+                setTheme(R.style.Theme_Astronomy_Earth)
             }
             blackAndWhiteTheme -> {
-                //TODO: create theme and set it
+                setTheme(Theme_Astronomy)
             }
             marsTheme -> {
-                //TODO: create theme and set it
+                setTheme(R.style.Theme_Astronomy_Mars)
             }
         }
     }
