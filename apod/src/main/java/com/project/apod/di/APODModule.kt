@@ -36,7 +36,14 @@ val apodModule = module {
 
         scoped { APODRepository(apodApiService = get()) }
 
-        scoped { APODUseCase(calendarRepository = get(), remoteRepository = get(), localRepository = get()) }
+        scoped {
+            APODUseCase(
+                calendarRepository = get(),
+                remoteRepository = get(),
+                localRepository = get(),
+                androidNetworkStatus = get()
+            )
+        }
 
         scoped { APODViewModelFactory(apodUseCase = get()) }
     }

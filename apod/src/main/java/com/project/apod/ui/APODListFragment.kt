@@ -5,21 +5,25 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.*
+import android.widget.ImageView
 import androidx.annotation.ColorInt
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenResumed
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.ImageLoader
+import coil.request.ImageRequest
 import com.google.android.material.snackbar.Snackbar
 import com.project.apod.databinding.ListApodFragmentBinding
 import com.project.apod.di.SCOPE_APOD_LIST_MODULE
 import com.project.apod.entities.remote.APODResponse
 import com.project.apod.viewmodels.APODViewModel
 import com.project.apod.viewmodels.APODViewModelFactory
+import com.project.core.R
 import com.project.core.net.AndroidNetworkStatus
-import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.core.viewmodel.SettingsViewModel
 import kotlinx.coroutines.flow.collect
@@ -29,7 +33,7 @@ import org.koin.android.ext.android.inject
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 
-class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentBinding::inflate) {
+class APODListFragment : Fragment() {
     private val apodListFragmentScope: Scope =
         getKoin().getOrCreateScope(SCOPE_APOD_LIST_MODULE, named(SCOPE_APOD_LIST_MODULE))
 
@@ -40,12 +44,13 @@ class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentB
         SavedStateViewModelFactory(apodViewModelFactory, this)
     }
 
+    private var binding: ListApodFragmentBinding? = null
+
     private val adapter by lazy {
         APODRecyclerViewAdapter(::onItemClick, ::useCoilToLoadPhoto) { _, _ ->
-            with(binding.shimmerViewContainer) {
-                stopShimmer()
-                visibility = View.GONE
-            }
+            binding?.shimmerViewContainer?.stopShimmer()
+            binding?.shimmerViewContainer?.visibility = View.GONE
+            apodViewModel.onLoadingFinished()
         }
     }
 
@@ -62,12 +67,14 @@ class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentB
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return providePersistentView(inflater, container, savedInstanceState)
+        binding = ListApodFragmentBinding.inflate(inflater, container, false)
+        initRecyclerView()
+        return binding?.root
     }
 
     override fun onResume() {
         super.onResume()
-        binding.shimmerViewContainer.startShimmer()
+        binding?.shimmerViewContainer?.startShimmer()
         //returning transparent status bar background color
         val window: Window = requireActivity().window
         window.statusBarColor = Color.parseColor("#00000000")
@@ -75,7 +82,7 @@ class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentB
 
     override fun onPause() {
         super.onPause()
-        binding.shimmerViewContainer.stopShimmer()
+        binding?.shimmerViewContainer?.stopShimmer()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -88,22 +95,22 @@ class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentB
         @ColorInt val mColor = typedValue.data
         val window: Window = requireActivity().window
         context?.let { window.statusBarColor = mColor }
-
-        if (!hasInitializedRootView) {
-            hasInitializedRootView = true
-            apodViewModel.load(androidNetworkStatus.isNetworkAvailable())
-            initRecyclerView()
-        }
         with(apodViewModel) {
+            isOnceCreated().observe(viewLifecycleOwner) { isOnceCreated ->
+                if (isOnceCreated) {
+                    binding?.shimmerViewContainer?.stopShimmer()
+                    binding?.shimmerViewContainer?.visibility = View.GONE
+                }
+            }
             responseAPODFromDateToDate().observe(viewLifecycleOwner) { list ->
                 if (list.isNotEmpty()) {
                     adapter.items = list
                 } else {
-                    Snackbar.make(binding.root, "No data received", Snackbar.LENGTH_LONG).show()
+                    binding?.root?.let { Snackbar.make(it, "No data received", Snackbar.LENGTH_LONG).show() }
                 }
             }
             error().observe(viewLifecycleOwner) { exception ->
-                Snackbar.make(binding.root, exception.message.toString(), Snackbar.LENGTH_LONG).show()
+                binding?.root?.let { Snackbar.make(it, exception.message.toString(), Snackbar.LENGTH_LONG).show() }
             }
         }
         settingsViewModel.imageResolution.observe(viewLifecycleOwner) {
@@ -113,10 +120,8 @@ class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentB
     }
 
     private fun initRecyclerView() {
-        with(binding.rvListApodVertical) {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = this@APODListFragment.adapter
-        }
+        binding?.rvListApodVertical?.layoutManager = LinearLayoutManager(requireContext())
+        binding?.rvListApodVertical?.adapter = adapter
     }
 
     override fun onDestroy() {
@@ -129,5 +134,20 @@ class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentB
         val action = APODListFragmentDirections
             .actionFragmentApodToFragmentApodDescription(apodResponse)
         findNavController().navigate(action)
+    }
+
+    private fun useCoilToLoadPhoto(imageView: ImageView, imageLink: String?) {
+        context?.let { _context ->
+            val request = ImageRequest.Builder(_context)
+                .data(imageLink)
+                .target(
+                    onStart = {},
+                    onSuccess = { drawable -> imageView.setImageDrawable(drawable) },
+                    onError = { imageView.setImageResource(R.drawable.no_image) }
+                )
+                .crossfade(true)
+                .build()
+            ImageLoader(_context).enqueue(request)
+        }
     }
 }

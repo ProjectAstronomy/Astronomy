@@ -17,10 +17,19 @@ class APODViewModel(
 
     companion object {
         internal const val APODRESPONSE_FROM_DATE_TO_DATE = "PODRESPONSE_FROM_DATE_TO_DATE"
+        internal const val IS_ONCE_CREATED = "IS_ONCE_CREATED"
+    }
+
+    init {
+        load()
     }
 
     fun responseAPODFromDateToDate(): LiveData<List<APODResponse>> {
         return savedStateHandle.getLiveData(APODRESPONSE_FROM_DATE_TO_DATE)
+    }
+
+    fun isOnceCreated(): LiveData<Boolean> {
+        return savedStateHandle.getLiveData(IS_ONCE_CREATED)
     }
 
     override fun onCleared() {
@@ -28,12 +37,12 @@ class APODViewModel(
         savedStateHandle.set(APODRESPONSE_FROM_DATE_TO_DATE, null)
     }
 
-    fun load(isNetworkAvailable: Boolean) {
+    private fun load() {
         cancelJob()
         viewModelCoroutineScope.launch {
             var result: List<APODResponse>
             withContext(Dispatchers.IO) {
-                result = apodUseCase.load(isNetworkAvailable).reversed()
+                result = apodUseCase.load().reversed()
             }
             saveLoadedData(result)
         }
@@ -52,6 +61,10 @@ class APODViewModel(
 
     fun insert(apodResponse: APODResponse) {
         viewModelScope.launch { apodUseCase.insert(apodResponse) }
+    }
+
+    fun onLoadingFinished() {
+        savedStateHandle.set(IS_ONCE_CREATED, true)
     }
 
     internal fun saveLoadedData(result: List<APODResponse>) {
