@@ -16,12 +16,12 @@ class GSTRepositoryLocal(
     private val allKpIndexDao: AllKpIndexDao
 ) {
     suspend fun insertGeomagneticStorm(geomagneticStorm: GeomagneticStorm) {
-        convert(geomagneticStorm)?.let { geomagneticStormDao.insertGeomagneticStorm(it) }
+        geomagneticStormDao.insertGeomagneticStorm(convert(geomagneticStorm))
         geomagneticStorm.allKpIndex?.let {
-            geomagneticStorm.gstID?.let { gstID -> insertAllKpIndices(it, gstID) }
+            insertAllKpIndices(it, geomagneticStorm.gstID)
         }
         geomagneticStorm.linkedEvents?.let {
-            geomagneticStorm.gstID?.let { gstID -> insertLinkedEvents(it, gstID) }
+            insertLinkedEvents(it, geomagneticStorm.gstID)
         }
     }
 
@@ -57,14 +57,12 @@ class GSTRepositoryLocal(
         }
     }
 
-    private fun convert(geomagneticStorm: GeomagneticStorm): GeomagneticStormEntity? =
-        geomagneticStorm.gstID?.let {
-            GeomagneticStormEntity(
-                gstID = it,
-                startTime = geomagneticStorm.startTime,
-                link = geomagneticStorm.link
-            )
-        }
+    private fun convert(geomagneticStorm: GeomagneticStorm): GeomagneticStormEntity =
+        GeomagneticStormEntity(
+            gstID = geomagneticStorm.gstID,
+            startTime = geomagneticStorm.startTime,
+            link = geomagneticStorm.link
+        )
 
     private fun convert(geomagneticStormEntity: GeomagneticStormEntity): GeomagneticStorm =
         GeomagneticStorm(

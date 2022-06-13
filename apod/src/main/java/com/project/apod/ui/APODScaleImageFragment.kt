@@ -52,9 +52,9 @@ class APODScaleImageFragment :
         }
         useCoilToLoadPhoto(binding.myImageView, resolution)
         binding.myImageView.doOnLayout { originContentRect }
-        binding.viewTouchHandler.setOnTouchListener { view, event ->
+        binding.viewTouchHandler.setOnTouchListener { _view, event ->
             scaleGestureDetector.onTouchEvent(event)
-            translationHandler.onTouch(view, event)
+            translationHandler.onTouch(_view, event)
             true
         }
     }
@@ -63,7 +63,7 @@ class APODScaleImageFragment :
         super.onResume()
         //set status bar background color
         val window: Window = requireActivity().window
-        window.setStatusBarColor(Color.parseColor("#000000"))
+        window.statusBarColor = Color.parseColor("#000000")
     }
 
     // Ниже методы, относящиеся к жестам (ч. 3 из 3)

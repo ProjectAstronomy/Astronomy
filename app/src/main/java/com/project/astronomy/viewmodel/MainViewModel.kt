@@ -7,13 +7,13 @@ import com.project.astronomy.entities.ItemRv
 import com.project.astronomy.repository.MainRepository
 import com.project.core.viewmodel.BaseViewModel
 
-//TODO: complete MainViewModel
 class MainViewModel(
-    private val savedStateHandle: SavedStateHandle,
-    private val mainRepository: MainRepository
+    savedStateHandle: SavedStateHandle,
+    mainRepository: MainRepository
 ) : BaseViewModel(savedStateHandle) {
 
-    val liveDataSolar: LiveData<List<ItemRv>> = MutableLiveData(mainRepository.getListRvSolarFlare())
+    val liveDataSolar: LiveData<List<ItemRv>> =
+        MutableLiveData(mainRepository.getListRvSolarFlare())
     val liveDataEpic: LiveData<List<ItemRv>> = MutableLiveData(mainRepository.getListRvEpic())
     val liveDataMars: LiveData<List<ItemRv>> = MutableLiveData(mainRepository.getListRvMars())
 }

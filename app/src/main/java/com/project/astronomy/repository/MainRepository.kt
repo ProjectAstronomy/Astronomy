@@ -5,7 +5,7 @@ import com.project.astronomy.entities.ItemRv
 import com.project.astronomy.utils.ResourceProvider
 import com.project.astronomy.utils.*
 
-class MainRepository(private val resourceProvider: ResourceProvider) {
+class MainRepository(resourceProvider: ResourceProvider) {
 
     private val listItemRvSolarFlare: List<ItemRv> = listOf(
         ItemRv(resourceProvider.getString(R.string.title_main_solar), RV_SOLAR_TODAY),
