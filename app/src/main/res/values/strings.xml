@@ -30,6 +30,8 @@
     <string name="title_main_opportunity">Opportunity</string>
     <string name="title_front_in_main_fragment">An official data from NASA website</string>
     <string name="settings">Settings</string>
+    <string name="content_description_favorite">content_description_favorite</string>
+    <string name="main_settings">main_settings</string>
 
 
 </resources>

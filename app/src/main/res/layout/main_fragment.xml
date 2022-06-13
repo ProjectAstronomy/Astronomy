@@ -308,13 +308,7 @@
                                 />
 
                         </RelativeLayout>
-
                     </com.google.android.material.card.MaterialCardView>
-
-<!--                    <androidx.recyclerview.widget.RecyclerView-->
-<!--                        android:id="@+id/rv_apod"-->
-<!--                        style="@style/padding_start_top_end_normal_rv"-->
-<!--                        android:clipToPadding="false" />-->
 
                     <!--    2. Solar Flare-->
                     <com.google.android.material.textview.MaterialTextView

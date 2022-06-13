@@ -64,14 +64,19 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
             whenResumed {
                 androidNetworkStatus.networkState.collect { isNetworkAvailable ->
                     if (!isNetworkAvailable) {
-                        Snackbar.make(binding.root, "No internet connection", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(binding.root, "No internet connection", Snackbar.LENGTH_SHORT)
+                            .show()
                     }
                 }
             }
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return providePersistentView(inflater, container, savedInstanceState)
     }
 
@@ -102,8 +107,10 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
 
         binding.ivPic.setOnClickListener { onApodClickListener() }
 
-        binding.appBarLayout.findViewById<View>(R.id.main_appbar).findViewById<View>(R.id.settings).setOnClickListener { dropLayout() }
-        binding.appBarLayout.findViewById<View>(R.id.main_appbar).setOnClickListener { dropLayout() }
+        binding.appBarLayout.findViewById<View>(R.id.main_appbar).findViewById<View>(R.id.settings)
+            .setOnClickListener { dropLayout() }
+        binding.appBarLayout.findViewById<View>(R.id.main_appbar)
+            .setOnClickListener { dropLayout() }
 
         binding.cardviewIconOne.setOnClickListener {
             setIconsStrokeClear()
@@ -147,7 +154,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
 //        }
 //    }
 
-    private fun setIconsStrokeClear () {
+    private fun setIconsStrokeClear() {
         binding.cardviewIconOne.setStrokeWidth(0)
         binding.cardviewIconTwo.setStrokeWidth(0)
         binding.cardviewIconThree.setStrokeWidth(0)
@@ -184,7 +191,11 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         //sets specific status bar color because of no appbar animation in this fragment
         val typedValue = TypedValue()
         val theme: Resources.Theme = requireContext().theme
-        theme.resolveAttribute(com.google.android.material.R.attr.colorPrimaryVariant, typedValue, true)
+        theme.resolveAttribute(
+            com.google.android.material.R.attr.colorPrimaryVariant,
+            typedValue,
+            true
+        )
         @ColorInt val mColor = typedValue.data
         val window: Window = requireActivity().window
         context?.let { window.setStatusBarColor(mColor) }
