@@ -59,26 +59,26 @@
                 style="@style/padding_start_top_end_normal_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:checkedButton="@id/button_one"
+                app:checkedButton="@id/button_original_theme"
                 app:selectionRequired="true"
                 app:singleSelection="true">
 
                 <Button
-                    android:id="@+id/button_one"
+                    android:id="@+id/button_original_theme"
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_themes_original" />
 
                 <Button
-                    android:id="@+id/button_two"
+                    android:id="@+id/button_earth_theme"
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_themes_earth" />
 
                 <Button
-                    android:id="@+id/button_three"
+                    android:id="@+id/button_mars_theme"
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

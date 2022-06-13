@@ -23,7 +23,6 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class MissionManifestFragment :
     BaseFragment<FragmentMissionManifestBinding>(FragmentMissionManifestBinding::inflate) {
     private val navArgs: MissionManifestFragmentArgs by navArgs()

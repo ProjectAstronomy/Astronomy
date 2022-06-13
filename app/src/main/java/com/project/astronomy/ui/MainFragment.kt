@@ -26,6 +26,7 @@ import com.project.astronomy.di.SCOPE_MAIN_MODULE
 import com.project.astronomy.entities.ItemRv
 import com.project.astronomy.viewmodel.MainViewModel
 import com.project.core.entities.ApplicationIcon
+import com.project.core.entities.ApplicationTheme
 import com.project.core.entities.ImageResolution
 import com.project.core.net.AndroidNetworkStatus
 import com.project.core.ui.BaseFragment
@@ -133,6 +134,21 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
 
         binding.buttonResolutionRegular.setOnClickListener {
             settingsViewModel.setImageResolution(ImageResolution.REGULAR)
+        }
+
+        binding.buttonOriginalTheme.setOnClickListener {
+            settingsViewModel.setApplicationTheme(ApplicationTheme.ORIGINAL)
+            requireActivity().recreate()
+        }
+
+        binding.buttonMarsTheme.setOnClickListener {
+            settingsViewModel.setApplicationTheme(ApplicationTheme.MARS)
+            requireActivity().recreate()
+        }
+
+        binding.buttonEarthTheme.setOnClickListener {
+            settingsViewModel.setApplicationTheme(ApplicationTheme.EARTH)
+            requireActivity().recreate()
         }
     }
 
