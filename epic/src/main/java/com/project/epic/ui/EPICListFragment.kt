@@ -9,7 +9,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenCreated
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.project.core.entities.ImageResolution
 import com.project.core.net.AndroidNetworkStatus
 import com.project.core.ui.BaseFragment
@@ -28,9 +29,14 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
     private val epicFragmentScope =
         getKoin().getOrCreateScope(SCOPE_EPIC_MODULE, named(SCOPE_EPIC_MODULE))
 
+    private var mShimmerViewContainer: ShimmerFrameLayout? = null
+
+//    private val epicViewModelFactory: EPICViewModelFactory = epicFragmentScope.get()
+//    private val epicViewModel: EPICViewModel by viewModels {
+//        SavedStateViewModelFactory(epicViewModelFactory, this)
     private val epicViewModel: EPICViewModel by epicFragmentScope.inject {
-        parametersOf(SavedStateHandle())
-    }
+        parametersOf(SavedStateHandle()) }
+
 
     private val settingsViewModel by activityViewModels<SettingsViewModel>()
     private var imageResolution = ImageResolution.REGULAR
@@ -56,13 +62,19 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
         super.onViewCreated(view, savedInstanceState)
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
+            mShimmerViewContainer = binding.shimmerEpic
             initRecyclerView()
+            //            epicViewModel.loadAsync(
+//                androidNetworkStatus.isNetworkAvailable(),
+//                imageResolution.resolution
+//            )
         }
 
         with(epicViewModel) {
             responseEPIC().observe(viewLifecycleOwner) {
-                binding.title.text = it[0].caption
                 adapterEpic.items = it
+                mShimmerViewContainer?.stopShimmer()
+                mShimmerViewContainer?.visibility = View.GONE
             }
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
@@ -71,9 +83,19 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
 
     private fun initRecyclerView() {
         with(binding.rvListEpicVertical) {
-            layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = LinearLayoutManager(activity)
             adapter = this@EPICListFragment.adapterEpic
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mShimmerViewContainer?.startShimmer()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mShimmerViewContainer?.startShimmer()
     }
 
     override fun onDestroy() {

@@ -54,6 +54,9 @@ dependencies {
     implementation(Koin.koinAndroid)
     implementation(Koin.koinAndroidCompat)
 
+    //Facebook Shimmer
+    implementation(FacebookShimmer.facebookShimmer)
+
     //Lifecycle
     implementation(Lifecycle.lifecycleViewModelKTX)
     implementation(Lifecycle.lifecycleLiveDataKTX)
@@ -83,6 +86,8 @@ dependencies {
     //Design
     implementation(Design.appcompat)
     implementation(Design.material)
+    implementation(Design.circleImageView)
+    implementation(FacebookShimmer.facebookShimmer)
 
     //Navigation
     implementation(Navigation.navigationFragmentKTX)

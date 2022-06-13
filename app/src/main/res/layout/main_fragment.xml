@@ -4,8 +4,7 @@
     android:id="@+id/viewToScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -40,7 +39,6 @@
             android:background="?attr/colorPrimaryVariant"
             android:orientation="vertical">
 
-
             <!--   Themes-->
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -61,31 +59,31 @@
                 style="@style/padding_start_top_end_normal_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:checkedButton="@id/button_original_theme"
                 app:selectionRequired="true"
                 app:singleSelection="true">
 
                 <Button
-                    android:id="@+id/button_one"
+                    android:id="@+id/button_original_theme"
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_themes_original" />
 
                 <Button
-                    android:id="@+id/button_two"
+                    android:id="@+id/button_earth_theme"
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_themes_earth" />
 
                 <Button
-                    android:id="@+id/button_3"
+                    android:id="@+id/button_mars_theme"
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_themes_mars" />
             </com.google.android.material.button.MaterialButtonToggleGroup>
-
 
             <!--   Resolutions-->
             <LinearLayout
@@ -105,11 +103,11 @@
             <com.google.android.material.button.MaterialButtonToggleGroup
                 android:id="@+id/toggle_resolution"
                 style="@style/padding_start_top_end_normal_rv"
+                app:checkedButton="@id/button_resolution_regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:selectionRequired="true"
                 app:singleSelection="true">
-                <!--                app:checkedButton="@+id/button_resolution_hd"-->
 
                 <Button
                     android:id="@+id/button_resolution_hd"
@@ -226,7 +224,6 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-
         </LinearLayout>
 
         <!-- FRONT LAYOUT    -->
@@ -277,8 +274,7 @@
                         android:layout_margin="@dimen/step_normal"
                         app:cardCornerRadius="@dimen/radius_normal"
                         app:strokeWidth="@dimen/stroke_width_normal"
-                        app:cardElevation="@dimen/elevation_normal"
-                        >
+                        app:cardElevation="@dimen/elevation_normal">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -304,9 +300,7 @@
                                 android:layout_alignParentBottom="true"
                                 android:layout_alignParentStart="true"
                                 android:textAlignment="viewStart"
-                                android:text="@string/title_main_today"
-                                />
-
+                                android:text="@string/title_main_today" />
                         </RelativeLayout>
                     </com.google.android.material.card.MaterialCardView>
 

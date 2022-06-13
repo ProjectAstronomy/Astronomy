@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_epic"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="@dimen/radius_normal"
     app:cardElevation="@dimen/elevation_small"
+
     app:strokeWidth="@dimen/stroke_width_normal">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,8 +42,10 @@
                     android:src="@drawable/no_image"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.487" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/identifier_epic"
@@ -56,4 +59,4 @@
                     app:layout_constraintTop_toBottomOf="@+id/img_epic" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>
