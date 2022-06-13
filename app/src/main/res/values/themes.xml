@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- Base application theme. -->
     <style name="Theme.Astronomy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -8,7 +8,7 @@
         <item name="colorPrimaryVariant">@color/colorPrimaryVariantStandart</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:colorAccent" tools:targetApi="lollipop">#000000</item>
+        <item name="android:colorAccent" >#000000</item>
         <item name="myColorPrimaryLight">@color/colorPrimaryVariantStandart</item>
         <item name="colorSecondary">@color/teal_200</item>
         <!--   фон ресайклера-->
@@ -16,7 +16,7 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. (по умолчанию также colorPrimaryDark) -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- ���� ����������� ��������� ��������-->
         <item name="android:windowBackground">?attr/myColorPrimaryLight</item>
     </style>
@@ -36,20 +36,19 @@
         <item name="android:windowBackground">@drawable/gradient_splash</item>
     </style>
 
-
     <!--   Марсианская-->
     <style name="Theme.Astronomy.Mars" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/RelativeLayoutStyleMars</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textAppearanceButton">@color/white</item>
-        <item name="android:colorAccent" tools:targetApi="lollipop">#000000</item>
+        <item name="android:colorAccent">#000000</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/colorPrimaryMars</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. (по умолчанию также colorPrimaryDark) -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- ���� ����������� ��������� ��������-->
         <item name="android:windowBackground">?attr/myColorPrimaryLight</item>
         <item name="colorPrimaryDark">@color/colorPrimaryMars</item>
@@ -77,20 +76,19 @@
         <item name="android:windowBackground">@drawable/gradient_splash</item>
     </style>
 
-
     <!--   Земная-->
     <style name="Theme.Astronomy.Earth" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/RelativeLayoutStyleEarth</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textAppearanceButton">@color/white</item>
-        <item name="android:colorAccent" tools:targetApi="lollipop">#000000</item>
+        <item name="android:colorAccent">#000000</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/colorPrimaryEarth</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. (по умолчанию также colorPrimaryDark) -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- ���� ����������� ��������� ��������-->
         <item name="android:windowBackground">?attr/myColorPrimaryLight</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkEarth</item>

@@ -63,7 +63,10 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
         }
 
         with(flrViewModel) {
-            responseSolarFlare().observe(viewLifecycleOwner) { adapterSolarVertical.items = it }
+            responseSolarFlare().observe(viewLifecycleOwner) {
+                binding.shimmerViewContainerFlr.stopShimmer()
+                adapterSolarVertical.items = it
+            }
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
     }
@@ -73,6 +76,16 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
             layoutManager = LinearLayoutManager(context)
             adapter = this@FLRListFragment.adapterSolarVertical
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.shimmerViewContainerFlr.startShimmer()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.shimmerViewContainerFlr.stopShimmer()
     }
 
     override fun onDestroy() {

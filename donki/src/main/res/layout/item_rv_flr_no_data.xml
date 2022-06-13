@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/step_zero"
@@ -13,12 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_date_solar"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@color/grey_100"
-            android:backgroundTint="@color/blue_grey_100"
+            android:background="@color/grey_300"
             android:paddingTop="@dimen/step_small"
             android:paddingBottom="@dimen/step_small"
             android:textAlignment="center"
@@ -42,11 +40,10 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_instead_of_scale"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            app:cardBackgroundColor="@color/light_green_800"
             android:paddingTop="@dimen/step_small"
             android:paddingBottom="@dimen/step_small"
             android:paddingStart="@dimen/step_normal"

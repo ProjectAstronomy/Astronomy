@@ -5,6 +5,7 @@
     <dimen name="step_top_heading">36dp</dimen>
     <dimen name="step_start_heading">12dp</dimen>
     <dimen name="text_size_heading">24sp</dimen>
+    <dimen name="text_size_appbar">20sp</dimen>
 
 
     <!--large-->
@@ -17,11 +18,13 @@
     <dimen name="step_large_plus">28dp</dimen>
     <dimen name="step_large">24dp</dimen>
     <dimen name="radius_large">24dp</dimen>
+    <dimen name="stroke_width_large">4dp</dimen>
     <dimen name="elevation_large">6dp</dimen>
     <dimen name="text_size_large">16sp</dimen>
 
     <!--normal-->
     <dimen name="step_normal">12dp</dimen>
+    <dimen name="step_normal_too">8dp</dimen>
     <dimen name="step_start_normal">12dp</dimen>
     <dimen name="step_bottom_normal">12dp</dimen>
     <dimen name="step_top_normal">12dp</dimen>
@@ -31,13 +34,13 @@
 
     <dimen name="radius_normal">12dp</dimen>
     <dimen name="stroke_width_normal">1dp</dimen>
-    <dimen name="elevation_normal">5dp</dimen>
+    <dimen name="elevation_normal">4dp</dimen>
 
     <!--small-->
     <dimen name="step_small">6dp</dimen>
     <dimen name="step_start_small">6dp</dimen>
     <dimen name="step_bottom_small">6dp</dimen>
-    <dimen name="elevation_small">2dp</dimen>
+    <dimen name="elevation_small">1dp</dimen>
     <dimen name="step_between_rv_items_small">6dp</dimen>
     <dimen name="text_size_small">6sp</dimen>
 

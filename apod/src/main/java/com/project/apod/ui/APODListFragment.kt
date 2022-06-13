@@ -1,9 +1,11 @@
 package com.project.apod.ui
 
+import android.content.res.Resources
+import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.TypedValue
+import android.view.*
+import androidx.annotation.ColorInt
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.lifecycleScope
@@ -26,6 +28,7 @@ import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
+
 
 class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentBinding::inflate) {
     private val apodListFragmentScope: Scope =
@@ -68,6 +71,9 @@ class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentB
     override fun onResume() {
         super.onResume()
         binding.shimmerViewContainer.startShimmer()
+        //returning transparent status bar background color
+        val window: Window = requireActivity().window
+        window.setStatusBarColor(Color.parseColor("#00000000"))
     }
 
     override fun onPause() {
@@ -77,6 +83,15 @@ class APODListFragment : BaseFragment<ListApodFragmentBinding>(ListApodFragmentB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //sets specific status bar color because of no appbar animation in this fragment
+        val typedValue = TypedValue()
+        val theme: Resources.Theme = requireContext().theme
+        theme.resolveAttribute(com.google.android.material.R.attr.colorPrimaryVariant, typedValue, true)
+        @ColorInt val mColor = typedValue.data
+        val window: Window = requireActivity().window
+        context?.let { window.setStatusBarColor(mColor) }
+
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             initRecyclerView()
