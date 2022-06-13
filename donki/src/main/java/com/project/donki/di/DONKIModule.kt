@@ -1,7 +1,6 @@
 package com.project.donki.di
 
 import android.content.Context
-import androidx.lifecycle.SavedStateHandle
 import androidx.room.Room
 import com.project.donki.database.DONKIDatabase
 import com.project.donki.database.DONKI_DATABASE_NAME
@@ -12,10 +11,9 @@ import com.project.donki.domain.remote.api.FLRApiService
 import com.project.donki.domain.remote.api.GSTApiService
 import com.project.donki.usecases.FLRUseCase
 import com.project.donki.usecases.GSTUseCase
-import com.project.donki.viewmodels.FLRViewModel
-import com.project.donki.viewmodels.GSTViewModel
+import com.project.donki.viewmodels.factories.FLRViewModelFactory
+import com.project.donki.viewmodels.factories.GSTViewModelFactory
 import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -65,9 +63,7 @@ val flrModule = module {
 
         scoped { FLRUseCase(calendarRepository = get(), remoteRepository = get(), localRepository = get()) }
 
-        viewModel { (savedStateHandle: SavedStateHandle) ->
-            FLRViewModel(savedStateHandle = savedStateHandle, flrUseCase = get())
-        }
+        scoped { FLRViewModelFactory(flrUseCase = get()) }
     }
 }
 
@@ -81,8 +77,6 @@ val gstModule = module {
 
         scoped { GSTUseCase(calendarRepository = get(), remoteRepository = get(), localRepository = get()) }
 
-        viewModel { (savedStateHandle: SavedStateHandle) ->
-            GSTViewModel(savedStateHandle = savedStateHandle, gstUseCase = get())
-        }
+        scoped { GSTViewModelFactory(gstUseCase = get()) }
     }
 }
