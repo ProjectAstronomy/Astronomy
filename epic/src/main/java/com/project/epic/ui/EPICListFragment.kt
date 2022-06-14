@@ -1,9 +1,14 @@
 package com.project.epic.ui
 
+import android.content.res.Resources
+import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import androidx.annotation.ColorInt
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.lifecycleScope
@@ -60,6 +65,11 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //returning transparent status bar background color
+        val window: Window = requireActivity().window
+        window.setStatusBarColor(Color.parseColor("#00000000"))
+
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             mShimmerViewContainer = binding.shimmerEpic
@@ -91,6 +101,9 @@ class EPICListFragment : BaseFragment<FragmentListEpicBinding>(FragmentListEpicB
     override fun onResume() {
         super.onResume()
         mShimmerViewContainer?.startShimmer()
+        //returning transparent status bar background color
+        val window: Window = requireActivity().window
+        window.setStatusBarColor(Color.parseColor("#00000000"))
     }
 
     override fun onPause() {
