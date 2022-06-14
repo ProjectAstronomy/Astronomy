@@ -53,6 +53,7 @@
                 android:id="@+id/status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/step_normal"
                 android:gravity="left"
                 android:paddingLeft="10sp"
                 android:text="@string/status_mission"
