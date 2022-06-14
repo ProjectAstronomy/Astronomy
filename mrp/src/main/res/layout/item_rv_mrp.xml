@@ -4,6 +4,9 @@
     android:id="@+id/card_mrp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/step_small"
+    android:layout_marginStart="@dimen/step_small"
+    android:layout_marginEnd="@dimen/step_small"
     app:cardCornerRadius="@dimen/radius_normal"
     app:cardElevation="@dimen/elevation_small"
     app:strokeWidth="@dimen/stroke_width_normal">
@@ -19,6 +22,7 @@
             android:gravity="left"
             android:paddingLeft="10sp"
             android:paddingTop="@dimen/padding_10"
+            android:textColor="?attr/colorPrimary"
             app:layout_constraintBottom_toTopOf="@id/earthDate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
