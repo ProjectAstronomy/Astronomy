@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 class AndroidNetworkStatus(context: Context) {
     private val connectivityManager = context.getSystemService<ConnectivityManager>()
-    private val _networkState = MutableStateFlow(false)
+    private val _networkState = MutableStateFlow(true)
     val networkState: StateFlow<Boolean> = _networkState
 
     init {

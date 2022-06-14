@@ -35,9 +35,11 @@ class MissionRecyclerViewAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MissionViewHolder =
-        MissionViewHolder(ItemRvMrpBinding.inflate(LayoutInflater.from(parent.context),
+        MissionViewHolder(
+            ItemRvMrpBinding.inflate(LayoutInflater.from(parent.context),
             parent,
-            false))
+            false)
+        )
 
     inner class MissionViewHolder(private val viewBinding: ItemRvMrpBinding) :
         BaseViewHolder<PhotosInformation>(viewBinding.root) {

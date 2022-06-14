@@ -1,6 +1,5 @@
 package com.project.astronomy.utils
 
-internal const val RV_APOD_TODAY = "rv_apod_today"
 internal const val RV_SOLAR_TODAY = "rv_solar_today"
 internal const val RV_GEO_TODAY = "rv_geo_today"
 internal const val RV_EPIC_TODAY = "rv_epic_today"

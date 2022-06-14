@@ -14,7 +14,6 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.project.apod.R
 import com.project.apod.databinding.OneApodFragmentBinding
 import com.project.core.entities.ImageResolution
 import com.project.core.ui.BaseFragment
@@ -85,6 +84,6 @@ class APODDescriptionFragment :
         theme.resolveAttribute(com.google.android.material.R.attr.colorPrimaryVariant, typedValue, true)
         @ColorInt val mColor = typedValue.data
         val window: Window = requireActivity().window
-        context?.let { window.setStatusBarColor(mColor) }
+        context?.let { window.statusBarColor = mColor }
     }
 }

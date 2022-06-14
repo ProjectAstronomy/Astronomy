@@ -85,8 +85,7 @@ class MissionManifestFragment :
     }
 
     @SuppressLint("SimpleDateFormat")
-    private fun transformDate(date: String?): String {
-        val serverDate = date
+    private fun transformDate(serverDate: String?): String {
         val originalFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
         val targetFormat: DateFormat = SimpleDateFormat("dd-MMM-yyyy")
         val date: Date = originalFormat.parse(serverDate.toString()) as Date

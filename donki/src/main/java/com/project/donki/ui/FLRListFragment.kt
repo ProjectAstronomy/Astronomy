@@ -4,23 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.SavedStateHandle
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenCreated
 import androidx.lifecycle.whenResumed
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.core.net.AndroidNetworkStatus
 import com.project.core.ui.BaseFragment
+import com.project.core.viewmodel.SavedStateViewModelFactory
 import com.project.donki.databinding.FragmentListFlrBinding
 import com.project.donki.di.SCOPE_FLR_MODULE
 import com.project.donki.entities.remote.SolarFlare
 import com.project.donki.ui.adapters.FLRRecyclerViewAdapter
 import com.project.donki.viewmodels.FLRViewModel
+import com.project.donki.viewmodels.factories.FLRViewModelFactory
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 import org.koin.core.scope.Scope
 
@@ -28,8 +29,9 @@ class FLRListFragment : BaseFragment<FragmentListFlrBinding>(FragmentListFlrBind
     private val flrListFragmentScope: Scope =
         getKoin().getOrCreateScope(SCOPE_FLR_MODULE, named(SCOPE_FLR_MODULE))
 
-    private val flrViewModel: FLRViewModel by flrListFragmentScope.inject {
-        parametersOf(SavedStateHandle())
+    private val flrViewModelFactory: FLRViewModelFactory = flrListFragmentScope.get()
+    private val flrViewModel: FLRViewModel by viewModels {
+        SavedStateViewModelFactory(flrViewModelFactory, this)
     }
 
     private val onSolarFlareClicked: (SolarFlare) -> Unit = { flrViewModel.insert(it) }

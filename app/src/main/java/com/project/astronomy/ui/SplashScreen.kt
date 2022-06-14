@@ -7,8 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.project.astronomy.R
-import com.project.astronomy.databinding.SplashScreenBinding
-
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : Activity() {
@@ -21,7 +19,7 @@ class SplashScreen : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
 
-        Handler(Looper.getMainLooper()).postDelayed(Runnable {
+        Handler(Looper.getMainLooper()).postDelayed({
             val mainIntent = Intent(this@SplashScreen, MainActivity::class.java)
             this@SplashScreen.startActivity(mainIntent)
             this@SplashScreen.finish()

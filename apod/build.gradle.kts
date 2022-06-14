@@ -56,6 +56,9 @@ dependencies {
     //Modules
     implementation(project(mapOf("path" to Modules.core)))
 
+    //Coil
+    implementation(Coil.coil)
+
     //StartUp
     implementation(StartUp.startUpRuntime)
 

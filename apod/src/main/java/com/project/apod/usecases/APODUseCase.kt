@@ -4,14 +4,16 @@ import com.project.apod.domain.local.APODRepositoryLocal
 import com.project.apod.domain.remote.APODRepository
 import com.project.apod.entities.remote.APODResponse
 import com.project.core.domain.CalendarRepository
+import com.project.core.net.AndroidNetworkStatus
 
 class APODUseCase(
     private val calendarRepository: CalendarRepository,
     private val remoteRepository: APODRepository,
-    private val localRepository: APODRepositoryLocal
+    private val localRepository: APODRepositoryLocal,
+    private val androidNetworkStatus: AndroidNetworkStatus
 ) {
-    suspend fun load(isNetworkAvailable: Boolean): List<APODResponse> {
-        return if (!isNetworkAvailable) {
+    suspend fun load(): List<APODResponse> {
+        return if (!androidNetworkStatus.isNetworkAvailable()) {
             localRepository.getAll()
         } else {
             calendarRepository.refreshDates(CalendarRepository.RangeFlag.ONE_MONTH)
