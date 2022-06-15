@@ -20,6 +20,7 @@ import androidx.lifecycle.whenResumed
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.project.astronomy.BuildConfig
 import com.project.astronomy.R
 import com.project.astronomy.databinding.MainFragmentBinding
 import com.project.astronomy.di.SCOPE_MAIN_MODULE
@@ -104,27 +105,30 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         binding.appBarLayout.findViewById<View>(R.id.main_appbar).findViewById<View>(R.id.settings).setOnClickListener { dropLayout() }
         binding.appBarLayout.findViewById<View>(R.id.main_appbar).setOnClickListener { dropLayout() }
 
+        // initial icon stroke
+        binding.cardviewIconOne.strokeWidth = 6
+
         binding.cardviewIconOne.setOnClickListener {
             setIconsStrokeClear()
-            binding.cardviewIconOne.strokeWidth = 12
+            binding.cardviewIconOne.strokeWidth = 6
             settingsViewModel.setApplicationIcon(ApplicationIcon.MARS)
         }
 
         binding.cardviewIconTwo.setOnClickListener {
             setIconsStrokeClear()
-            binding.cardviewIconTwo.strokeWidth = 12
+            binding.cardviewIconTwo.strokeWidth = 6
             settingsViewModel.setApplicationIcon(ApplicationIcon.JUPITER)
         }
 
         binding.cardviewIconThree.setOnClickListener {
             setIconsStrokeClear()
-            binding.cardviewIconThree.strokeWidth = 12
+            binding.cardviewIconThree.strokeWidth = 6
             settingsViewModel.setApplicationIcon(ApplicationIcon.ROVER)
         }
 
         binding.cardviewIconFour.setOnClickListener {
             setIconsStrokeClear()
-            binding.cardviewIconFour.strokeWidth = 12
+            binding.cardviewIconFour.strokeWidth = 6
             settingsViewModel.setApplicationIcon(ApplicationIcon.VENUS)
         }
 
@@ -183,7 +187,6 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         }
     }
 
-
     override fun onResume() {
         super.onResume()
         //sets specific status bar color because of no appbar animation in this fragment
@@ -194,7 +197,6 @@ class MainFragment : BaseFragment<MainFragmentBinding>(MainFragmentBinding::infl
         val window: Window = requireActivity().window
         context?.let { window.statusBarColor = mColor }
     }
-
 
     override fun onStop() {
         super.onStop()

@@ -8,7 +8,8 @@
     android:layout_marginEnd="@dimen/step_between_rv_items_normal"
     app:cardCornerRadius="@dimen/radius_normal"
     app:strokeWidth="@dimen/stroke_width_normal"
-    app:cardElevation="@dimen/elevation_normal"
+    app:cardElevation="@dimen/elevation_small"
+    app:cardBackgroundColor="?attr/colorOnPrimary"
     >
 
     <RelativeLayout

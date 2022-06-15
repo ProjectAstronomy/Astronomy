@@ -4,6 +4,9 @@
     android:id="@+id/card_epic"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/step_normal"
+    android:layout_marginStart="@dimen/step_small"
+    android:layout_marginEnd="@dimen/step_small"
     app:cardCornerRadius="@dimen/radius_normal"
     app:cardElevation="@dimen/elevation_small"
 
@@ -28,6 +31,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/date_epic"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="@dimen/text_size_large"
                     app:layout_constraintBottom_toTopOf="@+id/img_epic"
                     app:layout_constraintStart_toEndOf="@+id/ver_epic"
                     app:layout_constraintEnd_toEndOf="parent"
