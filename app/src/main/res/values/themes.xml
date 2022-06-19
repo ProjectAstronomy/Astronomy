@@ -1,115 +1,63 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="Theme.Astronomy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorPrimaryVariantStandart</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryVariantStandart</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryVariantStandart</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:colorAccent" >#000000</item>
-        <item name="myColorPrimaryLight">@color/colorPrimaryVariantStandart</item>
-        <item name="colorSecondary">@color/teal_200</item>
-        <!--   фон ресайклера-->
-        <item name="colorSurface">@color/colorSurfaceStandart</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. (по умолчанию также colorPrimaryDark) -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- ���� ����������� ��������� ��������-->
-        <item name="android:windowBackground">?attr/myColorPrimaryLight</item>
-    </style>
-
-    <style name="ChipStandart" parent="Widget.MaterialComponents.Chip.Entry">
-        <item name="chipBackgroundColor">@color/ChipStandart</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-    <style name="RelativeLayoutStyleStandart" parent="@android:style/Widget">
-        <item name="android:background">@color/RelativeLayoutStyleStandart</item>
-    </style>
-    <style name="cardViewStandart" parent="Widget.MaterialComponents.CardView">
-        <item name="cardBackgroundColor">@color/RelativeLayoutStyleStandart</item>
-        <item name="background">@color/RelativeLayoutStyleStandart</item>
-    </style>
     <style name="SplashThemeStandart" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/gradient_splash</item>
     </style>
 
-    <!--   Марсианская-->
-    <style name="Theme.Astronomy.Mars" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/RelativeLayoutStyleMars</item>
+    <!-- Base application theme. -->
+    <style name="Theme.Astronomy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/red_500</item>
+        <item name="colorPrimaryDark">@color/blue_300</item>
+        <item name="colorPrimaryVariant">@color/blue_300</item>
+        <item name="android:textColor">@color/grey_800</item>
+        <!-- Color background (not main)       -->
+        <item name="myColorPrimaryLight">@color/blue_200</item>
+        <!-- Color background in cardview      -->
         <item name="colorOnPrimary">@color/white</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textAppearanceButton">@color/white</item>
-        <item name="android:colorAccent">#000000</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/colorPrimaryMars</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <!-- rv background-->
+        <item name="colorSurface">@color/grey_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. (по умолчанию также colorPrimaryDark) -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- ���� ����������� ��������� ��������-->
         <item name="android:windowBackground">?attr/myColorPrimaryLight</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryMars</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryVariantMars</item>
-        <!-- фон задний -->
-        <item name="myColorPrimaryLight">@color/myColorPrimaryLightMArs</item>
-        <item name="chipStyle">@style/ChipMars</item>
-        <item name="cardViewStyle">@style/cardViewMars</item>
-        <!--   фон ресайклера-->
-        <item name="colorSurface">@color/colorSurfaceMars</item>
-    </style>
-
-    <style name="cardViewMars" parent="Widget.MaterialComponents.CardView">
-        <item name="cardBackgroundColor">@color/RelativeLayoutStyleMars</item>
-        <item name="background">@color/RelativeLayoutStyleMars</item>
-    </style>
-    <style name="ChipMars" parent="Widget.MaterialComponents.Chip.Entry">
-        <item name="chipBackgroundColor">@color/ChipMars</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-    <style name="RelativeLayoutStyleMars" parent="@android:style/Widget">
-        <item name="android:background">@color/RelativeLayoutStyleMars</item>
-    </style>
-    <style name="SplashThemeMars" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/gradient_splash</item>
     </style>
 
     <!--   Земная-->
     <style name="Theme.Astronomy.Earth" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/RelativeLayoutStyleEarth</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue_700</item>
+        <item name="colorPrimaryDark">@color/green_300</item>
+        <item name="colorPrimaryVariant">@color/green_300</item>
+        <item name="android:textColor">@color/grey_800</item>
+        <!-- Color background (not main)       -->
+        <item name="myColorPrimaryLight">@color/green_200</item>
+        <!-- Color background in cardview      -->
         <item name="colorOnPrimary">@color/white</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textAppearanceButton">@color/white</item>
-        <item name="android:colorAccent">#000000</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/colorPrimaryEarth</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <!-- rv background-->
+        <item name="colorSurface">@color/grey_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. (по умолчанию также colorPrimaryDark) -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- ���� ����������� ��������� ��������-->
         <item name="android:windowBackground">?attr/myColorPrimaryLight</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkEarth</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryEarth</item>
-        <!-- фон задний -->
-        <item name="myColorPrimaryLight">@color/myColorPrimaryLightEarth</item>
-        <item name="chipStyle">@style/ChipEarth</item>
-        <item name="cardViewStyle">@style/cardViewEarth</item>
-        <!--   фон ресайклера-->
-        <item name="colorSurface">@color/colorSurfaceEarth</item>
     </style>
 
-    <style name="ChipEarth" parent="Widget.MaterialComponents.Chip.Entry">
-        <item name="chipBackgroundColor">@color/ChipEarth</item>
-        <item name="android:textColor">@color/white</item>
+    <!--   Марсианская-->
+    <style name="Theme.Astronomy.Mars" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange_900</item>
+        <item name="colorPrimaryDark">@color/deep_orange_300</item>
+        <item name="colorPrimaryVariant">@color/deep_orange_300</item>
+        <item name="android:textColor">@color/grey_800</item>
+        <!-- Color background (not main)       -->
+        <item name="myColorPrimaryLight">@color/deep_orange_200</item>
+        <!-- Color background in cardview      -->
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- rv background-->
+        <item name="colorSurface">@color/grey_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. (по умолчанию также colorPrimaryDark) -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:windowBackground">?attr/myColorPrimaryLight</item>
     </style>
-    <style name="RelativeLayoutStyleEarth" parent="@android:style/Widget">
-        <item name="android:background">@color/RelativeLayoutStyleEarth</item>
-    </style>
-    <style name="cardViewEarth" parent="Widget.MaterialComponents.CardView">
-        <item name="cardBackgroundColor">@color/RelativeLayoutStyleEarth</item>
-        <item name="background">@color/RelativeLayoutStyleEarth</item>
-    </style>
+
 </resources>

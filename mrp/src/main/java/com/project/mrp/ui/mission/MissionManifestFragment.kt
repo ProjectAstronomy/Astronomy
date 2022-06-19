@@ -1,10 +1,15 @@
 package com.project.mrp.ui.mission
 
 import android.annotation.SuppressLint
+import android.content.res.Resources
+import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import androidx.annotation.ColorInt
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -59,6 +64,15 @@ class MissionManifestFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //sets specific status bar color because of no appbar animation in this fragment
+        val typedValue = TypedValue()
+        val theme: Resources.Theme = requireContext().theme
+        theme.resolveAttribute(com.google.android.material.R.attr.colorPrimaryVariant, typedValue, true)
+        @ColorInt val mColor = typedValue.data
+        val window: Window = requireActivity().window
+        context?.let { window.setStatusBarColor(mColor) }
+
         if (!hasInitializedRootView) {
             hasInitializedRootView = true
             mShimmerViewContainer = binding.shimmerViewContainerRoverImg
@@ -70,6 +84,9 @@ class MissionManifestFragment :
     override fun onResume() {
         super.onResume()
         mShimmerViewContainer?.startShimmer()
+        //returning transparent status bar background color
+        val window: Window = requireActivity().window
+        window.setStatusBarColor(Color.parseColor("#00000000"))
     }
 
     override fun onPause() {

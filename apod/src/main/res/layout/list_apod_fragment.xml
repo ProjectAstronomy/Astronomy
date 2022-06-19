@@ -59,6 +59,8 @@
             android:layout_height="@dimen/step_xxx_small"
             app:cardElevation="@dimen/elevation_normal"
             android:backgroundTint="#0D000000"
+            android:layout_marginStart="@dimen/step_small"
+            android:layout_marginEnd="@dimen/step_small"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <com.facebook.shimmer.ShimmerFrameLayout

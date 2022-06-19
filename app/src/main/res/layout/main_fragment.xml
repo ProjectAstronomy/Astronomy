@@ -153,7 +153,7 @@
                     android:layout_marginTop="@dimen/step_start_normal"
                     app:cardCornerRadius="@dimen/radius_normal"
                     app:strokeWidth="@dimen/step_zero"
-                    app:strokeColor="?attr/colorAccent">
+                    app:strokeColor="?attr/colorPrimary">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -274,7 +274,8 @@
                         android:layout_margin="@dimen/step_normal"
                         app:cardCornerRadius="@dimen/radius_normal"
                         app:strokeWidth="@dimen/stroke_width_normal"
-                        app:cardElevation="@dimen/elevation_normal">
+                        app:cardElevation="@dimen/elevation_small"
+                        app:cardBackgroundColor="?attr/colorOnPrimary">
 
                         <RelativeLayout
                             android:layout_width="match_parent"

@@ -6,9 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/step_normal"
+    android:layout_marginStart="@dimen/step_small"
+    android:layout_marginEnd="@dimen/step_small"
     app:cardCornerRadius="@dimen/radius_normal"
     app:strokeWidth="@dimen/stroke_width_normal"
     app:cardElevation="@dimen/elevation_small"
+    app:cardBackgroundColor="?attr/colorOnPrimary"
     >
 
     <LinearLayout
@@ -28,7 +31,7 @@
                 style="@style/margin_all_normal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.8"
+                android:layout_weight="0.75"
                 android:gravity="top|start"
                 android:textSize="@dimen/text_size_heading" />
 
@@ -37,9 +40,10 @@
                 style="@style/margin_all_normal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
+                android:layout_weight="0.25"
                 android:gravity="top|end"
-                android:textSize="@dimen/text_size_normal" />
+                android:textSize="@dimen/text_size_normal"
+                android:textColor="?attr/colorPrimary"/>
 
         </LinearLayout>
 
