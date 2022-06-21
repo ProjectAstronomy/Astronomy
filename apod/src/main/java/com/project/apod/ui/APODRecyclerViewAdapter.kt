@@ -1,21 +1,21 @@
 package com.project.apod.ui
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
-import android.webkit.WebView
 import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import com.project.apod.database.YOUTUBE
 import com.project.apod.databinding.ItemRvApodBinding
 import com.project.apod.entities.remote.APODResponse
 import com.project.core.entities.ImageResolution
 import com.project.core.ui.BaseRecyclerViewAdapter
+
 
 class APODRecyclerViewAdapter(
     private val onItemClickListener: (APODResponse) -> Unit,
@@ -78,7 +78,7 @@ class APODRecyclerViewAdapter(
                     "video" -> {
                         viewBinding.ivUrlApod.visibility = View.GONE
                         viewBinding.wvRvUrlVideoApod.visibility = View.VISIBLE
-                        if (apodResponse.url?.take(23) == "https://www.youtube.com") {
+                        if (Regex(YOUTUBE).containsMatchIn(apodResponse.url.toString())) {
                             with(viewBinding.wvRvUrlVideoApod) {
                                 visibility = View.VISIBLE
                                 settings.javaScriptEnabled = true

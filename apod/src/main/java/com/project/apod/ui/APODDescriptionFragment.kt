@@ -17,6 +17,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.project.apod.R
+import com.project.apod.database.YOUTUBE
 import com.project.apod.databinding.OneApodFragmentBinding
 import com.project.core.entities.ImageResolution
 import com.project.core.ui.BaseFragment
@@ -67,7 +68,7 @@ class APODDescriptionFragment :
                     binding.ivUrlApod.visibility = View.GONE
                     binding.wvOneUrlVideoApod.visibility = View.VISIBLE
                     binding.saveImageToExternalStorage.text = getString(R.string.open_in_browser)
-                    if (apodResponse.url?.take(23) == "https://www.youtube.com") {
+                    if (Regex(YOUTUBE).containsMatchIn(apodResponse.url.toString())) {
                         with(binding.wvOneUrlVideoApod) {
                             settings.javaScriptEnabled = true
                             settings.pluginState = android.webkit.WebSettings.PluginState.ON
