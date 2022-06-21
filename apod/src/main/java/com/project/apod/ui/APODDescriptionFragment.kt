@@ -1,7 +1,9 @@
 package com.project.apod.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.Resources
+import android.net.Uri
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -20,13 +22,18 @@ import com.project.core.entities.ImageResolution
 import com.project.core.ui.BaseFragment
 import com.project.core.viewmodel.SettingsViewModel
 
+
 class APODDescriptionFragment :
     BaseFragment<OneApodFragmentBinding>(OneApodFragmentBinding::inflate) {
 
     internal val navArgs: APODDescriptionFragmentArgs by navArgs()
     private val settingsViewModel: SettingsViewModel by activityViewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return providePersistentView(inflater, container, savedInstanceState)
     }
 
@@ -58,12 +65,21 @@ class APODDescriptionFragment :
                 }
                 "video" -> {
                     binding.ivUrlApod.visibility = View.GONE
-                    with(binding.wvOneUrlVideoApod) {
-                        visibility = View.VISIBLE
-                        settings.javaScriptEnabled = true
-                        settings.pluginState = android.webkit.WebSettings.PluginState.ON
-                        loadUrl(apodResponse.url + "&fs=0&loop=1&modestbranding=1&autoplay=1&mute=1")
-                        webChromeClient = WebChromeClient()
+                    binding.wvOneUrlVideoApod.visibility = View.VISIBLE
+                    binding.saveImageToExternalStorage.text = getString(R.string.open_in_browser)
+                    if (apodResponse.url?.take(23) == "https://www.youtube.com") {
+                        with(binding.wvOneUrlVideoApod) {
+                            settings.javaScriptEnabled = true
+                            settings.pluginState = android.webkit.WebSettings.PluginState.ON
+                            loadUrl(apodResponse.url + "&fs=0&loop=1&modestbranding=1&autoplay=1&mute=1")
+                            webChromeClient = WebChromeClient()
+                        }
+                    } else {
+                        binding.wvOneUrlVideoApod.loadUrl(apodResponse.url.toString())
+                    }
+                    binding.saveImageToExternalStorage.setOnClickListener {
+                        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(apodResponse.url.toString()))
+                        startActivity(browserIntent)
                     }
                 }
             }
@@ -82,7 +98,11 @@ class APODDescriptionFragment :
         //sets specific status bar color because of no appbar animation in this fragment
         val typedValue = TypedValue()
         val theme: Resources.Theme = requireContext().theme
-        theme.resolveAttribute(com.google.android.material.R.attr.colorPrimaryVariant, typedValue, true)
+        theme.resolveAttribute(
+            com.google.android.material.R.attr.colorPrimaryVariant,
+            typedValue,
+            true
+        )
         @ColorInt val mColor = typedValue.data
         val window: Window = requireActivity().window
         context?.let { window.setStatusBarColor(mColor) }

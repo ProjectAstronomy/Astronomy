@@ -1,11 +1,14 @@
 package com.project.apod.ui
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
+import android.webkit.WebView
 import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -35,7 +38,13 @@ class APODRecyclerViewAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): APODViewHolder =
-        APODViewHolder(ItemRvApodBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        APODViewHolder(
+            ItemRvApodBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
 
     fun onImageResolutionChanged(imageResolution: ImageResolution) {
         this.imageResolution = imageResolution
@@ -51,6 +60,7 @@ class APODRecyclerViewAdapter(
                 tvTitleApod.text = apodResponse.title
                 tvDateApod.text = apodResponse.date
                 tvCopyrightApod.text = apodResponse.copyright
+
                 when (apodResponse.mediaType) {
                     "image" -> {
                         viewBinding.ivUrlApod.visibility = View.VISIBLE
@@ -64,15 +74,30 @@ class APODRecyclerViewAdapter(
                             }
                         )
                     }
+
                     "video" -> {
                         viewBinding.ivUrlApod.visibility = View.GONE
                         viewBinding.wvRvUrlVideoApod.visibility = View.VISIBLE
-                        with(viewBinding.wvRvUrlVideoApod) {
-                            visibility = View.VISIBLE
-                            settings.javaScriptEnabled = true
-                            settings.pluginState = WebSettings.PluginState.ON
-                            loadUrl(apodResponse.url + "&fs=0&loop=1&modestbranding=1&autoplay=1&mute=1")
-                            webChromeClient = WebChromeClient()
+                        if (apodResponse.url?.take(23) == "https://www.youtube.com") {
+                            with(viewBinding.wvRvUrlVideoApod) {
+                                visibility = View.VISIBLE
+                                settings.javaScriptEnabled = true
+                                settings.pluginState = WebSettings.PluginState.ON
+                                loadUrl(apodResponse.url + "&fs=0&loop=1&modestbranding=1&autoplay=1&mute=1")
+                                webChromeClient = WebChromeClient()
+                            }
+                        } else {
+                            viewBinding.wvRvUrlVideoApod.loadUrl(apodResponse.url.toString())
+                            // using setOnTouchListener because of onClickListener does not work in webview
+                            viewBinding.wvRvUrlVideoApod.setOnTouchListener(object : View.OnTouchListener {
+                                override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                                    when (event?.action) {
+                                        MotionEvent.ACTION_UP -> onItemClickListener(apodResponse)
+                                    }
+                                    return v?.onTouchEvent(event) ?: true
+                                }
+                            })
+
                         }
                     }
                 }
