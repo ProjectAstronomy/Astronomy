@@ -96,6 +96,13 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
         }
     }
 
+    private fun initRecyclerView() {
+        with(binding.rvListGst) {
+            layoutManager = LinearLayoutManager(context)
+            adapter = this@GSTListFragment.adapter
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         binding.shimmerViewContainerGst.startShimmer()
@@ -107,16 +114,8 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
         binding.shimmerViewContainerGst.stopShimmer()
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
         gstListFragmentScope.close()
-    }
-
-    private fun initRecyclerView() {
-        with(binding.rvListGst) {
-            layoutManager = LinearLayoutManager(context)
-            adapter = this@GSTListFragment.adapter
-        }
     }
 }

@@ -42,7 +42,7 @@ class GSTRecyclerViewAdapter(private val onGeomagneticStormClicked: (Geomagnetic
         val myInflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             TYPE_HEADER -> HeadersViewHolder(myInflater.inflate(R.layout.item_rv_flr_header, parent, false))
-            TYPE_NO_FLR -> NoFlareViewHolder(myInflater.inflate(R.layout.item_rv_flr_no_data, parent, false))
+            //TYPE_NO_FLR -> NoFlareViewHolder(myInflater.inflate(R.layout.item_rv_flr_no_data, parent, false))
             TYPE_LARGE -> LargeViewHolder(myInflater.inflate(R.layout.item_rv_flr_detailed, parent, false))
             else -> SmallViewHolder(myInflater.inflate(R.layout.item_rv_flr, parent, false))
         }
@@ -53,7 +53,7 @@ class GSTRecyclerViewAdapter(private val onGeomagneticStormClicked: (Geomagnetic
             TYPE_HEADER -> holder as HeadersViewHolder
             TYPE_SMALL -> holder as SmallViewHolder
             TYPE_LARGE -> holder as LargeViewHolder
-            TYPE_NO_FLR -> holder as NoFlareViewHolder
+            //TYPE_NO_FLR -> holder as NoFlareViewHolder
         }
         holder.bind(adapterListGST[position])
     }
@@ -88,9 +88,9 @@ class GSTRecyclerViewAdapter(private val onGeomagneticStormClicked: (Geomagnetic
         }
     }
 
-    inner class NoFlareViewHolder(itemView: View) : BaseViewHolder<GeomagneticStorm>(itemView) {
-        override fun bind(adapterItemData: GeomagneticStorm) {}
-    }
+//    inner class NoFlareViewHolder(itemView: View) : BaseViewHolder<GeomagneticStorm>(itemView) {
+//        override fun bind(adapterItemData: GeomagneticStorm) {}
+//    }
 
     override fun getItemViewType(position: Int): Int {
         return when (adapterListGST[position].link) {
