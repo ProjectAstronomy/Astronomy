@@ -1,10 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-parcelize'
 }
 
 android {
-    compileSdk Config.compileSdk
+    compileSdk 31
 
     defaultConfig {
         applicationId Config.applicationId
@@ -14,6 +16,9 @@ android {
         versionName Releases.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures {
+        viewBinding true
     }
 
     buildTypes {
@@ -32,15 +37,58 @@ android {
 }
 
 dependencies {
+    //Modules
+    implementation project(Modules.apod)
+    implementation project(Modules.donki)
+    implementation project(Modules.epic)
+    implementation project(Modules.mrp)
+    implementation project(Modules.core)
+
+    //Retrofit2
+    implementation Retrofit.retrofit
+    implementation Retrofit.converterGson
+    implementation Retrofit.loggingInterceptor
+    implementation Retrofit.retrofitKotlinCoroutinesAdapter
+
+    //Koin
+    implementation Koin.koinCore
+    implementation Koin.koinAndroid
+    implementation Koin.koinAndroidCompat
+
     //Core
     implementation Core.coreKTX
 
     //Design
     implementation Design.appcompat
     implementation Design.material
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
+    implementation "androidx.cardview:cardview:1.0.0"
+
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.airbnb.android:lottie:3.4.4'
+
+    //AndroidX
+    implementation AndroidXImpl.activityKTX
+    implementation AndroidXImpl.fragmentKTX
+    implementation AndroidXImpl.preferences
+
+    //Navigation
+    implementation Navigation.navigationFragmentKTX
+    implementation Navigation.navigationUIKTX
+    implementation Navigation.navigationRuntime
 
     //Test
     testImplementation TestImpl.junit
+    testImplementation TestImpl.mockito
+    testImplementation TestImpl.mockitoInline
+    testImplementation TestImpl.mockitoKotlin
+
+    androidTestImplementation TestImpl.navigation
+    androidTestImplementation TestImpl.fragment
     androidTestImplementation TestImpl.extJunit
     androidTestImplementation TestImpl.espresso
+    androidTestImplementation(TestImpl.espressoContrib)
 }

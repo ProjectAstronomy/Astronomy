@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">Astronomy</string>
+    <string name="fragment_main_navigation_label">fragment_main</string>
+
+    <!-- Preference Titles -->
+    <string name="design_header">Design</string>
+    <string name="image_resolution_header">Image resolution</string>
+
+    <string name="themes_title">Themes</string>
+    <string name="theme_original">Original</string>
+    <string name="theme_blackAndWhite">Black and white</string>
+    <string name="theme_mars">Mars</string>
+    <string name="themes_key">themes</string>
+    <string name="themes_summary">Choose theme</string>
+    <string name="theme_default_value">@string/theme_original</string>
+
+    <string name="image_resolution_title">Resolutions</string>
+    <string name="regular">Regular</string>
+    <string name="hd">HD</string>
+    <string name="image_resolution_key">Resolution</string>
+    <string name="image_resolution_summary">Choose resolution</string>
+    <string name="image_resolution_default_value">@string/regular</string>
+
+    <string name="title_main_today">Today</string>
+    <string name="title_main_solar">Solar Flare</string>
+    <string name="title_main_magnetic">Magnetic Storm</string>
+    <string name="title_main_before">Before</string>
+    <string name="title_main_curiosity">Curiosity</string>
+    <string name="title_main_spirit">Spirit</string>
+    <string name="title_main_opportunity">Opportunity</string>
+    <string name="title_front_in_main_fragment">An official data from NASA website</string>
+    <string name="settings">Settings</string>
+    <string name="content_description_favorite">content_description_favorite</string>
+    <string name="main_settings">main_settings</string>
+
+
 </resources>

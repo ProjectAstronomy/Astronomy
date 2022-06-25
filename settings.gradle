@@ -14,3 +14,8 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Astronomy"
 include ':app'
+include ':apod'
+include ':core'
+include ':mrp'
+include ':donki'
+include ':epic'

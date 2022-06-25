@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Astronomy</string>
+    <string name="content_description_media">no description</string>
+    <string name="title">no title</string>
+    <string name="heading_title_pod">Picture Of The Day</string>
+    <string name="heading_title_solar">Solar Flare &amp; Geomagnetic Storm</string>
+    <string name="heading_title_flr">Solar Flare</string>
+    <string name="heading_title_gst">Geomagnetic Storm</string>
+    <string name="heading_title_epic">Earth Polychromatic Camera</string>
+    <string name="heading_title_mars">Mars Rover Photos</string>
+    <string name="no_text_yet">no text yet</string>
+    <string name="save_image_to_external_storage">Save image to gallery</string>
+
+    <string name="settings_resolutions_title">Image Resolutions</string>
+    <string name="settings_resolutions_hd">HD</string>
+    <string name="settings_resolutions_regular">regular</string>
+
+    <string name="settings_icon_title">Application Icons</string>
+
+    <string name="settings_themes_title">Themes</string>
+    <string name="settings_themes_original">Original</string>
+    <string name="settings_themes_earth">Earth</string>
+    <string name="settings_themes_mars">Mars</string>
+
+    <string name="settings_credits_title">Credits</string>
+
+</resources>

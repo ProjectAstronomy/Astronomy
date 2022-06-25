@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fragment_flr_label">fragment_flr</string>
+    <string name="fragment_gst_label">fragment_gst_label</string>
+    <string name="there_is_no_solar_flare">There is no solar flare this day</string>
+    <string name="holder_some_n">\n \n \n \n \n</string>
+</resources>

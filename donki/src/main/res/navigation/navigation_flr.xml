@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_flr"
+    app:startDestination="@id/fragment_flr">
+
+    <fragment
+        android:id="@+id/fragment_flr"
+        android:name="com.project.donki.ui.FLRListFragment"
+        android:label="@string/fragment_flr_label"
+        tools:layout="@layout/fragment_list_flr" />
+</navigation>

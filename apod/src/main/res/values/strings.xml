@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fragment_apod_navigation_label">fragment_apod</string>
+    <string name="fragment_apod_description_navigation_label">fragment_apod_description</string>
+    <string name="open_in_browser">open in browser</string>
+</resources>

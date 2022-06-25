@@ -2,12 +2,72 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.project.astronomy">
 
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.Astronomy" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
 
+    <application
+        android:name=".application.AstronomyApplication"
+        android:icon="@mipmap/ic_launcher_1"
+        android:usesCleartextTraffic="true"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round_1"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Astronomy">
+        <activity
+            android:name=".ui.SplashScreen"
+            android:exported="true"
+            android:theme="@style/SplashThemeStandart">
+        </activity>
+        <activity android:name=".ui.MainActivity"
+            android:exported="true">
+        </activity>
+        <activity-alias
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_launcher_1"
+            android:name=".MARS"
+            android:enabled="true"
+            android:targetActivity=".ui.SplashScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_launcher_2"
+            android:name=".JUPITER"
+            android:enabled="false"
+            android:targetActivity=".ui.SplashScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_launcher_3"
+            android:name=".ROVER"
+            android:enabled="false"
+            android:targetActivity=".ui.SplashScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_launcher_4"
+            android:name=".VENUS"
+            android:enabled="false"
+            android:targetActivity=".ui.SplashScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+    </application>
 </manifest>

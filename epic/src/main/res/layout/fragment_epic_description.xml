@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sun_j2000_position"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/sun_j2000_position"
+        android:paddingLeft="@dimen/padding_left_epic"
+        android:text="@string/sun"
+        android:textSize="@dimen/text_size_epic"
+        app:layout_constraintBottom_toTopOf="@+id/sun_x"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sun_x"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/sun_x"
+        android:paddingLeft="@dimen/padding_left_epic"
+        app:layout_constraintBottom_toTopOf="@+id/sun_y"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sun_j2000_position" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sun_y"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/sun_y"
+        android:paddingLeft="@dimen/padding_left_epic"
+        app:layout_constraintBottom_toTopOf="@+id/sun_z"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sun_x" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sun_z"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/sun_z"
+        android:paddingLeft="@dimen/padding_left_epic"
+        android:paddingBottom="@dimen/pad_bot_pic_txt"
+        app:layout_constraintBottom_toTopOf="@+id/lunar_j2000_position"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sun_y" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lunar_j2000_position"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/lunar"
+        android:paddingLeft="@dimen/padding_left_epic"
+        android:textSize="@dimen/text_size_epic"
+        app:layout_constraintBottom_toTopOf="@+id/sun_x_luna"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sun_z" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sun_x_luna"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/luna_x"
+        android:paddingLeft="@dimen/padding_left_epic"
+        app:layout_constraintBottom_toTopOf="@+id/sun_y_luna"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lunar_j2000_position" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sun_y_luna"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/luna_y"
+        android:paddingLeft="@dimen/padding_left_epic"
+        app:layout_constraintBottom_toTopOf="@+id/sun_z_luna"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sun_x_luna" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sun_z_luna"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/luna_z"
+        android:paddingLeft="@dimen/padding_left_epic"
+        android:paddingBottom="@dimen/pad_bot_pic_txt"
+        app:layout_constraintBottom_toTopOf="@+id/dscovr_j2000_position"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sun_y_luna" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/dscovr_j2000_position"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/dscovк"
+        android:paddingLeft="@dimen/padding_left_epic"
+        android:textSize="@dimen/text_size_epic"
+        app:layout_constraintBottom_toTopOf="@+id/dscovr_x"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sun_z_luna" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/dscovr_x"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/dscovr_x"
+        android:paddingLeft="@dimen/padding_left_epic"
+        app:layout_constraintBottom_toTopOf="@+id/dscovr_y"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dscovr_j2000_position" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/dscovr_y"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/dscovr_y"
+        android:paddingLeft="@dimen/padding_left_epic"
+        app:layout_constraintBottom_toTopOf="@+id/dscovr_z"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dscovr_x" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/dscovr_z"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/dscovr_z"
+        android:paddingLeft="@dimen/padding_left_epic"
+        android:paddingBottom="@dimen/pad_bot_pic_txt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dscovr_y" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_epic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/no_image"
+        app:layout_constraintBottom_toTopOf="@id/save_image_to_external_storage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dscovr_z" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save_image_to_external_storage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save_image_to_external_storage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_epic" />
+</androidx.constraintlayout.widget.ConstraintLayout>

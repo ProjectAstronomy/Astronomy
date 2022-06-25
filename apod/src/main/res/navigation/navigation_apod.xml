@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_apod"
+    app:startDestination="@id/fragment_apod">
+
+    <fragment
+        android:id="@+id/fragment_apod"
+        android:name="com.project.apod.ui.APODListFragment"
+        android:label="@string/fragment_apod_navigation_label"
+        tools:layout="@layout/list_apod_fragment">
+
+        <action
+            android:id="@+id/action_fragment_apod_to_fragment_apod_description"
+            app:destination="@id/fragment_apod_description"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_apod_description"
+        android:name="com.project.apod.ui.APODDescriptionFragment"
+        android:label="@string/fragment_apod_description_navigation_label"
+        tools:layout="@layout/one_apod_fragment">
+        <argument
+            android:name="apodResponse"
+            app:argType="com.project.apod.entities.remote.APODResponse" />
+        <action
+            android:id="@+id/action_fragment_apod_description_to_APODScaleImageFragment"
+            app:destination="@id/fragment_apod_scale_image"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_apod_scale_image"
+        android:name="com.project.apod.ui.APODScaleImageFragment"
+        android:label="fragment_apod_scale_image_navigation_label"
+        tools:layout="@layout/scale_image_apod_fragment">
+        <argument
+            android:name="apodResponse"
+            app:argType="com.project.apod.entities.remote.APODResponse" />
+    </fragment>
+</navigation>
