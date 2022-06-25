@@ -22,7 +22,7 @@ class GSTViewModel(
         private const val GST_RESPONSE = "GST_RESPONSE"
     }
 
-    fun responseGeomagneticStorms(): LiveData<List<GeomagneticStorm>> =
+    fun responseGeomagneticStorms(): LiveData<List<IGstAdapterItem>> =
         savedStateHandle.getLiveData(GST_RESPONSE)
 
     override fun onCleared() {
@@ -37,7 +37,7 @@ class GSTViewModel(
             withContext(Dispatchers.IO) {
                 result = gstUseCase.load(isNetworkAvailable).reversed()
             }
-            saveLoadedData(result)
+            saveLoadedData(prepareListForAdapter(result))
         }
     }
 
@@ -48,7 +48,7 @@ class GSTViewModel(
             withContext(Dispatchers.IO) {
                 result = gstUseCase.reload().reversed()
             }
-            saveLoadedData(result)
+            saveLoadedData(prepareListForAdapter(result))
         }
     }
 
@@ -85,12 +85,12 @@ class GSTViewModel(
         viewModelScope.launch { gstUseCase.insert(geomagneticStorm) }
     }
 
-    private fun saveLoadedData(result: List<GeomagneticStorm>) {
+    private fun saveLoadedData(result: List<IGstAdapterItem>) {
         if (!savedStateHandle.contains(GST_RESPONSE)) {
             savedStateHandle.set(GST_RESPONSE, result)
         } else {
             val list =
-                savedStateHandle.getLiveData<List<GeomagneticStorm>>(GST_RESPONSE).value?.toMutableList()
+                savedStateHandle.getLiveData<List<IGstAdapterItem>>(GST_RESPONSE).value?.toMutableList()
             list?.addAll(result)
             savedStateHandle.set(GST_RESPONSE, list)
         }

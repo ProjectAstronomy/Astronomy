@@ -15,6 +15,7 @@ import com.project.donki.databinding.FragmentListGstBinding
 import com.project.donki.di.SCOPE_GST_MODULE
 import com.project.donki.entities.remote.GeomagneticStorm
 import com.project.donki.ui.adapters.GSTRecyclerViewAdapter
+import com.project.donki.ui.adapters.GeoRecyclerViewAdapter
 import com.project.donki.viewmodels.GSTViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -32,7 +33,7 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
     }
 
     private val onGeomagneticStormClicked: (GeomagneticStorm) -> Unit = { gstViewModel.insert(it) }
-    private val adapter by lazy { GSTRecyclerViewAdapter(onGeomagneticStormClicked) }
+    private val adapter by lazy { GeoRecyclerViewAdapter(onGeomagneticStormClicked) }
     private val androidNetworkStatus: AndroidNetworkStatus by inject()
 
     init {
@@ -63,34 +64,34 @@ class GSTListFragment : BaseFragment<FragmentListGstBinding>(FragmentListGstBind
 
         with(gstViewModel) {
             responseGeomagneticStorms().observe(viewLifecycleOwner) {
-                // сохраняем массив (listSolarResponse) с данными из API
-                val listGSTResponse = it
-                // создаем вспомогательный массив
-                val listGSTDisplay = mutableListOf<GeomagneticStorm>()
-                for (index in listGSTResponse.indices) {
-                    listGSTDisplay.add(
-                        GeomagneticStorm(
-                            gstID = listGSTResponse[index].startTime.toString(),
-                            startTime = listGSTResponse[index].startTime?.take(10),
-                            null,
-                            null,
-                            "header"
-                        )
-                    )
-                    listGSTResponse[index].allKpIndex?.forEach { eachFromAllKpIndex ->
-                        listGSTDisplay.add(
-                            GeomagneticStorm(
-                                gstID = listGSTResponse[index].startTime.toString(),
-                                startTime = eachFromAllKpIndex.observedTime?.substring(11, 16),
-                                allKpIndex = listOf(eachFromAllKpIndex),
-                                null,
-                                "small"
-                            )
-                        )
-                    }
-                }
+//                // сохраняем массив (listSolarResponse) с данными из API
+//                val listGSTResponse = it
+//                // создаем вспомогательный массив
+//                val listGSTDisplay = mutableListOf<GeomagneticStorm>()
+//                for (index in listGSTResponse.indices) {
+//                    listGSTDisplay.add(
+//                        GeomagneticStorm(
+//                            gstID = listGSTResponse[index].startTime.toString(),
+//                            startTime = listGSTResponse[index].startTime?.take(10),
+//                            null,
+//                            null,
+//                            "header"
+//                        )
+//                    )
+//                    listGSTResponse[index].allKpIndex?.forEach { eachFromAllKpIndex ->
+//                        listGSTDisplay.add(
+//                            GeomagneticStorm(
+//                                gstID = listGSTResponse[index].startTime.toString(),
+//                                startTime = eachFromAllKpIndex.observedTime?.substring(11, 16),
+//                                allKpIndex = listOf(eachFromAllKpIndex),
+//                                null,
+//                                "small"
+//                            )
+//                        )
+//                    }
+//                }
                 binding.shimmerViewContainerGst.stopShimmer()
-                adapter.adapterListGST = listGSTDisplay
+                adapter.items = it
             }
             error().observe(viewLifecycleOwner) { showThrowable(it) }
         }
