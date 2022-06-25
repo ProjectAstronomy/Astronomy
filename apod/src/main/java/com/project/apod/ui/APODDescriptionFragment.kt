@@ -1,7 +1,9 @@
 package com.project.apod.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.Resources
+import android.net.Uri
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -14,6 +16,8 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.project.apod.R
+import com.project.apod.database.YOUTUBE
 import com.project.apod.databinding.OneApodFragmentBinding
 import com.project.core.entities.ImageResolution
 import com.project.core.ui.BaseFragment
@@ -25,7 +29,11 @@ class APODDescriptionFragment :
     internal val navArgs: APODDescriptionFragmentArgs by navArgs()
     private val settingsViewModel: SettingsViewModel by activityViewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return providePersistentView(inflater, container, savedInstanceState)
     }
 
@@ -57,12 +65,21 @@ class APODDescriptionFragment :
                 }
                 "video" -> {
                     binding.ivUrlApod.visibility = View.GONE
-                    with(binding.wvOneUrlVideoApod) {
-                        visibility = View.VISIBLE
-                        settings.javaScriptEnabled = true
-                        settings.pluginState = android.webkit.WebSettings.PluginState.ON
-                        loadUrl(apodResponse.url + "&fs=0&loop=1&modestbranding=1&autoplay=1&mute=1")
-                        webChromeClient = WebChromeClient()
+                    binding.wvOneUrlVideoApod.visibility = View.VISIBLE
+                    binding.saveImageToExternalStorage.text = getString(R.string.open_in_browser)
+                    if (Regex(YOUTUBE).containsMatchIn(apodResponse.url.toString())) {
+                        with(binding.wvOneUrlVideoApod) {
+                            settings.javaScriptEnabled = true
+                            settings.pluginState = android.webkit.WebSettings.PluginState.ON
+                            loadUrl(apodResponse.url + "&fs=0&loop=1&modestbranding=1&autoplay=1&mute=1")
+                            webChromeClient = WebChromeClient()
+                        }
+                    } else {
+                        binding.wvOneUrlVideoApod.loadUrl(apodResponse.url.toString())
+                    }
+                    binding.saveImageToExternalStorage.setOnClickListener {
+                        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(apodResponse.url.toString()))
+                        startActivity(browserIntent)
                     }
                 }
             }
